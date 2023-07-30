@@ -1,0 +1,33 @@
+@media screen and (min-width: 768px) {
+	.productSuiteBackground {
+		width: 90% !important;
+		mix-blend-mode: normal !important;
+		/* background: url("/assets/images/productSuiteBackgroundImage.png") !important; */
+	}
+	.productSuiteBackgroundImage {
+		display: block !important;
+	}
+	.productSuiteContainer {
+		display: grid !important;
+		grid-template-columns: 1fr 1fr 1fr !important;
+		grid-template-rows: auto auto auto !important;
+		width: 100% !important;
+	}
+	.productSuiteContainer:nth-child {
+		align-self: stretch;
+	}
+	.productSuiteMobile {
+		display: none !important;
+	}
+	.productSuiteDesktop {
+		display: block !important;
+	}
+	.productSuiteDesktopLower {
+		display: flex !important;
+	}
+}
+@media screen and (min-width: 1024px) {
+	.productSuiteDesktop > * {
+		width: 14rem !important;
+	}
+}

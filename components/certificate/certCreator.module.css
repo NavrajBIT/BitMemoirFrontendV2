@@ -44,7 +44,7 @@
   left: 50px;
   background-color: var(--background-secondary);
   padding: var(--padding-light);
-  text-align: right;
+  text-align: left;
   border-radius: var(--border-radius);
   width: 200px;
   z-index: 1;

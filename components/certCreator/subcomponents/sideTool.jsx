@@ -1,8 +1,9 @@
+"use client"
 import { useState } from "react";
 import Image from "next/image";
 import style from "../certCreator.module.css";
 
-const SideTool = ({ icon, toolName, toolDescription }) => {
+const SideTool = ({ icon, toolName, toolDescription, tool, setTool  }) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
   const handleMouseEnter = () => {
@@ -18,6 +19,13 @@ const SideTool = ({ icon, toolName, toolDescription }) => {
       className={style.tool}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={() => {
+        if(tool===toolName){
+          setTool("");
+        }else{
+          setTool(toolName);
+        }
+      }}
     >
       <Image height={30} width={30} alt="" src={"/icons/" + icon + ".svg"} />
       {showTooltip && (

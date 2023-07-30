@@ -1,7 +1,6 @@
 import CertCreator from "@/components/certCreator/certCreator";
-
 const Page = () => {
-  return <CertCreator />;
-};
+    return <CertCreator />;
+    }
 
 export default Page;
