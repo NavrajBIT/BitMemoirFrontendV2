@@ -1,9 +1,0 @@
-/* desktop size */
-@media screen and (min-width: 1024px) {
-	.navmenu {
-		display: none !important;
-	}
-	.navitems {
-		display: flex !important;
-	}
-}

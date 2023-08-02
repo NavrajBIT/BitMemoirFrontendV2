@@ -1,5 +1,15 @@
+import Login from "@/components/login/login";
+import Head from "next/head";
+
 const Page = () => {
-  return <div>This is Login Page</div>;
+  return (
+    <>
+      <Head>
+        <title>Login to BitMemoir</title>
+      </Head>
+      <Login />
+    </>
+  );
 };
 
 export default Page;

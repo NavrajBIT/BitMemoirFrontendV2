@@ -1,0 +1,48 @@
+.heroContainer {
+  min-height: var(--min-height);
+  background-image: url("/assets/images/background_hero.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: flex;
+  justify-content: center;
+}
+
+.heroSection {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: auto;
+  padding: var(--padding-main);
+  gap: var(--padding-main);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.desktopillustration {
+  width: 50%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.mobileillustration {
+  width: 100%;
+  display: none;
+  align-items: center;
+  justify-content: space-around;
+}
+
+@media only screen and (max-width: 720px) {
+  .mobileillustration {
+    display: flex;
+  }
+
+  .desktopillustration {
+    display: none;
+  }
+  .heroSection {
+    flex-direction: column;
+  }
+}

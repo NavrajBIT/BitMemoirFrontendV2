@@ -1,82 +1,82 @@
 :root {
-	--max-width: 1100px;
-	--template-max-width: 720px;
-	--min-height: 500px;
-	--padding-main: 20px;
-	--padding-light: 10px;
-	--padding-extra-light: 5px;
-	--border-radius: 12px;
-	--border-radius-light: 6px;
+  --max-width: 1600px;
+  --max-width-form: 500px;
+  --nav-height: 100px;
+  --template-max-width: 720px;
+  --min-height: 500px;
+  --min-height-screen: 90vh;
+  --padding-main: 20px;
+  --padding-light: 10px;
+  --padding-extra-light: 5px;
+  --border-radius: 4px;
+  --border-radius-light: 2px;
+  --text-shadow-emphasis: 0 0 1rem white;
 
-	/* Primary palette */
-	--primary-50: #00d4ff;
-	--primary-60: #0094b2;
-	--primary-70: #01708684;
-	--primary-80: #004c5c;
-	--primary-90: #003f4c;
-	--primary-100: #0f303e;
-	--primary-110: #001d23;
+  /* Media queries */
 
-	/* Neutral Palette */
-	--black-100: #000000;
-	--white-100: #ffffff;
-	--white-110: #f0f0f0;
+  --screen-medium: 720px;
 
-	--background-dark: #23023b;
-	--text-primary: rgb(230, 230, 230);
-	--text-bright: rgb(255, 255, 255);
-	--text-dark: rgb(150, 150, 150);
+  /* Primary palette */
+  --primary-50: #00d4ff;
+  --primary-60: #0094b2;
+  --primary-70: #01708684;
+  --primary-80: #004c5c;
+  --primary-90: #003f4c;
+  --primary-100: #0f303e;
+  --primary-110: #001d23;
+
+  /* Neutral Palette */
+  --black-100: #000000;
+  --white-100: #ffffff;
+  --white-110: #f0f0f0;
+
+  --background-dark: #23023b;
+  --text-primary: rgb(230, 230, 230);
+  --text-bright: rgb(255, 255, 255);
+  --text-dark: rgb(150, 150, 150);
 }
 
 * {
-	box-sizing: border-box;
-	padding: 0;
-	margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 html,
 body {
-	max-width: 100vw;
-	overflow-x: hidden;
-	font-size: 16px;
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-size: 16px;
 }
 
 body {
-	color: var(--text-primary);
-	background-color: var(--primary-110);
+  color: var(--text-primary);
+  background-color: var(--primary-110);
 }
 
 a {
-	color: inherit;
-	text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 button {
-	background: none;
-	border: none;
-}
-s .link {
-	font-size: 1.5rem;
-}
-
-.link:hover {
-	border-bottom: 1px solid white;
-	color: var(--text-bright);
+  background: none;
+  border: none;
 }
 
 ::-webkit-scrollbar {
-	width: 10px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-	background: var(--background-primary);
+  background: var(--background-primary);
 }
 
 ::-webkit-scrollbar-thumb {
-	background: var(--text-primary);
-	border-radius: 5px;
+  background: var(--text-primary);
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: #555;
+  background: #555;
 }

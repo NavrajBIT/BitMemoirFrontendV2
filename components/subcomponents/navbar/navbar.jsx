@@ -1,64 +1,35 @@
 import Image from "next/image";
 import Link from "next/link";
+import Navmenu from "./navmenu";
+import style from "./navbar.module.css";
 import LoginButton from "./loginButton";
-import Navmenu from "../navmenu/navmenu";
-import "./navbar.css";
 const Navbar = () => {
-	const navMenuItems = [
-		{ name: "Certificates", route: "/mint" },
-		{ name: "NFT", route: "/view" },
-		{ name: "Souvenirs", route: "/verify" },
-		{ name: "Blog", route: "/blog" },
-		{ name: "About Us", route: "/about" },
-	];
-	return (
-		<nav
-			style={{
-				height: "100px",
-				display: "flex",
-				alignItems: "center",
-				justifyContent: "space-between",
-				padding: "4rem 2rem",
-				gap: "2rem",
-			}}>
-			<Link href="/home">
-				<Image
-					height={23}
-					width={114}
-					src="/assets/bitmemoirlogo.png"
-					alt="BitMemoir"
-				/>
-			</Link>
-			<div
-				className="navitems"
-				style={{
-					display: "none",
-					gap: "2rem",
-					alignItems: "center",
-				}}>
-				{navMenuItems.map((item, index) => {
-					return (
-						<Link
-							className="link"
-							href={item.route}
-							key={index}
-							style={{
-								background:
-									"linear-gradient(to bottom, var(--primary-110), var(--primary-100))",
-								padding: "0.5rem",
-								borderRadius: "0.2rem",
-							}}>
-							{item.name}
-						</Link>
-					);
-				})}
-				<LoginButton />
-			</div>
-			<span className="navmenu">
-				<Navmenu />
-			</span>
-		</nav>
-	);
+  const navMenuItems = [
+    { name: "Certificates", route: "/mint" },
+    { name: "Verify", route: "/verify" },
+    { name: "Blog", route: "/blog" },
+    { name: "About Us", route: "/about" },
+  ];
+  return (
+    <nav className={style.navbar}>
+      <Link href="/home">
+        <Image height={80} width={140} src="/assets/logo.png" alt="BitMemoir" />
+      </Link>
+      <div className={style.navContainer}>
+        {navMenuItems.map((item, index) => {
+          return (
+            <Link className={style.navbutton} href={item.route} key={index}>
+              {item.name}
+            </Link>
+          );
+        })}
+      </div>
+      <div className={style.loginContainer}>
+        <LoginButton />
+      </div>
+      <Navmenu />
+    </nav>
+  );
 };
 
 export default Navbar;

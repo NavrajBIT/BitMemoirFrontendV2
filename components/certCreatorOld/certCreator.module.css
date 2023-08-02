@@ -41,14 +41,12 @@
 .tooltip {
   position: absolute;
   top: 0px;
-  right: 60px;
-  background-color: var(--primary-80);
+  left: 50px;
+  background-color: var(--background-secondary);
   padding: var(--padding-light);
   text-align: right;
   border-radius: var(--border-radius);
   width: 200px;
-  /* width: fit-content; */
-  /* height: 50px; */
   z-index: 1;
 }
 .toptooltip {
@@ -72,7 +70,8 @@
   position: relative;
 }
 
-.template-bar {
+.template-bar{
   width: 30%;
   height: 100vh;
+  
 }

@@ -1,43 +1,31 @@
 "use client";
+import Link from "next/link";
+import style from "./navbar.module.css";
+import API from "../scripts/apiCall";
+import Image from "next/image";
 
-import Button from "../button/button";
-import { useRouter } from "next/navigation";
+const LoginButton = ({ onClick }) => {
+  const api = API();
 
-const LoginButton = () => {
-	const router = useRouter();
-	return (
-		<div
-			style={{
-				alignItems: "center",
-				display: "flex",
-				gap: "1em",
-				justifyContent: "center",
-			}}>
-			<Button
-				text={"Sign Up"}
-				style={{
-					color: "var(--white-100)",
-					fontSize: "1.25rem",
-					padding: "0.5em 1.2em",
-					border: "1px solid var(--primary-60)",
-					borderRadius: "0.3em",
-					cursor: "pointer",
-				}}
-			/>
-			<Button
-				text={"Get Wallet"}
-				style={{
-					color: "var(--white-100)",
-					fontSize: "1.25rem",
-					padding: "0.5em 1em",
-					border: "1px solid var(--primary-60)",
-					borderRadius: "0.3em",
-					backgroundColor: "var(--primary-60)",
-					cursor: "pointer",
-				}}
-			/>
-		</div>
-	);
+  if (api.jwtToken !== null) {
+    return (
+      <Link className={style.loginbutton} href="/dashboard" onClick={onClick}>
+        <Image
+          src={"/icons/dashboard.svg"}
+          height={20}
+          width={20}
+          alt="dashboard"
+        />
+        Dashboard
+      </Link>
+    );
+  }
+
+  return (
+    <Link className={style.loginbutton} href="/login" onClick={onClick}>
+      Log In
+    </Link>
+  );
 };
 
 export default LoginButton;
