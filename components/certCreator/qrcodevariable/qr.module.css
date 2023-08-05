@@ -1,0 +1,62 @@
+.logoContainer {
+  position: absolute;
+  width: fit-content;
+  border: 1px solid transparent;
+  animation: initiatevariable 1s;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.logoContainer:hover {
+  border: 1px solid var(--primary-50);
+  cursor: grab;
+  box-shadow: 0 0 10px var(--primary-50);
+}
+
+.textOptions {
+  border-radius: var(--border-radius);
+  background-color: var(--primary-100);
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: var(--padding-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--padding-light);
+  position: absolute;
+  top: -80px;
+  width: 150px;
+}
+
+.textOptions input {
+  font-size: 1rem;
+  background: var(--text-primary);
+  padding: 0px;
+  border: 1px solid var(--primary-50);
+  border-radius: var(--border-radius-light);
+  height: 2rem;
+  width: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cornerHandle {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background: var(--primary-50);
+  border: 1px solid transparent;
+}
+.cornerHandle:hover {
+  border: 1px solid var(--primary-110);
+  box-shadow: 0 0 10px var(--text-primary);
+}
+
+@keyframes initiatevariable {
+  from {
+    box-shadow: 0 0 50px var(--primary-50);
+  }
+  to {
+    box-shadow: 0 0 0px var(--primary-50);
+  }
+}

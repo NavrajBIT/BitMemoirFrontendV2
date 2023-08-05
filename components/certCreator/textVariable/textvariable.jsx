@@ -1,56 +1,69 @@
 import Draggable from "react-draggable";
-import { Resizable } from "re-resizable";
-import style from "../certCreator.module.css";
-import { useState } from "react";
+import style from "./textVariable.module.css";
 import { HexColorPicker } from "react-colorful";
+import useTextVariable from "./useTextVariable";
 
-const Textvariable = ({ data, index, setVariables }) => {
-  const [isFocused, setIsFocused] = useState(false);
+const Textvariable = ({ data, index, setVariables, setSelectedVariable }) => {
+  const handleId = `text-handle-${index}`;
 
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
+  const textScript = useTextVariable(
+    data,
+    index,
+    setVariables,
+    setSelectedVariable
+  );
+  const {
+    isFocused,
+    textWidth,
+    isColorPickerFocused,
+    setIsColorPickerFocused,
+    parentRef,
+    childRef,
+    handleFocus,
+    changeValue,
+    changePos,
+    changeColor,
+    handleColorPickerFocus,
+    handleColorPickerBlur,
+    toggleBold,
+    toggleItalic,
+    changeSize,
+    changeFont,
+  } = textScript;
 
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
   return (
-    <Draggable bounds="parent">
+    <Draggable
+      bounds="#canvas"
+      handle={`#${handleId}`}
+      onDrag={changePos}
+      position={{ x: data.x_pos, y: data.y_pos }}
+    >
       <div
         className={style.variabletext}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
+        onClick={() => setSelectedVariable({ type: "text", index: index })}
       >
-        <textarea
+        <input
           style={{
             fontFamily: data.font,
             fontSize: data.font_size + "px",
             color: `#${data.color}`,
             fontStyle: data.is_italic ? "italic" : "normal",
             fontWeight: data.is_bold ? "bold" : "normal",
+            width: textWidth,
           }}
           value={data.value}
-          onChange={(e) =>
-            setVariables((prevState) => ({
-              ...prevState,
-              text: [
-                {
-                  ...prevState.text[index],
-                  value: e.target.value,
-                },
-              ],
-            }))
-          }
-          rows="1"
-          cols={data.value.length}
+          type="text"
+          onChange={(e) => changeValue(e.target.value)}
+          onFocus={handleFocus}
+          ref={parentRef}
+          id={handleId}
         />
         {isFocused && (
           <TextOptions
             data={data}
             index={index}
             setVariables={setVariables}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
+            textScript={textScript}
           />
         )}
       </div>
@@ -60,19 +73,29 @@ const Textvariable = ({ data, index, setVariables }) => {
 
 export default Textvariable;
 
-const TextOptions = ({ data, index, setVariables }) => {
-  const [isFocused, setIsFocused] = useState(false);
-
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
-
+const TextOptions = ({ data, index, setVariables, textScript }) => {
+  const {
+    isFocused,
+    setIsFocused,
+    textWidth,
+    setTextWidth,
+    isColorPickerFocused,
+    setIsColorPickerFocused,
+    parentRef,
+    childRef,
+    handleFocus,
+    changeValue,
+    changePos,
+    changeColor,
+    handleColorPickerFocus,
+    handleColorPickerBlur,
+    toggleBold,
+    toggleItalic,
+    changeSize,
+    changeFont,
+  } = textScript;
   return (
-    <div className={style.textOptions}>
+    <div className={style.textOptions} ref={childRef}>
       {/* Bolden Text................................................ */}
       <div
         className={style.option}
@@ -80,17 +103,7 @@ const TextOptions = ({ data, index, setVariables }) => {
           fontWeight: "bold",
           background: data.is_bold ? "var(--primary-60)" : "none",
         }}
-        onClick={() =>
-          setVariables((prevState) => ({
-            ...prevState,
-            text: [
-              {
-                ...prevState.text[index],
-                is_bold: !prevState.text[index].is_bold,
-              },
-            ],
-          }))
-        }
+        onClick={toggleBold}
       >
         B
       </div>
@@ -102,17 +115,7 @@ const TextOptions = ({ data, index, setVariables }) => {
           fontStyle: "italic",
           background: data.is_italic ? "var(--primary-60)" : "none",
         }}
-        onClick={() =>
-          setVariables((prevState) => ({
-            ...prevState,
-            text: [
-              {
-                ...prevState.text[index],
-                is_italic: !prevState.text[index].is_italic,
-              },
-            ],
-          }))
-        }
+        onClick={toggleItalic}
       >
         I
       </div>
@@ -129,17 +132,9 @@ const TextOptions = ({ data, index, setVariables }) => {
         <input
           type="number"
           value={data.font_size}
-          onChange={(e) =>
-            setVariables((prevState) => ({
-              ...prevState,
-              text: [
-                {
-                  ...prevState.text[index],
-                  font_size: e.target.value,
-                },
-              ],
-            }))
-          }
+          onChange={(e) => changeSize(e.target.value)}
+          min={0}
+          max={50}
         />
         px
       </div>
@@ -149,17 +144,7 @@ const TextOptions = ({ data, index, setVariables }) => {
         Font:
         <select
           value={data.font}
-          onChange={(e) =>
-            setVariables((prevState) => ({
-              ...prevState,
-              text: [
-                {
-                  ...prevState.text[index],
-                  font: e.target.value,
-                },
-              ],
-            }))
-          }
+          onChange={(e) => changeFont(e.target.value)}
           style={{ width: "100%", padding: "8px", fontSize: "16px" }}
         >
           <option value="Arial">Arial</option>
@@ -179,7 +164,7 @@ const TextOptions = ({ data, index, setVariables }) => {
         }}
       >
         Color:
-        <div onFocus={handleFocus} onBlur={handleBlur}>
+        <div onFocus={handleColorPickerFocus} onBlur={handleColorPickerBlur}>
           <input
             type="text"
             value={`#${data.color}`}
@@ -190,20 +175,10 @@ const TextOptions = ({ data, index, setVariables }) => {
               width: "70px",
             }}
           />
-          {isFocused && (
+          {isColorPickerFocused && (
             <HexColorPicker
               value={data.color}
-              onChange={(e) =>
-                setVariables((prevState) => ({
-                  ...prevState,
-                  text: [
-                    {
-                      ...prevState.text[index],
-                      color: e.slice(1),
-                    },
-                  ],
-                }))
-              }
+              onChange={(e) => changeColor(e.slice(1))}
               style={{ position: "absolute", top: "40px", left: "0px" }}
             />
           )}

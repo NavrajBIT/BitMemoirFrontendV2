@@ -1,0 +1,110 @@
+.variablecontainer {
+  position: absolute;
+  animation: initiatevariable 1s;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: var(--template-width);
+}
+
+.variablecontainer:hover {
+  cursor: grab;
+  border: 1px solid var(--primary-50);
+  box-shadow: 0 0 10px var(--primary-110);
+}
+
+.innerText {
+  position: absolute;
+}
+
+.textOptions {
+  border-radius: var(--border-radius);
+  background-color: var(--primary-100);
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: var(--padding-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--padding-light);
+  position: absolute;
+  top: -80px;
+  width: 600px;
+}
+
+.textOptions .option {
+  font-size: 1rem;
+  border: 1px solid var(--primary-50);
+  border-radius: var(--border-radius-light);
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: context-menu;
+}
+.textOptions input {
+  font-size: 1rem;
+  background: var(--text-primary);
+  padding: 0px;
+  border: 1px solid var(--primary-50);
+  border-radius: var(--border-radius-light);
+  height: 2rem;
+  width: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cornerHandle {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background: var(--primary-50);
+  border: 1px solid transparent;
+}
+.cornerHandle:hover {
+  border: 1px solid var(--primary-110);
+  box-shadow: 0 0 10px var(--text-primary);
+}
+
+.horizontalHandle {
+  width: 50px;
+  height: 10px;
+  border-radius: 10px;
+  background: var(--primary-50);
+  border: 1px solid transparent;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.horizontalHandle:hover {
+  border: 1px solid var(--primary-110);
+  box-shadow: 0 0 10px var(--text-primary);
+}
+.verricalHandle {
+  width: 10px;
+  height: 50px;
+  border-radius: 10px;
+  background: var(--primary-50);
+  border: 1px solid transparent;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.verricalHandle:hover {
+  border: 1px solid var(--primary-110);
+  box-shadow: 0 0 10px var(--text-primary);
+}
+
+@keyframes initiatevariable {
+  from {
+    box-shadow: 0 0 50px var(--primary-50);
+  }
+  to {
+    box-shadow: 0 0 0px var(--primary-50);
+  }
+}

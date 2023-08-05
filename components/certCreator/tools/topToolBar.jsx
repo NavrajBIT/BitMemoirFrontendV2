@@ -18,6 +18,11 @@ const TopToolBar = ({ creator }) => {
       }}
     >
       <TopTool icon="save" toolName="Save" toolDescription="Save template" />
+      <TopTool
+        icon="saveas"
+        toolName="Save As"
+        toolDescription="Duplicate template to another file"
+      />
       Template:
       <input
         type="text"

@@ -1,0 +1,73 @@
+.variabletext {
+  position: absolute;
+  animation: initiatevariable 1s;
+}
+
+.variabletext input {
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  background: none;
+  outline: none;
+  padding: var(--padding-light);
+  display: inline-block;
+  width: fit-content;
+  max-width: var(--template-width);
+}
+
+.variabletext input:hover {
+  cursor: grab;
+  border: 1px solid var(--primary-50);
+  box-shadow: 0 0 10px var(--primary-110);
+}
+.variabletext input:focus {
+  border: 1px solid var(--primary-50);
+  box-shadow: 0 0 10px var(--primary-110);
+}
+
+.textOptions {
+  border-radius: var(--border-radius);
+  background-color: var(--primary-100);
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: var(--padding-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--padding-light);
+  position: absolute;
+  top: -80px;
+  width: 600px;
+}
+
+.textOptions .option {
+  font-size: 1rem;
+  border: 1px solid var(--primary-50);
+  border-radius: var(--border-radius-light);
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: context-menu;
+}
+.textOptions input {
+  font-size: 1rem;
+  background: var(--text-primary);
+  padding: 0px;
+  border: 1px solid var(--primary-50);
+  border-radius: var(--border-radius-light);
+  height: 2rem;
+  width: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes initiatevariable {
+  from {
+    box-shadow: 0 0 50px var(--primary-50);
+  }
+  to {
+    box-shadow: 0 0 0px var(--primary-50);
+  }
+}

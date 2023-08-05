@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
-import SideBar from "./subcomponents/sideBar";
+import SideBar from "./tools/sideBar";
 import Main from "./subcomponents/main";
-import SideToolBar from "./subcomponents/sideToolBar";
+import SideToolBar from "./tools/sideToolBar";
 import useCertCreator from "./useCertCreator";
-import TopToolBar from "./subcomponents/topToolBar";
-import Canvas from "./subcomponents/canvas";
+import TopToolBar from "./tools/topToolBar";
+import Canvas from "./canvas";
 
 const CertCreator = () => {
   const [variable, setVariable] = useState("");
@@ -32,7 +32,7 @@ const CertCreator = () => {
         <TopToolBar creator={creator} />
         <Canvas creator={creator} />
       </div>
-      <SideToolBar tool={tool} setTool={setTool} />
+      <SideToolBar creator={creator} />
     </div>
   );
 };
