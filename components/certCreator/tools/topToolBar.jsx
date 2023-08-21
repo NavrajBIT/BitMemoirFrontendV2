@@ -1,22 +1,29 @@
 import TopTool from "./topTool";
 import Button from "@/components/subcomponents/button/button";
-import { useRef } from "react";
+import { LocalInputField } from "@/components/subcomponents/form/form";
+import { useRef, useState } from "react";
+import Slider from "@/components/subcomponents/slider/slider";
+import style from "../certCreator.module.css";
+import { useRouter } from "next/navigation";
 
 const TopToolBar = ({ creator }) => {
   const imageRef = useRef();
+  const router = useRouter();
   return (
-    <div
-      style={{
-        width: "100%",
-        maxWidth: "var(--template-width)",
-        background: "rgba(0,0,0,0.5)",
-        borderRadius: "var(--border-radius)",
-        padding: "var(--padding-extra-light)",
-        display: "flex",
-        gap: "var(--padding-light)",
-        alignItems: "center",
-      }}
-    >
+    <div className={style.toptoolContainer}>
+      <div style={{ width: "fit-content" }}>
+        <Button
+          text="<<Back"
+          variant={"primary"}
+          style={{
+            fontSize: "1rem",
+          }}
+          onClick={async () => {
+            await creator.save();
+            router.back();
+          }}
+        />
+      </div>
       <TopTool icon="save" toolName="Save" toolDescription="Save template" />
       <TopTool
         icon="saveas"
@@ -24,10 +31,10 @@ const TopToolBar = ({ creator }) => {
         toolDescription="Duplicate template to another file"
       />
       Template:
-      <input
-        type="text"
+      <LocalInputField
+        inputData={{ type: "text", label: "" }}
         value={creator.templateName}
-        onChange={(e) => creator.setTemplateName(e.target.value)}
+        handleChange={(e) => creator.setTemplateName(e.target.value)}
       />
       <div
         style={{
@@ -35,6 +42,7 @@ const TopToolBar = ({ creator }) => {
           alignItems: "center",
           gap: "var(--padding-light)",
           width: "100%",
+          maxWidth: "200px",
         }}
       >
         Image:
@@ -45,9 +53,7 @@ const TopToolBar = ({ creator }) => {
           variant="primary"
           onClick={() => imageRef.current.click()}
           style={{
-            fontSize: "0.75rem",
-            padding: "var(--padding-extra-light)",
-            width: "100%",
+            fontSize: "1rem",
           }}
         />
       </div>
@@ -57,11 +63,7 @@ const TopToolBar = ({ creator }) => {
         toolDescription="Remove base image"
         onClick={creator.removeImage}
       />
-      <input
-        type="number"
-        value={creator.scale}
-        onChange={(e) => creator.setScale(e.target.value)}
-      />
+      <ScaleTool creator={creator} />
       <input
         type="file"
         ref={imageRef}
@@ -73,3 +75,15 @@ const TopToolBar = ({ creator }) => {
 };
 
 export default TopToolBar;
+
+const ScaleTool = ({ creator }) => {
+  return (
+    <div style={{ display: "flex" }}>
+      <Slider
+        value={creator.scale}
+        valueDisplay={`Size: ${creator.scale}%`}
+        handleChange={(e) => creator.setScale(e.target.value)}
+      />
+    </div>
+  );
+};

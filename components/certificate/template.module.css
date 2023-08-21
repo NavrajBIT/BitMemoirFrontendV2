@@ -1,0 +1,123 @@
+.certificateContainer {
+  width: 100%;
+  display: flex;
+}
+
+/* Template side bar ------------------------ */
+
+.templateBar {
+  width: 100%;
+  max-width: var(--max-width-form);
+  background-color: var(--primary-100);
+  overflow-y: scroll;
+  height: var(--min-height-screen);
+}
+
+.recentlyUsedContainer {
+  width: 100%;
+  display: flex;
+  gap: var(--padding-main);
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.heading {
+  width: 100%;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: var(--padding-main);
+}
+
+.templateContainer {
+  width: 100%;
+  padding: var(--padding-main);
+  display: flex;
+  gap: var(--padding-light);
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+}
+
+.template {
+  border: 2px solid var(--primary-70);
+  border-radius: var(--border-radius);
+}
+.template:hover {
+  border: 2px solid var(--primary-110);
+  box-shadow: 0 0 10px var(--primary-50);
+}
+
+/* Full template view ------------ */
+
+.templateViewContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.templateView {
+  min-height: var(--min-height-screen);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: var(--template-width);
+  padding: var(--padding-main);
+  gap: var(--padding-main);
+}
+
+.templateHeading {
+  width: 100%;
+  font-size: 1.5rem;
+  text-align: center;
+  color: var(--primary-50);
+  text-shadow: 0 0 10px var(--primary-60);
+}
+
+.previewimageContainer {
+  position: relative;
+  width: 100%;
+  max-width: var(--template-width);
+  aspect-ratio: 4/3;
+}
+.previewimage {
+  object-fit: contain;
+  box-shadow: 10px 10px 10px var(--primary-90);
+}
+
+.buttonContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.innerButtonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--padding-light);
+}
+
+@media only screen and (max-width: 900px) {
+  .certificateContainer {
+    flex-direction: column;
+  }
+
+  .templateBar {
+    max-width: 100vw;
+    height: 255px;
+  }
+
+  .templateContainer {
+    height: 145px;
+    overflow: scroll;
+  }
+}

@@ -1,149 +1,46 @@
-const { default: Button } = require("@/components/subcomponents/button/button");
 import Image from "next/image";
-import "./templateBar.css";
-import { useRouter } from "next/navigation";
-const TemplateBar = () => {
-  const router = useRouter();
+import style from "../template.module.css";
 
-  const templates = [
-    {
-      name: "Certificate of Completion",
-    },
-    {
-      name: "Certificate of Achievement",
-    },
-    {
-      name: "Certificate of Participation",
-    },
-  ];
+const TemplateBar = ({ cert }) => {
   return (
-    <div className="template-bar">
-      <div className="template-bar-title">Templates</div>
-      <div className="template-bar-recently-used-box">
-        <div className="template-bar-recently-used-title">Recently Used</div>
-        <div className="template-bar-recently-used">
-          {templates.map((template) => {
-            return (
-              <div className="template-bar-recently-used-template">
-                <div className="template-bar-recently-used-template-image">
-                  {/* <img src={certImage} alt={template.name} /> */}
-                  <Image
-                    src=""
-                    alt={template.name}
-                    style={{
-                      width: "8rem",
-                      height: "auto",
-                      borderRadius: "0.3rem",
-                    }}
-                  />
-                </div>
-              </div>
-            );
-          })}
+    <div className={style.templateBar}>
+      <div className={style.recentlyUsedContainer}>
+        <div className={style.heading}>Templates</div>
+        <div className={style.templateContainer}>
+          {cert.templates &&
+            Array.isArray(cert.templates) &&
+            cert.templates.length > 0 &&
+            cert.templates.map((template, index) => {
+              return (
+                <Image
+                  src={
+                    template.icon !== null
+                      ? template.icon
+                      : "/icons/imageplaceholder.svg"
+                  }
+                  loader={() =>
+                    template.icon !== null
+                      ? template.icon
+                      : "/icons/imageplaceholder.svg"
+                  }
+                  width={140}
+                  height={105}
+                  alt={template.name}
+                  className={style.template}
+                  key={template.name + "-" + index}
+                  onClick={() => cert.setSelectedtemplate(template)}
+                />
+              );
+            })}
+          <Image
+            src={"/icons/add.svg"}
+            width={140}
+            height={105}
+            alt={"Create New Template"}
+            className={style.template}
+            onClick={cert.createNewTemplate}
+          />
         </div>
-        <p
-          style={{
-            color: "#00D4FF",
-            cursor: "pointer",
-            marginTop: "1rem",
-            marginLeft: "1rem",
-            textAlign: "center",
-          }}
-          className="template-bar-recently-used-button"
-        >
-          Explore
-        </p>
-      </div>
-      <div className="template-bar-recently-used-box">
-        <div className="template-bar-recently-used-title">Free Templates</div>
-        <div className="template-bar-recently-used">
-          {templates.map((template) => {
-            return (
-              <div className="template-bar-recently-used-template">
-                <div className="template-bar-recently-used-template-image">
-                  <Image
-                    src={certImage}
-                    alt={template.name}
-                    style={{
-                      width: "8rem",
-                      height: "auto",
-                      borderRadius: "0.3rem",
-                    }}
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        <p
-          style={{
-            color: "#00D4FF",
-            cursor: "pointer",
-            marginTop: "1rem",
-            marginLeft: "1rem",
-            textAlign: "center",
-          }}
-          className="template-bar-recently-used-button"
-        >
-          Explore{" "}
-        </p>
-      </div>
-
-      <div className="template-bar-recently-used-box">
-        <div className="template-bar-recently-used-title">
-          Premium Templates
-        </div>
-        <div className="template-bar-recently-used">
-          {templates.map((template) => {
-            return (
-              <div className="template-bar-recently-used-template">
-                <div className="template-bar-recently-used-template-image">
-                  <Image
-                    src={certImage}
-                    alt={template.name}
-                    style={{
-                      width: "8rem",
-                      height: "auto",
-                      borderRadius: "0.3rem",
-                    }}
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        <p
-          style={{
-            color: "#00D4FF",
-            cursor: "pointer",
-            marginTop: "1rem",
-            marginLeft: "1rem",
-            textAlign: "center",
-          }}
-          className="template-bar-recently-used-button"
-        >
-          Explore
-        </p>
-      </div>
-
-      <div className="button-create-template">
-        <button
-          style={{
-            color: "white",
-            backgroundColor: "#0094B2",
-            padding: "1rem",
-            borderRadius: "0.2rem",
-            border: "none",
-            marginTop: "3rem",
-            marginLeft: "10rem",
-            cursor: "pointer",
-          }}
-          onClick={() => {
-            router.push("/certCreator");
-          }}
-        >
-          Create Custom Template
-        </button>
       </div>
     </div>
   );

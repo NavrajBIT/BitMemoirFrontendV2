@@ -55,7 +55,6 @@ const uselogin = () => {
           setStatus(res.error);
         } else {
           router.back();
-          window.location.reload(true);
         }
       })
       .catch((err) => {
@@ -78,12 +77,10 @@ const uselogin = () => {
         password: data.Password,
       })
       .then((res) => {
-        console.log(res);
         if (res.error) {
           setStatus(res.error);
         } else {
-          router.back();
-          window.location.reload(true);
+          router.push("/kyc");
         }
       })
       .catch((err) => {
@@ -92,6 +89,23 @@ const uselogin = () => {
       });
 
     setIsLoading(false);
+  };
+
+  const handleGoogleLogin = (response) => {
+    api
+      .socialLogin(response.credential, "google-oauth2")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
+  const handleFacebookLogin = (response) => {
+    api
+      .socialLogin(response.data.accessToken, "google-oauth2")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
   };
 
   return {
@@ -105,6 +119,8 @@ const uselogin = () => {
     signupSubmit,
     isLoading,
     setIsLoading,
+    handleGoogleLogin,
+    handleFacebookLogin,
   };
 };
 

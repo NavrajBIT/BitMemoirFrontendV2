@@ -5,10 +5,12 @@
   --template-max-width: 720px;
   --template-width: 1080px;
   --template-height: 810px;
+  --card-width: 220px;
   --min-height: 500px;
   --min-height-screen: 90vh;
   --padding-main: 20px;
   --padding-light: 10px;
+  --padding-large: 100px;
   --padding-extra-light: 5px;
   --border-radius: 4px;
   --border-radius-light: 2px;
@@ -81,4 +83,158 @@ button {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+/* fonts-------------------------------------------------------- */
+@font-face {
+  font-family: "Crimson-normal";
+  src: url("/fonts/Crimson_Text/CrimsonText-Regular.ttf");
+}
+@font-face {
+  font-family: "Crimson-bold";
+  src: url("/fonts/Crimson_Text/CrimsonText-Bold.ttf");
+}
+@font-face {
+  font-family: "Crimson-italic";
+  src: url("/fonts/Crimson_Text/CrimsonText-Italic.ttf");
+}
+@font-face {
+  font-family: "Crimson-bolditalic";
+  src: url("/fonts/Crimson_Text/CrimsonText-BoldItalic.ttf");
+}
+
+@font-face {
+  font-family: "Lato-normal";
+  src: url("/fonts/Lato/Lato-Regular.ttf");
+}
+@font-face {
+  font-family: "Lato-bold";
+  src: url("/fonts/Lato/Lato-Bold.ttf");
+}
+@font-face {
+  font-family: "Lato-italic";
+  src: url("/fonts/Lato/Lato-Italic.ttf");
+}
+@font-face {
+  font-family: "Lato-bolditalic";
+  src: url("/fonts/Lato/Lato-BoldItalic.ttf");
+}
+
+@font-face {
+  font-family: "Montserrat-normal";
+  src: url("/fonts/Montserrat/static/Montserrat-Regular.ttf");
+}
+@font-face {
+  font-family: "Montserrat-bold";
+  src: url("/fonts/Montserrat/static/Montserrat-Bold.ttf");
+}
+@font-face {
+  font-family: "Montserrat-italic";
+  src: url("/fonts/Montserrat/static/Montserrat-Italic.ttf");
+}
+@font-face {
+  font-family: "Montserrat-bolditalic";
+  src: url("/fonts/Montserrat/static/Montserrat-BoldItalic.ttf");
+}
+
+@font-face {
+  font-family: "Open_Sans-normal";
+  src: url("/fonts/Open_Sans/static/OpenSans-Regular.ttf");
+}
+@font-face {
+  font-family: "Open_Sans-bold";
+  src: url("/fonts/Open_Sans/static/OpenSans-Bold.ttf");
+}
+@font-face {
+  font-family: "Open_Sans-italic";
+  src: url("/fonts/Open_Sans/static/OpenSans-Italic.ttf");
+}
+@font-face {
+  font-family: "Open_Sans-bolditalic";
+  src: url("/fonts/Open_Sans/static/OpenSans-BoldItalic.ttf");
+}
+
+@font-face {
+  font-family: "Playfair_Display-normal";
+  src: url("/fonts/Playfair_Display/static/PlayfairDisplay-Regular.ttf");
+}
+@font-face {
+  font-family: "Playfair_Display-bold";
+  src: url("/fonts/Playfair_Display/static/PlayfairDisplay-Bold.ttf");
+}
+@font-face {
+  font-family: "Playfair_Display-italic";
+  src: url("/fonts/Playfair_Display/static/PlayfairDisplay-Italic.ttf");
+}
+@font-face {
+  font-family: "Playfair_Display-bolditalic";
+  src: url("/fonts/Playfair_Display/static/PlayfairDisplay-BoldItalic.ttf");
+}
+
+@font-face {
+  font-family: "PT_Sans-normal";
+  src: url("/fonts/PT_Sans/PTSans-Regular.ttf");
+}
+@font-face {
+  font-family: "PT_Sans-bold";
+  src: url("/fonts/PT_Sans/PTSans-Bold.ttf");
+}
+@font-face {
+  font-family: "PT_Sans-italic";
+  src: url("/fonts/PT_Sans/PTSans-Italic.ttf");
+}
+@font-face {
+  font-family: "PT_Sans-bolditalic";
+  src: url("/fonts/PT_Sans/PTSans-BoldItalic.ttf");
+}
+
+@font-face {
+  font-family: "Quicksand-normal";
+  src: url("/fonts/Quicksand/static/Quicksand-Regular.ttf");
+}
+@font-face {
+  font-family: "Quicksand-bold";
+  src: url("/fonts/Quicksand/static/Quicksand-Bold.ttf");
+}
+@font-face {
+  font-family: "Quicksand-italic";
+  src: url("/fonts/Quicksand/static/Quicksand-Light.ttf");
+}
+@font-face {
+  font-family: "Quicksand-bolditalic";
+  src: url("/fonts/Quicksand/static/Quicksand-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "Roboto-normal";
+  src: url("/fonts/Roboto/Roboto-Regular.ttf");
+}
+@font-face {
+  font-family: "Roboto-bold";
+  src: url("/fonts/Roboto/Roboto-Bold.ttf");
+}
+@font-face {
+  font-family: "Roboto-italic";
+  src: url("/fonts/Roboto/Roboto-Italic.ttf");
+}
+@font-face {
+  font-family: "Roboto-bolditalic";
+  src: url("/fonts/Roboto/Roboto-BoldItalic.ttf");
+}
+
+@font-face {
+  font-family: "Source_Sans_3-normal";
+  src: url("/fonts/Source_Sans_3/static/SourceSans3-Regular.ttf");
+}
+@font-face {
+  font-family: "Source_Sans_3-bold";
+  src: url("/fonts/Source_Sans_3/static/SourceSans3-Bold.ttf");
+}
+@font-face {
+  font-family: "Source_Sans_3-italic";
+  src: url("/fonts/Source_Sans_3/static/SourceSans3-Italic.ttf");
+}
+@font-face {
+  font-family: "Source_Sans_3-bolditalic";
+  src: url("/fonts/Source_Sans_3/static/SourceSans3-BoldItalic.ttf");
 }

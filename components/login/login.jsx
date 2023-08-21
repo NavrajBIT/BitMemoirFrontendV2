@@ -1,6 +1,6 @@
 "use client";
 import UserLogin from "./userlogin";
-import UserSignUp from "./signup";
+import UserSignUp from "./usersignup";
 import uselogin from "./uselogin";
 
 const Login = () => {

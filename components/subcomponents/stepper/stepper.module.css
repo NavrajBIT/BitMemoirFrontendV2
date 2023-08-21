@@ -1,0 +1,28 @@
+.step {
+  border: 1px solid var(--primary-50);
+}
+
+.step:hover {
+  box-shadow: 0 0 10px var(--text-primary);
+}
+
+.stepSpace {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes emphasize {
+  from {
+    box-shadow: 0 0 50px var(--text-primary);
+  }
+  to {
+    box-shadow: none;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .stepSpace {
+    width: 50px;
+  }
+}

@@ -75,6 +75,19 @@ const useVariable = (
       };
     });
   };
+  const changeFontSize = (newValue) => {
+    setVariables((prevState) => {
+      const newVar = [...prevState.variable];
+      newVar[index] = {
+        ...newVar[index],
+        font_size: newValue,
+      };
+      return {
+        ...prevState,
+        variable: newVar,
+      };
+    });
+  };
 
   const changeFont = (newvalue) => {
     setVariables((prevState) => {
@@ -119,6 +132,7 @@ const useVariable = (
     toggleBold,
     toggleItalic,
     changeSize,
+    changeFontSize,
     changeFont,
     isResizing,
     setIsResizing,

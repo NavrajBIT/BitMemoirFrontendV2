@@ -68,7 +68,7 @@ const Qrcode = ({
             position: "absolute",
             top: "0px",
           }}
-          bgColor="transparent"
+          bgColor="white"
           fgColor={`#${data.color}`}
           value={"https://bitmemoir.com/sampleqr"}
           viewBox={`0 0 256 256`}

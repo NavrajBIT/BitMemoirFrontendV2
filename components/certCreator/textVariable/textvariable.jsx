@@ -2,9 +2,18 @@ import Draggable from "react-draggable";
 import style from "./textVariable.module.css";
 import { HexColorPicker } from "react-colorful";
 import useTextVariable from "./useTextVariable";
+import FontSelector from "@/components/subcomponents/font/fontSelector";
 
 const Textvariable = ({ data, index, setVariables, setSelectedVariable }) => {
   const handleId = `text-handle-${index}`;
+
+  const fontFamily = data.is_bold
+    ? data.is_italic
+      ? `${data.font}-bolditalic`
+      : `${data.font}-bold`
+    : data.is_italic
+    ? `${data.font}-italic`
+    : `${data.font}-normal`;
 
   const textScript = useTextVariable(
     data,
@@ -44,11 +53,9 @@ const Textvariable = ({ data, index, setVariables, setSelectedVariable }) => {
       >
         <input
           style={{
-            fontFamily: data.font,
+            fontFamily: fontFamily,
             fontSize: data.font_size + "px",
             color: `#${data.color}`,
-            fontStyle: data.is_italic ? "italic" : "normal",
-            fontWeight: data.is_bold ? "bold" : "normal",
             width: textWidth,
           }}
           value={data.value}
@@ -142,16 +149,7 @@ const TextOptions = ({ data, index, setVariables, textScript }) => {
       {/* Change font ........................................................... */}
       <div style={{ display: "flex", alignItems: "center" }}>
         Font:
-        <select
-          value={data.font}
-          onChange={(e) => changeFont(e.target.value)}
-          style={{ width: "100%", padding: "8px", fontSize: "16px" }}
-        >
-          <option value="Arial">Arial</option>
-          <option value="Verdana">Verdana</option>
-          <option value="Times New Roman">Times New Roman</option>
-          {/* Add more font options as needed */}
-        </select>
+        <FontSelector value={data.font} onChange={changeFont} />
       </div>
 
       {/* Change color ................................................................. */}

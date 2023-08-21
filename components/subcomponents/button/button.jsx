@@ -14,6 +14,7 @@ const Button = ({
   const variantOptions = {
     primary: styles.primaryButton,
     secondary: styles.secondaryButton,
+    tertiary: styles.tertiaryButton,
     emphasis: styles.emphasisButton,
   };
 

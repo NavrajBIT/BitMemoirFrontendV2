@@ -1,0 +1,27 @@
+.notFoundContainer {
+  min-height: var(--min-height-screen);
+  background-color: var(--primary-110);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--padding-main);
+}
+
+.error {
+  font-size: 2rem;
+  color: var(--primary-50);
+}
+
+.link {
+  font-size: 1.5rem;
+  border: 1px solid var(--primary-50);
+  padding: var(--padding-light);
+  border-radius: var(--border-radius);
+  width: 12rem;
+  text-align: center;
+}
+.link:hover {
+  border: 1px solid var(--primary-110);
+  box-shadow: 0 0 10px var(--primary-50);
+}

@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
+import API from "../subcomponents/scripts/apiCall";
 
-const useCertCreator = () => {
-  const [uploadedImage, setUploadedImage] = useState(null);
+const useCertCreator = (params) => {
+  const [loadingStatus, setLoadingStatus] = useState("loading");
+  const [isSelectingvariable, setIsSelectingVariable] = useState(false);
+  const [uploadedImageURL, setUploadedImageURL] = useState(null);
   const [uploadedImageName, setUploadedImageName] = useState(null);
   const [templateName, setTemplateName] = useState("");
   const [scale, setScale] = useState(100);
@@ -13,18 +16,90 @@ const useCertCreator = () => {
   });
 
   const [selectedVariable, setSelectedVariable] = useState(null);
+  const api = API();
+  const endpoint = `certificate/template/${params.templateId}`;
+
+  const poppulatetemplateData = (data) => {
+    setTemplateName(data.name);
+    let newvariableData = {
+      text: data.texts,
+      logo: data.logos,
+      variable: data.variables,
+      qrcode: data.qrcodes,
+    };
+    setVariables(newvariableData);
+    if (data.base_image !== null) {
+      setUploadedImageURL(data.base_image);
+    }
+  };
+
+  useEffect(() => {
+    api
+      .crud("GET", endpoint)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 404) {
+          setLoadingStatus("notFound");
+        } else {
+          setLoadingStatus("");
+          poppulatetemplateData(res);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoadingStatus("error");
+      });
+  }, []);
 
   useEffect(() => {
     adjustScale();
     window.addEventListener("resize", adjustScale);
+
     return () => {
       window.removeEventListener("resize", adjustScale);
     };
   }, []);
 
+  const save = async () => {
+    setLoadingStatus("Saving Template...");
+    let logoData = variables.logo;
+    if (logoData.length > 0) {
+      await Promise.all(
+        logoData.map(async (logo, index) => {
+          let newLogodata = { ...logo };
+          delete newLogodata["logo_image"];
+          await api
+            .crud("PATCH", `certificate/logo/${logo.id}`, newLogodata)
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
+        })
+      );
+    }
+    let apiData = {
+      name: templateName,
+      texts: variables.text,
+      variables: variables.variable,
+      qrcodes: variables.qrcode,
+    };
+    console.log(apiData);
+    await api
+      .crud("PATCH", endpoint, apiData)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          poppulatetemplateData(res);
+        }
+      })
+      .catch((err) => console.log(err));
+    setLoadingStatus("");
+  };
+
+  const saveas = () => {
+    console.log("Save As");
+  };
+
   const adjustScale = () => {
     let windowWidth = window.innerWidth;
-    console.log(windowWidth);
     const requiredFullWidth = 1080;
     if (windowWidth < requiredFullWidth) {
       setScale(Math.round((windowWidth / requiredFullWidth) * 100 - 5));
@@ -33,12 +108,37 @@ const useCertCreator = () => {
     }
   };
 
+  const handleKeyPress = (event) => {
+    if (isSelectingvariable) return;
+    if (event.key === "Delete") {
+      deletevariable();
+    }
+    if (event.key === "t") {
+      addText();
+    }
+    if (event.key === "v") {
+      setIsSelectingVariable(true);
+    }
+    if (event.key === "l") {
+      addLogo();
+    }
+    if (event.key === "q") {
+      addQrcode();
+    }
+    if (event.ctrlKey && event.key === "s") {
+      save();
+    }
+    // if (event.ctrlKey && event.sh event.key === "s") {
+    //   saveas();
+    // }
+  };
+
   const removeImage = () => {
     setUploadedImage(null);
     setUploadedImageName(null);
   };
 
-  const selectImage = (file) => {
+  const selectImage = async (file) => {
     const fileName = file.name.replace(/\s+/g, "_");
     if (
       fileName.endsWith(".png") ||
@@ -46,13 +146,15 @@ const useCertCreator = () => {
       fileName.endsWith(".jpeg")
     ) {
       const newFile = new File([file], fileName, { type: file.type });
-      setUploadedImage(newFile);
-      setUploadedImageName(fileName);
-      let filereader = new FileReader();
-      filereader.addEventListener("load", () => {
-        setUploadedImage(filereader.result);
-      });
-      filereader.readAsDataURL(newFile);
+      const formdata = new FormData();
+      formdata.append("base_image", newFile);
+      setLoadingStatus("Uploading...");
+      await api
+        .crud("PATCH", endpoint, formdata, true)
+        .then((res) => {})
+        .catch((err) => alert("Could not upload image."));
+      await save();
+      setLoadingStatus("");
     } else {
       alert("Please select a valid image file.");
     }
@@ -68,7 +170,7 @@ const useCertCreator = () => {
           x_pos: 100,
           y_pos: 100,
           font_size: 16,
-          font: "Arial",
+          font: "Crimson",
           is_bold: false,
           is_italic: false,
           color: "000000",
@@ -79,7 +181,7 @@ const useCertCreator = () => {
   const addLogo = () => {
     const myInput = document.createElement("input");
     myInput.setAttribute("type", "file");
-    const handleUpload = (e) => {
+    const handleUpload = async (e) => {
       const file = e.target.files[0];
       const fileName = file.name.replace(/\s+/g, "_");
       if (
@@ -88,25 +190,18 @@ const useCertCreator = () => {
         fileName.endsWith(".jpeg")
       ) {
         const newFile = new File([file], fileName, { type: file.type });
-        let filereader = new FileReader();
-        filereader.addEventListener("load", () => {
-          setVariables((prev) => ({
-            ...prev,
-            logo: [
-              ...prev.logo,
-              {
-                logo_image: filereader.result,
-                height: 100,
-                width: 100,
-                x_pos: 100,
-                y_pos: 100,
-              },
-            ],
-          }));
-
-          myInput.remove();
-        });
-        filereader.readAsDataURL(newFile);
+        const formdata = new FormData();
+        formdata.append("logo_image", newFile);
+        formdata.append("height", 100);
+        formdata.append("width", 100);
+        formdata.append("x_pos", 100);
+        formdata.append("y_pos", 100);
+        formdata.append("template", params.templateId);
+        setLoadingStatus("Uploading...");
+        await api.crud("POST", "certificate/logo", formdata, true);
+        setLoadingStatus("");
+        await save();
+        myInput.remove();
       } else {
         alert("Please select a valid image file.");
         myInput.remove();
@@ -116,21 +211,21 @@ const useCertCreator = () => {
     myInput.click();
   };
 
-  const addVariable = () => {
+  const addVariable = (variablename) => {
     setVariables((prev) => ({
       ...prev,
       variable: [
         ...prev.variable,
         {
-          name: "Student Name",
+          name: variablename,
           x_pos: 100,
           y_pos: 100,
-          font: "Arial",
+          font: "Crimson",
           font_size: 25,
           is_bold: false,
           is_italic: false,
           color: "000000",
-          width: 300,
+          width: 500,
           height: 100,
         },
       ],
@@ -155,6 +250,7 @@ const useCertCreator = () => {
   };
 
   const deletevariable = () => {
+    console.log(selectedVariable);
     if (selectedVariable === null) return;
     setVariables((prev) => {
       const newArr = [
@@ -169,7 +265,10 @@ const useCertCreator = () => {
   };
 
   return {
-    uploadedImage,
+    loadingStatus,
+    isSelectingvariable,
+    setIsSelectingVariable,
+    uploadedImageURL,
     uploadedImageName,
     selectImage,
     removeImage,
@@ -186,6 +285,8 @@ const useCertCreator = () => {
     selectedVariable,
     setSelectedVariable,
     deletevariable,
+    save,
+    saveas,
   };
 };
 

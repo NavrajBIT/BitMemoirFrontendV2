@@ -1,0 +1,14 @@
+.certificate {
+  width: var(--card-width);
+  padding: var(--padding-light);
+  gap: var(--padding-light);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--primary-80);
+  border-radius: var(--border-radius);
+}
+
+.certificate:hover {
+  border: 1px solid var(--primary-100);
+  box-shadow: 0 0 10px var(--primary-50);
+}

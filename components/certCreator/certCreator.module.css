@@ -1,3 +1,13 @@
+.sideToolBar {
+  padding: var(--padding-light);
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-light);
+  margin-top: 10rem;
+}
+
 .tool {
   width: 50px;
   height: 50px;
@@ -16,6 +26,19 @@
 
 .tool:focus {
   border: 2px solid grey;
+}
+
+.toptoolContainer {
+  width: 100%;
+  max-width: var(--template-width);
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: var(--border-radius);
+  padding: var(--padding-extra-light);
+  display: flex;
+  gap: var(--padding-light);
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .toptool {
@@ -41,10 +64,10 @@
 .tooltip {
   position: absolute;
   top: 0px;
-  right: 60px;
+  left: 60px;
   background-color: var(--primary-80);
   padding: var(--padding-light);
-  text-align: right;
+  text-align: left;
   border-radius: var(--border-radius);
   width: 200px;
   z-index: 1;
@@ -52,6 +75,39 @@
 .toptooltip {
   position: absolute;
   top: 30px;
+  left: 0px;
+  background-color: var(--primary-80);
+  padding: var(--padding-light);
+  text-align: left;
+  border-radius: var(--border-radius);
+  width: 200px;
+  z-index: 1;
+}
+
+.bottomToolBarContainer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  z-index: 1;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottomToolBar {
+  padding: var(--padding-light);
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--padding-light);
+}
+
+.bottomtooltip {
+  position: absolute;
+  bottom: 60px;
   left: 0px;
   background-color: var(--primary-80);
   padding: var(--padding-light);
@@ -77,4 +133,13 @@
 .template-bar {
   width: 30%;
   height: 100vh;
+}
+
+@media only screen and (max-width: 1150px) {
+  .sideToolBar {
+    display: none;
+  }
+  .bottomToolBarContainer {
+    display: flex;
+  }
 }

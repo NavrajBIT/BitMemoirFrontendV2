@@ -5,7 +5,7 @@ import style from "./navbar.module.css";
 import LoginButton from "./loginButton";
 const Navbar = () => {
   const navMenuItems = [
-    { name: "Certificates", route: "/mint" },
+    { name: "Certificates", route: "/certificate" },
     { name: "Verify", route: "/verify" },
     { name: "Blog", route: "/blog" },
     { name: "About Us", route: "/about" },

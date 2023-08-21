@@ -3,6 +3,7 @@ import { Resizable } from "re-resizable";
 import style from "./variable.module.css";
 import { HexColorPicker } from "react-colorful";
 import useVariable from "./usevariable";
+import FontSelector from "@/components/subcomponents/font/fontSelector";
 
 const Variable = ({
   data,
@@ -12,6 +13,13 @@ const Variable = ({
   selectedVariable,
 }) => {
   const handleId = `variable-handle-${index}`;
+  const fontFamily = data.is_bold
+    ? data.is_italic
+      ? `${data.font}-bolditalic`
+      : `${data.font}-bold`
+    : data.is_italic
+    ? `${data.font}-italic`
+    : `${data.font}-normal`;
 
   const textScript = useVariable(
     data,
@@ -31,6 +39,7 @@ const Variable = ({
     toggleBold,
     toggleItalic,
     changeSize,
+    changeFontSize,
     changeFont,
     isResizing,
     setIsResizing,
@@ -52,11 +61,9 @@ const Variable = ({
         onMouseEnter={() => setIsResizeVisible(true)}
         onMouseLeave={() => setIsResizeVisible(false)}
         style={{
-          fontFamily: data.font,
+          fontFamily: fontFamily,
           fontSize: data.font_size + "px",
           color: `#${data.color}`,
-          fontStyle: data.is_italic ? "italic" : "normal",
-          fontWeight: data.is_bold ? "bold" : "normal",
           boxShadow: isSelected ? "0 0 10px var(--primary-110)" : "none",
         }}
         id={handleId}
@@ -101,6 +108,7 @@ const TextOptions = ({ data, index, setVariables, textScript }) => {
     toggleBold,
     toggleItalic,
     changeSize,
+    changeFontSize,
     changeFont,
     isResizing,
     setIsResizing,
@@ -145,7 +153,7 @@ const TextOptions = ({ data, index, setVariables, textScript }) => {
         <input
           type="number"
           value={data.font_size}
-          onChange={(e) => changeSize(e.target.value)}
+          onChange={(e) => changeFontSize(e.target.value)}
           min={0}
           max={50}
         />
@@ -155,16 +163,7 @@ const TextOptions = ({ data, index, setVariables, textScript }) => {
       {/* Change font ........................................................... */}
       <div style={{ display: "flex", alignItems: "center" }}>
         Font:
-        <select
-          value={data.font}
-          onChange={(e) => changeFont(e.target.value)}
-          style={{ width: "100%", padding: "8px", fontSize: "16px" }}
-        >
-          <option value="Arial">Arial</option>
-          <option value="Verdana">Verdana</option>
-          <option value="Times New Roman">Times New Roman</option>
-          {/* Add more font options as needed */}
-        </select>
+        <FontSelector value={data.font} onChange={changeFont} />
       </div>
 
       {/* Change color ................................................................. */}

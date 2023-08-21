@@ -1,0 +1,28 @@
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: auto;
+  padding: var(--padding-main);
+  background-color: var(--primary-100);
+  border-radius: var(--border-radius);
+  position: relative;
+}
+
+.details {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: var(--padding-main);
+}
+
+.detailContainer {
+  width: 100%;
+  max-width: var(--max-width-form);
+  padding: var(--padding-main);
+  background-color: var(--primary-100);
+  border-radius: var(--border-radius);
+  position: relative;
+}

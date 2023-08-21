@@ -1,0 +1,5 @@
+.fontContainer {
+  width: 100%;
+  padding: var(--padding-light);
+  font-size: 1rem;
+}

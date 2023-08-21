@@ -1,42 +1,59 @@
 import Image from "next/image";
-const FullViewTemplate = () => {
-  return (
-    <div
-      style={{
-        width: "60%",
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "8rem",
-      }}
-    >
-      <div>
-        <Image
-          src=""
-          alt={"Certificate"}
-          style={{
-            width: "80%",
-            height: "auto",
-          }}
-        />
-      </div>
+import style from "../template.module.css";
+import Button from "@/components/subcomponents/button/button";
 
-      <div>
-        <button
-          style={{
-            color: "white",
-            backgroundColor: "#0094B2",
-            padding: "1rem",
-            borderRadius: "0.5rem",
-            border: "none",
-            marginTop: "3rem",
-            marginLeft: "28rem",
-          }}
-        >
-          {"Edit >"}
-        </button>
+const FullViewTemplate = ({ cert }) => {
+  const template = cert.selectedTemplate;
+  return (
+    <div className={style.templateViewContainer}>
+      <div className={style.templateView}>
+        <div className={style.templateHeading}>
+          {cert.selectedTemplate.name}
+        </div>
+        <div className={style.buttonContainer}>
+          <div className={style.innerButtonContainer}>
+            <div style={{ width: "fit-content" }}>
+              <Button
+                text={"Edit"}
+                variant={"secondary"}
+                startIcon={"edit"}
+                onClick={cert.editTemplate}
+              />
+            </div>
+            <div style={{ width: "fit-content" }}>
+              <Button
+                text={"Delete"}
+                variant={"secondary"}
+                startIcon={"delete"}
+                onClick={() => cert.setIsDeletePopup(true)}
+              />
+            </div>
+          </div>
+          <div>
+            <Button
+              text={"Issue >>"}
+              variant={"primary"}
+              onClick={cert.issueCert}
+            />
+          </div>
+        </div>
+        <div className={style.previewimageContainer}>
+          <Image
+            src={
+              template.icon !== null
+                ? template.icon
+                : "/icons/imageplaceholder.svg"
+            }
+            loader={() =>
+              template.icon !== null
+                ? template.icon
+                : "/icons/imageplaceholder.svg"
+            }
+            alt={"Certificate"}
+            fill={true}
+            className={style.previewimage}
+          />
+        </div>
       </div>
     </div>
   );

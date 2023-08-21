@@ -1,5 +1,7 @@
+import Verify from "@/components/verify/verify";
+
 const Page = () => {
-  return <div>This is Verify Page</div>;
+  return <Verify />;
 };
 
 export default Page;

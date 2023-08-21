@@ -1,0 +1,19 @@
+.popupChild {
+  animation: popup 0.5s;
+  box-shadow: 0 0 10px var(--primary-50);
+}
+
+@keyframes popup {
+  0% {
+    transform: scale(0);
+    box-shadow: 0 0 0px var(--primary-50);
+  }
+  50% {
+    transform: scale(1.5);
+    box-shadow: 0 0 50px var(--primary-50);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px var(--primary-50);
+  }
+}

@@ -1,0 +1,18 @@
+export const partnersData=[
+    { img: '/about/partners/partner-1.png'},
+    { img: '/about/partners/partner-2.png'},
+    { img: '/about/partners/image.png'},
+    { img: '/about/partners/partner-4.png'},
+    { img: '/about/partners/partner-5.png'},
+    { img: '/about/partners/partner-6.png'},
+    { img: '/about/partners/partner-7.png'},
+    { img: '/about/partners/partner-8.png'},
+    { img: '/about/partners/partner-9.png'},
+    { img: '/about/partners/partner-10.png'},
+    { img: '/about/partners/partner-11.png'},
+    { img: '/about/partners/partner-12.png'},
+    { img: '/about/partners/partner-13.png'},
+    { img: '/about/partners/partner-14.png'},
+    { img: '/about/partners/partner-15.png'},
+    { img: '/about/partners/partner-16.png'},
+];

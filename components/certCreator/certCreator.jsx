@@ -1,16 +1,25 @@
 "use client";
-import { useState } from "react";
-import SideBar from "./tools/sideBar";
-import Main from "./subcomponents/main";
 import SideToolBar from "./tools/sideToolBar";
 import useCertCreator from "./useCertCreator";
 import TopToolBar from "./tools/topToolBar";
+import BottomToolBar from "./tools/bottomToolBar";
 import Canvas from "./canvas";
+import Popup from "../subcomponents/popup/popup";
+import VariableSelector from "./tools/variableSelector";
+import LocalLoading from "../subcomponents/loadingPage/localloading";
+import NotFound from "../subcomponents/errorPages/notFound";
+import WentWrong from "../subcomponents/errorPages/wentWrong";
 
-const CertCreator = () => {
-  const [variable, setVariable] = useState("");
-  const [tool, setTool] = useState("");
-  const creator = useCertCreator();
+const CertCreator = ({ params }) => {
+  const creator = useCertCreator(params);
+
+  if (creator.loadingStatus === "notFound") {
+    return <NotFound />;
+  }
+  if (creator.loadingStatus === "error") {
+    return <WentWrong />;
+  }
+
   return (
     <div
       style={{
@@ -18,7 +27,9 @@ const CertCreator = () => {
         display: "flex",
       }}
     >
-      <SideBar variable={variable} setVariable={setVariable} />
+      <SideToolBar creator={creator} />
+      <BottomToolBar creator={creator} />
+
       <div
         style={{
           width: "100%",
@@ -32,7 +43,18 @@ const CertCreator = () => {
         <TopToolBar creator={creator} />
         <Canvas creator={creator} />
       </div>
-      <SideToolBar creator={creator} />
+
+      {creator.isSelectingvariable && (
+        <Popup>
+          <VariableSelector
+            close={() => creator.setIsSelectingVariable(false)}
+            selectvariable={creator.addVariable}
+          />
+        </Popup>
+      )}
+      {creator.loadingStatus !== "" && (
+        <LocalLoading text={creator.loadingStatus} />
+      )}
     </div>
   );
 };

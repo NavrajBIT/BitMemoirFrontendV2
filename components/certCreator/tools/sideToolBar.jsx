@@ -1,19 +1,10 @@
 import SideTool from "./sideTool";
+import style from "../certCreator.module.css";
 
 const SideToolBar = ({ creator }) => {
   return (
     <div>
-      <div
-        style={{
-          padding: "var(--padding-light)",
-          background: "rgba(0,0,0,0.3)",
-          borderRadius: "var(--border-radius)",
-          display: "flex",
-          flexDirection: "column",
-          gap: "var(--padding-light)",
-          marginTop: "10rem",
-        }}
-      >
+      <div className={style.sideToolBar}>
         <SideTool
           icon="text"
           toolName="Add Text"
@@ -31,7 +22,7 @@ const SideToolBar = ({ creator }) => {
           icon="variable"
           toolName="Variable"
           toolDescription="Add variable on the certificate template. Variable values can vary on different certificate issuances. e.g. Student Name"
-          onClick={creator.addVariable}
+          onClick={() => creator.setIsSelectingVariable(true)}
         />
         <SideTool
           icon="qr"
@@ -55,11 +46,17 @@ const SideToolBar = ({ creator }) => {
           toolName="Redo"
           toolDescription="Redo last operation"
         /> */}
-        <SideTool icon="save" toolName="Save" toolDescription="Save Template" />
+        <SideTool
+          icon="save"
+          toolName="Save"
+          toolDescription="Save Template"
+          onClick={creator.save}
+        />
         <SideTool
           icon="saveas"
           toolName="Save As"
           toolDescription="Duplicate template to another file"
+          onClick={creator.saveas}
         />
       </div>
     </div>
