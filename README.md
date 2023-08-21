@@ -1,3 +1,10 @@
+# Setup
+
+Create a .env.local file at the root directory
+NEXT_PUBLIC_API_ENDPOINT=
+NEXT_PUBLIC_GOOGLE_KEY=
+NEXT_PUBLIC_FACEBOOK_KEY=
+
 # Coding Starndards
 
 ## Folder structure
