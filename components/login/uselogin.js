@@ -92,8 +92,9 @@ const uselogin = () => {
   };
 
   const handleGoogleLogin = (response) => {
+    console.log(response);
     api
-      .socialLogin(response.credential, "google-oauth2")
+      .socialLogin(response.access_token, "google-oauth2")
       .then((res) => {
         console.log(res);
       })
@@ -101,7 +102,7 @@ const uselogin = () => {
   };
   const handleFacebookLogin = (response) => {
     api
-      .socialLogin(response.data.accessToken, "google-oauth2")
+      .socialLogin(response.data.accessToken, "facebook")
       .then((res) => {
         console.log(res);
       })

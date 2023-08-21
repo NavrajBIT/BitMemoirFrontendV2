@@ -7,7 +7,7 @@ function FacebookOAuth({ useLogin }) {
     <div>
       <LoginSocialFacebook
         appId="234093165719884"
-        onResolve={useLogin.handleGoogleLogin}
+        onResolve={useLogin.handleFacebookLogin}
         onReject={(error) => {
           console.log(error);
         }}

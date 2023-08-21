@@ -1,16 +1,14 @@
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import { GoogleLogin } from "@react-oauth/google";
 
+import { GoogleOAuthProvider, GoogleLogin,useGoogleLogin } from '@react-oauth/google';
+import { GoogleLoginButton } from "react-social-login-buttons";
 const Google = ({ useLogin }) => {
+
+  const login = useGoogleLogin({
+    onSuccess:useLogin.handleGoogleLogin,
+
+  });
   return (
-    <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_KEY}>
-      <GoogleLogin
-        onSuccess={useLogin.handleGoogleLogin}
-        onError={() => {
-          console.log("Login Failed");
-        }}
-      />
-    </GoogleOAuthProvider>
+    <GoogleLoginButton onClick={() => login()} />
   );
 };
 

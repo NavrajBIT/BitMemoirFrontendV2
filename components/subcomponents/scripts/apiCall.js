@@ -1,6 +1,7 @@
 import { useRouter } from "next/navigation";
 
-const API_URL = process.env.NEXT_PUBLIC_API_ENDPOINT;
+// const API_URL = process.env.NEXT_PUBLIC_API_ENDPOINT;
+const API_URL = "http://localhost:8000/";
 
 const API = () => {
   const router = useRouter();
