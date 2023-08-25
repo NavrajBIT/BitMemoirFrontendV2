@@ -1,9 +1,9 @@
 "use client";
 import Form from "../subcomponents/form/form";
 import Button from "../subcomponents/button/button";
-import Google from "./google";
-import FacebookOAuth from "./facebook";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+// import Google from "./google";
+// import FacebookOAuth from "./facebook";
+// import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const UserLogin = ({ useLogin }) => {
   return (
@@ -31,12 +31,12 @@ const UserLogin = ({ useLogin }) => {
             gap: "var(--padding-main)",
           }}
         >
-          <div style={{ width: "fit-content" }}>
+          {/* <div style={{ width: "fit-content" }}>
             <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_KEY}>
               <Google useLogin={useLogin} />
             </GoogleOAuthProvider>
           </div>
-          <FacebookOAuth useLogin={useLogin} />
+          <FacebookOAuth useLogin={useLogin} /> */}
           <div style={{ display: "flex", alignItems: "center" }}>
             Don&apos;t have an account?
             <div style={{ width: "fit-content" }}>
