@@ -2,7 +2,7 @@
 import Form from "@/components/subcomponents/form/form";
 import { useRouter } from "next/navigation";
 
-const Verify = ({ setIsVerified }) => {
+const Verify = () => {
   const router = useRouter();
   const verifyDataForm = [
     {
@@ -30,7 +30,7 @@ const Verify = ({ setIsVerified }) => {
           formData={verifyDataForm}
           handleSubmit={btnClicked}
           formButton={"Verify"}
-          status={status}
+          status={""}
           bgImage={false}
         />
       </div>

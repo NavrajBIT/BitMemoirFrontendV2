@@ -1,3 +1,4 @@
+"use client";
 import Form from "../subcomponents/form/form";
 import Button from "../subcomponents/button/button";
 import Google from "./google";
