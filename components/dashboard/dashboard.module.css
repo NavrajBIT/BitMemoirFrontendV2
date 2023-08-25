@@ -32,3 +32,27 @@
   box-shadow: 0 0 10px var(--primary-50);
   cursor: context-menu;
 }
+
+.dotmenu {
+  position: absolute;
+  top: var(--padding-main);
+  right: var(--padding-main);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: context-menu;
+}
+.dotmenu:hover {
+  box-shadow: 0 0 20px var(--primary-50);
+}
+
+.menuContainer {
+  position: absolute;
+  top: var(--padding-main);
+  right: var(--padding-large);
+  background-color: var(--primary-80);
+  border-radius: var(--border-radius);
+}

@@ -1,10 +1,13 @@
 import BottomTool from "./bottomTool";
 import style from "../certCreator.module.css";
+import { useState } from "react";
+import { HexColorPicker } from "react-colorful";
 
 const BottomToolBar = ({ creator }) => {
   return (
     <div className={style.bottomToolBarContainer}>
       <div className={style.bottomToolBar}>
+        {creator.templateBackground && <BackgroundColor creator={creator} />}
         <BottomTool
           icon="text"
           toolName="Add Text"
@@ -54,3 +57,49 @@ const BottomToolBar = ({ creator }) => {
 };
 
 export default BottomToolBar;
+
+const BackgroundColor = ({ creator }) => {
+  const [isColorpicker, setIsColorPicker] = useState(false);
+  const [isColorPickerFocused, setIsColorPickerFocused] = useState(false);
+  const changeColor = (color) => {
+    creator.setTemplateBackground(color);
+  };
+
+  const openColorPicker = () => {
+    setIsColorPicker((prev) => !prev);
+    setTimeout(() => {
+      setIsColorPicker(false);
+    }, 1000);
+  };
+
+  return (
+    <div
+      style={{ position: "relative" }}
+      onFocus={() => setIsColorPickerFocused(true)}
+      onBlur={() => setIsColorPickerFocused(false)}
+    >
+      <BottomTool
+        icon="color"
+        toolName="Background Color"
+        toolDescription="Change Template Background Color"
+        onClick={openColorPicker}
+      />
+      <div
+        onFocus={() => setIsColorPickerFocused(true)}
+        onBlur={() => setIsColorPickerFocused(false)}
+        style={{
+          display: isColorpicker || isColorPickerFocused ? "flex" : "none",
+        }}
+        className={style.colorPickerContainer}
+      >
+        {isColorPickerFocused && (
+          <HexColorPicker
+            value={creator.templateBackground}
+            onChange={(e) => changeColor(e.slice(1))}
+            style={{ position: "absolute", bottom: "50px", left: "0px" }}
+          />
+        )}
+      </div>
+    </div>
+  );
+};

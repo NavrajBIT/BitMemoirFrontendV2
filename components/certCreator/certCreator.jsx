@@ -9,6 +9,8 @@ import VariableSelector from "./tools/variableSelector";
 import LocalLoading from "../subcomponents/loadingPage/localloading";
 import NotFound from "../subcomponents/errorPages/notFound";
 import WentWrong from "../subcomponents/errorPages/wentWrong";
+import TutorialPopup from "./tutorialPopup";
+import NoqrPopup from "./noqrPopup";
 
 const CertCreator = ({ params }) => {
   const creator = useCertCreator(params);
@@ -55,6 +57,8 @@ const CertCreator = ({ params }) => {
       {creator.loadingStatus !== "" && (
         <LocalLoading text={creator.loadingStatus} />
       )}
+      <TutorialPopup />
+      {creator.noQR && <NoqrPopup creator={creator} />}
     </div>
   );
 };

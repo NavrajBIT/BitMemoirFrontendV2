@@ -25,13 +25,16 @@ const Qrcode = ({
     isSelected,
     isColorPickerFocused,
     setIsColorPickerFocused,
+    isBGColorPickerFocused,
+    setIsBGColorPickerFocused,
+    changeBGColor,
     changeColor,
   } = useqr(data, index, setVariables, selectedVariable);
 
   return (
     <Draggable
       bounds="#canvas"
-      disabled={isResizing || isColorPickerFocused}
+      disabled={isResizing || isColorPickerFocused || isBGColorPickerFocused}
       handle={`#${handleId}`}
       onDrag={changePos}
       position={{ x: data.x_pos, y: data.y_pos }}
@@ -68,9 +71,9 @@ const Qrcode = ({
             position: "absolute",
             top: "0px",
           }}
-          bgColor="white"
+          bgColor={`#${data.background_color}`}
           fgColor={`#${data.color}`}
-          value={"https://bitmemoir.com/sampleqr"}
+          value={"https://bitmemoir.com/"}
           viewBox={`0 0 256 256`}
         />
 
@@ -80,6 +83,9 @@ const Qrcode = ({
             isColorPickerFocused={isColorPickerFocused}
             setIsColorPickerFocused={setIsColorPickerFocused}
             changeColor={changeColor}
+            isBGColorPickerFocused={isBGColorPickerFocused}
+            setIsBGColorPickerFocused={setIsBGColorPickerFocused}
+            changeBGColor={changeBGColor}
           />
         )}
       </div>
@@ -93,6 +99,9 @@ const QROptions = ({
   data,
   isColorPickerFocused,
   setIsColorPickerFocused,
+  isBGColorPickerFocused,
+  setIsBGColorPickerFocused,
+  changeBGColor,
   changeColor,
 }) => {
   return (
@@ -107,7 +116,10 @@ const QROptions = ({
       >
         Color:
         <div
-          onFocus={() => setIsColorPickerFocused(true)}
+          onFocus={() => {
+            setIsColorPickerFocused(true);
+            setIsBGColorPickerFocused(false);
+          }}
           onBlur={() => setIsColorPickerFocused(false)}
         >
           <input
@@ -115,7 +127,7 @@ const QROptions = ({
             value={`#${data.color}`}
             onChange={(e) => {}}
             style={{
-              color: "var(--text-primary)",
+              color: `#${data.color}`,
               background: `#${data.color}`,
               width: "70px",
             }}
@@ -125,6 +137,32 @@ const QROptions = ({
               value={data.color}
               onChange={(e) => changeColor(e.slice(1))}
               style={{ position: "absolute", top: "40px", left: "0px" }}
+            />
+          )}
+        </div>
+        BG Color:
+        <div
+          onFocus={() => {
+            setIsBGColorPickerFocused(true);
+            setIsColorPickerFocused(false);
+          }}
+          onBlur={() => setIsBGColorPickerFocused(false)}
+        >
+          <input
+            type="text"
+            value={`#${data.background_color}`}
+            onChange={(e) => {}}
+            style={{
+              color: `#${data.background_color}`,
+              background: `#${data.background_color}`,
+              width: "70px",
+            }}
+          />
+          {isBGColorPickerFocused && (
+            <HexColorPicker
+              value={data.background_color}
+              onChange={(e) => changeBGColor(e.slice(1))}
+              style={{ position: "absolute", top: "40px", left: "200px" }}
             />
           )}
         </div>

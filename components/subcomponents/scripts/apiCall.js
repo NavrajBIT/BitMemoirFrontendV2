@@ -101,6 +101,27 @@ const API = () => {
       throw error;
     }
   }
+  async function nft(nftId) {
+    let endpoint = `nft/${nftId}`;
+
+    const requestOptions = {
+      method: "GET",
+    };
+    try {
+      const response = await fetch(API_URL + endpoint + "/", requestOptions);
+      if (response.status === 404) return { status: 404 };
+
+      const responseData = await response.json();
+      if (responseData["status"]) {
+        responseData["modelStatus"] = responseData["status"];
+      }
+      responseData["status"] = response.status;
+      return responseData;
+    } catch (error) {
+      console.error("API call error:", error);
+      throw error;
+    }
+  }
 
   async function createUser(data) {
     const requestOptions = {
@@ -223,6 +244,8 @@ const API = () => {
       const response = await fetch(`${API_URL}user/auth/`, requestOptions);
       const responseData = await response.json();
       console.log(responseData);
+      localStorage.setItem("jwtToken", responseData.token);
+
       return responseData;
     } catch (error) {
       console.log("API call error:", error);
@@ -238,6 +261,7 @@ const API = () => {
     socialLogin,
     certificate,
     blog,
+    nft,
   };
 };
 

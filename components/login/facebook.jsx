@@ -6,8 +6,8 @@ function FacebookOAuth({ useLogin }) {
   return (
     <div>
       <LoginSocialFacebook
-        appId="234093165719884"
-        onResolve={useLogin.handleGoogleLogin}
+        appId={process.env.NEXT_PUBLIC_FACEBOOK_KEY}
+        onResolve={useLogin.handleFacebookLogin}
         onReject={(error) => {
           console.log(error);
         }}

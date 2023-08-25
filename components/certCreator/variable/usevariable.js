@@ -76,6 +76,7 @@ const useVariable = (
     });
   };
   const changeFontSize = (newValue) => {
+    if (newValue > 100) newValue = 100;
     setVariables((prevState) => {
       const newVar = [...prevState.variable];
       newVar[index] = {

@@ -1,18 +1,23 @@
 import { useState, useEffect } from "react";
 import API from "../subcomponents/scripts/apiCall";
+import useApprover from "../approver/useApprover";
 
 const useIssue = (params) => {
   const api = API();
+  const approver = useApprover();
   const [loadingStatus, setLoadingStatus] = useState("");
   const [popupStatus, setPopupStatus] = useState("");
   const [template, setTemplate] = useState(null);
   const [studentNumber, setStudentNumber] = useState(null);
   const [studentData, setStudentData] = useState(null);
   const [confirmPopup, setConfirmPopup] = useState(false);
+  const [approverPopup, setApproverPopup] = useState(false);
+  const [notVerifiedPopup, setNotVerifiedPopup] = useState(false);
   const [successPopup, setSuccessPopup] = useState(false);
   const [certType, setcertType] = useState("nonessential");
   const [deploymentType, setDeploymentType] = useState("static");
   const [orderId, setOrderId] = useState(null);
+  const [selectedApprovers, setSelectedApprovers] = useState([]);
 
   useEffect(() => {
     poppulateTemplateData();
@@ -196,6 +201,12 @@ const useIssue = (params) => {
       type: deploymentType,
       certificates: [],
     };
+
+    apiData["approvals"] = [];
+    selectedApprovers.map((approver) => {
+      apiData["approvals"].push({ approver: approver });
+    });
+
     studentData.map((row, index) => {
       let rowData = {
         email: row[row.length - 2],
@@ -213,14 +224,45 @@ const useIssue = (params) => {
     return apiData;
   };
 
+  const checkIsVerified = async () => {
+    let is_verified = true;
+    setLoadingStatus("Checking data...");
+    await api
+      .crud("GET", "/user/kyc")
+      .then((res) => {
+        console.log(res);
+        if (
+          res.status >= 200 &&
+          res.status <= 299 &&
+          res[0].status !== "Approved"
+        ) {
+          is_verified = false;
+        }
+      })
+      .catch((err) => console.log(err));
+    setLoadingStatus("");
+    return is_verified;
+  };
+
   const placeOrder = async () => {
+    setApproverPopup(false);
     setConfirmPopup(false);
+    const is_verified = await checkIsVerified();
+    if (!is_verified) {
+      setNotVerifiedPopup(true);
+      return;
+    }
+    issueCertificates();
+  };
+
+  const issueCertificates = async () => {
     let apiData = getApiData();
     console.log(apiData);
     setLoadingStatus("Submitting Certificate Order...");
     await api
       .crud("POST", "certificate/order", apiData)
       .then((res) => {
+        console.log(res);
         if (res.status >= 200 && res.status <= 299) {
           setOrderId(res.id);
           setSuccessPopup(true);
@@ -255,6 +297,14 @@ const useIssue = (params) => {
     successPopup,
     setSuccessPopup,
     orderId,
+    approver,
+    approverPopup,
+    setApproverPopup,
+    selectedApprovers,
+    setSelectedApprovers,
+    notVerifiedPopup,
+    setNotVerifiedPopup,
+    issueCertificates,
   };
 };
 

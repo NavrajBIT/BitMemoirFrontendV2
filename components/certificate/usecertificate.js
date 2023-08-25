@@ -12,7 +12,17 @@ const usecertificate = () => {
 
   useEffect(() => {
     getTemplates();
+    setTutorialData();
   }, []);
+
+  const setTutorialData = () => {
+    let tutorial = localStorage.getItem("templateTutorial");
+
+    if (tutorial !== "true" && tutorial !== "false") {
+      localStorage.setItem("templateTutorial", true);
+      localStorage.setItem("certCreatorTutorial", true);
+    }
+  };
 
   const getTemplates = async () => {
     setIsLoading(true);
@@ -25,14 +35,16 @@ const usecertificate = () => {
     setIsLoading(false);
   };
 
-  const createNewTemplate = () => {
-    api
+  const createNewTemplate = async () => {
+    setIsLoading(true);
+    await api
       .crud("POST", "certificate/template")
       .then((res) => {
         if (res.status >= 200 && res.status <= 299)
           router.push(`/certCreator/${res.id}`);
       })
       .catch((err) => console.log(err));
+    setIsLoading(false);
   };
 
   const editTemplate = () => {

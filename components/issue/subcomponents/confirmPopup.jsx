@@ -77,6 +77,7 @@ const TypeSelector = ({ issue }) => (
     </div>
   </div>
 );
+
 const DeploymentSelector = ({ issue }) => (
   <div className={style.sectionLight}>
     <div className={style.sectionHeading}>Deployment type</div>
@@ -116,17 +117,33 @@ const ButtonContainer = ({ issue }) => (
       alignItems: "center",
       justifyContent: "space-between",
       padding: "var(--padding-main)",
+      gap: "var(--padding-main)",
     }}
   >
     <div style={{ width: "fit-content", minWidth: "40%" }}>
       <Button
         text="X Cancel"
         variant="secondary"
-        onClick={() => issue.setConfirmPopup(false)}
+        onClick={() => {
+          issue.setApproverPopup(false);
+          issue.setConfirmPopup(false);
+        }}
       />
     </div>
     <div style={{ width: "fit-content", minWidth: "40%" }}>
-      <Button text="Issue >" variant="primary" onClick={issue.placeOrder} />
+      <Button
+        text="Issue >"
+        variant="primary"
+        onClick={() => {
+          if (issue.certType === "essential") {
+            issue.setApproverPopup(true);
+            issue.setConfirmPopup(false);
+
+            return;
+          }
+          issue.placeOrder();
+        }}
+      />
     </div>
   </div>
 );

@@ -6,7 +6,9 @@ import useIssue from "./useIssue";
 import LocalLoading from "../subcomponents/loadingPage/localloading";
 import Alert from "./subcomponents/alert";
 import ConfirmPopup from "./subcomponents/confirmPopup";
+import ApproverPopup from "./subcomponents/approverPopup";
 import SuccessPopup from "./subcomponents/successPopup";
+import NotVerifiedPopup from "./subcomponents/notVerifiedPopup";
 
 const Issue = ({ params }) => {
   const issue = useIssue(params);
@@ -49,6 +51,8 @@ const Issue = ({ params }) => {
       )}
       {issue.popupStatus !== "" && <Alert issue={issue} />}
       {issue.confirmPopup && <ConfirmPopup issue={issue} />}
+      {issue.approverPopup && <ApproverPopup issue={issue} />}
+      {issue.notVerifiedPopup && <NotVerifiedPopup issue={issue} />}
       {issue.successPopup && <SuccessPopup issue={issue} />}
     </div>
   );

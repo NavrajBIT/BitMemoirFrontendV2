@@ -21,6 +21,7 @@ const useOrder = (params) => {
     api
       .crud("GET", `certificate/order/${params.orderId}`)
       .then((res) => {
+        console.log(res);
         if (res.status === 404) setNotFound(true);
         if (res.status >= 200 && res.status <= 299) {
           const date = new Date(res.timestamp);
@@ -48,7 +49,7 @@ const useOrder = (params) => {
     poppulateOrderDetails();
   }, []);
 
-  return { orderDetails, templateDetails, notFound };
+  return { orderDetails, templateDetails, notFound, poppulateOrderDetails };
 };
 
 export default useOrder;

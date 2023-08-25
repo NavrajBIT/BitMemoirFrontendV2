@@ -15,15 +15,7 @@ const useTextVariable = (data, index, setVariables) => {
   }, []);
 
   useEffect(() => {
-    setTextWidth(
-      getTextWidth(
-        data.value,
-        data.font,
-        data.font_size,
-        data.is_bold,
-        data.is_italic
-      )
-    );
+    setTextWidth(getTextWidth(data));
   }, [data.value, data.font, data.font_size, data.is_bold, data.is_italic]);
 
   const handleDocumentClick = (event) => {
@@ -44,19 +36,19 @@ const useTextVariable = (data, index, setVariables) => {
     setIsFocused(false);
   };
 
-  function getTextWidth(text, font, fontSize, isBold, isItalic) {
+  function getTextWidth(data) {
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
-    let fontStyle = "";
-    if (isBold) {
-      fontStyle += "bold ";
-    }
-    if (isItalic) {
-      fontStyle += "italic ";
-    }
-    context.font = `${fontStyle}${fontSize}px ${font}`;
+    const fontFamily = data.is_bold
+      ? data.is_italic
+        ? `${data.font}-bolditalic`
+        : `${data.font}-bold`
+      : data.is_italic
+      ? `${data.font}-italic`
+      : `${data.font}-normal`;
 
-    const textMetrics = context.measureText(text);
+    context.font = `${data.font_size}px ${fontFamily}`;
+    const textMetrics = context.measureText(data.value);
     const width = Math.round(textMetrics.width) + 20;
     canvas.remove();
     return `${width}px`;
@@ -126,6 +118,7 @@ const useTextVariable = (data, index, setVariables) => {
     });
   };
   const changeSize = (newvalue) => {
+    if (newvalue > 100) newvalue = 100;
     setVariables((prevState) => {
       const newText = [...prevState.text];
       newText[index] = {

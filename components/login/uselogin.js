@@ -80,7 +80,12 @@ const uselogin = () => {
         if (res.error) {
           setStatus(res.error);
         } else {
-          router.push("/kyc");
+          try {
+            let nextRoute = localStorage.getItem("nextRoute");
+            router.push(nextRoute);
+          } catch {
+            router.push("/kyc");
+          }
         }
       })
       .catch((err) => {
@@ -93,17 +98,17 @@ const uselogin = () => {
 
   const handleGoogleLogin = (response) => {
     api
-      .socialLogin(response.credential, "google-oauth2")
+      .socialLogin(response.access_token, "google-oauth2")
       .then((res) => {
-        console.log(res);
+        router.back();
       })
       .catch((err) => console.log(err));
   };
   const handleFacebookLogin = (response) => {
     api
-      .socialLogin(response.data.accessToken, "google-oauth2")
+      .socialLogin(response.data.accessToken, "facebook")
       .then((res) => {
-        console.log(res);
+        router.back();
       })
       .catch((err) => console.log(err));
   };

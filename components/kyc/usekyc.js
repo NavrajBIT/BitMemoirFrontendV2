@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import API from "../subcomponents/scripts/apiCall";
+import { useRouter } from "next/navigation";
 
 const usekyc = () => {
   const api = API();
+  const router = useRouter();
   const [kycStep, setKycStep] = useState(1);
   const [formStatus, setFormStatus] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -205,6 +207,24 @@ const usekyc = () => {
     uploader.click();
   };
 
+  const handleWalletSubmit = async () => {
+    setIsLoading(true);
+
+    await api
+      .crud("PATCH", `user/account/${accountDetails.id}`, {
+        wallet: accountDetails.wallet,
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.status >= 200 && res.status <= 299) {
+          router.push("/kyc/status");
+        }
+      })
+      .catch((err) => console.log(err));
+
+    setIsLoading(false);
+  };
+
   return {
     kycStep,
     setKycStep,
@@ -222,6 +242,7 @@ const usekyc = () => {
     uploadRegProof,
     issuerDetails,
     handleIssuerSubmit,
+    handleWalletSubmit,
   };
 };
 

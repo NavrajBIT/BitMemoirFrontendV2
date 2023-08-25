@@ -70,17 +70,60 @@ const Certificate = ({ cert, index }) => {
             :{" " + variable.value}
           </div>
         ))}
-        <div>
-          <span style={{ color: "var(--primary-50)" }}>email</span>:
-          {" " + cert.email}
-        </div>
-        <div>
-          <span style={{ color: "var(--primary-50)" }}>wallet</span>:
-          {" " + cert.wallet}
+        <div style={{ padding: "var(--padding-light) 0" }}>
+          <div>
+            <span style={{ color: "var(--primary-50)" }}>email</span>:
+            {" " + cert.email}
+          </div>
+          <div>
+            <span style={{ color: "var(--primary-50)" }}>wallet</span>:
+            {" " + cert.wallet}
+          </div>
         </div>
         <div>
           <span style={{ color: "var(--primary-50)" }}>Certificate Id:</span>
           {cert.id}
+        </div>
+        <div
+          style={{
+            padding: "var(--padding-light)",
+            background: "var(--primary-90)",
+            borderRadius: "var(--border-radius)",
+          }}
+        >
+          <div
+            style={{
+              color: "var(--primary-50)",
+            }}
+          >
+            Status:
+          </div>
+          <div>
+            <span>Email:</span>
+            {cert.email === "" && "Not Provided"}
+            {cert.email !== "" && (
+              <>
+                {cert.email_sent ? (
+                  <span style={{ color: "green" }}>Sent</span>
+                ) : (
+                  <span>Pending</span>
+                )}
+              </>
+            )}
+          </div>
+          <div>
+            <span>Minted:</span>
+            {cert.wallet === "" && "Wallet Not Provided"}
+            {cert.wallet !== "" && (
+              <>
+                {cert.is_minted ? (
+                  <span style={{ color: "green" }}>Success</span>
+                ) : (
+                  <span style={{ color: "red" }}>Pending</span>
+                )}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -7,6 +7,7 @@ const useCertCreator = (params) => {
   const [uploadedImageURL, setUploadedImageURL] = useState(null);
   const [uploadedImageName, setUploadedImageName] = useState(null);
   const [templateName, setTemplateName] = useState("");
+  const [templateBackground, setTemplateBackground] = useState(null);
   const [scale, setScale] = useState(100);
   const [variables, setVariables] = useState({
     text: [],
@@ -16,11 +17,13 @@ const useCertCreator = (params) => {
   });
 
   const [selectedVariable, setSelectedVariable] = useState(null);
+  const [noQR, setNoQR] = useState(false);
   const api = API();
   const endpoint = `certificate/template/${params.templateId}`;
 
   const poppulatetemplateData = (data) => {
     setTemplateName(data.name);
+    setTemplateBackground(data.background_color);
     let newvariableData = {
       text: data.texts,
       logo: data.logos,
@@ -28,9 +31,7 @@ const useCertCreator = (params) => {
       qrcode: data.qrcodes,
     };
     setVariables(newvariableData);
-    if (data.base_image !== null) {
-      setUploadedImageURL(data.base_image);
-    }
+    setUploadedImageURL(data.base_image);
   };
 
   useEffect(() => {
@@ -77,6 +78,7 @@ const useCertCreator = (params) => {
     }
     let apiData = {
       name: templateName,
+      background_color: templateBackground,
       texts: variables.text,
       variables: variables.variable,
       qrcodes: variables.qrcode,
@@ -133,9 +135,15 @@ const useCertCreator = (params) => {
     // }
   };
 
-  const removeImage = () => {
-    setUploadedImage(null);
-    setUploadedImageName(null);
+  const removeImage = async () => {
+    if (!uploadedImageURL) return;
+    setLoadingStatus("Deleting Image...");
+    await api
+      .crud("PATCH", endpoint, { base_image: null })
+      .then((res) => {})
+      .catch((err) => alert("Could not upload image."));
+    setLoadingStatus("");
+    save();
   };
 
   const selectImage = async (file) => {
@@ -244,6 +252,7 @@ const useCertCreator = (params) => {
           x_pos: 100,
           y_pos: 100,
           color: "000000",
+          background_color: "ffffff",
         },
       ],
     }));
@@ -274,6 +283,8 @@ const useCertCreator = (params) => {
     removeImage,
     templateName,
     setTemplateName,
+    templateBackground,
+    setTemplateBackground,
     scale,
     setScale,
     variables,
@@ -287,6 +298,8 @@ const useCertCreator = (params) => {
     deletevariable,
     save,
     saveas,
+    noQR,
+    setNoQR,
   };
 };
 

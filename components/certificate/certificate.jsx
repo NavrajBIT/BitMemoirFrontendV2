@@ -5,6 +5,8 @@ import FullViewTemplate from "./subcomponents/fullViewTemplate";
 import usecertificate from "./usecertificate";
 import style from "./template.module.css";
 import DeletePopup from "./subcomponents/deletePopup";
+import LocalLoading from "../subcomponents/loadingPage/localloading";
+import TutorialPopup from "../certCreator/tutorialPopup";
 
 const Certificate = () => {
   const cert = usecertificate();
@@ -18,6 +20,8 @@ const Certificate = () => {
         <FullViewTemplate cert={cert} />
       )}
       {cert.isDeletePopup && <DeletePopup cert={cert} />}
+      {cert.isLoading && <LocalLoading />}
+      <TutorialPopup />
     </div>
   );
 };

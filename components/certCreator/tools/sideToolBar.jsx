@@ -1,10 +1,13 @@
 import SideTool from "./sideTool";
 import style from "../certCreator.module.css";
+import { useState } from "react";
+import { HexColorPicker } from "react-colorful";
 
 const SideToolBar = ({ creator }) => {
   return (
     <div>
       <div className={style.sideToolBar}>
+        {creator.templateBackground && <BackgroundColor creator={creator} />}
         <SideTool
           icon="text"
           toolName="Add Text"
@@ -64,3 +67,49 @@ const SideToolBar = ({ creator }) => {
 };
 
 export default SideToolBar;
+
+const BackgroundColor = ({ creator }) => {
+  const [isColorpicker, setIsColorPicker] = useState(false);
+  const [isColorPickerFocused, setIsColorPickerFocused] = useState(false);
+  const changeColor = (color) => {
+    creator.setTemplateBackground(color);
+  };
+
+  const openColorPicker = () => {
+    setIsColorPicker((prev) => !prev);
+    setTimeout(() => {
+      setIsColorPicker(false);
+    }, 1000);
+  };
+
+  return (
+    <div
+      style={{ position: "relative" }}
+      onFocus={() => setIsColorPickerFocused(true)}
+      onBlur={() => setIsColorPickerFocused(false)}
+    >
+      <SideTool
+        icon="color"
+        toolName="Background Color"
+        toolDescription="Change Template Background Color"
+        onClick={openColorPicker}
+      />
+      <div
+        onFocus={() => setIsColorPickerFocused(true)}
+        onBlur={() => setIsColorPickerFocused(false)}
+        style={{
+          display: isColorpicker || isColorPickerFocused ? "flex" : "none",
+        }}
+        className={style.colorPickerContainer}
+      >
+        {isColorPickerFocused && (
+          <HexColorPicker
+            value={creator.templateBackground}
+            onChange={(e) => changeColor(e.slice(1))}
+            style={{ position: "absolute", top: "0px", left: "0px" }}
+          />
+        )}
+      </div>
+    </div>
+  );
+};

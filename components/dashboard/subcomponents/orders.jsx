@@ -41,7 +41,13 @@ export default Orders;
 const OrderCard = ({ usedash, order }) => {
   const router = useRouter();
 
-  const certImage = order.certificates[0].image;
+  let certImage;
+  try {
+    certImage = order.certificates[0].image;
+  } catch {
+    certImage = "/icons/imageplaceholder.svg";
+  }
+
   const statusData = {
     pending: { color: "var(--primary-50)", text: "Pending" },
     error: { color: "red", text: "Error" },

@@ -1,6 +1,7 @@
 import style from "../home.module.css";
-import Button from "@/components/subcomponents/button/button";
+import FreetrialButton from "./freetrialButton";
 import Image from "next/image";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -41,9 +42,8 @@ const HeroContent = () => (
     >
       Revolutionizing Certification with Blockchain
     </div>
-    <div style={{ width: "fit-content" }}>
-      <Button text="Free Trial" variant="emphasis" endIcon="arrow-right" />
-    </div>
+
+    <FreetrialButton />
   </div>
 );
 

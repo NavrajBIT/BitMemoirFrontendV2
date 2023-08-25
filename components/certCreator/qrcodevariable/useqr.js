@@ -4,6 +4,7 @@ const useqr = (data, index, setVariables, selectedVariable) => {
   const [isResizing, setIsResizing] = useState(false);
   const [isResizeVisible, setIsResizeVisible] = useState(false);
   const [isColorPickerFocused, setIsColorPickerFocused] = useState(false);
+  const [isBGColorPickerFocused, setIsBGColorPickerFocused] = useState(false);
   const logoRef = useRef(null);
 
   const changePos = (e, data) => {
@@ -58,6 +59,19 @@ const useqr = (data, index, setVariables, selectedVariable) => {
       };
     });
   };
+  const changeBGColor = (newvalue) => {
+    setVariables((prevState) => {
+      const newQR = [...prevState.qrcode];
+      newQR[index] = {
+        ...newQR[index],
+        background_color: newvalue,
+      };
+      return {
+        ...prevState,
+        qrcode: newQR,
+      };
+    });
+  };
 
   const isSelected =
     selectedVariable !== null &&
@@ -74,6 +88,9 @@ const useqr = (data, index, setVariables, selectedVariable) => {
     isSelected,
     isColorPickerFocused,
     setIsColorPickerFocused,
+    isBGColorPickerFocused,
+    setIsBGColorPickerFocused,
+    changeBGColor,
     changeColor,
   };
 };

@@ -20,6 +20,26 @@
   justify-content: space-between;
 }
 
+.heroPrimaryButton {
+  border: 1px solid transparent;
+  background-color: var(--text-bright);
+  font-size: 1.5rem;
+  padding: var(--padding-light);
+  color: var(--primary-60);
+  font-weight: 700;
+  border-radius: var(--border-radius-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+.heroPrimaryButton:hover {
+  border: 1px solid var(--primary-50);
+  color: var(--primary-50);
+}
+
 .desktopillustration {
   width: 50%;
   display: flex;

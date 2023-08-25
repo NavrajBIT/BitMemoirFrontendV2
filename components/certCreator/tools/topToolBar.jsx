@@ -20,7 +20,11 @@ const TopToolBar = ({ creator }) => {
           }}
           onClick={async () => {
             await creator.save();
-            router.back();
+            if (creator.variables.qrcode.length === 0) {
+              creator.setNoQR(true);
+            } else {
+              router.back();
+            }
           }}
         />
       </div>

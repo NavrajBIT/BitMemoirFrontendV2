@@ -36,6 +36,7 @@ const Canvas = ({ creator }) => {
       className={style.canvas}
       style={{
         transform: `scale(${canvasScale})`,
+        backgroundColor: `#${creator.templateBackground}`,
         backgroundImage: `url(${creator.uploadedImageURL})`,
       }}
       id="canvas"

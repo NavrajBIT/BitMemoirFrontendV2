@@ -6,6 +6,7 @@ const usedashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedTab, setSelectedTab] = useState("Profile");
   const [accountDetails, setAccountDetails] = useState(null);
+  const [kycDetails, setKycDetails] = useState(null);
   const [emailDetails, setEmailDetails] = useState(null);
   const [organizationDetails, setOrganizationDetails] = useState(null);
   const [issuerDetails, setIssuerDetails] = useState(null);
@@ -21,6 +22,7 @@ const usedashboard = () => {
     poppulateApprovers();
     poppulateOrders();
     poppulateCertificates();
+    poppulateKYCDetails();
   }, []);
 
   const poppulateAccountDetails = async () => {
@@ -30,6 +32,17 @@ const usedashboard = () => {
         console.log(res[0]);
         if (res.status === 200) {
           setAccountDetails(res[0]);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+  const poppulateKYCDetails = async () => {
+    await api
+      .crud("GET", "user/kyc")
+      .then((res) => {
+        console.log(res[0]);
+        if (res.status === 200) {
+          setKycDetails(res[0]);
         }
       })
       .catch((err) => console.log(err));
@@ -115,6 +128,7 @@ const usedashboard = () => {
   return {
     isLoading,
     accountDetails,
+    kycDetails,
     emailDetails,
     organizationDetails,
     issuerDetails,

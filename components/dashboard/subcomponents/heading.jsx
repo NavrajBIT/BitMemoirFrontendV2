@@ -1,9 +1,11 @@
 import style from "../dashboard.module.css";
 import Button from "@/components/subcomponents/button/button";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { useState } from "react";
 
 const Heading = ({ usedash }) => {
-  const router = useRouter();
+  const [isMenu, setIsMenu] = useState(false);
   const userDetails = {
     name: `${
       usedash.accountDetails.first_name
@@ -19,7 +21,7 @@ const Heading = ({ usedash }) => {
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div style={{ fontSize: "1.5rem", color: "var(--text-bright)" }}>
           {userDetails.name}
-          {usedash.issuerDetails.status !== "Approved" && (
+          {usedash.kycDetails.status !== "Approved" && (
             <span style={{ fontSize: "0.75rem", color: "red" }}>
               KYC pending*{" "}
             </span>
@@ -40,30 +42,55 @@ const Heading = ({ usedash }) => {
           flexWrap: "wrap",
         }}
       >
-        <div style={{ width: "fit-content" }}>
-          <Button
-            text="Logout"
-            variant={"secondary"}
-            onClick={() => {
-              localStorage.setItem("jwtToken", null);
-              router.push("/home");
-            }}
-          />
+        <div
+          className={style.dotmenu}
+          onClick={() => setIsMenu((prev) => !prev)}
+          style={{
+            background: isMenu ? "var(--primary-80)" : "var(--primary-90)",
+          }}
+        >
+          {!isMenu ? (
+            <Image src={"/icons/dot-menu.svg"} width={30} height={50} />
+          ) : (
+            "X"
+          )}
         </div>
-        <div style={{ width: "fit-content" }}>
-          <Button
-            text="Edit Profile"
-            variant={"secondary"}
-            startIcon={"edit"}
-            onClick={() => {
-              localStorage.setItem("jwtToken", null);
-              router.push("/kyc");
-            }}
-          />
-        </div>
+        {isMenu && <Menu />}
       </div>
     </div>
   );
 };
 
 export default Heading;
+
+const Menu = () => {
+  const router = useRouter();
+
+  return (
+    <div className={style.menuContainer}>
+      <Button
+        text="Logout"
+        variant={"tertiary"}
+        onClick={() => {
+          localStorage.setItem("jwtToken", null);
+          router.push("/home");
+        }}
+      />
+
+      <Button
+        text="Edit Profile"
+        variant={"tertiary"}
+        onClick={() => {
+          router.push("/kyc");
+        }}
+      />
+      <Button
+        text="KYC Status"
+        variant={"tertiary"}
+        onClick={() => {
+          router.push("/kyc/status");
+        }}
+      />
+    </div>
+  );
+};

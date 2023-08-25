@@ -90,6 +90,7 @@ export const LocalInputField = ({
   handleChange,
   onFocus,
   onBlur,
+  maxLength,
 }) => {
   const inputref = useRef(null);
   const labelref = useRef(null);
@@ -125,6 +126,7 @@ export const LocalInputField = ({
         onFocus={handleFocus}
         onBlur={handleBlur}
         required={inputData.required}
+        maxLength={maxLength ? maxLength : ""}
       />
     </div>
   );

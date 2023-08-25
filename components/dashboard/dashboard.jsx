@@ -22,6 +22,7 @@ const Dashboard = () => {
     >
       {usedash.accountDetails &&
         usedash.emailDetails &&
+        usedash.kycDetails &&
         usedash.issuerDetails && <Heading usedash={usedash} />}
       <Tabs usedash={usedash} />
       {usedash.selectedTab === "Profile" && (

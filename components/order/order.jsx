@@ -5,6 +5,7 @@ import OrderHeading from "./subcomponents/orderHeading";
 import Certificates from "./subcomponents/certificates";
 import Link from "next/link";
 import NotFound from "../subcomponents/errorPages/notFound";
+import Approval from "./subcomponents/approval";
 
 const Order = ({ params }) => {
   const orderer = useOrder(params);
@@ -41,6 +42,11 @@ const Order = ({ params }) => {
         {"< Back"}
       </Link>
       {orderer.templateDetails !== null && <OrderHeading orderer={orderer} />}
+      {orderer.orderDetails &&
+        orderer.orderDetails.approvals &&
+        orderer.orderDetails.approvals.length > 0 && (
+          <Approval orderer={orderer} />
+        )}
       <Certificates orderer={orderer} />
     </div>
   );

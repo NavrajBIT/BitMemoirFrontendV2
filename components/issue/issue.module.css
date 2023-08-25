@@ -98,6 +98,14 @@
   height: 1rem;
 }
 
+.selector select {
+  width: 100%;
+  color: var(--text-primary);
+  background-color: var(--primary-110);
+  padding: var(--padding-light);
+  font-size: 1.25rem;
+}
+
 @media only screen and (max-height: 700px) {
   .confirmContainer {
     overflow-y: scroll;
