@@ -1,6 +1,7 @@
 const http = require("http");
 const { exec } = require("child_process");
 const { createHmac } = require("crypto");
+const crypto = require("crypto");
 
 const secretToken = "";
 
@@ -47,3 +48,14 @@ const server = http.createServer((req, res) => {
 server.listen(4000, "127.0.0.1", () => {
   console.log("Deployment server listening on http://127.0.0.1:4000");
 });
+
+function validateSignature(signature, data, secret) {
+  const computedSignature = `sha256=${crypto
+    .createHmac("sha256", secret)
+    .update(data)
+    .digest("hex")}`;
+  return crypto.timingSafeEqual(
+    Buffer.from(signature),
+    Buffer.from(computedSignature)
+  );
+}
