@@ -1,7 +1,6 @@
 import DynamicForm from "@/components/subcomponents/form/dynamicForm";
 import Form from "@/components/subcomponents/form/form";
 import LocalLoading from "@/components/subcomponents/loadingPage/localloading";
-import { useState } from "react";
 
 const TrialForm = ({ usekyc }) => {
   if (usekyc.accountDetails === null || usekyc.emailDetails === null) {

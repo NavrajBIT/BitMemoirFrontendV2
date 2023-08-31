@@ -3,6 +3,7 @@ import Link from "next/link";
 import Datafield from "./subcomponents/datafield";
 import Spreadsheet from "./subcomponents/spreadsheet";
 import useIssue from "./useIssue";
+import NotFound from "../subcomponents/errorPages/notFound";
 import LocalLoading from "../subcomponents/loadingPage/localloading";
 import Alert from "./subcomponents/alert";
 import ConfirmPopup from "./subcomponents/confirmPopup";
@@ -13,7 +14,9 @@ import NotVerifiedPopup from "./subcomponents/notVerifiedPopup";
 const Issue = ({ params }) => {
   const issue = useIssue(params);
 
-  if (issue.template === null)
+  if (issue.notFound) return <NotFound />;
+
+  if (!issue.template)
     return (
       <div
         style={{

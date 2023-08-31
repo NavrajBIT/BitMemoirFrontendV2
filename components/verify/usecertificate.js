@@ -1,32 +1,27 @@
-import API from "../subcomponents/scripts/apiCall";
-import { useState, useEffect } from "react";
+import ServerAPI from "../subcomponents/scripts/serversideapicall";
 
-const usecertificate = (params) => {
-  const api = API();
-  const [certDetails, setCertDetails] = useState(null);
-  const [txId, setTxId] = useState(null);
+const usecertificate = async (params) => {
+  const api = ServerAPI();
 
-  useEffect(() => {
-    poppulateCertDetails();
-  }, []);
-
-  const poppulateCertDetails = () => {
-    api
-      .certificate(params.certId)
-      .then((res) => {
-        console.log(res);
-        if (res.status >= 200 && res.status <= 299) {
-          setCertDetails(res);
-          if (res.nft) {
-            api.nft(res.nft).then((nftres) => {
-              if (nftres.status === 200) setTxId(nftres.tx_id);
-            });
-          }
+  const data = async () => {
+    let returnData = { certDetails: null, txId: null };
+    await api
+      .crud("GET", `certificate/${params.certId}`)
+      .then(async (res) => {
+        returnData.certDetails = res;
+        if (res.nft) {
+          await api.crud("GET", `nft/${res.nft}`).then((nftres) => {
+            returnData.txId = nftres;
+          });
         }
       })
       .catch((err) => console.log(err));
+    return returnData;
   };
-  return { certDetails, txId };
+
+  const certData = await data();
+
+  return { certDetails: certData.certDetails, txId: certData.txId };
 };
 
 export default usecertificate;

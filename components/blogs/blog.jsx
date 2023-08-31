@@ -1,11 +1,13 @@
-"use client";
 import BlogCard from "./blogCard";
-import styles from "./blog.module.css";
+import BlogFullCard from "./blogFullCard";
 import useblog from "./useblog";
 
-const Blog = () => {
-  const { blogs } = useblog();
+const Blog = async () => {
+  const { blogs } = await useblog();
   console.log(blogs);
+
+  const smallBlogs = blogs.slice(0, 5);
+  const largeBlogs = blogs.slice(5, blogs.length + 1);
 
   return (
     <div
@@ -16,25 +18,18 @@ const Blog = () => {
         margin: "auto",
         padding: "var(--padding-main)",
         display: "flex",
-        flexDirection: "column",
-        gap: "1.5rem",
+        gap: "var(--padding-main)",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "space-between",
+        flexWrap: "wrap",
       }}
     >
-      {/* <div className={styles.blogHeader}>
-        <h3>Top Blogs</h3>
-        <div>
-          <button className={styles.button}>Sort</button>
-          <button className={styles.button}>Filter</button>
-        </div>
-      </div> */}
-
-      <div className={styles.blogCardsDiv}>
-        {blogs.map((blog, index) => {
-          return <BlogCard key={"blog-" + index} blog={blog} />;
-        })}
-      </div>
+      {smallBlogs.map((blog, index) => {
+        return <BlogCard key={"small-blog-" + index} blog={blog} />;
+      })}
+      {largeBlogs.map((blog, index) => {
+        return <BlogFullCard key={"large-blog-" + index} blog={blog} />;
+      })}
     </div>
   );
 };

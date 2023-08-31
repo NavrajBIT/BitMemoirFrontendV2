@@ -1,8 +1,7 @@
 import style from "../certificate.module.css";
-import Button from "@/components/subcomponents/button/button";
-import { useRouter } from "next/navigation";
+import LinkButton from "@/components/subcomponents/button/link";
+
 const Advertisment = () => {
-  const router = useRouter();
   return (
     <div
       className={style.container}
@@ -34,11 +33,7 @@ const Advertisment = () => {
         verifying their validity using blockchain technology
       </div>
       <div style={{ width: "fit-content" }}>
-        <Button
-          variant="primary"
-          text="Try For Free"
-          onClick={() => router.push("/trial")}
-        />
+        <LinkButton variant="primary" text="Try For Free" href="/trial" />
       </div>
     </div>
   );

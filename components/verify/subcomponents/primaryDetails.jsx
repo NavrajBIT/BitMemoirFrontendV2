@@ -1,13 +1,8 @@
 import style from "../certificate.module.css";
 import Image from "next/image";
-import Button from "@/components/subcomponents/button/button";
 import Link from "next/link";
 
 const PrimaryDetails = ({ usecert }) => {
-  const isLoading = !usecert.certDetails || usecert.certDetails == null;
-
-  if (isLoading) return null;
-
   const verificationstatus = usecert.certDetails.is_verified
     ? "verified"
     : "unverified";

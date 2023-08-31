@@ -15,15 +15,21 @@ const usedashboard = () => {
   const [certificates, setCertificates] = useState(null);
 
   useEffect(() => {
-    poppulateAccountDetails();
-    poppulateEmailDetails();
-    poppulateOrganizationDetails();
-    poppulateIssuerDetails();
-    poppulateApprovers();
-    poppulateOrders();
-    poppulateCertificates();
-    poppulateKYCDetails();
+    poppulateData();
   }, []);
+
+  const poppulateData = async () => {
+    setIsLoading(true);
+    await poppulateAccountDetails();
+    await poppulateEmailDetails();
+    await poppulateOrganizationDetails();
+    await poppulateIssuerDetails();
+    await poppulateApprovers();
+    await poppulateOrders();
+    await poppulateCertificates();
+    await poppulateKYCDetails();
+    setIsLoading(false);
+  };
 
   const poppulateAccountDetails = async () => {
     await api
@@ -81,7 +87,6 @@ const usedashboard = () => {
       .catch((err) => console.log(err));
   };
   const poppulateApprovers = async () => {
-    setIsLoading(true);
     await api
       .crud("GET", "user/approver")
       .then((res) => {
@@ -89,10 +94,8 @@ const usedashboard = () => {
         if (res.status >= 200 && res.status <= 299) setApproversList(res);
       })
       .catch((er) => console.log(er));
-    setIsLoading(false);
   };
   const poppulateOrders = async () => {
-    setIsLoading(true);
     await api
       .crud("GET", "certificate/order")
       .then((res) => {
@@ -100,10 +103,8 @@ const usedashboard = () => {
         if (res.status >= 200 && res.status <= 299) setOrders(res);
       })
       .catch((er) => console.log(er));
-    setIsLoading(false);
   };
   const poppulateCertificates = async () => {
-    setIsLoading(true);
     await api
       .crud("GET", "certificate/all")
       .then((res) => {
@@ -111,7 +112,6 @@ const usedashboard = () => {
         if (res.status >= 200 && res.status <= 299) setCertificates(res);
       })
       .catch((er) => console.log(er));
-    setIsLoading(false);
   };
 
   const deleteApprover = async (approver) => {

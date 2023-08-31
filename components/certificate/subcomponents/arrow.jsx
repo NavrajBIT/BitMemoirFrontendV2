@@ -1,14 +1,8 @@
+import style from "../template.module.css";
+
 const Arrow = () => (
-  <div
-    style={{
-      display: "flex",
-    }}
-  >
-    <div
-      style={{
-        marginTop: "10rem",
-      }}
-    >
+  <div className={style.arrowContainer}>
+    <div className={style.arrow}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="125"
@@ -37,11 +31,10 @@ const Arrow = () => (
     </div>
     <div
       style={{
-        padding: "0 0 0 1rem",
-        marginTop: "28rem",
         color: "var(--primary-50)",
         fontSize: "2rem",
         fontWeight: "bold",
+        textAlign: "center",
       }}
     >
       Select <br /> Template <br />

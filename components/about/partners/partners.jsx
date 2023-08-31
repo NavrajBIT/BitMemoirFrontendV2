@@ -1,38 +1,47 @@
 import { partnersData } from "./partnersData";
-import styles from '../team/team.module.css';
+import Image from "next/image";
 
 const Partners = () => {
   return (
-    <div style={{
-        // border: '2px solid red',
-        position:'relative',
-        padding:'2rem 0'
-    }}>
-        <h1 style={{
-            position:'absolute',
-            top:'4.6rem',
-            left:'10rem',
-            color:"var(--primary-light)",
-        }} className={styles.teamHead}>Our Partners</h1>
-        <div style={{
-            border:'1px solid var(--primary-dark)',
-            width: '85%',
-            margin: ' 4rem auto',
-            padding:'2rem 0',
-            display: 'flex',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-        }}>
-            {
-                partnersData.map((partner,index)=>{
-                    return(
-                        <img key={partner} src={partner.img} alt="" style={{margin:'1.5rem'}} />
-                    )
-                })
-            }
-        </div>
-    </div>
-  )
-}
+    <div
+      style={{
+        width: "100%",
+        maxWidth: "var(--max-width)",
+        margin: "auto",
+        padding: "var(--padding-main)",
+        position: "relative",
+        display: "flex",
+        flexWrap: "wrap",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "var(--padding-main)",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          fontSize: "2rem",
+          fontWeight: "700",
+          top: "-1.5rem",
+          left: "var(--padding-main)",
+        }}
+      >
+        Our Partners
+      </div>
 
-export default Partners
+      {partnersData.map((partner, index) => {
+        return (
+          <Image
+            key={partner}
+            src={partner.img}
+            alt={partner}
+            height={150}
+            width={200}
+          />
+        );
+      })}
+    </div>
+  );
+};
+
+export default Partners;

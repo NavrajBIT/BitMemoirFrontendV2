@@ -1,27 +1,40 @@
+import Image from "next/image";
+
 const TeamCard = (props) => {
   return (
     <div
       style={{
-        border: "0.1px solid #007B94",
-        background: "#002E37",
-        width: "12rem",
+        border: "0.1px solid var(--primary-110)",
+        background: "var(--primary-90)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        padding: "10px 8px",
-        margin: "1.5rem",
+        padding: "var(--padding-light)",
+        borderRadius: "var(--border-radius)",
       }}
     >
-      <img src={props.img} alt={props.name} style={{ width: "100%" }} />
-      <span style={{ marginTop: "8px" }}>{props.designation}</span>
-      <h4
+      <Image src={props.img} alt={props.name} width={200} height={200} />
+
+      <div
         style={{
-          margin: "1rem 0",
-          color: "var(--primary-50)",
+          padding: "var(--padding-light)",
+          textAlign: "center",
+          display: "flex",
+          flexDirection: "column",
+          gap: "var(--padding-light)",
         }}
       >
-        {props.name}
-      </h4>
+        <div>{props.designation}</div>
+        <div
+          style={{
+            color: "var(--primary-50)",
+            fontWeight: "600",
+            fontSize: "1.25rem",
+          }}
+        >
+          {props.name}
+        </div>
+      </div>
     </div>
   );
 };

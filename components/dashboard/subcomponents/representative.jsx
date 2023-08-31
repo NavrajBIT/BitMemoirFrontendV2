@@ -3,9 +3,10 @@ import style from "../dashboard.module.css";
 import { downloadFile } from "@/components/subcomponents/scripts/scripts";
 
 const Representative = ({ usedash }) => {
-  const organizationDetails = {
-    designation:
-      usedash.issuerDetails.designation && usedash.issuerDetails.designation,
+  const representativeDetails = {
+    designation: usedash.issuerDetails.designation
+      ? usedash.issuerDetails.designation
+      : "---",
     signed_note:
       usedash.issuerDetails.signed_note && usedash.issuerDetails.signed_note,
   };
@@ -54,19 +55,23 @@ const Representative = ({ usedash }) => {
             justifyContent: "center",
           }}
         >
-          <div>{organizationDetails.designation}</div>
+          <div>{representativeDetails.designation}</div>
 
-          <Button
-            variant={"tertiary"}
-            text={get_filename(organizationDetails.signed_note)}
-            style={{ height: "1rem" }}
-            onClick={() =>
-              downloadFile(
-                organizationDetails.reg_proof,
-                get_filename(organizationDetails.signed_note)
-              )
-            }
-          />
+          {representativeDetails.signed_note ? (
+            <Button
+              variant={"tertiary"}
+              text={get_filename(representativeDetails.signed_note)}
+              style={{ height: "1rem" }}
+              onClick={() =>
+                downloadFile(
+                  representativeDetails.signed_note,
+                  get_filename(representativeDetails.signed_note)
+                )
+              }
+            />
+          ) : (
+            <div>---</div>
+          )}
         </div>
       </div>
     </div>

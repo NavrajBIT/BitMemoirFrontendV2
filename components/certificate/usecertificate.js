@@ -30,9 +30,9 @@ const usecertificate = () => {
       .crud("GET", "certificate/template")
       .then((res) => {
         setTemplates(res);
+        setIsLoading(false);
       })
       .catch((err) => console.log(err));
-    setIsLoading(false);
   };
 
   const createNewTemplate = async () => {

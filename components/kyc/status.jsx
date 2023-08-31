@@ -16,6 +16,7 @@ const Status = () => {
         display: "flex",
         flexDirection: "column",
         gap: "var(--padding-large)",
+        paddingTop: "var(--padding-large)",
         alignItems: "center",
       }}
     >
@@ -258,6 +259,7 @@ const KYCDetails = () => {
         background: "var(--primary-90)",
         borderRadius: "var(--border-radius)",
         padding: "var(--padding-main)",
+        paddingTop: "var(--padding-main)",
         gap: "var(--padding-main)",
         position: "relative",
       }}
@@ -268,16 +270,29 @@ const KYCDetails = () => {
           fontSize: "1.5rem",
           fontWeight: "700",
           position: "absolute",
-          top: "-1rem",
+          top: "-1.5rem",
           left: "var(--padding-main)",
+          display: "flex",
+          alignItems: "center",
         }}
       >
-        KYC Status
+        KYC Status{" "}
+        {kycDetails && (
+          <Image
+            src={
+              kycDetails.status === "Approved"
+                ? "/icons/ok.svg"
+                : "/icons/notok.svg"
+            }
+            height={50}
+            width={50}
+            alt="status"
+          />
+        )}
       </div>
       <div
         style={{
-          color: "var(--primary-50)",
-          fontSize: "1.5rem",
+          fontSize: "1.25rem",
         }}
       >
         KYC is required for the certificates to be verified.
@@ -287,7 +302,7 @@ const KYCDetails = () => {
           <div>
             {!kycDetails.is_applied && (
               <Button
-                text="Apply for KYC"
+                text={kycDetails.comment ? "Re-Apply" : "Apply for KYC"}
                 variant={"primary"}
                 isLoading={isLoading}
                 onClick={apply}
@@ -295,13 +310,16 @@ const KYCDetails = () => {
             )}
           </div>
           {kycDetails.is_applied && (
+            <div style={{ fontSize: "1.5rem", color: "green" }}>Applied</div>
+          )}
+          {kycDetails.is_applied && (
             <div
               style={{
+                fontSize: "1.5rem",
                 color: kycDetails.status === "Approved" ? "green" : "red",
               }}
             >
-              Status:{" "}
-              {kycDetails.status === "Approved" ? "Approved" : "Not Verified"}
+              Status: {kycDetails.status}
             </div>
           )}
           {kycDetails.comment && kycDetails.status !== "Approved" && (

@@ -6,6 +6,7 @@ const useIssue = (params) => {
   const api = API();
   const approver = useApprover();
   const [loadingStatus, setLoadingStatus] = useState("");
+  const [notFound, setNotFound] = useState(false);
   const [popupStatus, setPopupStatus] = useState("");
   const [template, setTemplate] = useState(null);
   const [studentNumber, setStudentNumber] = useState(null);
@@ -37,6 +38,7 @@ const useIssue = (params) => {
     await api
       .crud("GET", `certificate/template/${params.templateId}`)
       .then((res) => {
+        if (res.status === 404) setNotFound(true);
         if (res.status >= 200 && res.status <= 299) {
           setTemplate(res);
         }
@@ -230,7 +232,7 @@ const useIssue = (params) => {
     await api
       .crud("GET", "/user/kyc")
       .then((res) => {
-        console.log(res);
+        console.log(res.status);
         if (
           res.status >= 200 &&
           res.status <= 299 &&
@@ -239,7 +241,7 @@ const useIssue = (params) => {
           is_verified = false;
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => (is_verified = false));
     setLoadingStatus("");
     return is_verified;
   };
@@ -274,6 +276,7 @@ const useIssue = (params) => {
   };
 
   return {
+    notFound,
     loadingStatus,
     setLoadingStatus,
     template,

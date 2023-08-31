@@ -7,9 +7,13 @@ import Approvers from "./subcomponents/approvers";
 import Tabs from "./subcomponents/tabs";
 import Orders from "./subcomponents/orders";
 import Certificates from "./subcomponents/certificates";
+import Loading from "../subcomponents/loadingPage/loading";
 
 const Dashboard = () => {
   const usedash = usedashboard();
+
+  if (usedash.isLoading) return <Loading />;
+
   return (
     <div
       style={{
