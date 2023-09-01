@@ -31,8 +31,7 @@ const HeroContent = () => (
         fontWeight: "700",
       }}
     >
-      BitMemoir <br />
-      for Education
+      BitMemoir
     </div>
     <div
       style={{
@@ -40,7 +39,7 @@ const HeroContent = () => (
         color: "var(--primary-50)",
       }}
     >
-      Revolutionizing Certification with Blockchain
+      Issue. Store. Verify. Retrieve.
     </div>
 
     <FreetrialButton />
