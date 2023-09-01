@@ -3,8 +3,8 @@ import Link from "next/link";
 import { AiOutlineTwitter, AiOutlineMail } from "react-icons/ai";
 import { BiLogoTelegram } from "react-icons/bi";
 import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
-import style from "./footer.module.css";
 import Image from "next/image";
+import style from "./footer.module.css";
 
 const Footer = () => {
   return (
@@ -18,12 +18,13 @@ const Footer = () => {
             gap: "var(--padding-light)",
           }}
         >
-          <Email email={"support@beimagine.tech"} />
-          <Email email={"marketing@beimagine.tech"} />
+          <Email email={"support@beimagine.tech"} style={{fontSize:'1rem !important'}} />
+          <Email email={"marketing@beimagine.tech"} className={style.mail} />
           <div
             style={{
-              fontSize: "1.125rem",
+              fontSize: "1.1rem",
               fontWeight: "bold",
+              margin: '1rem 0 0.5rem'
             }}
           >
             Check out our social :
@@ -34,24 +35,24 @@ const Footer = () => {
               gap: "var(--padding-main)",
             }}
           >
-            <Link href={"https://twitter.com/"} className={style.sociallink}>
+            <Link href={"https://twitter.com/"} target="_blank" className={style.sociallink}>
               <FaLinkedinIn />
             </Link>
-            <Link href={"https://twitter.com/"} className={style.sociallink}>
+            <Link href={"https://twitter.com/"} target="_blank" className={style.sociallink}>
               <FaInstagram />
             </Link>
-            <Link href={"https://twitter.com/"} className={style.sociallink}>
+            <Link href={"https://twitter.com/"} target="_blank" className={style.sociallink}>
               <AiOutlineTwitter />
             </Link>
-            <Link href={"https://twitter.com/"} className={style.sociallink}>
+            <Link href={"https://twitter.com/"} target="_blank" className={style.sociallink}>
               <BiLogoTelegram />
             </Link>
           </div>
         </div>
         <AddressBar />
       </div>
-      <div style={{ textAlign: "center" }}>
-        Copyright © 2022 Beyond Imagination Technologies Pvt. Ltd. All right
+      <div style={{ textAlign: "center",fontSize:'0.9rem' }} className={style.copyright}>
+        Copyright © 2022 Beyond Imagination Technologies Pvt. Ltd. All rights
         reserved.
       </div>
     </section>
@@ -64,11 +65,12 @@ const Email = ({ email }) => (
   <Link
     href={`mailto:${email}`}
     target="_blank"
+className={style.email}
     style={{
       display: "flex",
       alignItems: "center",
       gap: "var(--padding-light)",
-      fontSize: "1.25rem",
+      fontSize: "1rem",
     }}
   >
     <AiOutlineMail /> {email}
@@ -76,24 +78,26 @@ const Email = ({ email }) => (
 );
 
 const AddressBar = () => (
-  <div>
+  <div className={style.footerLogo}>
     <Image
       src={"/assets/logo.png"}
-      width={250}
-      height={120}
+      width={200}
+      height={100}
       alt="Bwyond Imagination Technologies"
     />
     <div
       style={{
         fontWeight: "bold",
+        margin:'2rem 0 0.5rem'
       }}
     >
       Address :
     </div>
     <div
       style={{
-        fontSize: "0.875rem",
+        fontSize: "0.8rem",
         marginTop: "0.5rem",
+        lineHeight:'1.2rem'
       }}
     >
       Beyond imagination tech LLC

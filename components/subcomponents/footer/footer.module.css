@@ -1,6 +1,7 @@
 .footer {
+  /* border:2px solid red; */
   background-color: var(--primary-100);
-  margin: var(--padding-large) 0px;
+  padding:1rem;
 }
 
 .footercontainer {
@@ -20,7 +21,7 @@
   text-align: start;
   font-weight: bold;
   position: absolute;
-  top: -1rem;
+  top: -2rem;
 }
 
 .sociallink {
@@ -31,4 +32,37 @@
   display: flex;
   width: min-content;
   border-radius: var(--border-radius);
+}
+
+.mail a{
+  color:red !important;
+  font-size: 1rem !important;
+}
+
+@media only screen and (max-width:768px) {
+  .footer {
+    padding:1rem 0;
+    margin-top:5rem;
+  }
+  .footercontainer {
+    flex-direction: column-reverse;
+  }
+  .footerLogo{
+    text-align: center;
+    margin:1.5rem 0;
+  }
+  .email{
+    font-size: 0.8rem !important;
+    font-weight: 600;
+  }
+  .copyright{
+    font-size: 0.8rem !important;
+    padding:4px;
+  }
+}
+@media only screen and (min-width:768px) and (max-width:1200px) {
+  .footer {
+    padding:1rem 0;
+    margin-top:5rem;
+  }
 }

@@ -42,12 +42,13 @@
 
 .inputcontainer input {
   width: 100%;
-  padding: var(--padding-light);
+  padding: 1rem var(--padding-main);
   border: none;
   border-radius: var(--border-radius-light);
-  background-color: var(--primary-80);
+  /* background-color: var(--primary-80); */
+  background-color: #004351;
   color: var(--text-primary);
-  font-size: 1.25rem;
+  font-size: 1rem;
   outline: none;
 }
 

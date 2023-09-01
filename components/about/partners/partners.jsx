@@ -12,7 +12,7 @@ const Partners = () => {
             position:'absolute',
             top:'4.6rem',
             left:'10rem',
-            color:"var(--primary-light)",
+            color:"var(--primary-50)",
         }} className={styles.teamHead}>Our Partners</h1>
         <div style={{
             border:'1px solid var(--primary-dark)',

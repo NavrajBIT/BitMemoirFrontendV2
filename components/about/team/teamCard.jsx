@@ -13,7 +13,7 @@ const TeamCard = (props) => {
       }}
     >
       <img src={props.img} alt={props.name} style={{ width: "100%" }} />
-      <span style={{ marginTop: "8px" }}>{props.designation}</span>
+      <span style={{ marginTop: "10px",fontSize:'14px' }}>{props.designation}</span>
       <h4
         style={{
           margin: "1rem 0",

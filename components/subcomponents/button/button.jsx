@@ -11,6 +11,8 @@ const Button = ({
   type,
   isLoading,
 }) => {
+  console.log(text);
+
   const variantOptions = {
     primary: styles.primaryButton,
     secondary: styles.secondaryButton,

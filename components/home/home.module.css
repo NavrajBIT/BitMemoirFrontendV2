@@ -17,7 +17,7 @@
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .heroPrimaryButton {
@@ -92,11 +92,28 @@
 }
 
 .whybitContent {
-  display: grid;
-  grid-template-columns: 3fr 4fr;
-  align-items: center;
-  justify-content: center;
-  gap: var(--padding-main);
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.whyBitHeading {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.whyBitText {
+  font-size: 1rem;
+  text-align: justify;
+  width: 40%;
+  line-height: 1.8rem;
+}
+
+.demoVideo {
+  width: 40%;
+  aspect-ratio: 16/9;
 }
 
 .feature {
@@ -116,6 +133,7 @@
   font-size: 1rem;
   font-weight: 600;
 }
+
 .featureDescription {
   display: none;
   font-size: 0.5rem;
@@ -130,6 +148,7 @@
 .feature:hover .featureHeading {
   display: none;
 }
+
 .feature:hover .featureDescription {
   display: flex;
 }
@@ -167,6 +186,7 @@
   justify-content: center;
   gap: var(--padding-main);
 }
+
 .mobilefeaturesContainer {
   width: 100%;
   display: none;
@@ -186,6 +206,7 @@
   from {
     transform: scale(1);
   }
+
   to {
     transform: scale(1.5);
   }
@@ -199,17 +220,57 @@
   .desktopillustration {
     display: none;
   }
+
   .heroSection {
     flex-direction: column;
   }
-  .whybitContent {
-    display: flex;
-    flex-direction: column;
-  }
+
   .desktopfeaturesContainer {
     display: none;
   }
+
   .mobilefeaturesContainer {
     display: flex;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .whybitContent {
+    flex-direction: column;
+    align-items: center;
+    gap:2rem;
+  }
+  .demoVideo {
+    width: 85%;
+  }
+  .whyBitText {
+    width: 95%;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .whybitContent {
+    flex-direction: column;
+    align-items: center;
+    gap:2rem;
+  }
+  .demoVideo {
+    width: 65%;
+  }
+  .whyBitText {
+    width: 85%;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1200px) {
+  .whyBitText,
+  .demoVideo {
+    width: 45%;
+  }
+}
+@media only screen and (max-width: 450px) {
+  .demoVideo {
+    aspect-ratio: 1 / 1;
+  }
+  .whyBitText {
+    width: 100%;
   }
 }
