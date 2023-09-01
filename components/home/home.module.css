@@ -235,41 +235,77 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .homeTextContainer {
+    text-align: center;
+  }
+
+  .homeMainText {
+    font-size: 3rem !important;
+  }
+
   .whybitContent {
     flex-direction: column;
     align-items: center;
-    gap:2rem;
+    gap: 2rem;
   }
+
   .demoVideo {
     width: 85%;
   }
+
   .whyBitText {
     width: 95%;
   }
 }
+
 @media only screen and (min-width: 600px) and (max-width: 768px) {
+  .heroSection {
+    flex-direction: column;
+  }
+
+  .homeTextContainer {
+    text-align: center;
+  }
+
+  .homeMainText {
+    font-size: 3rem !important;
+  }
+
   .whybitContent {
     flex-direction: column;
     align-items: center;
-    gap:2rem;
+    gap: 2rem;
   }
+
   .demoVideo {
     width: 65%;
   }
+
   .whyBitText {
     width: 85%;
   }
 }
+
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
+  .homeTextContainer {
+    margin-left: 2rem;
+  }
+
+  .homeMainText {
+    font-size: 3rem !important;
+  }
+
   .whyBitText,
   .demoVideo {
     width: 45%;
   }
 }
+
 @media only screen and (max-width: 450px) {
   .demoVideo {
     aspect-ratio: 1 / 1;
   }
+
   .whyBitText {
     width: 100%;
   }

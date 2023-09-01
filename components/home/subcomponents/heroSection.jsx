@@ -1,7 +1,6 @@
 import style from "../home.module.css";
 import FreetrialButton from "./freetrialButton";
 import Image from "next/image";
-import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -24,12 +23,14 @@ const HeroContent = () => (
       flexDirection: "column",
       gap: "var(--padding-main)",
     }}
+    className={style.homeTextContainer}
   >
     <div
       style={{
         fontSize: "4rem",
         fontWeight: "700",
       }}
+      className={style.homeMainText}
     >
       BitMemoir <br />
       for Education

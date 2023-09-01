@@ -4,7 +4,6 @@ import styles from '../team/team.module.css';
 const Partners = () => {
   return (
     <div style={{
-        // border: '2px solid red',
         position:'relative',
         padding:'2rem 0'
     }}>
