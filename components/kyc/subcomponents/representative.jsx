@@ -28,7 +28,7 @@ const Representative = ({ usekyc }) => {
   return (
     <DynamicForm
       formTitle="Representative Details"
-      formButton="Save"
+      formButton={usekyc.issuerChanged ? "Save" : "Next >"}
       isLoading={usekyc.isLoading}
       status={usekyc.formStatus}
       handleSubmit={usekyc.handleIssuerSubmit}

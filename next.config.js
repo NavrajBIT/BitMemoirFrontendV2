@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["localhost"],
+    domains: [
+      "localhost",
+      "d3a5rnyctxz7gc.cloudfront.net",
+      "bitmemoir.s3.amazonaws.com",
+    ],
     // remotePatterns: [
     //   {
     //     protocol: "http",

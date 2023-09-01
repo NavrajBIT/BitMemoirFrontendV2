@@ -96,19 +96,73 @@ const uselogin = () => {
     setIsLoading(false);
   };
 
-  const handleGoogleLogin = (response) => {
+  //Handle Social Login Oauth  in Button
+
+  const handleGoogleLoginButton = async () => {
+    try {
+      const clientId = process.env.NEXT_PUBLIC_GOOGLE_KEY;
+      const redirectUri = `${process.env.NEXT_PUBLIC_LOCATION}login/auth/google`;
+      const url = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=openid%20email%20profile`;
+
+      router.push(url);
+    } catch (error) {
+      console.error("Error initiating Google login:", error);
+    }
+  };
+
+  const handleFacebookLoginButton = async () => {
+    try {
+      const clientId = process.env.NEXT_PUBLIC_FACEBOOK_KEY;
+      const redirectUri = `${process.env.NEXT_PUBLIC_LOCATION}login/auth/facebook`;
+      const authUrl = `https://www.facebook.com/v12.0/dialog/oauth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=email%20public_profile`;
+      router.push(authUrl);
+    } catch (error) {
+      console.error("Error initiating Facebook login:", error);
+    }
+  };
+
+  //Handle Social Login Oauth  Response from Our backend
+
+  const handleGoogleLogin = (response, page) => {
+    setIsLoading(true);
+    console.log(response);
     api
-      .socialLogin(response.access_token, "google-oauth2")
+      .socialLogin(response, "google-oauth2")
       .then((res) => {
-        router.back();
+        if (res.error) {
+          setStatus(res.error);
+        } else {
+          if (res.isAccountExits) {
+            router.push("/dashboard");
+          } else {
+            try {
+              router.push("/kyc");
+            } catch {
+              router.push("/kyc");
+            }
+          }
+        }
       })
       .catch((err) => console.log(err));
   };
-  const handleFacebookLogin = (response) => {
+
+  const handleFacebookLogin = (response, page) => {
     api
-      .socialLogin(response.data.accessToken, "facebook")
+      .socialLogin(response, "facebook")
       .then((res) => {
-        router.back();
+        if (res.error) {
+          setStatus(res.error);
+        } else {
+          if (res.isAccountExits) {
+            router.push("/dashboard");
+          } else {
+            try {
+              router.push("/kyc");
+            } catch {
+              router.push("/kyc");
+            }
+          }
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -126,6 +180,8 @@ const uselogin = () => {
     setIsLoading,
     handleGoogleLogin,
     handleFacebookLogin,
+    handleGoogleLoginButton,
+    handleFacebookLoginButton,
   };
 };
 

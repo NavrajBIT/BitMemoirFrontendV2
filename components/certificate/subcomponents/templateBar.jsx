@@ -8,6 +8,7 @@ const TemplateBar = ({ cert }) => {
       <div className={style.recentlyUsedContainer}>
         <div className={style.heading}>Templates</div>
         <div className={style.templateContainer}>
+          <CreateNewTemplate cert={cert} />
           {cert.templates &&
             Array.isArray(cert.templates) &&
             cert.templates.length > 0 &&
@@ -33,8 +34,6 @@ const TemplateBar = ({ cert }) => {
                 />
               );
             })}
-
-          <CreateNewTemplate cert={cert} />
         </div>
       </div>
     </div>

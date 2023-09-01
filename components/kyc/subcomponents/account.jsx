@@ -45,23 +45,35 @@ const Account = ({ usekyc }) => {
     },
   ];
 
+  const getButtonTitle = () => {
+    if (usekyc.emailChanged) {
+      if (usekyc.accountChanged) return "Save";
+      else return "Save Email";
+    } else if (usekyc.accountChanged) return "Save";
+    else return "Next >";
+  };
+
   return (
     <DynamicForm
       formTitle="Account Details"
-      formButton="Save"
+      formButton={getButtonTitle()}
       isLoading={usekyc.isLoading}
       status={usekyc.formStatus}
       handleSubmit={usekyc.handleAccountSubmit}
       formData={formData}
     >
       <br />
-      <Button
-        text="Skip for now >>"
-        variant={"tertiary"}
-        onClick={() => {
-          usekyc.changeStep(usekyc.kycStep + 1);
-        }}
-      />
+      {usekyc.accountChanged || usekyc.emailChanged ? (
+        <Button
+          text="Skip for now >>"
+          variant={"tertiary"}
+          onClick={() => {
+            usekyc.changeStep(usekyc.kycStep + 1);
+          }}
+        />
+      ) : (
+        ""
+      )}
     </DynamicForm>
   );
 };

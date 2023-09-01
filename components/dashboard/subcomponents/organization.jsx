@@ -4,21 +4,24 @@ import { downloadFile } from "@/components/subcomponents/scripts/scripts";
 
 const Organization = ({ usedash }) => {
   const organizationDetails = {
-    name: usedash.organizationDetails.name && usedash.organizationDetails.name,
-    address:
-      usedash.organizationDetails.address &&
-      usedash.organizationDetails.address,
-    country:
-      usedash.organizationDetails.country &&
-      usedash.organizationDetails.country,
-    website:
-      usedash.organizationDetails.website &&
-      usedash.organizationDetails.website,
-    description:
-      usedash.organizationDetails.description &&
-      usedash.organizationDetails.description,
-    reg_id:
-      usedash.organizationDetails.reg_id && usedash.organizationDetails.reg_id,
+    name: usedash.organizationDetails.name
+      ? usedash.organizationDetails.name
+      : "---",
+    address: usedash.organizationDetails.address
+      ? usedash.organizationDetails.address
+      : "---",
+    country: usedash.organizationDetails.country
+      ? usedash.organizationDetails.country
+      : "---",
+    website: usedash.organizationDetails.website
+      ? usedash.organizationDetails.website
+      : "---",
+    description: usedash.organizationDetails.description
+      ? usedash.organizationDetails.description
+      : "---",
+    reg_id: usedash.organizationDetails.reg_id
+      ? usedash.organizationDetails.reg_id
+      : "---",
     reg_proof:
       usedash.organizationDetails.reg_proof &&
       usedash.organizationDetails.reg_proof,
@@ -80,17 +83,22 @@ const Organization = ({ usedash }) => {
           <div>{organizationDetails.country}</div>
           <div>{organizationDetails.website}</div>
           <div>{organizationDetails.reg_id}</div>
-          <Button
-            variant={"tertiary"}
-            text={get_filename(organizationDetails.reg_proof)}
-            style={{ height: "1rem" }}
-            onClick={() =>
-              downloadFile(
-                organizationDetails.reg_proof,
-                get_filename(organizationDetails.reg_proof)
-              )
-            }
-          />
+          {organizationDetails.reg_proof ? (
+            <Button
+              variant={"tertiary"}
+              endIcon={"download"}
+              text={get_filename(organizationDetails.reg_proof)}
+              style={{ height: "1rem" }}
+              onClick={() =>
+                downloadFile(
+                  organizationDetails.reg_proof,
+                  get_filename(organizationDetails.reg_proof)
+                )
+              }
+            />
+          ) : (
+            <div>---</div>
+          )}
         </div>
       </div>
     </div>

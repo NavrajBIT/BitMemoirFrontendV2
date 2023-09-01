@@ -23,7 +23,7 @@ const Heading = ({ usedash }) => {
           {userDetails.name}
           {usedash.kycDetails.status !== "Approved" && (
             <span style={{ fontSize: "0.75rem", color: "red" }}>
-              KYC pending*{" "}
+              KYC pending*
             </span>
           )}
         </div>
@@ -50,7 +50,12 @@ const Heading = ({ usedash }) => {
           }}
         >
           {!isMenu ? (
-            <Image src={"/icons/dot-menu.svg"} width={30} height={50} />
+            <Image
+              src={"/icons/dot-menu.svg"}
+              width={30}
+              height={50}
+              alt="menu"
+            />
           ) : (
             "X"
           )}
@@ -70,7 +75,7 @@ const Menu = () => {
     <div className={style.menuContainer}>
       <Button
         text="Logout"
-        variant={"tertiary"}
+        variant={"secondary"}
         onClick={() => {
           localStorage.setItem("jwtToken", null);
           router.push("/home");
@@ -79,14 +84,14 @@ const Menu = () => {
 
       <Button
         text="Edit Profile"
-        variant={"tertiary"}
+        variant={"secondary"}
         onClick={() => {
           router.push("/kyc");
         }}
       />
       <Button
         text="KYC Status"
-        variant={"tertiary"}
+        variant={"secondary"}
         onClick={() => {
           router.push("/kyc/status");
         }}

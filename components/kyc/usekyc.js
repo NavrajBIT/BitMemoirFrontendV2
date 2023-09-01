@@ -9,10 +9,14 @@ const usekyc = () => {
   const [formStatus, setFormStatus] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [accountDetails, setAccountDetails] = useState(null);
+  const [accountChanged, setAccountChanged] = useState(false);
   const [emailDetails, setEmailDetails] = useState(null);
+  const [emailChanged, setEmailChanged] = useState(false);
   const [isOTP, setIsOTP] = useState(false);
   const [organizationDetails, setOrganizationDetails] = useState(null);
+  const [organizationChanged, setOrganizationChanged] = useState(false);
   const [issuerDetails, setIssuerDetails] = useState(null);
+  const [issuerChanged, setIssuerChanged] = useState(false);
 
   useEffect(() => {
     poppulateAccountDetails();
@@ -28,6 +32,7 @@ const usekyc = () => {
         console.log(res[0]);
         if (res.status === 200) {
           setAccountDetails(res[0]);
+          setAccountChanged(false);
         }
       })
       .catch((err) => console.log(err));
@@ -39,6 +44,7 @@ const usekyc = () => {
         console.log(res[0]);
         if (res.status === 200) {
           setEmailDetails(res[0]);
+          setEmailChanged(false);
         }
       })
       .catch((err) => console.log(err));
@@ -50,6 +56,7 @@ const usekyc = () => {
         console.log(res[0]);
         if (res.status === 200) {
           setOrganizationDetails(res[0]);
+          setOrganizationChanged(false);
         }
       })
       .catch((err) => console.log(err));
@@ -61,6 +68,7 @@ const usekyc = () => {
         console.log(res[0]);
         if (res.status === 200) {
           setIssuerDetails(res[0]);
+          setIssuerChanged(false);
         }
       })
       .catch((err) => console.log(err));
@@ -75,21 +83,27 @@ const usekyc = () => {
 
   const handleAccountSubmit = async () => {
     setIsLoading(true);
-    await api
-      .crud("PATCH", `user/account/${accountDetails.id}`, accountDetails)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
-    await api
-      .crud("PATCH", `user/email/${emailDetails.id}`, emailDetails)
-      .then((res) => {
-        console.log(res);
-        if (res.status >= 200 && res.status <= 299) {
-          setIsOTP(true);
-        }
-      })
-      .catch((err) => console.log(err));
+    if (accountChanged) {
+      await api
+        .crud("PATCH", `user/account/${accountDetails.id}`, accountDetails)
+        .then((res) => {
+          console.log(res);
+          poppulateAccountDetails();
+        })
+        .catch((err) => console.log(err));
+    }
+    if (emailChanged) {
+      await api
+        .crud("PATCH", `user/email/${emailDetails.id}`, emailDetails)
+        .then((res) => {
+          console.log(res);
+          if (res.status >= 200 && res.status <= 299) {
+            setIsOTP(true);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+    if (!emailChanged) changeStep(kycStep + 1);
     setIsLoading(false);
   };
   const verifyEmail = async (e) => {
@@ -103,6 +117,7 @@ const usekyc = () => {
         console.log(res);
         if (res.status >= 200 && res.status <= 299) {
           changeStep(kycStep + 1);
+          poppulateEmailDetails();
         } else if (res.status === 400) {
           setFormStatus("Incorrect OTP.");
         }
@@ -114,6 +129,7 @@ const usekyc = () => {
 
   const handleChange = (model, key, value) => {
     if (model === "account") {
+      setAccountChanged(true);
       setAccountDetails((prev) => {
         let newDetails = { ...prev };
         newDetails[key] = value;
@@ -121,6 +137,7 @@ const usekyc = () => {
       });
     }
     if (model === "email") {
+      setEmailChanged(true);
       setEmailDetails((prev) => {
         let newDetails = { ...prev };
         newDetails[key] = value;
@@ -128,6 +145,7 @@ const usekyc = () => {
       });
     }
     if (model === "organization") {
+      setOrganizationChanged(true);
       setOrganizationDetails((prev) => {
         let newDetails = { ...prev };
         newDetails[key] = value;
@@ -135,6 +153,7 @@ const usekyc = () => {
       });
     }
     if (model === "issuer") {
+      setIssuerChanged(true);
       setIssuerDetails((prev) => {
         let newDetails = { ...prev };
         newDetails[key] = value;
@@ -144,6 +163,11 @@ const usekyc = () => {
   };
 
   const handleOrganizationSubmit = async () => {
+    if (!organizationChanged) {
+      changeStep(kycStep + 1);
+      return;
+    }
+
     setIsLoading(true);
     let apiData = { ...organizationDetails };
     delete apiData.reg_proof;
@@ -153,6 +177,7 @@ const usekyc = () => {
         console.log(res);
         if (res.status >= 200 && res.status <= 299) {
           changeStep(kycStep + 1);
+          poppulateOrganizationDetails();
         }
       })
       .catch((err) => console.log(err));
@@ -160,6 +185,10 @@ const usekyc = () => {
     setIsLoading(false);
   };
   const handleIssuerSubmit = async () => {
+    if (!issuerChanged) {
+      changeStep(kycStep + 1);
+      return;
+    }
     setIsLoading(true);
     let apiData = { ...issuerDetails };
     delete apiData.signed_note;
@@ -169,6 +198,7 @@ const usekyc = () => {
         console.log(res);
         if (res.status >= 200 && res.status <= 299) {
           changeStep(kycStep + 1);
+          poppulateIssuerDetails();
         }
       })
       .catch((err) => console.log(err));
@@ -243,6 +273,10 @@ const usekyc = () => {
     issuerDetails,
     handleIssuerSubmit,
     handleWalletSubmit,
+    accountChanged,
+    emailChanged,
+    organizationChanged,
+    issuerChanged,
   };
 };
 

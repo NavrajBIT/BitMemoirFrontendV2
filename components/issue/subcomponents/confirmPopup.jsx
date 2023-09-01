@@ -138,7 +138,6 @@ const ButtonContainer = ({ issue }) => (
           if (issue.certType === "essential") {
             issue.setApproverPopup(true);
             issue.setConfirmPopup(false);
-
             return;
           }
           issue.placeOrder();

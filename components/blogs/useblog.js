@@ -1,21 +1,21 @@
-"use client";
-import { use, useEffect, useState } from "react";
-import API from "../subcomponents/scripts/apiCall";
-const useblog = () => {
-  const api = API();
+import ServerAPI from "../subcomponents/scripts/serversideapicall";
+const useblog = async () => {
+  const api = ServerAPI();
 
-  const [blogs, setBlogs] = useState([]);
-
-  useEffect(() => {
-    api
-      .blog()
+  const getBlogs = async () => {
+    return await api
+      .crud("GET", "blog")
       .then((res) => {
-        setBlogs(res);
+        return res;
       })
       .catch((err) => {
-        console.log(err);
+        return null;
       });
-  }, []);
+  };
+
+  const blogs = await getBlogs();
+  console.log("--------------------------------------------------------");
+  console.log(blogs);
 
   return {
     blogs,

@@ -1,50 +1,52 @@
 import TeamCard from "./teamCard";
 import { teamData } from "./teamData";
-import styles from './team.module.css';
 
 const Team = () => {
-    return (
-        <>
-            <div style={{
-                // border: '2px solid red',
-                position: 'relative',
-                padding: '2rem 0'
-            }}>
-                <h1 style={{
-                    position: 'absolute',
-                    top: '4.6rem',
-                    left: '10rem',
-                    color: "var(--primary-50)",
-                }} className={styles.teamHead}>Founding Team</h1>
-                <div style={{
-                    // border: '2px solid red',
-                    backgroundImage: `url(/about/team/team-bg.png)`,
-                    backgroundPosition: 'center',
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
-                    width: '85%',
-                    margin: ' 4rem auto',
-                    padding: '2rem 0',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    flexWrap: 'wrap',
-                }}>
-                    {
-                        teamData.map((teamMember, index) => {
-                            return (
-                                <TeamCard
-                                    key={index+teamMember}
-                                    name={teamMember.name}
-                                    designation={teamMember.designation}
-                                    img={teamMember.img}
-                                />
-                            );
-                        })
-                    }
-                </div>
-            </div>
-        </>
-    )
-}
+  return (
+    <div
+      style={{
+        width: "100%",
+        maxWidth: "var(--max-width)",
+        margin: "auto",
+        backgroundImage: "url('/assets/images/productSuiteBackground.svg')",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        borderRadius: "var(--border-radius)",
+        padding: "var(--padding-main)",
+        position: "relative",
+        display: "flex",
+        flexWrap: "wrap",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "var(--padding-main)",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          fontSize: "2rem",
+          fontWeight: "700",
+          top: "-1.5rem",
+          left: "var(--padding-main)",
+          color: "var(--primary-50)",
+        }}
+      >
+        Founding Team
+      </div>
+
+      {teamData.map((teamMember, index) => {
+        return (
+          <TeamCard
+            key={index + teamMember}
+            name={teamMember.name}
+            designation={teamMember.designation}
+            img={teamMember.img}
+          />
+        );
+      })}
+    </div>
+  );
+};
 
 export default Team;

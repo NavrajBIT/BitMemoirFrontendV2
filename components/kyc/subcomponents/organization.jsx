@@ -73,7 +73,7 @@ const Organization = ({ usekyc }) => {
   return (
     <DynamicForm
       formTitle="Organization Details"
-      formButton="Save"
+      formButton={usekyc.organizationChanged ? "Save" : "Next >"}
       isLoading={usekyc.isLoading}
       status={usekyc.formStatus}
       handleSubmit={usekyc.handleOrganizationSubmit}
@@ -99,13 +99,15 @@ const Organization = ({ usekyc }) => {
         />
       )}
       <br />
-      <Button
-        text="Skip for now >>"
-        variant={"tertiary"}
-        onClick={() => {
-          usekyc.changeStep(usekyc.kycStep + 1);
-        }}
-      />
+      {usekyc.organizationChanged && (
+        <Button
+          text="Skip for now >>"
+          variant={"tertiary"}
+          onClick={() => {
+            usekyc.changeStep(usekyc.kycStep + 1);
+          }}
+        />
+      )}
     </DynamicForm>
   );
 };

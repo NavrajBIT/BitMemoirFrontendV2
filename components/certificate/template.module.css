@@ -74,11 +74,10 @@
 }
 
 .templateHeading {
-  width: 100%;
   font-size: 1.5rem;
   text-align: center;
   color: var(--primary-50);
-  text-shadow: 0 0 10px var(--primary-60);
+  font-weight: 700;
 }
 
 .previewimageContainer {
@@ -89,21 +88,46 @@
 }
 .previewimage {
   object-fit: contain;
-  box-shadow: 10px 10px 10px var(--primary-90);
 }
 
-.buttonContainer {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 .innerButtonContainer {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: var(--padding-light);
+  position: absolute;
+  padding: var(--padding-main);
+  left: 0px;
+  bottom: 0px;
+  background-color: var(--bg-90);
+  animation: fade-in 1s;
+}
+
+.toolbar {
+  width: 100%;
+  position: absolute;
+  padding: var(--padding-main);
+  left: 0px;
+  top: 0px;
+  background-color: var(--bg-90);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--padding-light);
+  flex-wrap: wrap;
+  animation: fade-in 1s;
+}
+
+/* Arrow -------------------------- */
+
+.arrowContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--padding-main);
 }
 
 @media only screen and (max-width: 900px) {
@@ -119,5 +143,23 @@
   .templateContainer {
     height: 145px;
     overflow: scroll;
+  }
+
+  .arrowContainer {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .arrow {
+    display: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

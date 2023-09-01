@@ -1,23 +1,33 @@
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import styles from "./blog.module.css";
+import Image from "next/image";
 
 const BlogCard = ({ blog }) => {
-  const router = useRouter();
-
   return (
     <div
-      className={styles.blogCards}
-      onClick={() => router.push(`/blog/${blog.id}`)}
+      style={{
+        background: "var(--primary-90)",
+        padding: "var(--padding-light)",
+        borderRadius: "var(--border-radius)",
+        width: "270px",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        gap: "var(--padding-light)",
+      }}
     >
-      <img src={blog.image} alt="" />
-      <div className={styles.blogMainText}>
-        <p>{blog.title}</p>
+      <Image
+        src={blog.image}
+        width={250}
+        height={200}
+        alt={blog.title}
+        style={{ borderRadius: "var(--border-radius)" }}
+      />
+      <div style={{ whiteSpace: "nowrap", fontSize: "1.5rem" }}>
+        {blog.title}
       </div>
 
-      <Link href={`/blog/${blog.id}`} legacyBehavior>
-        <a className={`${styles.blogText} ${styles.blogLink}`}>read more</a>
-      </Link>
+      <Link href={`/blog/${blog.id}`}>read more</Link>
     </div>
   );
 };
