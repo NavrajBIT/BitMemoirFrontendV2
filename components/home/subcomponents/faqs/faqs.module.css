@@ -1,8 +1,22 @@
+.faqs {
+	background-color: var(--primary-100);
+	position: relative;
+	margin-top: 0rem;
+}
+
+.faqsHeading {
+	font-size: 1.5rem;
+	font-weight: 700;
+	text-align: center;
+	transform: translateY(-50%);
+}
+
 @media screen and (min-width: 1024px) {
 	.faqs {
 		margin: 10rem !important;
 		border-radius: 0.5rem;
 	}
+
 	.faqsHeading {
 		text-align: left !important;
 		margin-left: 3rem;
@@ -10,6 +24,7 @@
 		color: var(--primary-50);
 	}
 }
+
 @media screen and (min-width: 768px) {
 	.faqs {
 		margin-top: 10rem !important;
