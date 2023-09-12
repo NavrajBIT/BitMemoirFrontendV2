@@ -1,0 +1,88 @@
+#subscriptionCardsDiv {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	gap: 1rem;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.subscriptionCards {
+	/* border:2px solid red; */
+	height: 70%;
+	width: 25%;
+	background-image: url("/assets/images/background_3.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.priceInfo {
+	background: #0a2c3a;
+	width: 100%;
+	text-align: center;
+	padding: 10px;
+}
+
+.subscriptionBtn {
+	background-color: var(--primary-80);
+	cursor: pointer;
+	color: white;
+	padding: 0.7rem 1rem;
+	width: 70%;
+	border-radius: 3px;
+}
+
+@media only screen and (max-width: 600px) {
+	#subscriptionContainer {
+		width: 100% !important;
+		margin-top: 6rem !important;
+	}
+
+	.subscriptionHead {
+		font-size: 1.2rem !important;
+		top: -4rem !important;
+	}
+
+	.subscriptionCardHead {
+		left: unset !important;
+	}
+
+	#subscriptionCardsDiv {
+		flex-direction: column;
+		overflow-x: auto;
+		gap: 2rem;
+		padding: 0 1rem;
+	}
+
+	#subscriptionCardsDiv::-webkit-scrollbar {
+		height: 4px;
+	}
+
+	.subscriptionCards {
+		width: 50%;
+		border-collapse: collapse;
+	}
+}
+
+@media only screen and (max-width: 450px) {
+	.subscriptionCards {
+		width: 65%;
+	}
+}
+
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+	.subscriptionCards {
+		width: 30% !important;
+	}
+
+	.certificates {
+		font-size: 3rem !important;
+	}
+}
