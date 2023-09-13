@@ -24,7 +24,6 @@ const containerStyle = {
 const Subscription = () => {
 	const [userSubscription, setUserSubscription] = useState(null);
 	const [selectedPlan, setSelectedPlan] = useState(null);
-	const [accountDetails, setAccountDetails] = useState(null);
 	const api = API();
 	useEffect(() => {
 		getUserSubscription();
