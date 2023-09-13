@@ -24,8 +24,8 @@ const Accordian = ({ heading, text, index }) => {
 					}}>
 					<Image
 						src={"/icons/down_arrow.svg"}
-						height={10}
-						width={15}
+						height={20}
+						width={30}
 					/>
 				</span>
 			</div>
