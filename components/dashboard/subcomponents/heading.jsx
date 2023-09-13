@@ -19,11 +19,9 @@ const Heading = ({ usedash }) => {
 		wallet: usedash.accountDetails.wallet && usedash.accountDetails.wallet,
 	};
 	const subscriptionDetails = {
-		plan:
-			usedash.subscriptionDetails.plan &&
-			usedash.subscriptionDetails.plan,
+		plan: usedash.subscriptionDetails && usedash.subscriptionDetails.plan,
 		nft_quota:
-			usedash.subscriptionDetails.nft_quota &&
+			usedash.subscriptionDetails &&
 			usedash.subscriptionDetails.nft_quota,
 	};
 	return (
@@ -42,8 +40,15 @@ const Heading = ({ usedash }) => {
 					<div>Email: {userDetails.email}</div>
 					<div>Phone: {userDetails.phone}</div>
 					<div>Wallet: {userDetails.wallet}</div>
-					<div>Subscription Plan: {subscriptionDetails.plan}</div>
-					<div>NFT's Left: {subscriptionDetails.nft_quota}</div>
+					<div>
+						Subscription Plan:{" "}
+						{subscriptionDetails.plan && subscriptionDetails.plan}
+					</div>
+					<div>
+						NFT's Left:{" "}
+						{subscriptionDetails.nft_quota &&
+							subscriptionDetails.nft_quota}
+					</div>
 				</div>
 			</div>
 			<div
