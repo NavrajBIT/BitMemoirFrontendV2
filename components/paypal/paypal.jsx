@@ -84,10 +84,16 @@ const PayPalCheckout = ({ selectedPlan, getUserSubscription }) => {
 									const response = await fetch(
 										url,
 										requestOptions
-									).then(getUserSubscription());
-
+									);
+									if (response.status == 201) {
+										console.log(
+											"Payment completed:",
+											details
+										);
+										getUserSubscription();
+									}
 									console.log(response);
-									console.log("Payment completed:", details);
+									setPaymentDone(true);
 								} catch (error) {
 									console.error("Error:", error);
 								}
