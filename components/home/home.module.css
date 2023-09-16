@@ -99,6 +99,7 @@
   gap: var(--padding-main);
 }
 
+
 .feature {
   border-radius: var(--border-radius);
   width: 200px;

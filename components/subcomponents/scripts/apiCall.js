@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 
-const API_URL = process.env.NEXT_PUBLIC_API_ENDPOINT;
+const API_URL = "http://13.200.86.140/api/v2/";
 
 const API = () => {
   const router = useRouter();

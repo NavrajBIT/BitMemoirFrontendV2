@@ -14,6 +14,7 @@ const TeamCard = (props) => {
       }}
     >
       <Image src={props.img} alt={props.name} width={200} height={200} />
+      
 
       <div
         style={{
