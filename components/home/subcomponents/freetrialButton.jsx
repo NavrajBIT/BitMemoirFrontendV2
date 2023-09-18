@@ -8,7 +8,6 @@ const FreetrialButton = () => {
   return (
     <div style={{
       width: "fit-content",
-      margin: window.innerWidth < 768 && 'auto'
     }}>
       <Button
         variant="emphasis"
