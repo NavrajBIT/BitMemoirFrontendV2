@@ -1,6 +1,7 @@
 import ServerAPI from "../subcomponents/scripts/serversideapicall";
 import NotFound from "../subcomponents/errorPages/notFound";
 import Image from "next/image";
+import { Markup } from 'interweave';
 
 const api = ServerAPI();
 const getBlogDetail = async (blogId) => {
@@ -13,7 +14,8 @@ const getBlogDetail = async (blogId) => {
 const BlogNum = async ({ params }) => {
   const blog = await getBlogDetail(params.blogId);
 
-  if (!blog) return <NotFound />;
+  if (!blog) return <NotFound  />;
+  // console.log(blog.content)
 
   return (
     <div
@@ -54,8 +56,9 @@ const BlogNum = async ({ params }) => {
       </div>
 
       <div style={{ textAlign: "justify" }}>
-        <p>{blog.content}</p>
-        <h1>{blog.content}</h1>
+        {/* <p>{blog.content}</p>
+        <h1>{blog.content}</h1> */}
+        <Markup content={blog.content} />
       </div>
     </div>
   );

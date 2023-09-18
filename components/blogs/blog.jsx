@@ -1,14 +1,15 @@
+import NotFound from "../subcomponents/errorPages/notFound";
 import BlogCard from "./blogCard";
 import BlogFullCard from "./blogFullCard";
 import useblog from "./useblog";
 
 const Blog = async () => {
   const { blogs } = await useblog();
-  console.log(blogs);
+  // console.log(blogs);
 
   const smallBlogs = blogs.slice(0, 5);
   const largeBlogs = blogs.slice(5, blogs.length + 1);
-
+  if (true) return <NotFound text="Blog Not Found"/>;
   return (
     <div
       style={{

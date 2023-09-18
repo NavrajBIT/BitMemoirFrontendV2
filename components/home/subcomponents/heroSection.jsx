@@ -1,7 +1,6 @@
 import style from "../home.module.css";
 import FreetrialButton from "./freetrialButton";
 import Image from "next/image";
-import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -24,14 +23,17 @@ const HeroContent = () => (
       flexDirection: "column",
       gap: "var(--padding-main)",
     }}
+    className={style.homeTextContainer}
   >
     <div
       style={{
         fontSize: "4rem",
         fontWeight: "700",
       }}
+      className={style.homeMainText}
     >
-      BitMemoir
+      BitMemoir <br />
+      for Education
     </div>
     <div
       style={{
@@ -39,7 +41,7 @@ const HeroContent = () => (
         color: "var(--primary-50)",
       }}
     >
-      Issue. Store. Verify. Retrieve.
+      Revolutionizing Certification with Blockchain
     </div>
 
     <FreetrialButton />

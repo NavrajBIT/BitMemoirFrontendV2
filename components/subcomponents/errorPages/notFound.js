@@ -2,7 +2,8 @@ import style from "./error.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
-const NotFound = () => {
+const NotFound = ({text}) => {
+  // console.log(text);
   const navMenuItems = [
     { name: "Home", route: "/home" },
     { name: "Certificates", route: "/certificate" },
@@ -19,8 +20,8 @@ const NotFound = () => {
         height={100}
         alt="Beyond Imagination Technologies"
       />
-      <div className={style.error}>Error: 404 | PAGE NOT FOUND</div>
-      {navMenuItems.map((item, index) => {
+      <div className={style.error}>{text ? text : "Error 404 : Page Not Found" }</div>
+      {! text && navMenuItems.map((item, index) => {
         return (
           <Link className={style.link} href={item.route} key={index}>
             {item.name}

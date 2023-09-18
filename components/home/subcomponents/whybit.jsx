@@ -1,37 +1,27 @@
-import style from "../home.module.css";
+import styles from "../home.module.css";
 
 const Whybit = () => {
   return (
-    <div className={style.whybitContainer}>
-      <div className={style.whybitfilter} />
-      <div className={style.whybitSection}>
-        <div
-          className="whybitmemoirHeading"
-          style={{
-            fontSize: "3rem",
-            fontWeight: "700",
-            textAlign: "center",
-          }}
-        >
+    <div className={styles.whybitContainer}>
+      <div className={styles.whybitfilter} />
+      <div className={styles.whybitSection}>
+        <div className={styles.whyBitHeading}>
           Why Bitmemoir
         </div>
-        <div className={style.whybitContent}>
-          <div style={{ width: "100%", aspectRatio: "16/9" }}>
+        <div className={styles.whybitContent}>
+          <div className={styles.demoVideo}>
             <iframe
               width="100%"
               height="100%"
               src="https://www.youtube.com/embed/YDsqedqmF84"
               title="YouTube video player"
-              frameborder="0"
+              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />
           </div>
           <div
-            style={{
-              fontSize: "1rem",
-              textAlign: "justify",
-            }}
+            className={styles.whyBitText}
           >
             Revolutionizing the education landscape by the issuing legitimate
             and validated credentials, eliminating any chance of duplicity,
