@@ -1,7 +1,9 @@
 "use client";
+
 import Form from "../subcomponents/form/form";
 import Button from "../subcomponents/button/button";
 import SocialLoginPage from "./subcomponents/socialloginButton";
+import Link from "next/link";
 
 const UserLogin = ({ useLogin }) => {
   return (
@@ -30,19 +32,29 @@ const UserLogin = ({ useLogin }) => {
           }}
         >
           <SocialLoginPage />
-          <div style={{ display: "flex", alignItems: "center" }}>
-            Don&apos;t have an account?
-            <div style={{ width: "fit-content" }}>
-              <Button
-                text={"Sign Up"}
-                variant={"tertiary"}
-                onClick={() => {
-                  useLogin.setStatus("");
-                  useLogin.setSignUp(true);
-                }}
-              />
-            </div>
+          <div style={{
+            display: 'flex',
+          }}>
+            <span style={{ display: "flex", alignItems: "center" }}>
+              Don&apos;t have an account?
+            </span>
+            <Button
+              text={"Sign Up"}
+              variant={"tertiary"}
+              onClick={() => {
+                useLogin.setStatus("");
+                useLogin.setSignUp(true);
+              }}
+              style={{ width: 'unset' }}
+            />
           </div>
+          <Link href="/login/forgetpassword" style={{
+            textDecoration: "underline",
+            color: 'var(--primary-50)',
+            marginTop: '-15px'
+          }}>
+            Forget password
+          </Link>
         </div>
       </Form>
     </div>

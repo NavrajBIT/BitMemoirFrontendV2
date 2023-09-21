@@ -30,19 +30,12 @@ const Form = ({
           <InputField inputData={inputData} key={inputData.label + index} />
         ))}
         <div style={{ color: "red" }}>{status}</div>
-        <div
-          style={{
-            width: "50%",
-            margin: "auto",
-          }}
-        >
           <Button
             text={formButton}
             type="submit"
             variant="primary"
             isLoading={isLoading}
           />
-        </div>
       </form>
       {children}
     </div>

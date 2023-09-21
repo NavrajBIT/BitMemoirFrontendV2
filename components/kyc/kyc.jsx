@@ -27,7 +27,6 @@ const Kyc = () => {
         currentStep={script.kycStep}
         setCurrentStep={script.changeStep}
       />
-      <div style={{ height: "2rem" }} />
 
       {script.kycStep === 1 && <Account usekyc={script} />}
       {script.kycStep === 2 && <Organization usekyc={script} />}
