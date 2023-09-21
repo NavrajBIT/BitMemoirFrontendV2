@@ -237,23 +237,68 @@ const usekyc = () => {
     uploader.click();
   };
 
-  const handleWalletSubmit = async () => {
+
+  const connectWalletAndHandleApi = async () => {
     setIsLoading(true);
+    try {
+      // Check if window and window.bit are defined (client-side check)
+      if (typeof window !== "undefined" && window.bit) {
+        const provider = window.bit;
+        const connection = await provider.connect();
+        console.log(connection);
 
-    await api
-      .crud("PATCH", `user/account/${accountDetails.id}`, {
-        wallet: accountDetails.wallet,
-      })
-      .then((res) => {
-        console.log(res);
-        if (res.status >= 200 && res.status <= 299) {
+        // Update account details state
+        setAccountDetails((prev) => ({
+          ...prev,
+          wallet: connection,
+        }));
+
+        // Make an API request to update the user's wallet information
+        const response = await api.crud("PATCH", `user/account/${accountDetails.id}`, {
+          wallet: connection,
+        });
+
+        if (response.status >= 200 && response.status <= 299) {
           router.push("/kyc/status");
+        } else {
+          console.error("Failed to update user account:", response.statusText);
         }
-      })
-      .catch((err) => console.log(err));
-
+      }
+    } catch (error) {
+      console.error("Error while connecting wallet:", error);
+    }
     setIsLoading(false);
   };
+
+
+
+
+  // const handleWalletSubmit = async () => {
+  //   setIsLoading(true);
+
+  //   await api
+  //     .crud("PATCH", `user/account/${accountDetails.id}`, {
+  //       wallet: accountDetails.wallet,
+  //     })
+  //     .then((res) => {
+  //       console.log(res);
+  //       if (res.status >= 200 && res.status <= 299) {
+  //         router.push("/kyc/status");
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+
+  //   setIsLoading(false);
+
+  // };
+
+  const downloadWallet = () => {
+    var targetPageUrl = "https://chrome.google.com/webstore/detail/bitwallet-testnet/ckcpahfdaadkkpcoklfamindgidnjebd"; 
+    if (typeof window !== "undefined"){
+      window.open(targetPageUrl, "_blank");
+    }
+  };
+
 
   return {
     kycStep,
@@ -272,11 +317,14 @@ const usekyc = () => {
     uploadRegProof,
     issuerDetails,
     handleIssuerSubmit,
-    handleWalletSubmit,
+    // handleWalletSubmit,
     accountChanged,
     emailChanged,
     organizationChanged,
     issuerChanged,
+    setAccountDetails,
+    connectWalletAndHandleApi,
+    downloadWallet
   };
 };
 
