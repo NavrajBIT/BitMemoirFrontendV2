@@ -64,7 +64,7 @@ const Wallet = ({ usekyc }) => {
           text="Download Wallet"
           variant="primary"
           startIcon={"near"}
-          onClick={downloadWallet}
+          onClick={usekyc.downloadWallet}
         />
         }
       </div>
