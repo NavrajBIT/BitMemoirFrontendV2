@@ -13,6 +13,7 @@ const Stepper = ({ numberOfSteps, currentStep, setCurrentStep }) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        margin:'1rem 0 4rem'
       }}
     >
       {Array.from({ length: numberOfSteps }, () => 0).map((_, index) => {
