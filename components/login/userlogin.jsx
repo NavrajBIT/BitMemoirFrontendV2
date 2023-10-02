@@ -2,6 +2,7 @@
 import Form from "../subcomponents/form/form";
 import Button from "../subcomponents/button/button";
 import SocialLoginPage from "./subcomponents/socialloginButton";
+import Link from "next/link";
 
 const UserLogin = ({ useLogin }) => {
   return (
@@ -43,6 +44,16 @@ const UserLogin = ({ useLogin }) => {
               />
             </div>
           </div>
+          <Link
+            href="/login/passwordReset"
+            style={{
+              textDecoration: "underline",
+              color: "var(--primary-50)",
+              marginTop: "-15px",
+            }}
+          >
+            Forgot password
+          </Link>
         </div>
       </Form>
     </div>

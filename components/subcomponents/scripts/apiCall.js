@@ -40,7 +40,7 @@ const API = () => {
         response.status >= 200 &&
         response.status <= 299
       ) {
-        // refreshToken();
+        refreshToken();
         return true;
       }
       const responseData = await response.json();
@@ -49,73 +49,6 @@ const API = () => {
       }
       responseData["status"] = response.status;
       // refreshToken();
-      return responseData;
-    } catch (error) {
-      console.error("API call error:", error);
-      throw error;
-    }
-  }
-
-  async function certificate(certId) {
-    const requestOptions = {
-      method: "GET",
-    };
-    try {
-      const response = await fetch(
-        API_URL + `certificate/${certId}` + "/",
-        requestOptions
-      );
-
-      const responseData = await response.json();
-      if (responseData["status"]) {
-        responseData["modelStatus"] = responseData["status"];
-      }
-      responseData["status"] = response.status;
-      return responseData;
-    } catch (error) {
-      console.error("API call error:", error);
-      throw error;
-    }
-  }
-
-  async function blog(blogId) {
-    let endpoint = `blog`;
-    if (blogId) {
-      endpoint = `blog/${blogId}`;
-    }
-    const requestOptions = {
-      method: "GET",
-    };
-    try {
-      const response = await fetch(API_URL + endpoint + "/", requestOptions);
-      if (response.status === 404) return { status: 404 };
-
-      const responseData = await response.json();
-      if (responseData["status"]) {
-        responseData["modelStatus"] = responseData["status"];
-      }
-      responseData["status"] = response.status;
-      return responseData;
-    } catch (error) {
-      console.error("API call error:", error);
-      throw error;
-    }
-  }
-  async function nft(nftId) {
-    let endpoint = `nft/${nftId}`;
-
-    const requestOptions = {
-      method: "GET",
-    };
-    try {
-      const response = await fetch(API_URL + endpoint + "/", requestOptions);
-      if (response.status === 404) return { status: 404 };
-
-      const responseData = await response.json();
-      if (responseData["status"]) {
-        responseData["modelStatus"] = responseData["status"];
-      }
-      responseData["status"] = response.status;
       return responseData;
     } catch (error) {
       console.error("API call error:", error);
@@ -187,7 +120,7 @@ const API = () => {
     const lastTime = localStorage.getItem("lastRefresh");
 
     if (lastTime) {
-      const refreshTime = 90; // time in minutes
+      const refreshTime = 30; // time in minutes
       const currentTime = new Date().getTime();
       const refreshTimeInMillis = refreshTime * 60 * 1000;
       const elapsedTime = currentTime - parseInt(lastTime);
@@ -259,9 +192,6 @@ const API = () => {
     getToken,
     refreshToken,
     socialLogin,
-    certificate,
-    blog,
-    nft,
   };
 };
 

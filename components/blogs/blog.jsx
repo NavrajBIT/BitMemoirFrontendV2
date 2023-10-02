@@ -6,8 +6,16 @@ const Blog = async () => {
   const { blogs } = await useblog();
   console.log(blogs);
 
-  const smallBlogs = blogs.slice(0, 5);
-  const largeBlogs = blogs.slice(5, blogs.length + 1);
+  let smallBlogs = [];
+  let largeBlogs = [];
+
+  try {
+    smallBlogs = blogs.slice(0, 5);
+    largeBlogs = blogs.slice(5, blogs.length + 1);
+  } catch {
+    smallBlogs = [];
+    largeBlogs = [];
+  }
 
   return (
     <div
