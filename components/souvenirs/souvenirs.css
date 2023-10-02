@@ -1,0 +1,48 @@
+#uploadImgDiv {
+	width: 100px;
+	height: 100px;
+	/* dashed border */
+	background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%2300D4FFFF' stroke-width='3' stroke-dasharray='17%2c 23' stroke-dashoffset='41' stroke-linecap='square'/%3e%3c/svg%3e");
+}
+
+#uploadCertLabel,
+.drag {
+	color: #99abaf;
+	font-weight: bold;
+}
+
+select {
+	max-width: 90%;
+	width: 35%;
+	background: #004351;
+	color: #757575;
+	padding: 1rem;
+	margin: 0 0 1rem;
+	border: none;
+	outline: none;
+}
+
+/* MEDIA QUERY */
+
+@media only screen and (max-width: 600px) {
+	#formContainer {
+		width: 100% !important;
+		margin-top: 5rem;
+	}
+	.formHead {
+		font-size: 1.5rem;
+		left: unset !important;
+		top: -4rem !important;
+	}
+	#uploadImgDiv {
+		height: 15rem !important;
+		justify-content: center !important;
+	}
+	#uploadImgDiv img {
+		height: 4rem;
+		margin: 1.5rem !important;
+	}
+	.drag {
+		display: none;
+	}
+}

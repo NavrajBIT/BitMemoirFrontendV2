@@ -7,6 +7,13 @@ import GenerateNewPassword from "./forgetPassword/generateNewPassword";
 
 const ForgetPassword = () => {
   const [step, setStep] = useState(1);
+  const [userDetailsForForget,setUserDetailsForForget] = useState({
+    username : "",
+    otp: "",
+    password:"",
+    email:""
+  });
+  const [isLoading,setLoading] = useState(false);
 
   const changeStep = (e) => setStep(e);
 
@@ -30,9 +37,9 @@ const ForgetPassword = () => {
         setCurrentStep={changeStep}
       />
 
-      {step === 1 && <Forget/>}
-      {step === 2 && <VerifyOtp/>}
-      {step === 3 && <GenerateNewPassword />}
+      {step === 1 && <Forget userDetailsForForget={userDetailsForForget} setUserDetailsForForget ={setUserDetailsForForget}  isLoading={isLoading} setLoading={setLoading}  step={step} setStep={setStep}/>}
+      {step === 2 && <VerifyOtp userDetailsForForget={userDetailsForForget} setUserDetailsForForget ={setUserDetailsForForget} isLoading={isLoading} setLoading={setLoading} step={step} setStep={setStep}/>}
+      {step === 3 && <GenerateNewPassword userDetailsForForget={userDetailsForForget} setUserDetailsForForget ={setUserDetailsForForget} isLoading={isLoading} setLoading={setLoading} step={step} setStep={setStep}/>}
     </div>
   )
 }

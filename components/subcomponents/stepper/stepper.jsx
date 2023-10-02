@@ -50,7 +50,10 @@ const Step = ({ index, currentStep, setCurrentStep }) => (
   >
     <div
       className={style.step}
-      onClick={() => setCurrentStep(index + 1)}
+      onClick={() => 
+        setCurrentStep(index + 1)
+        // console.log(index)
+      }
       style={{
         width: stepSizePx,
         height: stepSizePx,
@@ -89,7 +92,10 @@ const LastStep = ({ index, currentStep, setCurrentStep }) => (
   >
     <div
       className={style.step}
-      onClick={() => setCurrentStep(index + 1)}
+      onClick={() => 
+        setCurrentStep(index + 1)
+        // console.log(index)
+      }
       style={{
         width: stepSizePx,
         height: stepSizePx,

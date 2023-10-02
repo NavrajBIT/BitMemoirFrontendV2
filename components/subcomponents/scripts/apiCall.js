@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 
-const API_URL = "http://13.200.86.140/api/v2/";
+const API_URL = "http://127.0.0.1:8000/";
 
 const API = () => {
   const router = useRouter();
@@ -253,6 +253,51 @@ const API = () => {
     }
   }
 
+  async function forgetPasswordAPI(username,password) {
+    try{
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      };
+      const response = await fetch(`${API_URL}user/forget/`, requestOptions);
+      const responseData = await response.json();
+      console.log(responseData);
+      return responseData;
+    } catch (error) {
+      console.log("API call error:", error);
+      throw error;
+    }
+  }
+
+  async function crudForResetPassword(requestMethod, endpoint, data) {
+    const requestOptions =  {
+          method: requestMethod,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: data ? JSON.stringify(data) : null,
+    };
+
+    try {
+      const response = await fetch(API_URL + endpoint + "/", requestOptions);
+      const responseData = await response.json();
+      responseData["status"] = response.status;
+      // refreshToken();
+      return responseData;
+    } catch (error) {
+      console.error("API call error:", error);
+      throw error;
+    }
+  }
+    
+  
+
   return {
     crud,
     createUser,
@@ -262,6 +307,8 @@ const API = () => {
     certificate,
     blog,
     nft,
+    forgetPasswordAPI,
+    crudForResetPassword
   };
 };
 
