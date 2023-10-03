@@ -6,7 +6,14 @@ import API from "../subcomponents/scripts/apiCall";
 const useSouvenirs = () => {
     const api = API();
 	const [frameFile, setFrameFile] = useState(null);
-	const [availableFrames, setAvailableFrames] = useState([]);
+	const [uploadedImage, setUploadedImage] = useState(null);
+	const [availableFrames, setAvailableFrames] = useState([{
+		label: "---Select Frame---",
+		value: "",
+	},{
+		label: "Add Frame",
+		value: "addFrame",
+	}]);
 	const [selectedFrame, setSelectedFrame] = useState("");
 	const [newFrameName, setNewFrameName] = useState(""); 
 	const [newFrameFile, setNewFrameFile] = useState(null); 
@@ -21,7 +28,9 @@ const useSouvenirs = () => {
     useEffect(() => {
 
         api.crud("GET", "certificate/frames").then((res) => {
-            setAvailableFrames(res);
+			setAvailableFrames((prev) => {
+				return [...prev, ...res];
+			})
         }).catch((err) => console.log(err));3
         
 	}, []);
@@ -64,10 +73,12 @@ const useSouvenirs = () => {
 		// Perform validation for the new frame inputs if needed
 		if (newFrameName && newFrameFile) {
 
+			
 
-			api.crud("POST", "certificate/frames/", {
+			api.crud("POST", "certificate/frames", {
 				frame_name: newFrameName,
 				frame_image: newFrameFile,
+				user :3
 			}).then((res) => {
 				setAvailableFrames([...availableFrames, res]);
 				setNewFrameName("");
@@ -80,9 +91,12 @@ const useSouvenirs = () => {
 	};
 
 	const handlePublishSouvenir = () => {
+		console.log(souvenirDetails);
+		console.log(uploadedImage)
+		console.log(selectedFrame);
 		//Conditions 
 		if (true) {
-			api.crud("POST", "certificate/mint-souvenir/", {
+			api.crud("POST", "certificate/mint-souvenir", {
 				souvenir_name: souvenirDetails.name,
 				frame_id: selectedFrame,
 				email: souvenirDetails.email,
@@ -119,7 +133,9 @@ const useSouvenirs = () => {
 		setNewFrameFile,
 		souvenirDetails,
 		setSouvenirDetails,
-		isLoading
+		isLoading,
+		uploadedImage,
+		setUploadedImage
     }
 
 }

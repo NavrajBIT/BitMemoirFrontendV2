@@ -1,22 +1,38 @@
 "use client";
 import { useState, useEffect } from "react";
-import Form from "../subcomponents/form/form";
 import DynamicForm from "../subcomponents/form/dynamicForm";
 import "./souvenirs.css";
 import useSouvenirs from "./usesouvenirs";
+import AddFramePopup from "./subcomponents/addFramePopup";
 
 const Souvenirs = () => {
 
 	const useSouvenirsScript = useSouvenirs();
+	
 
 	const handleChange=(key,value)=>{
-		console.log(key,value);
-		useSouvenirsScript.setSouvenirDetails((prev) => {
-			let newDetails = { ...prev };
-			newDetails[key] = value;
-			return newDetails;
-		  });
+		// console.log(key,value);
+		if(value === "addFrame"){
+			useSouvenirsScript.setShowAddFrameModal(true);
+		}
+		else if(value === 'image') {
+			useSouvenirsScript.setUploadedImage(value);
+		}
+		else{
+
+			// console.log("here");
+			useSouvenirsScript.setSouvenirDetails((prev) => {
+				let newDetails = { ...prev };
+				newDetails[key] = value;
+				console.log(newDetails);
+				return newDetails;
+			});
+			
+		}
+		
 	}
+	
+
 
 	const formData = [
 		{
@@ -82,6 +98,9 @@ const Souvenirs = () => {
 				formData={formData}
 			>
 			</DynamicForm>
+			{useSouvenirsScript.showAddFrameModal && (
+				<AddFramePopup setShowAddFrameModal={useSouvenirsScript.setShowAddFrameModal} />)
+			}
 		</div>
 	);
 };

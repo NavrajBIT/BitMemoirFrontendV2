@@ -182,14 +182,14 @@ const SelectField = ({ inputData }) => {
         color: "var(--text-bright)",
       }}
     >
-      <option value="">Select Frame</option>
+      {/* <option value="">Select Frame</option> */}
       {inputData.options && inputData.options.map((option) => (
         <option value={option.value} key={option.value}>
           {option.label}
         </option>
         
       ))}
-      <option value="addFrame">Add Frame</option>
+      {/* <option value="addFrame">Add Frame</option> */}
     </select>
     </div>
   );
