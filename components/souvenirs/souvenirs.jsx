@@ -4,7 +4,9 @@ import DynamicForm from "../subcomponents/form/dynamicForm";
 import "./souvenirs.css";
 import useSouvenirs from "./usesouvenirs";
 import AddFramePopup from "./subcomponents/addFramePopup";
-
+import SuccessPopup from "./subcomponents/successPopup";
+import LocalLoading from "../subcomponents/loadingPage/localloading";
+import Alert from "../issue/subcomponents/alert";
 const Souvenirs = () => {
 
 	const useSouvenirsScript = useSouvenirs();
@@ -88,6 +90,7 @@ const Souvenirs = () => {
 				display: "flex",
 				alignItems: "center",
 				justifyContent: "center",
+				
 			}}>
 
 			<DynamicForm
@@ -98,8 +101,24 @@ const Souvenirs = () => {
 				formData={formData}
 			>
 			</DynamicForm>
+
+			{
+				useSouvenirsScript.loadingStatus !== ""  && (
+					<LocalLoading tex={useSouvenirsScript.loadingStatus} />
+				)
+			}
+			{
+				useSouvenirsScript.loadingStatus === "Error occured" && (
+					<Alert useSouvenirsScript={useSouvenirsScript} />
+				)
+			}
 			{useSouvenirsScript.showAddFrameModal && (
 				<AddFramePopup setShowAddFrameModal={useSouvenirsScript.setShowAddFrameModal} />)
+			}
+			{
+				useSouvenirsScript.successPopup && (
+					<SuccessPopup/>
+				)
 			}
 		</div>
 	);

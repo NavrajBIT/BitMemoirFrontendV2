@@ -29,6 +29,7 @@ const API = () => {
           body: data ? JSON.stringify(data) : null,
         };
 
+
     try {
       const response = await fetch(API_URL + endpoint + "/", requestOptions);
       if (response.status === 401) {

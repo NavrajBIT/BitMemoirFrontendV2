@@ -230,7 +230,7 @@ const useIssue = (params) => {
     let is_verified = true;
     setLoadingStatus("Checking data...");
     await api
-      .crud("GET", "/user/kyc")
+      .crud("GET", "user/kyc")
       .then((res) => {
         console.log(res.status);
         if (

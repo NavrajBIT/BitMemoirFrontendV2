@@ -6,6 +6,7 @@ import LoginButton from "./loginButton";
 const Navbar = () => {
   const navMenuItems = [
     { name: "Certificates", route: "/certificate" },
+    { name: "Souvenirs", route: "/souvenirs" },
     { name: "Verify", route: "/verify" },
     { name: "Blog", route: "/blog" },
     { name: "About Us", route: "/about" },

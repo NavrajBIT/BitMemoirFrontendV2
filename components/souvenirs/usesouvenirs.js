@@ -7,6 +7,7 @@ const useSouvenirs = () => {
     const api = API();
 	const [frameFile, setFrameFile] = useState(null);
 	const [uploadedImage, setUploadedImage] = useState(null);
+	const [successPopup, setSuccessPopup] = useState(false);
 	const [availableFrames, setAvailableFrames] = useState([{
 		label: "---Select Frame---",
 		value: "",
@@ -16,7 +17,7 @@ const useSouvenirs = () => {
 	}]);
 	const [selectedFrame, setSelectedFrame] = useState("");
 	const [newFrameName, setNewFrameName] = useState(""); 
-	const [newFrameFile, setNewFrameFile] = useState(null); 
+	const [newFrameFile, setNewFrameFile] = useState(''); 
 	const [showAddFrameModal, setShowAddFrameModal] = useState(false); 
 	const [isLoading, setIsLoading] = useState(false);
 	const [souvenirDetails, setSouvenirDetails] = useState({
@@ -25,12 +26,25 @@ const useSouvenirs = () => {
 		email: "",
 		wallet: "",
 	});
+	const [loadingStatus, setLoadingStatus] = useState("");
     useEffect(() => {
 
         api.crud("GET", "certificate/frames").then((res) => {
+			console.log(res);
 			setAvailableFrames((prev) => {
-				return [...prev, ...res];
-			})
+				// return [...prev, ...res];
+				let newDetails = [ ...prev ];
+
+				for (let i = 0; i < res.length; i++) {
+					newDetails.push({
+						label: res[i].frame_name,
+						value: res[i].id,
+					});
+				}
+				// newDetails[key] = value;
+				console.log(newDetails);
+				return newDetails;
+			});
         }).catch((err) => console.log(err));3
         
 	}, []);
@@ -41,8 +55,11 @@ const useSouvenirs = () => {
 	const handleFrameUpload = (event) => {
 		const file = event.target.files[0];
 		console.log(file);
+		console.log(file);
 		if (file) {
-			setFrameFile(file); // Store the frame file in state
+			setFrameFile(file);
+			setNewFrameFile(file)
+			 // Store the frame file in state
 		}
 	};
 
@@ -70,16 +87,12 @@ const useSouvenirs = () => {
 	};
 
 	const handleAddFrame = () => {
-		// Perform validation for the new frame inputs if needed
 		if (newFrameName && newFrameFile) {
-
-			
-
-			api.crud("POST", "certificate/frames", {
-				frame_name: newFrameName,
-				frame_image: newFrameFile,
-				user :3
-			}).then((res) => {
+			const formData = new FormData();
+			formData.append("frame_name", newFrameName);
+			formData.append("frame_image", newFrameFile);
+			console.log(formData);
+			api.crud("POST", "certificate/frames", formData,true).then((res) => {
 				setAvailableFrames([...availableFrames, res]);
 				setNewFrameName("");
 				setNewFrameFile(null);
@@ -91,25 +104,33 @@ const useSouvenirs = () => {
 	};
 
 	const handlePublishSouvenir = () => {
-		console.log(souvenirDetails);
-		console.log(uploadedImage)
-		console.log(selectedFrame);
+		setIsLoading(true);
+		setLoadingStatus("Submitting Certificate Order...");
+		console.log(loadingStatus)
 		//Conditions 
 		if (true) {
-			api.crud("POST", "certificate/mint-souvenir", {
-				souvenir_name: souvenirDetails.name,
-				frame_id: selectedFrame,
-				email: souvenirDetails.email,
-				wallet: souvenirDetails.wallet,
-				souvenir_image: souvenirDetails.image,
-			}).then((res) => {
+			const formData = new FormData();
+			formData.append("souvenir_name", souvenirDetails.name);
+			formData.append("frame_id",  selectedFrame);
+			formData.append("email", souvenirDetails.email);
+			formData.append("wallet", souvenirDetails.wallet);
+			formData.append("souvenir_image", souvenirDetails.image);
+			api.crud("POST", "certificate/mint-souvenir", formData,true).then((res) => {
 				console.log(res);
-				setSouvenirDetails({
-					name: "",
-					email: "",
-					wallet: "",
-					image: null,
-				});
+				console.log(res.status);
+				if(res.status >= 200 && res.status <= 299) {
+					setLoadingStatus("");
+					setSuccessPopup(true);
+					setSouvenirDetails({
+						name: "",
+						email: "",
+						wallet: "",
+						image: null,
+					});
+				}
+				else {
+					setLoadingStatus("Error Occured");
+				}
 			}).catch((err) => console.log(err));
 		}
 	};
@@ -135,7 +156,11 @@ const useSouvenirs = () => {
 		setSouvenirDetails,
 		isLoading,
 		uploadedImage,
-		setUploadedImage
+		setUploadedImage,
+		successPopup,
+		setSuccessPopup,
+		loadingStatus,
+		setLoadingStatus
     }
 
 }

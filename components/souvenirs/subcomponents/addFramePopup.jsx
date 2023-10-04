@@ -65,7 +65,7 @@ const AddFramePopup = ({setShowAddFrameModal}) => {
 									id="newFrameFile"
 									name="newFrameFile"
 									accept="image/*"
-									onChange={useSouvenirsScript.handleNewFrameFileChange}
+									onChange={(e) => useSouvenirsScript.handleNewFrameFileChange(e)}
 								/>
 							</div>
 							<div
