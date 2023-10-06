@@ -45,7 +45,7 @@ const UserLogin = ({ useLogin }) => {
             </div>
           </div>
           <Link
-            href="/login/passwordReset"
+            href="/login/forgotPassword"
             style={{
               textDecoration: "underline",
               color: "var(--primary-50)",

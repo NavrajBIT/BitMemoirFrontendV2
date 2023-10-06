@@ -237,12 +237,12 @@ const usekyc = () => {
     uploader.click();
   };
 
-  const handleWalletSubmit = async () => {
+  const handleWalletSubmit = async (walletAddress) => {
     setIsLoading(true);
 
     await api
       .crud("PATCH", `user/account/${accountDetails.id}`, {
-        wallet: accountDetails.wallet,
+        wallet: walletAddress,
       })
       .then((res) => {
         console.log(res);

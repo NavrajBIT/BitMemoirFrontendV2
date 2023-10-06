@@ -63,6 +63,7 @@
 
 .menuContainer {
   display: none;
+  z-index: 2;
 }
 
 @media only screen and (max-width: 720px) {

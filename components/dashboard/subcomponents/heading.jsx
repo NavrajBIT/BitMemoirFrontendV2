@@ -96,6 +96,13 @@ const Menu = () => {
           router.push("/kyc/status");
         }}
       />
+      <Button
+        text="Change Password"
+        variant={"secondary"}
+        onClick={() => {
+          router.push("/login/changePassword");
+        }}
+      />
     </div>
   );
 };

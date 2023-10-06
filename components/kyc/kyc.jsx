@@ -2,7 +2,7 @@
 import Account from "./subcomponents/account";
 import Organization from "./subcomponents/organization";
 import Representative from "./subcomponents/representative";
-import Wallet from "./subcomponents/wallet";
+import Wallet from "./subcomponents/wallet/wallet";
 import usekyc from "./usekyc";
 import Stepper from "../subcomponents/stepper/stepper";
 

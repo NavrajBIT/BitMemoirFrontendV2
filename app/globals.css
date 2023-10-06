@@ -28,6 +28,8 @@
   --primary-90: #003f4c;
   --primary-100: #0f303e;
   --primary-110: #001d23;
+  --error: #ff0000;
+  --success: #00ff00;
 
   /* Backgrounds */
   --bg-90: #003f4caf;

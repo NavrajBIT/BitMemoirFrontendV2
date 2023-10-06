@@ -11,39 +11,39 @@ const Footer = () => {
     <section className={style.footer}>
       <div className={style.footercontainer}>
         <div className={style.footerheading}>Reach out to us at</div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "var(--padding-light)",
-          }}
-        >
+        <div className={style.footercontent}>
           <Email email={"support@beimagine.tech"} />
           <Email email={"marketing@beimagine.tech"} />
-          <div
-            style={{
-              fontSize: "1.125rem",
-              fontWeight: "bold",
-            }}
-          >
-            Check out our social :
-          </div>
-          <div
-            style={{
-              display: "flex",
-              gap: "var(--padding-main)",
-            }}
-          >
-            <Link href={"https://twitter.com/"} className={style.sociallink}>
+          <div className={style.socialheading}>Check out our social :</div>
+          <div className={style.sociallinkcontainer}>
+            <Link
+              href={"https://www.linkedin.com/company/bitmemoir/"}
+              target="_blank"
+              className={style.sociallink}
+            >
               <FaLinkedinIn />
             </Link>
-            <Link href={"https://twitter.com/"} className={style.sociallink}>
+            <Link
+              href={"https://www.instagram.com/bitmemoir/"}
+              target="_blank"
+              className={style.sociallink}
+            >
               <FaInstagram />
             </Link>
-            <Link href={"https://twitter.com/"} className={style.sociallink}>
+            <Link
+              href={
+                "https://twitter.com/Bit_memoir?t=dPPpNawrSKg3mn3BLyYxWA&s=08"
+              }
+              target="_blank"
+              className={style.sociallink}
+            >
               <AiOutlineTwitter />
             </Link>
-            <Link href={"https://twitter.com/"} className={style.sociallink}>
+            <Link
+              href={"https://t.me/bitmemoirofficial"}
+              target="_blank"
+              className={style.sociallink}
+            >
               <BiLogoTelegram />
             </Link>
           </div>
@@ -84,6 +84,7 @@ const AddressBar = () => (
       alt="Bwyond Imagination Technologies"
     />
     <div
+      className={style.addressbar}
       style={{
         fontWeight: "bold",
       }}
@@ -93,7 +94,6 @@ const AddressBar = () => (
     <div
       style={{
         fontSize: "0.875rem",
-        marginTop: "0.5rem",
       }}
     >
       Beyond imagination tech LLC

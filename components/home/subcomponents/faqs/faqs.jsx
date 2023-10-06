@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Accordian from "@/components/subcomponents/accordian/accordian";
-import "./faqs.css";
 const FAQ = () => {
   const faqs = [
     {
@@ -46,15 +45,13 @@ const FAQ = () => {
   ];
   return (
     <section
-      className="faqs"
       style={{
-        backgroundColor: "var(--primary-100)",
+        backgroundColor: "var(--primary-110)",
         position: "relative",
-        marginTop: "0rem",
+        padding: "var(--padding-main)",
       }}
     >
       <div
-        className="faqsHeading"
         style={{
           fontSize: "1.5rem",
           fontWeight: "700",
@@ -71,23 +68,6 @@ const FAQ = () => {
           );
         })}
       </div>
-      <div
-        style={{
-          textAlign: "center",
-          padding: "2rem",
-        }}
-      >
-        <Link
-          href={"#"}
-          style={{
-            fontSize: "1.25rem",
-            color: "var(--primary-50)",
-            textDecoration: "underline",
-          }}
-        >
-          More FAQs
-        </Link>
-      </div>
     </section>
   );
 };
@@ -97,7 +77,14 @@ const BitBenefits = () => {
   return (
     <div>
       BitMemoir offers the following benefits:
-      <div style={{ padding: "var(--padding-light)" }}>
+      <div
+        style={{
+          padding: "var(--padding-light)",
+          display: "flex",
+          flexDirection: "column",
+          gap: "var(--padding-light)",
+        }}
+      >
         <p>
           A. Enhanced security: BitMemoir leverages blockchain technology to
           ensure that certificates cannot be tampered with or forged.
