@@ -13,6 +13,7 @@ const Popup = ({ children }) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        zIndex: 999,
       }}
     >
       <div className={style.popupChild}>{children}</div>

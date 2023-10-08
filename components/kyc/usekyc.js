@@ -206,35 +206,28 @@ const usekyc = () => {
     setIsLoading(false);
   };
 
-  const uploadRegProof = (model, field) => {
+  const uploadRegProof = async (model, field, file) => {
+    console.log("uploading file...");
     let endPoint;
-
     if (model === "organization")
       endPoint = `user/organization/${organizationDetails.id}`;
     if (model === "issuer") endPoint = `user/issuer/${issuerDetails.id}`;
 
-    const uploader = document.createElement("input");
-    uploader.setAttribute("type", "file");
-    uploader.onchange = async (event) => {
-      let file = event.target.files[0];
-      const fileName = file.name.replace(/\s+/g, "_");
-      const newFile = new File([file], fileName, { type: file.type });
-      const formdata = new FormData();
-      formdata.append(field, newFile);
-      setIsLoading(true);
-      await api
-        .crud("PATCH", endPoint, formdata, true)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => console.log(err));
-      if (model === "organization") await poppulateOrganizationDetails();
-      if (model === "issuer") await poppulateIssuerDetails();
+    const fileName = file.name.replace(/\s+/g, "_");
+    const newFile = new File([file], fileName, { type: file.type });
+    const formdata = new FormData();
+    formdata.append(field, newFile);
+    setIsLoading(true);
+    await api
+      .crud("PATCH", endPoint, formdata, true)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+    if (model === "organization") await poppulateOrganizationDetails();
+    if (model === "issuer") await poppulateIssuerDetails();
 
-      setIsLoading(false);
-      uploader.remove();
-    };
-    uploader.click();
+    setIsLoading(false);
   };
 
   const handleWalletSubmit = async (walletAddress) => {

@@ -2,6 +2,7 @@
 import style from "./form.module.css";
 import { useRef, useState } from "react";
 import Button from "../button/button";
+import { downloadFile } from "../scripts/scripts";
 
 const DynamicForm = ({
   formTitle,
@@ -26,9 +27,16 @@ const DynamicForm = ({
       <div className={style.formoverlay} />
       {formTitle && <div className={style.formTitle}>{formTitle}</div>}
       <form onSubmit={submitForm} className={style.myform}>
-        {formData.map((inputData, index) => (
-          <InputField inputData={inputData} key={inputData.label + index} />
-        ))}
+        {formData.map((inputData, index) => {
+          if (inputData.type === "file") {
+            return (
+              <FileInput inputData={inputData} key={inputData.label + index} />
+            );
+          }
+          return (
+            <InputField inputData={inputData} key={inputData.label + index} />
+          );
+        })}
         <div style={{ color: "red" }}>{status}</div>
         <div
           style={{
@@ -82,6 +90,46 @@ const InputField = ({ inputData }) => {
         onChange={inputData.setValue}
         maxLength={inputData.maxLength ? inputData.maxLength : ""}
       />
+    </div>
+  );
+};
+
+const FileInput = ({ inputData }) => {
+  const inputref = useRef(null);
+
+  const reg_filename = (url) => {
+    const parts = url.split("/");
+    return parts[parts.length - 1];
+  };
+
+  const handleFileInput = (event) => {
+    console.log("handling input");
+    let file = event.target.files[0];
+    inputData.onChange(file);
+  };
+  return (
+    <div className={style.fileInputContainer}>
+      <input
+        ref={inputref}
+        style={{ display: "none" }}
+        type="file"
+        onChange={handleFileInput}
+      />
+      <Button
+        text={inputData.text}
+        variant={"secondary"}
+        endIcon={"upload"}
+        onClick={() => inputref.current.click()}
+      />
+      {inputData.file !== null && (
+        <Button
+          text={"File: " + reg_filename(inputData.file)}
+          variant={"tertiary"}
+          onClick={() => {
+            downloadFile(inputData.file, reg_filename(inputData.file));
+          }}
+        />
+      )}
     </div>
   );
 };

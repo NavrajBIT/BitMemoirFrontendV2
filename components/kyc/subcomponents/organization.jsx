@@ -63,6 +63,14 @@ const Organization = ({ usekyc }) => {
       setValue: (e) =>
         usekyc.handleChange("organization", "reg_id", e.target.value),
     },
+    {
+      type: "file",
+      required: true,
+      file: usekyc.issuerDetails.signed_note,
+      text: "Upload Registration Proof",
+      onChange: (file) =>
+        usekyc.uploadRegProof("organization", "reg_proof", file),
+    },
   ];
 
   const reg_filename = (url) => {
@@ -79,26 +87,6 @@ const Organization = ({ usekyc }) => {
       handleSubmit={usekyc.handleOrganizationSubmit}
       formData={formData}
     >
-      {usekyc.organizationDetails.reg_proof !== null && (
-        <Button
-          text={"File: " + reg_filename(usekyc.organizationDetails.reg_proof)}
-          variant={"tertiary"}
-          onClick={() => {
-            downloadFile(
-              usekyc.organizationDetails.reg_proof,
-              reg_filename(usekyc.organizationDetails.reg_proof)
-            );
-          }}
-        />
-      )}
-      {!usekyc.isLoading && (
-        <Button
-          text="Upload Proof of Registration"
-          variant={"secondary"}
-          onClick={() => usekyc.uploadRegProof("organization", "reg_proof")}
-        />
-      )}
-      <br />
       {usekyc.organizationChanged && (
         <Button
           text="Skip for now >>"

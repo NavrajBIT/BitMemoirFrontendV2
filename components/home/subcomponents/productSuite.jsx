@@ -74,7 +74,7 @@ export default ProductSuite;
 
 const Illustration = () => (
   <div className={style.imageContainer}>
-    <Image fill src={"/assets/images/productSuite.svg"} />
+    <Image fill src={"/assets/images/productSuite.svg"} alt="Product Suites" />
   </div>
 );
 

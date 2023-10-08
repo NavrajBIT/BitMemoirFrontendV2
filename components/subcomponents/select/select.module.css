@@ -1,0 +1,10 @@
+.selectcontainer select {
+  width: 100%;
+  padding: var(--padding-light);
+  border: none;
+  border-radius: var(--border-radius-light);
+  background-color: var(--primary-80);
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  outline: none;
+}

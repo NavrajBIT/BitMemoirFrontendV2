@@ -18,6 +18,13 @@ const Representative = ({ usekyc }) => {
       setValue: (e) =>
         usekyc.handleChange("issuer", "designation", e.target.value),
     },
+    {
+      type: "file",
+      required: true,
+      file: usekyc.issuerDetails.signed_note,
+      text: "Upload Signed Note",
+      onChange: (file) => usekyc.uploadRegProof("issuer", "signed_note", file),
+    },
   ];
 
   const reg_filename = (url) => {
@@ -34,26 +41,6 @@ const Representative = ({ usekyc }) => {
       handleSubmit={usekyc.handleIssuerSubmit}
       formData={formData}
     >
-      {usekyc.issuerDetails.signed_note !== null && (
-        <Button
-          text={"File: " + reg_filename(usekyc.organizationDetails.reg_proof)}
-          variant={"tertiary"}
-          onClick={() => {
-            downloadFile(
-              usekyc.organizationDetails.reg_proof,
-              reg_filename(usekyc.organizationDetails.reg_proof)
-            );
-          }}
-        />
-      )}
-      {!usekyc.isLoading && (
-        <Button
-          text="Upload Signed Note from Authority"
-          variant={"secondary"}
-          onClick={() => usekyc.uploadRegProof("issuer", "signed_note")}
-        />
-      )}
-
       <Button
         text="Download sample note"
         variant={"tertiary"}

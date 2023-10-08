@@ -1,6 +1,9 @@
 .popupChild {
+  overflow-y: auto;
   animation: popup 0.5s;
   box-shadow: 0 0 10px var(--primary-50);
+  max-height: 90vh;
+  z-index: 999;
 }
 
 @keyframes popup {

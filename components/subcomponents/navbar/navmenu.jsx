@@ -9,6 +9,7 @@ const Navmenu = () => {
   const [isNavMenuActive, setIsNavMenuActive] = useState(false);
   const navMenuItems = [
     { name: "Home", route: "/home" },
+    { name: "Souvenirs", route: "/souvenir" },
     { name: "Certificates", route: "/certificate" },
     { name: "Verify", route: "/verify" },
     { name: "Blog", route: "/blog" },

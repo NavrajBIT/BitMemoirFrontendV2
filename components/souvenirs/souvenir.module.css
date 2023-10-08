@@ -8,6 +8,10 @@
   width: 100%;
   max-width: var(--max-width-form);
   z-index: 0;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-main);
 }
 
 .formoverlay {
@@ -38,44 +42,4 @@
   flex-direction: column;
   gap: var(--padding-main);
   width: 100%;
-}
-
-.inputcontainer input {
-  width: 100%;
-  padding: var(--padding-light);
-  border: none;
-  border-radius: var(--border-radius-light);
-  background-color: var(--primary-80);
-  color: var(--text-primary);
-  font-size: 1.25rem;
-  outline: none;
-}
-
-.inputcontainer {
-  position: relative;
-}
-.inputcontainer label {
-  font-size: 0.75rem;
-  color: var(--text-bright);
-  position: absolute;
-  top: -15px;
-}
-
-.myform input:focus {
-  background-color: var(--primary-60);
-  color: var(--text-bright);
-}
-
-.myform input:focus::placeholder {
-  color: var(--text-bright);
-}
-
-.myform input::placeholder {
-  color: var(--text-dark);
-}
-
-.fileInputContainer {
-  display: flex;
-  flex-direction: column;
-  gap: var(--padding-light);
 }

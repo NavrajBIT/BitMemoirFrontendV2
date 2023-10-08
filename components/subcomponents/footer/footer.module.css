@@ -2,6 +2,7 @@
   background-color: var(--primary-100);
   margin: var(--padding-large) 0px;
   padding-bottom: var(--padding-main);
+  z-index: -1;
 }
 
 .footercontainer {
@@ -14,6 +15,7 @@
   flex-wrap: wrap;
   position: relative;
   gap: var(--padding-main);
+  z-index: 0;
 }
 
 .footercontent {

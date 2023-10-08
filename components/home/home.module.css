@@ -119,12 +119,14 @@
 .featureDescription {
   display: none;
   font-size: 0.5rem;
-  text-align: justify;
+  text-align: center;
+  color: var(--text-bright);
 }
 
 .feature:hover {
   animation: scaleup 0.5s;
-  transform: scale(1.5);
+  transform: scale(1.2);
+  background-color: var(--primary-80);
 }
 
 .feature:hover .featureHeading {
@@ -187,7 +189,7 @@
     transform: scale(1);
   }
   to {
-    transform: scale(1.5);
+    transform: scale(1.2);
   }
 }
 

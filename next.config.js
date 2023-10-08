@@ -5,6 +5,7 @@ const nextConfig = {
       "localhost",
       "d3a5rnyctxz7gc.cloudfront.net",
       "bitmemoir.s3.amazonaws.com",
+      "localhost:3000",
     ],
     // remotePatterns: [
     //   {
