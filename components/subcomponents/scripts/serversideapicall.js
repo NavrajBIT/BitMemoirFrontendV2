@@ -1,5 +1,5 @@
 const ServerAPI = () => {
-  const API_URL = process.env.LOCAL_API_ENDPOINT;
+  const API_URL = process.env.NEXT_PUBLIC_API_ENDPOINT;
 
   async function crud(requestMethod, endpoint, data) {
     const requestOptions = {

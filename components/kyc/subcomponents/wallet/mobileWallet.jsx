@@ -83,7 +83,7 @@ const MobileWallet = ({ useWallet }) => {
       >
         Mobile Wallet
       </div>
-      <div>Connect with Bit-Wallet mobile app. {channelId}</div>
+      <div>Connect with Bit-Wallet mobile app.</div>
       <div
         style={{
           display: "flex",
@@ -109,7 +109,7 @@ const MobileWallet = ({ useWallet }) => {
       </div>
       <div>OR</div>
       <div>Scan the QR-code using bit-wallet app.</div>
-      {isConnected ? (
+      {isConnected && (
         <QRCode
           size={256}
           bgColor={"var(--primary-90)"}
@@ -117,8 +117,6 @@ const MobileWallet = ({ useWallet }) => {
           value={socketURL}
           viewBox={`0 0 256 256`}
         />
-      ) : (
-        <LocalLoading />
       )}
     </div>
   );

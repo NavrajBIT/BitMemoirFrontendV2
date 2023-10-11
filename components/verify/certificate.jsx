@@ -1,3 +1,4 @@
+"use client";
 import PrimaryDetails from "./subcomponents/primaryDetails";
 import Issuer from "./subcomponents/issuer";
 import Receiver from "./subcomponents/receiver";
@@ -6,9 +7,12 @@ import Advertisment from "./subcomponents/advertisment";
 import style from "./certificate.module.css";
 import usecertificate from "./usecertificate";
 import NotFound from "../subcomponents/errorPages/notFound";
+import Loading from "../subcomponents/loadingPage/loading";
 
-const Certificate = async ({ params }) => {
-  const usecert = await usecertificate(params);
+const Certificate = ({ params }) => {
+  const usecert = usecertificate(params);
+
+  if (usecert.isLoading) return <Loading />;
 
   if (!usecert.certDetails) return <NotFound />;
 
