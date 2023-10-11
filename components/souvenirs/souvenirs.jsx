@@ -9,6 +9,7 @@ import { LocalInputField } from "../subcomponents/form/form";
 import AddPopup from "./addPopup";
 import PreviewPopup from "./previewpopup";
 import StatusPopup from "./statusPopup";
+import PlanExpired from "../subscriptions/planExpired";
 
 const Souvenirs = () => {
   const script = useSouvenirs();
@@ -79,6 +80,7 @@ const Souvenirs = () => {
       {script.framePopup && <AddPopup script={script} />}
       {script.previewPopup && <PreviewPopup script={script} />}
       {script.status !== "" && <StatusPopup script={script} />}
+      {script.nftQuota !== null && script.nftQuota === 0 && <PlanExpired />}
     </div>
   );
 };

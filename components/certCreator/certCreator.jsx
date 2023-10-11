@@ -11,6 +11,7 @@ import NotFound from "../subcomponents/errorPages/notFound";
 import WentWrong from "../subcomponents/errorPages/wentWrong";
 import TutorialPopup from "./tutorialPopup";
 import NoqrPopup from "./noqrPopup";
+import SaveAsPopup from "./saveasPopup";
 
 const CertCreator = ({ params }) => {
   const creator = useCertCreator(params);
@@ -59,6 +60,7 @@ const CertCreator = ({ params }) => {
       )}
       <TutorialPopup />
       {creator.noQR && <NoqrPopup creator={creator} />}
+      {creator.saveaspopup && <SaveAsPopup creator={creator} />}
     </div>
   );
 };

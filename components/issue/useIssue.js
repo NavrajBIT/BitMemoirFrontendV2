@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import API from "../subcomponents/scripts/apiCall";
 import useApprover from "../approver/useApprover";
+import { isValidNearAddress } from "../subcomponents/scripts/scripts";
 
 const useIssue = (params) => {
   const api = API();
@@ -19,9 +20,11 @@ const useIssue = (params) => {
   const [deploymentType, setDeploymentType] = useState("static");
   const [orderId, setOrderId] = useState(null);
   const [selectedApprovers, setSelectedApprovers] = useState([]);
+  const [nftQuota, setNftQuota] = useState(null);
 
   useEffect(() => {
     poppulateTemplateData();
+    poppulateNFTQuota();
   }, []);
 
   const handleStudentNumberChange = (e) => {
@@ -45,6 +48,18 @@ const useIssue = (params) => {
       })
       .catch((err) => console.log(err));
     setLoadingStatus("");
+  };
+
+  const poppulateNFTQuota = async () => {
+    await api
+      .crud("GET", `subscription/nftQuota`)
+      .then((res) => {
+        if (res.status === 404) setNotFound(true);
+        if (res.status >= 200 && res.status <= 299) {
+          setNftQuota(parseInt(res.nft_quota));
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   const downloadcsv = () => {
@@ -167,9 +182,18 @@ const useIssue = (params) => {
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           if (!emailRegex.test(cell)) {
             setPopupStatus(
-              `Invalid email address for student ${
+              `Invalid email address for recipient ${
                 rowIndex + 1
               }. Please provide a valid email address.`
+            );
+            is_valid = false;
+          }
+        } else if (columnIndex === row.length - 1 && cell !== "") {
+          if (!isValidNearAddress(cell)) {
+            setPopupStatus(
+              `Invalid wallet address for recipient ${
+                rowIndex + 1
+              }. Please provide a valid wallet address.`
             );
             is_valid = false;
           }
@@ -308,6 +332,7 @@ const useIssue = (params) => {
     notVerifiedPopup,
     setNotVerifiedPopup,
     issueCertificates,
+    nftQuota,
   };
 };
 

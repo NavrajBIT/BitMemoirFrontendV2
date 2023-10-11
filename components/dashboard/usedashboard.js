@@ -13,6 +13,9 @@ const usedashboard = () => {
   const [approversList, setApproversList] = useState(null);
   const [orders, setOrders] = useState(null);
   const [certificates, setCertificates] = useState(null);
+  const [subscriptions, setSubscriptions] = useState(null);
+  const [trial, setTrial] = useState(null);
+  const [nftQuota, setNftQuota] = useState(null);
 
   useEffect(() => {
     poppulateData();
@@ -28,6 +31,7 @@ const usedashboard = () => {
     await poppulateOrders();
     await poppulateCertificates();
     await poppulateKYCDetails();
+    await poppulateSubscriptions();
     setIsLoading(false);
   };
 
@@ -113,6 +117,29 @@ const usedashboard = () => {
       })
       .catch((er) => console.log(er));
   };
+  const poppulateSubscriptions = async () => {
+    await api
+      .crud("GET", "subscription/nftQuota")
+      .then((res) => {
+        console.log(res);
+        if (res.status >= 200 && res.status <= 299) setNftQuota(res.nft_quota);
+      })
+      .catch((er) => console.log(er));
+    await api
+      .crud("GET", "subscription/trial")
+      .then((res) => {
+        console.log(res);
+        if (res.status >= 200 && res.status <= 299) setTrial(res[0]);
+      })
+      .catch((er) => console.log(er));
+    await api
+      .crud("GET", "subscription")
+      .then((res) => {
+        console.log(res);
+        if (res.status >= 200 && res.status <= 299) setSubscriptions(res);
+      })
+      .catch((er) => console.log(er));
+  };
 
   const deleteApprover = async (approver) => {
     setIsLoading(true);
@@ -138,6 +165,9 @@ const usedashboard = () => {
     setSelectedTab,
     orders,
     certificates,
+    subscriptions,
+    trial,
+    nftQuota,
   };
 };
 

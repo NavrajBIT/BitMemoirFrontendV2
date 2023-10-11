@@ -8,6 +8,7 @@ import Tabs from "./subcomponents/tabs";
 import Orders from "./subcomponents/orders";
 import Certificates from "./subcomponents/certificates";
 import Loading from "../subcomponents/loadingPage/loading";
+import Subscriptions from "./subcomponents/subscriptions";
 
 const Dashboard = () => {
   const usedash = usedashboard();
@@ -28,6 +29,7 @@ const Dashboard = () => {
         usedash.emailDetails &&
         usedash.kycDetails &&
         usedash.issuerDetails && <Heading usedash={usedash} />}
+      <Subscriptions usedash={usedash} />
       <Tabs usedash={usedash} />
       {usedash.selectedTab === "Profile" && (
         <>

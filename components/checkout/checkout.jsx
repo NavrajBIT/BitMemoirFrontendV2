@@ -118,7 +118,10 @@ const Checkout = ({ plan }) => {
         </div>
 
         <PayPalCheckout
-          selectedPlan={{ totalPrice: netPayable, certificates: 100 }}
+          totalPrice={netPayable}
+          certificates={script.plans[plan]["certificates"]}
+          couponCode={script.coupon}
+          plan={plan}
         />
       </div>
     </div>

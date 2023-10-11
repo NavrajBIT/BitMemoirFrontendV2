@@ -15,10 +15,24 @@ const useSouvenirs = () => {
   const [framePopup, setframePopup] = useState(false);
   const [previewPopup, setPreviewPopup] = useState(false);
   const [status, setStatus] = useState("");
+  const [nftQuota, setNftQuota] = useState(null);
 
   useEffect(() => {
     getFrames();
+    poppulateNFTQuota();
   }, []);
+
+  const poppulateNFTQuota = async () => {
+    await api
+      .crud("GET", `subscription/nftQuota`)
+      .then((res) => {
+        if (res.status === 404) setNotFound(true);
+        if (res.status >= 200 && res.status <= 299) {
+          setNftQuota(parseInt(res.nft_quota));
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   const handleImageUpload = async (image) => {
     setIsLoading(true);
@@ -125,6 +139,7 @@ const useSouvenirs = () => {
     publishSouvenir,
     status,
     setStatus,
+    nftQuota,
   };
 };
 

@@ -1,9 +1,11 @@
 "use client";
 import { useEffect } from "react";
 import API from "../subcomponents/scripts/apiCall";
+import { useRouter } from "next/navigation";
 
-const PayPalCheckout = ({ selectedPlan, getUserSubscription }) => {
+const PayPalCheckout = ({ totalPrice, certificates, couponCode, plan }) => {
   const api = API();
+  const router = useRouter();
   useEffect(() => {
     // Replace with your PayPal client ID
     const CLIENT_ID = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
@@ -26,7 +28,7 @@ const PayPalCheckout = ({ selectedPlan, getUserSubscription }) => {
               purchase_units: [
                 {
                   amount: {
-                    value: `${selectedPlan.totalPrice}`, // Replace with your product price
+                    value: `${totalPrice}`, // Replace with your product price
                     currency_code: "USD",
                   },
                 },
@@ -39,36 +41,21 @@ const PayPalCheckout = ({ selectedPlan, getUserSubscription }) => {
             });
           },
           onApprove: (data, actions) => {
-            // Capture the payment when the user approves
             return actions.order.capture().then(async function (details) {
-              // getting the user details
-              const user = await api
-                .crud("GET", "user/account")
-                .then((res) => {
-                  console.log(res[0]);
-                  if (res.status === 200) {
-                    return res[0];
-                  }
-                })
-                .catch((err) => console.log(err));
-
-              // checking if the payment is successfull
-
               try {
                 api
-                  .crud("POST", "subscription/create-subscription/", {
+                  .crud("POST", "subscription", {
                     payment_id: details.id,
-                    cert_number: selectedPlan.certificates,
-                    plan_name: selectedPlan.type,
-                    user: user,
+                    promocode: couponCode,
+                    cert_number: certificates,
+                    plan_name: plan,
                   })
                   .then((res) => {
                     console.log(res);
-                    if (res.status === 200) {
-                      getUserSubscription();
+                    if (res.status >= 200 && res.status <= 299) {
+                      router.back();
                     }
                   });
-                setPaymentDone(true);
               } catch (error) {
                 console.error("Error:", error);
               }
@@ -80,7 +67,7 @@ const PayPalCheckout = ({ selectedPlan, getUserSubscription }) => {
 
     // Append the script to the document
     document.body.appendChild(script);
-  }, []);
+  }, [totalPrice]);
 
   return (
     <div

@@ -49,7 +49,7 @@ const BottomToolBar = ({ creator }) => {
           icon="saveas"
           toolName="Save As"
           toolDescription="Duplicate template to another file"
-          onClick={creator.saveas}
+          onClick={() => creator.setsaveaspopup(true)}
         />
       </div>
     </div>

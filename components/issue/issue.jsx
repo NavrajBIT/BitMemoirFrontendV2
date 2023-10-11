@@ -10,9 +10,13 @@ import ConfirmPopup from "./subcomponents/confirmPopup";
 import ApproverPopup from "./subcomponents/approverPopup";
 import SuccessPopup from "./subcomponents/successPopup";
 import NotVerifiedPopup from "./subcomponents/notVerifiedPopup";
+import PlanExpired from "../subscriptions/planExpired";
 
 const Issue = ({ params }) => {
   const issue = useIssue(params);
+
+  const isNFTQuotaSufficient =
+    issue.nftQuota > 0 && issue.nftQuota >= issue.studentNumber;
 
   if (issue.notFound) return <NotFound />;
 
@@ -57,6 +61,7 @@ const Issue = ({ params }) => {
       {issue.approverPopup && <ApproverPopup issue={issue} />}
       {issue.notVerifiedPopup && <NotVerifiedPopup issue={issue} />}
       {issue.successPopup && <SuccessPopup issue={issue} />}
+      {issue.nftQuota !== null && !isNFTQuotaSufficient && <PlanExpired />}
     </div>
   );
 };

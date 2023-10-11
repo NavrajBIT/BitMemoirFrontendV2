@@ -53,7 +53,7 @@ const Datafield = ({ issue }) => {
             textAlign: "center",
           }}
         >
-          No. of students:
+          No. of recipients:
         </div>
         <LocalInputField
           inputData={{

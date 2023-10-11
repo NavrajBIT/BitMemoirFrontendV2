@@ -31,6 +31,7 @@ const API = () => {
 
     try {
       const response = await fetch(API_URL + endpoint + "/", requestOptions);
+
       if (response.status === 401) {
         router.push("/login");
         throw "Login required";

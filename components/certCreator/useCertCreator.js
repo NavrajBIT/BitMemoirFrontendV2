@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import API from "../subcomponents/scripts/apiCall";
+import { useRouter } from "next/navigation";
 
 const useCertCreator = (params) => {
+  const router = useRouter();
   const [loadingStatus, setLoadingStatus] = useState("loading");
   const [isSelectingvariable, setIsSelectingVariable] = useState(false);
   const [uploadedImageURL, setUploadedImageURL] = useState(null);
@@ -18,6 +20,7 @@ const useCertCreator = (params) => {
 
   const [selectedVariable, setSelectedVariable] = useState(null);
   const [noQR, setNoQR] = useState(false);
+  const [saveaspopup, setsaveaspopup] = useState(false);
   const api = API();
   const endpoint = `certificate/template/${params.templateId}`;
 
@@ -96,8 +99,32 @@ const useCertCreator = (params) => {
     setLoadingStatus("");
   };
 
-  const saveas = () => {
-    console.log("Save As");
+  const saveas = async (newtemplateName) => {
+    await save();
+    setLoadingStatus(`Saving template as ${newtemplateName}...`);
+    let newTemplateId = 0;
+    await api
+      .crud("POST", `${endpoint}/save_as`)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          newTemplateId = res.id;
+        }
+      })
+      .catch((err) => console.log(err));
+    let apiData = {
+      name: newtemplateName,
+    };
+    await api
+      .crud("PATCH", `certificate/template/${newTemplateId}`, apiData)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          router.push(`/certCreator/${newTemplateId}`);
+        }
+      })
+      .catch((err) => console.log(err));
+    setLoadingStatus("");
   };
 
   const adjustScale = () => {
@@ -300,6 +327,8 @@ const useCertCreator = (params) => {
     saveas,
     noQR,
     setNoQR,
+    saveaspopup,
+    setsaveaspopup,
   };
 };
 

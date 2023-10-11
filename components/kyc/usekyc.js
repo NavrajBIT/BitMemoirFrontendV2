@@ -17,12 +17,14 @@ const usekyc = () => {
   const [organizationChanged, setOrganizationChanged] = useState(false);
   const [issuerDetails, setIssuerDetails] = useState(null);
   const [issuerChanged, setIssuerChanged] = useState(false);
+  const [kycStatus, setKycStatus] = useState(null);
 
   useEffect(() => {
     poppulateAccountDetails();
     poppulateEmailDetails();
     poppulateOrganizationDetails();
     poppulateIssuerDetails();
+    poppulateKYCDetails();
   }, []);
 
   const poppulateAccountDetails = async () => {
@@ -73,6 +75,17 @@ const usekyc = () => {
       })
       .catch((err) => console.log(err));
   };
+  const poppulateKYCDetails = async () => {
+    await api
+      .crud("GET", "user/kyc")
+      .then((res) => {
+        console.log(res[0]);
+        if (res.status === 200) {
+          setKycStatus(res);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   const changeStep = (e) => {
     setFormStatus("");
@@ -106,6 +119,7 @@ const usekyc = () => {
     if (!emailChanged) changeStep(kycStep + 1);
     setIsLoading(false);
   };
+
   const verifyEmail = async (e) => {
     setIsLoading(true);
     let otp = e.OTP;
@@ -270,6 +284,7 @@ const usekyc = () => {
     emailChanged,
     organizationChanged,
     issuerChanged,
+    kycStatus,
   };
 };
 

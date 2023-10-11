@@ -47,12 +47,17 @@ const TrialForm = ({ usekyc }) => {
   return (
     <DynamicForm
       formTitle="Free Trial"
-      formButton="Save"
+      formButton={usekyc.accountChanged ? "Save" : "Next >"}
       isLoading={usekyc.isLoading}
       status={usekyc.formStatus}
       handleSubmit={usekyc.handleAccountSubmit}
       formData={formData}
-    ></DynamicForm>
+    >
+      <div style={{ textAlign: "center", fontSize: "1.5rem" }}>
+        You will receive {process.env.NEXT_PUBLIC_FREE_CERTS} free certificates
+        for trial purposes.
+      </div>
+    </DynamicForm>
   );
 };
 

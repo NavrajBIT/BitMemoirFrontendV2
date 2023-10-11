@@ -28,11 +28,17 @@ const TopToolBar = ({ creator }) => {
           }}
         />
       </div>
-      <TopTool icon="save" toolName="Save" toolDescription="Save template" />
+      <TopTool
+        icon="save"
+        toolName="Save"
+        toolDescription="Save template"
+        onClick={creator.save}
+      />
       <TopTool
         icon="saveas"
         toolName="Save As"
         toolDescription="Duplicate template to another file"
+        onClick={() => creator.setsaveaspopup(true)}
       />
       Template:
       <LocalInputField

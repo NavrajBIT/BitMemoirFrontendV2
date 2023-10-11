@@ -25,12 +25,14 @@ const useCheckout = () => {
       .localCrud("GET", `subscription/coupon/${couponCode}`)
       .then((res) => {
         console.log(res);
-        if (res.status >= 200 && res.status <= 299) {
-          const validFrom = new Date(res.valid_from);
-          const validUntil = new Date(res.valid_until);
-          const now = new Date();
-          if (now >= validFrom && now <= validUntil) {
-            setDiscount(parseFloat(res.discount_percent));
+        if (res.is_active) {
+          if (res.status >= 200 && res.status <= 299) {
+            const validFrom = new Date(res.valid_from);
+            const validUntil = new Date(res.valid_until);
+            const now = new Date();
+            if (now >= validFrom && now <= validUntil) {
+              setDiscount(parseFloat(res.discount_percent));
+            }
           }
         }
       })
