@@ -11,6 +11,7 @@ const HeroSection = () => {
         <DesktopIllustration />
         <MobileIllustration />
       </section>
+      <div className={style.downarrow} />
     </div>
   );
 };
@@ -48,24 +49,28 @@ const HeroContent = () => (
 
 const DesktopIllustration = () => (
   <div className={style.desktopillustration}>
-    <Image
-      alt="BitMemoir"
-      src={"/assets/images/hero_diamond_3.svg"}
-      width={100}
-      height={100}
-    />
+    <div className={style.smallIllustrationleft}>
+      <Image
+        alt="BitMemoir"
+        src={"/assets/images/hero_diamond_3.svg"}
+        width={100}
+        height={100}
+      />
+    </div>
     <Image
       alt="BitMemoir"
       src={"/assets/images/hero_diamond_2.svg"}
       width={300}
       height={300}
     />
-    <Image
-      alt="BitMemoir"
-      src={"/assets/images/hero_diamond_2.svg"}
-      width={80}
-      height={80}
-    />
+    <div className={style.smallIllustrationright}>
+      <Image
+        alt="BitMemoir"
+        src={"/assets/images/hero_diamond_2.svg"}
+        width={80}
+        height={80}
+      />
+    </div>
   </div>
 );
 

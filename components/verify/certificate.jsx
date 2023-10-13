@@ -24,6 +24,7 @@ const Certificate = ({ params }) => {
         display: "flex",
         flexDirection: "column",
         gap: "var(--padding-large)",
+        wordWrap: "break-word",
       }}
     >
       <PrimaryDetails usecert={usecert} />

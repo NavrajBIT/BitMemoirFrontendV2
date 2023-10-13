@@ -1,11 +1,26 @@
 .heroContainer {
-  min-height: var(--min-height);
+  min-height: var(--min-height-screen);
   background-image: url("/assets/images/background_hero.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  animation: zoomup 100s infinite;
+  position: relative;
+}
+
+@keyframes zoomup {
+  0% {
+    background-size: 200% 200%;
+  }
+  50% {
+    background-size: 100% 100%;
+  }
+  100% {
+    background-size: 200% 200%;
+  }
 }
 
 .heroSection {
@@ -47,6 +62,36 @@
   justify-content: space-around;
 }
 
+.smallIllustrationleft {
+  animation: movedown 100s infinite;
+}
+.smallIllustrationright {
+  animation: moveup 100s infinite;
+}
+
+@keyframes movedown {
+  0% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(200%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+@keyframes moveup {
+  0% {
+    transform: translateY(200%);
+  }
+  50% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}
+
 .mobileillustration {
   width: 100%;
   display: none;
@@ -54,6 +99,24 @@
   justify-content: space-around;
 }
 
+.downarrow {
+  border-left: 1px solid var(--primary-50);
+  border-bottom: 1px solid var(--primary-50);
+  width: 2rem;
+  height: 2rem;
+  margin: auto;
+  transform: rotate(-45deg);
+  animation: downarrow 3s infinite;
+}
+
+@keyframes downarrow {
+  from {
+    transform: translateY(-50%) rotate(-45deg);
+  }
+  to {
+    transform: translateY(50%) rotate(-45deg);
+  }
+}
 .whybitContainer {
   min-height: var(--min-height);
   background-color: var(--primary-100);
@@ -74,7 +137,7 @@
   top: 0px;
   left: 0px;
   background-color: var(--primary-110);
-  opacity: 0.8;
+  opacity: 0.9;
   z-index: -1;
 }
 

@@ -1,3 +1,4 @@
+import Button from "@/components/subcomponents/button/button";
 import style from "../certificate.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,7 +11,7 @@ const PrimaryDetails = ({ usecert }) => {
   return (
     <div
       className={style.container}
-      style={{ display: "flex", flexWrap: "wrap" }}
+      style={{ display: "flex", flexWrap: "wrap", wordWrap: "break-word" }}
     >
       <Image
         src={`/icons/${verificationstatus}.svg`}
@@ -41,10 +42,10 @@ const PrimaryDetails = ({ usecert }) => {
       >
         <div>Certificate id: {usecert.certDetails.id}</div>
         <div>CID: {usecert.certDetails.cid}</div>
-        {usecert.txId && <div>Tx Id: {usecert.txId}</div>}
-        {usecert.txId && (
+        {usecert.txId && <div>Tx Id: {usecert.txId.tx_id}</div>}
+        {usecert.txId.id && (
           <Link
-            href={process.env.NEXT_PUBLIC_EXPLORER + usecert.txId}
+            href={process.env.NEXT_PUBLIC_EXPLORER + usecert.txId.tx_id}
             target="_blank"
             style={{
               display: "flex",

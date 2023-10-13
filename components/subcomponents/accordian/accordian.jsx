@@ -44,9 +44,10 @@ const Accordian = ({ heading, text }) => {
           padding: isActive ? "var(--padding-main)" : "0",
           backgroundColor: isActive ? "var(--primary-90)" : "transparent",
           maxHeight: isActive ? "100%" : "0em",
-          fontSize: isActive ? "1rem" : "0rem",
+          fontSize: "0.75rem",
           transform: isActive ? "scaleY(1)" : "scaleY(0)",
-          transition: "all 0.3s",
+          transition: "all 0.1s",
+          textAlign: "justify",
         }}
       >
         {text}
