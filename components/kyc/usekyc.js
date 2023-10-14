@@ -110,6 +110,14 @@ const usekyc = () => {
         .crud("PATCH", `user/email/${emailDetails.id}`, emailDetails)
         .then((res) => {
           console.log(res);
+          if (
+            res.status === 400 &&
+            res.email[0] === "user email with this email already exists."
+          ) {
+            setFormStatus(
+              "Email address is already taken. Please use a different email address or login with your other account. For further assistance, contact us at support@beimagine.tech"
+            );
+          }
           if (res.status >= 200 && res.status <= 299) {
             setIsOTP(true);
           }
