@@ -11,7 +11,11 @@ const PrimaryDetails = ({ usecert }) => {
   return (
     <div
       className={style.container}
-      style={{ display: "flex", flexWrap: "wrap", wordWrap: "break-word" }}
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        marginTop: "var(--padding-main)",
+      }}
     >
       <Image
         src={`/icons/${verificationstatus}.svg`}
@@ -38,12 +42,18 @@ const PrimaryDetails = ({ usecert }) => {
           flexDirection: "column",
           alignItems: "flex-start",
           justifyContent: "center",
+          width: "100%",
         }}
       >
         <div>Certificate id: {usecert.certDetails.id}</div>
-        <div>CID: {usecert.certDetails.cid}</div>
-        {usecert.txId && <div>Tx Id: {usecert.txId.tx_id}</div>}
-        {usecert.txId.id && (
+        <div style={{ width: "100%" }}>
+          CID:
+          {usecert.certDetails.cid}
+        </div>
+        {usecert.txId && (
+          <div style={{ width: "100%" }}>Tx Id: {usecert.txId.tx_id}</div>
+        )}
+        {usecert.txId && (
           <Link
             href={process.env.NEXT_PUBLIC_EXPLORER + usecert.txId.tx_id}
             target="_blank"

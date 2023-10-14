@@ -1,17 +1,11 @@
-import { useEffect, useState } from "react";
 import ServerAPI from "../subcomponents/scripts/serversideapicall";
 
-const usecertificate = (params) => {
+const usecertificate = async (params) => {
   const api = ServerAPI();
-  const [certData, setCertData] = useState({ certDetails: null, txId: null });
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    poppulateCertData();
-  }, []);
 
   const data = async () => {
     let returnData = { certDetails: null, txId: null };
+    console.log(params);
     await api
       .crud("GET", `certificate/${params.certId}`)
       .then(async (res) => {
@@ -27,14 +21,9 @@ const usecertificate = (params) => {
     return returnData;
   };
 
-  const poppulateCertData = async () => {
-    setIsLoading(true);
-    const response = await data();
-    setIsLoading(false);
-    setCertData(response);
-  };
+  const certData = await data();
 
-  return { certDetails: certData.certDetails, txId: certData.txId, isLoading };
+  return { certDetails: certData.certDetails, txId: certData.txId };
 };
 
 export default usecertificate;

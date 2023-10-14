@@ -40,6 +40,8 @@ const Receiver = ({ usecert }) => {
       <div
         style={{
           color: "var(--primary-50)",
+          wordWrap: "break-word",
+          wordBreak: "break-all",
         }}
       >
         Wallet:

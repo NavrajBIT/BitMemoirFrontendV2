@@ -187,14 +187,19 @@ const API = () => {
     }
   }
 
-  async function localCrud(requestMethod, endpoint, data) {
-    const requestOptions = {
-      method: requestMethod,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: data ? JSON.stringify(data) : null,
-    };
+  async function localCrud(requestMethod, endpoint, data, isFormdata) {
+    const requestOptions = isFormdata
+      ? {
+          method: requestMethod,
+          body: data ? data : null,
+        }
+      : {
+          method: requestMethod,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: data ? JSON.stringify(data) : null,
+        };
 
     try {
       const response = await fetch(API_URL + endpoint + "/", requestOptions);

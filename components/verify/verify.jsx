@@ -1,19 +1,44 @@
 "use client";
-import Form from "@/components/subcomponents/form/form";
 import { useRouter } from "next/navigation";
+import DynamicForm from "../subcomponents/form/dynamicForm";
+import { useState } from "react";
+import Verifyfile from "./verifyfile";
+import LocalLoading from "../subcomponents/loadingPage/localloading";
 
 const Verify = () => {
   const router = useRouter();
+  const [certId, setCertId] = useState(null);
+  const [cid, setcid] = useState("");
+  const [status, setStatus] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const verifyDataForm = [
     {
       type: "number",
       label: "Certificate Id",
-      required: true,
+      required: false,
+      value: certId,
+      setValue: (e) => {
+        setcid("");
+        setCertId(e.target.value);
+      },
+    },
+    {
+      type: "text",
+      label: "CID",
+      required: false,
+      value: cid,
+      setValue: (e) => {
+        setCertId(0);
+        setcid(e.target.value);
+      },
     },
   ];
-  const btnClicked = (e) => {
-    let certId = e["Certificate Id"];
-    router.push(`certificate/${certId}`);
+  const handleSubmit = () => {
+    setStatus("");
+    if (certId !== null && certId > 0) {
+      router.push(`certificate/${certId}`);
+    } else if (cid !== "") router.push(`certificate/cid/${cid}`);
+    else setStatus("Please enter Either Certificate Id or CID");
   };
   return (
     <>
@@ -21,18 +46,44 @@ const Verify = () => {
         style={{
           minHeight: "var(--min-height-screen)",
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
-        <Form
+        <DynamicForm
           formTitle={"Verify Certificate"}
           formData={verifyDataForm}
-          handleSubmit={btnClicked}
+          handleSubmit={handleSubmit}
           formButton={"Verify"}
-          status={""}
+          status={status}
           bgImage={false}
-        />
+        >
+          <div
+            style={{
+              fontSize: "1.5rem",
+              textAlign: "center",
+              color: "var(--primary-50)",
+            }}
+          >
+            OR
+          </div>
+          <div
+            style={{
+              textAlign: "center",
+            }}
+          >
+            Upload file to verify
+          </div>
+          <Verifyfile
+            setIsLoading={setIsLoading}
+            setcid={(e) => {
+              setCertId(0);
+              setcid(e);
+            }}
+          />
+        </DynamicForm>
+        {isLoading && <LocalLoading />}
       </div>
     </>
   );

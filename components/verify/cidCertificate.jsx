@@ -4,11 +4,11 @@ import Receiver from "./subcomponents/receiver";
 import CertImage from "./subcomponents/certImage";
 import Advertisment from "./subcomponents/advertisment";
 import style from "./certificate.module.css";
-import usecertificate from "./usecertificate";
+import useCIDcertificate from "./usecidCertificate";
 import Image from "next/image";
 
-const Certificate = async ({ params }) => {
-  const usecert = await usecertificate(params);
+const CIDCertificate = async ({ params }) => {
+  const usecert = await useCIDcertificate(params);
 
   if (!usecert.certDetails)
     return (
@@ -66,4 +66,4 @@ const Certificate = async ({ params }) => {
   );
 };
 
-export default Certificate;
+export default CIDCertificate;
