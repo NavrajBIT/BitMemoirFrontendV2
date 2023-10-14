@@ -20,6 +20,7 @@ const useSouvenirs = () => {
   useEffect(() => {
     getFrames();
     poppulateNFTQuota();
+    setSelectedframe(null);
   }, []);
 
   const poppulateNFTQuota = async () => {
@@ -69,6 +70,7 @@ const useSouvenirs = () => {
         console.log(res);
         if (res.status >= 200 && res.status <= 299) {
           getFrames();
+          setSelectedframe(res);
         }
       })
       .catch((err) => console.log(err));
@@ -90,7 +92,11 @@ const useSouvenirs = () => {
   };
 
   const publishSouvenir = async () => {
-    if (accountId !== "" && !isValidNearAddress(accountId)) {
+    if (
+      accountId !== null &&
+      accountId !== "" &&
+      !isValidNearAddress(accountId)
+    ) {
       setStatus("Invalid Account Id.");
       return;
     }

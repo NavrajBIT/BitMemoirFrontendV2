@@ -6,6 +6,7 @@ import API from "../subcomponents/scripts/apiCall";
 import { useState, useEffect } from "react";
 import LinkButton from "../subcomponents/button/link";
 import LocalLoading from "../subcomponents/loadingPage/localloading";
+import SubscriptionCard from "../subscriptions/subscriptionCard";
 
 const Trial = () => {
   const script = usekyc();
@@ -45,7 +46,7 @@ const Trial = () => {
       {trial !== null && trial.is_active && (
         <div
           style={{
-            maxWidth: "var(--max-width-form)",
+            // maxWidth: "var(--max-width-form)",
             background: "var(--primary-100)",
             padding: "var(--padding-main)",
             borderRadius: "var(--border-radius)",
@@ -55,23 +56,47 @@ const Trial = () => {
           }}
         >
           <div style={{ textAlign: "center", fontSize: "1.5rem" }}>
-            Free Trial is already used.
+            Free Trial Plan is already being used.
           </div>
           <div style={{ textAlign: "center" }}>
             Free Trial Balance : {trial.nft_quota}
           </div>
-          <div style={{ textAlign: "center" }}>
-            For further assistance, please write to support@beimagine.tech
-          </div>
           <div
             style={{
               width: "100%",
-              display: "flex",
-              gap: "var(--padding-main)",
+              color: "var(--primary-50)",
+              fontSize: "2rem",
+              textAlign: "center",
+              fontWeight: "bold",
             }}
           >
-            <LinkButton text="Dashboard" href="/dashboard" variant="primary" />
-            <LinkButton text="Home" href="/home" variant="primary" />
+            Subscription Plans
+          </div>
+          <div
+            style={{
+              maxWidth: "var(--max-width)",
+              background: "var(--primary-100)",
+              borderRadius: "var(--border-radius)",
+              padding: "var(--padding-main)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "var(--padding-main)",
+              flexWrap: "wrap",
+              position: "relative",
+              padding: "var(--padding-main)",
+            }}
+          >
+            <SubscriptionCard title="Silver" certificates={100} price={2} />
+            <SubscriptionCard title="Gold" certificates={500} price={1.75} />
+            <SubscriptionCard
+              title="Platinum"
+              certificates={1000}
+              price={1.5}
+            />
+          </div>
+          <div style={{ textAlign: "center" }}>
+            For further assistance, please write to support@beimagine.tech
           </div>
         </div>
       )}

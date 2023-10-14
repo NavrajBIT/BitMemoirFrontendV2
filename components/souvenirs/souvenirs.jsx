@@ -16,6 +16,7 @@ const Souvenirs = () => {
 
   const frames = [];
 
+  frames.push({ name: "None", value: "none" });
   if (script.frames) {
     script.frames.map((frm) => {
       frames.push({ name: frm.frame_name, value: frm.id });
@@ -34,12 +35,20 @@ const Souvenirs = () => {
       <div className={style.formTitle}>Souvenir</div>
       <Draganddrop submitFile={script.handleImageUpload} file={script.image} />
       Please select a high quality image of 4/3 aspect ratio.
+      <Button
+        variant={"primary"}
+        text="Frame"
+        onClick={() => console.log(script.selectedFrame)}
+      />
       <Select
         title="Select Frame"
         options={frames}
         submit={(e) => {
           if (e === "add") {
             script.setframePopup(true);
+          }
+          if (e === "none") {
+            script.setSelectedframe(null);
           } else {
             script.frames.map((frm) => {
               if (frm.id == e) {
