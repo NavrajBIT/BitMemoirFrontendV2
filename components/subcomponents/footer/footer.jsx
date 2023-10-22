@@ -54,6 +54,9 @@ const Footer = () => {
         Copyright © 2022 Beyond Imagination Technologies Pvt. Ltd. All right
         reserved.
       </div>
+      <div style={{ textAlign: "center" }}>
+        Version: {process.env.NEXT_PUBLIC_VERSION}
+      </div>
     </section>
   );
 };

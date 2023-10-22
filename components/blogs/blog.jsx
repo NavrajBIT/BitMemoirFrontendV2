@@ -4,7 +4,6 @@ import useblog from "./useblog";
 
 const Blog = async () => {
   const { blogs } = await useblog();
-  console.log(blogs);
 
   let smallBlogs = [];
   let largeBlogs = [];

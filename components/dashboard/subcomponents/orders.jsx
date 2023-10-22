@@ -1,6 +1,7 @@
 import style from "../dashboard.module.css";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { getTime } from "@/components/subcomponents/scripts/scripts";
 
 const Orders = ({ usedash }) => {
   return (
@@ -54,25 +55,6 @@ const OrderCard = ({ usedash, order }) => {
     issued: { color: "green", text: "Issued" },
   };
 
-  const dateOptions = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  const timeOptions = {
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    timeZoneName: "short",
-  };
-
-  const getTime = () => {
-    const datetime = new Date(order.timestamp);
-    const date = datetime.toLocaleString("en-US", dateOptions);
-    const time = datetime.toLocaleString("en-US", timeOptions);
-    return { date, time };
-  };
-
   return (
     <div
       className={style.orderCard}
@@ -100,8 +82,7 @@ const OrderCard = ({ usedash, order }) => {
         {statusData[order.status]["text"]}
       </div>
       <div>Type: {order.type}</div>
-      <div>{getTime().date}</div>
-      <div>{getTime().time}</div>
+      <div>{getTime(order.timestamp)}</div>
     </div>
   );
 };

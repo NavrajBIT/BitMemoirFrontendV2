@@ -22,6 +22,7 @@ const usecertificate = async (params) => {
   };
 
   const certData = await data();
+  console.log(certData);
 
   return { certDetails: certData.certDetails, txId: certData.txId };
 };

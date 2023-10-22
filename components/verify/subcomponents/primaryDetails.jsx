@@ -2,6 +2,7 @@ import Button from "@/components/subcomponents/button/button";
 import style from "../certificate.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { getTime } from "@/components/subcomponents/scripts/scripts";
 
 const PrimaryDetails = ({ usecert }) => {
   const verificationstatus = usecert.certDetails.is_verified
@@ -45,6 +46,8 @@ const PrimaryDetails = ({ usecert }) => {
           width: "100%",
         }}
       >
+        <div>Issued at: {getTime(usecert.certDetails.timestamp)}</div>
+        <br />
         <div>Certificate id: {usecert.certDetails.id}</div>
         <div style={{ width: "100%" }}>
           CID:

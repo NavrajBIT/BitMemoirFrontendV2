@@ -55,6 +55,14 @@ const Issuer = ({ usecert }) => {
         Description:
       </div>
       <div>{usecert.certDetails && usecert.certDetails.issuer.description}</div>
+      <div
+        style={{
+          color: "var(--primary-50)",
+        }}
+      >
+        Account Id:
+      </div>
+      <div>{usecert.certDetails && usecert.certDetails.issuer.wallet}</div>
     </div>
   );
 };

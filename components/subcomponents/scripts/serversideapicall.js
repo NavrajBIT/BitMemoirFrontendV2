@@ -8,6 +8,7 @@ const ServerAPI = () => {
         "Content-Type": "application/json",
       },
       body: data ? JSON.stringify(data) : null,
+      cache: "no-store",
     };
 
     try {

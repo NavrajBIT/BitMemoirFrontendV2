@@ -25,3 +25,20 @@ export function isValidNearAddress(address) {
 
   return hasValidSuffix || hasValidLength;
 }
+
+export function getTime(serverTime) {
+  const datetimeOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    timeZoneName: "short",
+  };
+
+  const date = new Date(serverTime);
+  const time = date.toLocaleString("en-US", datetimeOptions);
+
+  return time;
+}

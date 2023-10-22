@@ -14,8 +14,6 @@ const useblog = async () => {
   };
 
   const blogs = await getBlogs();
-  console.log("--------------------------------------------------------");
-  console.log(blogs);
 
   return {
     blogs,
