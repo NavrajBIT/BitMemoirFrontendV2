@@ -43,7 +43,7 @@ const CertCreator = ({ params }) => {
           gap: "var(--padding-main)",
         }}
       >
-        <TopToolBar creator={creator} />
+        <TopToolBar creator={creator} templateId={params.templateId} />
         <Canvas creator={creator} />
       </div>
 

@@ -27,7 +27,7 @@ const Blog = async () => {
         display: "flex",
         gap: "var(--padding-main)",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "space-around",
         flexWrap: "wrap",
       }}
     >

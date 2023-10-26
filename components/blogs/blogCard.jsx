@@ -21,13 +21,15 @@ const BlogCard = ({ blog }) => {
         width={250}
         height={200}
         alt={blog.title}
-        style={{ borderRadius: "var(--border-radius)" }}
+        style={{ borderRadius: "var(--border-radius)", objectFit: "cover" }}
       />
       <div style={{ whiteSpace: "nowrap", fontSize: "1.5rem" }}>
         {blog.title}
       </div>
 
-      <Link href={`/blog/${blog.id}`}>read more</Link>
+      <Link href={`/blog/${blog.id}`} style={{ color: "var(--primary-50)" }}>
+        read more...
+      </Link>
     </div>
   );
 };

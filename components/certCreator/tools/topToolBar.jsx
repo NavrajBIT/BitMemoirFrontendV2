@@ -5,8 +5,9 @@ import { useRef, useState } from "react";
 import Slider from "@/components/subcomponents/slider/slider";
 import style from "../certCreator.module.css";
 import { useRouter } from "next/navigation";
+import LinkButton from "@/components/subcomponents/button/link";
 
-const TopToolBar = ({ creator }) => {
+const TopToolBar = ({ creator, templateId }) => {
   const imageRef = useRef();
   const router = useRouter();
   return (
@@ -74,6 +75,16 @@ const TopToolBar = ({ creator }) => {
         onClick={creator.removeImage}
       />
       <ScaleTool creator={creator} />
+      <div style={{ width: "fit-content" }}>
+        <LinkButton
+          text="Issue>>"
+          variant={"primary"}
+          style={{
+            fontSize: "1rem",
+          }}
+          href={`/issue/${templateId}`}
+        />
+      </div>
       <input
         type="file"
         ref={imageRef}

@@ -285,9 +285,18 @@ const useCertCreator = (params) => {
     }));
   };
 
-  const deletevariable = () => {
+  const deletevariable = async () => {
     console.log(selectedVariable);
     if (selectedVariable === null) return;
+    if (selectedVariable.type === "logo") {
+      setLoadingStatus("deleting...");
+      let logoId = variables["logo"][selectedVariable["index"]]["id"];
+      await api
+        .crud("DELETE", `certificate/logo/${logoId}`)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+      setLoadingStatus("");
+    }
     setVariables((prev) => {
       const newArr = [
         ...prev[selectedVariable.type].slice(0, selectedVariable.index),

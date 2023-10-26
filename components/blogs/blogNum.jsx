@@ -1,6 +1,8 @@
 import ServerAPI from "../subcomponents/scripts/serversideapicall";
 import NotFound from "../subcomponents/errorPages/notFound";
 import Image from "next/image";
+import style from "./blogdisplay.module.css";
+import LinkButton from "../subcomponents/button/link";
 
 const api = ServerAPI();
 const getBlogDetail = async (blogId) => {
@@ -29,22 +31,11 @@ const BlogNum = async ({ params }) => {
       }}
     >
       <title>{blog.title}</title>
-      <main
-        style={{
-          fontSize: "1.5rem",
-          fontWeight: "700",
-          color: "var(--primary-50)",
-        }}
-      >
-        {blog.title}
-      </main>
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          minHeight: "var(--max-width-form)",
-        }}
-      >
+      <div style={{ width: "fit-content" }}>
+        <LinkButton text="< back" href={"/blog"} variant={"secondary"} />
+      </div>
+      <main className={style.title}>{blog.title}</main>
+      <div className={style.blogImageContainer}>
         <Image
           src={blog.image}
           fill
@@ -52,11 +43,29 @@ const BlogNum = async ({ params }) => {
           alt={blog.title}
         />
       </div>
-
-      <div style={{ textAlign: "justify" }}>
-        <p>{blog.content}</p>
-        <h1>{blog.content}</h1>
-      </div>
+      {blog.content.length > 0 &&
+        blog.content.map((content, index) => {
+          if (content.type === "text")
+            return (
+              <div className={style.textDisplay} key={"blog-text-" + index}>
+                {content.value}
+              </div>
+            );
+          if (content.type === "image")
+            return (
+              <div
+                className={style.blogImageContainer}
+                key={"blog-image-" + index}
+              >
+                <Image
+                  src={content.value}
+                  alt="Blog Image"
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+            );
+        })}
     </div>
   );
 };
