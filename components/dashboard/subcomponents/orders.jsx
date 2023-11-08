@@ -53,6 +53,7 @@ const OrderCard = ({ usedash, order }) => {
     pending: { color: "var(--primary-50)", text: "Pending" },
     error: { color: "red", text: "Error" },
     issued: { color: "green", text: "Issued" },
+    in_progress: { color: "var(--primary-50)", text: "In Progress" },
   };
 
   return (

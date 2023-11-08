@@ -2,23 +2,24 @@ import BottomTool from "./bottomTool";
 import style from "../certCreator.module.css";
 import { useState } from "react";
 import { HexColorPicker } from "react-colorful";
+import t from "../translation";
 
-const BottomToolBar = ({ creator }) => {
+const BottomToolBar = ({ creator, dynamic, ln }) => {
   return (
     <div className={style.bottomToolBarContainer}>
       <div className={style.bottomToolBar}>
         {creator.templateBackground && <BackgroundColor creator={creator} />}
         <BottomTool
           icon="text"
-          toolName="Add Text"
-          toolDescription="Add permanent text on the certificate template"
+          toolName={t["Add Text"][ln]}
+          toolDescription={t["Addtextdescription"][ln]}
           onClick={creator.addText}
         />
 
         <BottomTool
           icon="add_image"
-          toolName="Add Logo"
-          toolDescription="Add logo on the certificate template"
+          toolName={t["Add Logo"][ln]}
+          toolDescription={t["Addtextdescription"][ln]}
           onClick={creator.addLogo}
         />
         <BottomTool
@@ -39,18 +40,21 @@ const BottomToolBar = ({ creator }) => {
           toolDescription="Delete selected items"
           onClick={creator.deletevariable}
         />
+
         <BottomTool
           icon="save"
           toolName="Save"
           toolDescription="Save Template"
           onClick={creator.save}
         />
-        <BottomTool
-          icon="saveas"
-          toolName="Save As"
-          toolDescription="Duplicate template to another file"
-          onClick={() => creator.setsaveaspopup(true)}
-        />
+        {!dynamic && (
+          <BottomTool
+            icon="saveas"
+            toolName="Save As"
+            toolDescription="Duplicate template to another file"
+            onClick={() => creator.setsaveaspopup(true)}
+          />
+        )}
       </div>
     </div>
   );

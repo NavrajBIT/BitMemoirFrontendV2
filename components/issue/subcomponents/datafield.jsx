@@ -57,7 +57,7 @@ const Datafield = ({ issue }) => {
         </div>
         <LocalInputField
           inputData={{
-            label: "No. of students",
+            label: "No. of recipients",
             type: "number",
             required: true,
           }}

@@ -1,7 +1,7 @@
 import Approver from "@/components/approver/approver";
 
-const Page = () => {
-  return <Approver />;
+const Page = ({ params }) => {
+  return <Approver params={params} />;
 };
 
 export default Page;

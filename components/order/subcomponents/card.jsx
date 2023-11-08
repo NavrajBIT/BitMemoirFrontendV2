@@ -3,21 +3,23 @@ import { useRouter } from "next/navigation";
 import style from "../order.module.css";
 import { useEffect, useState } from "react";
 import API from "@/components/subcomponents/scripts/apiCall";
+import Button from "@/components/subcomponents/button/button";
+import LinkButton from "@/components/subcomponents/button/link";
 
-const Certificate = ({ cert, index }) => {
+const Certificate = ({ cert, index, canEdit, setCertPopup, selectCert }) => {
   const router = useRouter();
   const api = API();
   const [certImage, setcertImage] = useState(null);
-  const [certStatus, setcertStatus] = useState(null);
+  const [isMinted, setIsMinted] = useState(null);
+  const [emailSent, setEmailSent] = useState(null);
 
   const poppulatecertImage = () => {
     api.crud("GET", `certificate/${cert.id}`).then((res) => {
       console.log(res);
       if (res.status >= 200 && res.status <= 299 && res.image !== null) {
         setcertImage(res.image);
-        if (res.modelStatus !== null) {
-          setcertStatus(res.modelStatus);
-        }
+        setEmailSent(res.email_sent);
+        setIsMinted(res.is_minted);
       }
     });
   };
@@ -31,17 +33,8 @@ const Certificate = ({ cert, index }) => {
     return () => clearInterval(interval);
   }, []);
 
-  const statusData = {
-    pending: { color: "var(--primary-50)", text: "Pending" },
-    error: { color: "red", text: "Error" },
-    issued: { color: "green", text: "Issued" },
-  };
-
   return (
-    <div
-      className={style.certificate}
-      onClick={() => router.push(`/certificate/${cert.id}`)}
-    >
+    <div className={style.certificate}>
       <Image
         src={certImage !== null ? certImage : "/icons/imageplaceholder.svg"}
         loader={() =>
@@ -54,12 +47,6 @@ const Certificate = ({ cert, index }) => {
           borderRadius: "var(--border-radius)",
         }}
       />
-
-      {certStatus && certStatus !== null && (
-        <div style={{ color: statusData[certStatus]["color"] }}>
-          {statusData[certStatus]["text"]}
-        </div>
-      )}
 
       <div style={{ overflowX: "hidden" }}>
         {cert.variablevalues.map((variable, varIndex) => (
@@ -103,7 +90,7 @@ const Certificate = ({ cert, index }) => {
             {cert.email === "" && "Not Provided"}
             {cert.email !== "" && (
               <>
-                {cert.email_sent ? (
+                {emailSent ? (
                   <span style={{ color: "green" }}>Sent</span>
                 ) : (
                   <span>Pending</span>
@@ -116,7 +103,7 @@ const Certificate = ({ cert, index }) => {
             {cert.wallet === "" && "Wallet Not Provided"}
             {cert.wallet !== "" && (
               <>
-                {cert.is_minted ? (
+                {isMinted ? (
                   <span style={{ color: "green" }}>Success</span>
                 ) : (
                   <span style={{ color: "red" }}>Pending</span>
@@ -125,6 +112,35 @@ const Certificate = ({ cert, index }) => {
             )}
           </div>
         </div>
+      </div>
+      <div className={style.certButton}>
+        {canEdit ? (
+          <Button
+            text=""
+            variant={"primary"}
+            endIcon={"edit"}
+            onClick={() => {
+              setCertPopup(true);
+              selectCert(cert.id);
+            }}
+          />
+        ) : (
+          <LinkButton
+            text=""
+            variant={"primary"}
+            endIcon={"view"}
+            href={`/certificate/${cert.id}`}
+          />
+        )}
+        {certImage !== null && (
+          <LinkButton
+            text=""
+            variant={"primary"}
+            endIcon={"download"}
+            href={certImage}
+            target="blank"
+          />
+        )}
       </div>
     </div>
   );

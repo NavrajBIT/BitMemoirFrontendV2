@@ -1,7 +1,7 @@
 import TeamCard from "./teamCard";
 import { teamData } from "./teamData";
 
-const Team = () => {
+const Team = ({ ln }) => {
   return (
     <div
       style={{
@@ -32,7 +32,9 @@ const Team = () => {
           color: "var(--primary-50)",
         }}
       >
-        Founding Team
+        {ln === "en" && "Founding Team"}
+        {ln === "es" && "Equipo fundador"}
+        {ln === "ar" && "الفريق المؤسس"}
       </div>
 
       {teamData.map((teamMember, index) => {

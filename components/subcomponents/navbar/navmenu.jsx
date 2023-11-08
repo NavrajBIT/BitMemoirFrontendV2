@@ -5,15 +5,26 @@ import { useState } from "react";
 import style from "./navbar.module.css";
 import LoginButton from "./loginButton";
 
-const Navmenu = () => {
+const Navmenu = ({ ln }) => {
   const [isNavMenuActive, setIsNavMenuActive] = useState(false);
   const navMenuItems = [
-    { name: "Home", route: "/home" },
-    { name: "Souvenirs", route: "/souvenir" },
-    { name: "Certificates", route: "/certificate" },
-    { name: "Verify", route: "/verify" },
-    { name: "Blog", route: "/blog" },
-    { name: "About Us", route: "/about" },
+    {
+      name: { en: "Certificates", es: "Certificados", ar: "الشهادات" },
+      route: `/${ln}/certificate`,
+    },
+    {
+      name: { en: "Souvenirs", es: "Recuerdos", ar: "هدايا تذكارية" },
+      route: `/${ln}/souvenir `,
+    },
+    {
+      name: { en: "Verify", es: "Verificar", ar: "يؤكد" },
+      route: `/${ln}/verify`,
+    },
+    { name: { en: "Blog", es: "Blog", ar: "مدونة" }, route: `/${ln}/blog` },
+    {
+      name: { en: "About Us", es: "Sobre nosotros", ar: "معلومات عنا" },
+      route: `/${ln}/about`,
+    },
   ];
   return (
     <div className={style.menuContainer}>
@@ -43,7 +54,7 @@ const Navmenu = () => {
                   padding: "var(--padding-main) 0",
                 }}
               >
-                {item.name}
+                {item.name[ln]}
               </Link>
             );
           })}
@@ -55,7 +66,7 @@ const Navmenu = () => {
               justifyContent: "center",
             }}
           >
-            <LoginButton onClick={() => setIsNavMenuActive(false)} />
+            <LoginButton ln={ln} onClick={() => setIsNavMenuActive(false)} />
           </div>
         </nav>
       )}

@@ -6,15 +6,24 @@ import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import style from "./footer.module.css";
 import Image from "next/image";
 
-const Footer = () => {
+const Footer = ({ params }) => {
+  const ln = params?.ln ? params.ln : "en";
   return (
     <section className={style.footer}>
       <div className={style.footercontainer}>
-        <div className={style.footerheading}>Reach out to us at</div>
+        <div className={style.footerheading}>
+          {ln === "en" && "Reach out to us at"}
+          {ln === "es" && "Llegar a nosotros en"}
+          {ln === "ar" && "تواصل معنا على"}
+        </div>
         <div className={style.footercontent}>
           <Email email={"support@beimagine.tech"} />
           <Email email={"marketing@beimagine.tech"} />
-          <div className={style.socialheading}>Check out our social :</div>
+          <div className={style.socialheading}>
+            {ln === "en" && "Check out our social:"}
+            {ln === "es" && "Echa un vistazo a nuestro social:"}
+            {ln === "ar" && "تحقق من الاجتماعية لدينا:"}
+          </div>
           <div className={style.sociallinkcontainer}>
             <Link
               href={"https://www.linkedin.com/company/bitmemoir/"}
@@ -48,11 +57,15 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-        <AddressBar />
+        <AddressBar ln={ln} />
       </div>
       <div style={{ textAlign: "center" }}>
-        Copyright © 2022 Beyond Imagination Technologies Pvt. Ltd. All right
-        reserved.
+        {ln === "en" &&
+          "Copyright © 2022 Beyond Imagination Technologies Pvt. Ltd. All rights  reserved."}
+        {ln === "es" &&
+          "Copyright © 2022 Más allá de la imaginación Technologies Pvt. Limitado. Ltd. Todos los derechos reservados."}
+        {ln === "ar" &&
+          "حقوق الطبع والنشر © 2022 Beyond Imagination Technologies Pvt. المحدودة. جميع الحقوق محفوظة."}
       </div>
       <div style={{ textAlign: "center" }}>
         Version: {process.env.NEXT_PUBLIC_VERSION}
@@ -78,7 +91,7 @@ const Email = ({ email }) => (
   </Link>
 );
 
-const AddressBar = () => (
+const AddressBar = ({ ln }) => (
   <div>
     <Image
       src={"/assets/logo.png"}
@@ -92,7 +105,9 @@ const AddressBar = () => (
         fontWeight: "bold",
       }}
     >
-      Address :
+      {ln === "en" && "Address:"}
+      {ln === "es" && "DIRECCIÓN :"}
+      {ln === "ar" && "عنوان :"}
     </div>
     <div
       style={{
@@ -100,10 +115,18 @@ const AddressBar = () => (
       }}
     >
       Beyond imagination tech LLC
-      <br /> M03 Laffa restaurant building,
       <br />
-      Sheikh Khalifa Bin Zayed St - Opp. Burjuman Mall,
-      <br /> Dubai, United Arab Emirates
+      {ln === "en" && "M03 Laffa restaurant building,"}
+      {ln === "es" && "M03 Edificio del restaurante Laffa,"}
+      {ln === "ar" && "M03 مبنى مطعم لافا،"}
+      <br />
+      {ln === "en" && "Sheikh Khalifa Bin Zayed St - Opp. Burjuman Mall,"}
+      {ln === "es" &&
+        "Calle Sheikh Khalifa Bin Zayed - Opp. centro comercial burjuman,"}
+      {ln === "ar" && "شارع الشيخ خليفة بن زايد - مقابل. برجمان مول،"}
+      <br /> {ln === "en" && "Dubai, United Arab Emirates"}
+      {ln === "es" && "Dubai, Emiratos Arabes Unidos"}
+      {ln === "ar" && "دبى، الامارات العربية المتحدة"}
     </div>
   </div>
 );

@@ -1,6 +1,7 @@
 import Button from "../subcomponents/button/button";
+import t from "./translation";
 
-const ApproverList = ({ script }) => {
+const ApproverList = ({ script, ln }) => {
   return (
     <div
       style={{
@@ -28,13 +29,14 @@ const ApproverList = ({ script }) => {
           fontWeight: "700",
         }}
       >
-        Approvers
+        {t[ln]["Approvers"]}
       </div>
       {script.approversList.map((approver, index) => (
         <ApproverCard
           key={"approver-" + index}
           approver={approver}
           script={script}
+          ln={ln}
         />
       ))}
     </div>
@@ -43,7 +45,7 @@ const ApproverList = ({ script }) => {
 
 export default ApproverList;
 
-export const ApproverCard = ({ approver, script }) => {
+export const ApproverCard = ({ approver, script, ln }) => {
   return (
     <div
       style={{
@@ -70,17 +72,17 @@ export const ApproverCard = ({ approver, script }) => {
         }}
       >
         <div>
-          <div>Designation:</div>
+          <div>{t[ln]["Designation"] + ":"}</div>
           <div style={{ fontSize: "1.25rem" }}>{approver.designation}</div>
         </div>
         <div>
-          <div>Email:</div>
+          <div>{t[ln]["Email"] + ":"}</div>
           <div style={{ fontSize: "1.25rem" }}>{approver.email}</div>
         </div>
       </div>
 
       <Button
-        text="Delete"
+        text={t[ln]["Delete"]}
         variant="secondary"
         endIcon="delete"
         onClick={() => script.deleteApprover(approver)}

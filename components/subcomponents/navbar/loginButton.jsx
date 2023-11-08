@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
-const LoginButton = ({ onClick }) => {
+const LoginButton = ({ onClick, ln }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const pathname = usePathname();
 
@@ -31,14 +31,18 @@ const LoginButton = ({ onClick }) => {
           width={20}
           alt="dashboard"
         />
-        Dashboard
+        {ln === "en" && "Dashboard"}
+        {ln === "es" && "Panel"}
+        {ln === "ar" && "لوحة القيادة"}
       </Link>
     );
   }
 
   return (
     <Link className={style.loginbutton} href="/login" onClick={onClick}>
-      Log In
+      {ln === "en" && "Log In"}
+      {ln === "es" && "Acceso"}
+      {ln === "ar" && "تسجيل الدخول"}
     </Link>
   );
 };

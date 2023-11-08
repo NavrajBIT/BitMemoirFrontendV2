@@ -1,3 +1,4 @@
+import Button from "@/components/subcomponents/button/button";
 import Image from "next/image";
 
 const OrderHeading = ({ orderer }) => {
@@ -37,9 +38,16 @@ const OrderHeading = ({ orderer }) => {
         </div>
         <div>submitted: {orderer.orderDetails.datetime}</div>
         <div style={{ color: "var(--primary-50)" }}>
-          status: {orderer.orderDetails.modelStatus}
+          status: {orderer.orderDetails.modelStatus.toUpperCase()}
         </div>
         <div>Order Id: {orderer.orderDetails.id}</div>
+        {orderer.orderDetails.modelStatus === "pending" && (
+          <Button
+            variant="primary"
+            text="Issue >>"
+            onClick={orderer.issueOrder}
+          />
+        )}
       </div>
     </div>
   );

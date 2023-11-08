@@ -1,7 +1,8 @@
 import Team from "./team/team";
 import Partners from "./partners/partners";
 
-const About = () => {
+const About = ({ params }) => {
+  const ln = params?.ln ? params.ln : "ens";
   return (
     <div
       style={{
@@ -12,8 +13,8 @@ const About = () => {
         gap: "var(--padding-large)",
       }}
     >
-      <Team />
-      <Partners />
+      <Team ln={ln} />
+      <Partners ln={ln} />
     </div>
   );
 };

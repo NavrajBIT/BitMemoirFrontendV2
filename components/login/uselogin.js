@@ -2,27 +2,37 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import API from "../subcomponents/scripts/apiCall";
 
-const uselogin = () => {
+const uselogin = (ln) => {
   const api = API();
   const router = useRouter();
   const [signUp, setSignUp] = useState(false);
   const [status, setStatus] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const formTranslation = {
+    Username: { en: "Username", es: "Nombre de usuario", ar: "اسم المستخدم" },
+    Password: { en: "Password", es: "Contraseña", ar: "كلمة المرور" },
+    "Confirm Password": {
+      en: "Confirm Password",
+      es: "Confirmar Contraseña",
+      ar: "تأكيد كلمة المرور",
+    },
+  };
+
   const signupformData = [
     {
       type: "text",
-      label: "Username",
+      label: formTranslation["Username"][ln],
       required: true,
     },
     {
       type: "password",
-      label: "Password",
+      label: formTranslation["Password"][ln],
       required: true,
     },
     {
       type: "password",
-      label: "Confirm Password",
+      label: formTranslation["Confirm Password"][ln],
       required: true,
     },
   ];
@@ -30,13 +40,13 @@ const uselogin = () => {
   const loginformData = [
     {
       type: "text",
-      label: "Username",
+      label: formTranslation["Username"][ln],
       required: true,
     },
 
     {
       type: "password",
-      label: "Password",
+      label: formTranslation["Password"][ln],
       required: true,
     },
   ];
@@ -46,8 +56,8 @@ const uselogin = () => {
     setIsLoading(true);
     await api
       .getToken({
-        username: data.Username,
-        password: data.Password,
+        username: data[formTranslation["Username"][ln]],
+        password: data[formTranslation["Password"][ln]],
       })
       .then((res) => {
         console.log(res);
@@ -58,7 +68,9 @@ const uselogin = () => {
         }
       })
       .catch((err) => {
-        setStatus("Something went wrong. Please try again.");
+        if (ln === "en") setStatus("Something went wrong. Please try again.");
+        else if (ln === "es") setStatus("Algo salió mal. Inténtalo de nuevo.");
+        else if (ln === "ar") setStatus("هناك خطأ ما. حاول مرة اخرى.");
       });
     setIsLoading(false);
   };
@@ -66,15 +78,20 @@ const uselogin = () => {
   const signupSubmit = async (data) => {
     setStatus("");
     setIsLoading(true);
-    if (data["Password"] !== data["Confirm Password"]) {
-      setStatus("Error: Passwords don't match.");
+    if (
+      data[formTranslation["Password"][ln]] !==
+      data[formTranslation["Confirm Password"][ln]]
+    ) {
+      if (ln === "en") setStatus("Error: Passwords don't match.");
+      else if (ln === "es") setStatus("Error: Las contraseñas no coinciden.");
+      else if (ln === "ar") setStatus("خطأ: كلمات المرور غير متطابقة.");
       setIsLoading(false);
       return;
     }
     await api
       .createUser({
-        username: data.Username,
-        password: data.Password,
+        username: data[formTranslation["Username"][ln]],
+        password: data[formTranslation["Password"][ln]],
       })
       .then((res) => {
         if (res.error) {
@@ -84,7 +101,7 @@ const uselogin = () => {
             let nextRoute = localStorage.getItem("nextRoute");
             router.push(nextRoute);
           } catch {
-            router.push("/kyc");
+            router.push(`/${ln}/kyc`);
           }
         }
       })
@@ -101,7 +118,7 @@ const uselogin = () => {
   const handleGoogleLoginButton = async () => {
     try {
       const clientId = process.env.NEXT_PUBLIC_GOOGLE_KEY;
-      const redirectUri = `${process.env.NEXT_PUBLIC_LOCATION}login/auth/google`;
+      const redirectUri = `${process.env.NEXT_PUBLIC_LOCATION}${ln}login/auth/google`;
       const url = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=openid%20email%20profile`;
 
       router.push(url);
@@ -113,7 +130,7 @@ const uselogin = () => {
   const handleFacebookLoginButton = async () => {
     try {
       const clientId = process.env.NEXT_PUBLIC_FACEBOOK_KEY;
-      const redirectUri = `${process.env.NEXT_PUBLIC_LOCATION}login/auth/facebook`;
+      const redirectUri = `${process.env.NEXT_PUBLIC_LOCATION}${ln}/login/auth/facebook`;
       const authUrl = `https://www.facebook.com/v12.0/dialog/oauth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=email%20public_profile`;
       router.push(authUrl);
     } catch (error) {
@@ -133,12 +150,12 @@ const uselogin = () => {
           setStatus(res.error);
         } else {
           if (res.isAccountExits) {
-            router.push("/dashboard");
+            router.push(`/${ln}/dashboard`);
           } else {
             try {
-              router.push("/kyc");
+              router.push(`/${ln}/kyc`);
             } catch {
-              router.push("/kyc");
+              router.push(`/${ln}/kyc`);
             }
           }
         }
@@ -154,12 +171,12 @@ const uselogin = () => {
           setStatus(res.error);
         } else {
           if (res.isAccountExits) {
-            router.push("/dashboard");
+            router.push(`/${ln}/dashboard`);
           } else {
             try {
-              router.push("/kyc");
+              router.push(`/${ln}/kyc`);
             } catch {
-              router.push("/kyc");
+              router.push(`/${ln}/kyc`);
             }
           }
         }

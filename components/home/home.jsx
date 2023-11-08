@@ -3,13 +3,14 @@ import Whybit from "./subcomponents/whybit";
 import ProductSuite from "./subcomponents/productSuite";
 import FAQ from "./subcomponents/faqs/faqs";
 
-const Home = () => {
+const Home = ({ params }) => {
+  const ln = params?.ln ? params.ln : "en";
   return (
     <div>
-      <HeroSection />
-      <Whybit />
-      <ProductSuite />
-      <FAQ />
+      <HeroSection ln={ln} />
+      <Whybit ln={ln} />
+      <ProductSuite ln={ln} />
+      <FAQ ln={ln} />
     </div>
   );
 };

@@ -21,6 +21,7 @@ const useCertCreator = (params) => {
   const [selectedVariable, setSelectedVariable] = useState(null);
   const [noQR, setNoQR] = useState(false);
   const [saveaspopup, setsaveaspopup] = useState(false);
+  const [imagequalityPopup, setImageQualityPopup] = useState(false);
   const api = API();
   const endpoint = `certificate/template/${params.templateId}`;
 
@@ -102,28 +103,19 @@ const useCertCreator = (params) => {
   const saveas = async (newtemplateName) => {
     await save();
     setLoadingStatus(`Saving template as ${newtemplateName}...`);
-    let newTemplateId = 0;
     await api
-      .crud("POST", `${endpoint}/save_as`)
+      .crud("POST", `certificate/template/save_as`, {
+        templateId: params.templateId,
+        name: newtemplateName,
+      })
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
-          newTemplateId = res.id;
+          router.push(`/certCreator/${res.id}`);
         }
       })
       .catch((err) => console.log(err));
-    let apiData = {
-      name: newtemplateName,
-    };
-    await api
-      .crud("PATCH", `certificate/template/${newTemplateId}`, apiData)
-      .then((res) => {
-        console.log(res);
-        if (res.status === 200) {
-          router.push(`/certCreator/${newTemplateId}`);
-        }
-      })
-      .catch((err) => console.log(err));
+
     setLoadingStatus("");
   };
 
@@ -173,6 +165,26 @@ const useCertCreator = (params) => {
     save();
   };
 
+  const checkImageSize = (file) => {
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        const img = new Image();
+        img.src = e.target.result;
+
+        img.onload = function () {
+          const width = this.width;
+          const height = this.height;
+
+          if (width < 1080 || height < 810) setImageQualityPopup(true);
+        };
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
+
   const selectImage = async (file) => {
     const fileName = file.name.replace(/\s+/g, "_");
     if (
@@ -181,6 +193,8 @@ const useCertCreator = (params) => {
       fileName.endsWith(".jpeg")
     ) {
       const newFile = new File([file], fileName, { type: file.type });
+      checkImageSize(file);
+
       const formdata = new FormData();
       formdata.append("base_image", newFile);
       setLoadingStatus("Uploading...");
@@ -338,6 +352,8 @@ const useCertCreator = (params) => {
     setNoQR,
     saveaspopup,
     setsaveaspopup,
+    imagequalityPopup,
+    setImageQualityPopup,
   };
 };
 

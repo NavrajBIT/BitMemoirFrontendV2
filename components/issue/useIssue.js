@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import API from "../subcomponents/scripts/apiCall";
 import useApprover from "../approver/useApprover";
 import { isValidNearAddress } from "../subcomponents/scripts/scripts";
+import { useRouter } from "next/navigation";
 
 const useIssue = (params) => {
   const api = API();
   const approver = useApprover();
+  const router = useRouter();
   const [loadingStatus, setLoadingStatus] = useState("");
   const [notFound, setNotFound] = useState(false);
   const [popupStatus, setPopupStatus] = useState("");
@@ -15,10 +17,8 @@ const useIssue = (params) => {
   const [confirmPopup, setConfirmPopup] = useState(false);
   const [approverPopup, setApproverPopup] = useState(false);
   const [notVerifiedPopup, setNotVerifiedPopup] = useState(false);
-  const [successPopup, setSuccessPopup] = useState(false);
   const [certType, setcertType] = useState("nonessential");
   const [deploymentType, setDeploymentType] = useState("static");
-  const [orderId, setOrderId] = useState(null);
   const [selectedApprovers, setSelectedApprovers] = useState([]);
   const [nftQuota, setNftQuota] = useState(null);
 
@@ -63,6 +63,10 @@ const useIssue = (params) => {
   };
 
   const downloadcsv = () => {
+    if (!studentNumber || studentNumber <= 0) {
+      setPopupStatus("Please enter number of recipients!");
+      return;
+    }
     const headers = [
       "S.No.",
       ...Array.from(
@@ -254,9 +258,9 @@ const useIssue = (params) => {
     let is_verified = true;
     setLoadingStatus("Checking data...");
     await api
-      .crud("GET", "/user/kyc")
+      .crud("GET", "user/kyc")
       .then((res) => {
-        console.log(res.status);
+        console.log(res);
         if (
           res.status >= 200 &&
           res.status <= 299 &&
@@ -283,15 +287,13 @@ const useIssue = (params) => {
 
   const issueCertificates = async () => {
     let apiData = getApiData();
-    console.log(apiData);
     setLoadingStatus("Submitting Certificate Order...");
     await api
       .crud("POST", "certificate/order", apiData)
       .then((res) => {
         console.log(res);
         if (res.status >= 200 && res.status <= 299) {
-          setOrderId(res.id);
-          setSuccessPopup(true);
+          router.push(`/order/${res.id}`);
         }
       })
       .catch((err) => console.log(err));
@@ -321,9 +323,6 @@ const useIssue = (params) => {
     setcertType,
     deploymentType,
     setDeploymentType,
-    successPopup,
-    setSuccessPopup,
-    orderId,
     approver,
     approverPopup,
     setApproverPopup,

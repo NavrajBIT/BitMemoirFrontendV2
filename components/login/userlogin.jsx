@@ -4,7 +4,7 @@ import Button from "../subcomponents/button/button";
 import SocialLoginPage from "./subcomponents/socialloginButton";
 import Link from "next/link";
 
-const UserLogin = ({ useLogin }) => {
+const UserLogin = ({ useLogin, ln }) => {
   return (
     <div
       style={{
@@ -15,10 +15,14 @@ const UserLogin = ({ useLogin }) => {
       }}
     >
       <Form
-        formTitle={"Log In"}
+        formTitle={
+          ln === "en" ? "Log In" : ln === "es" ? "Acceso" : "تسجيل الدخول"
+        }
         formData={useLogin.loginformData}
         handleSubmit={useLogin.loginSubmit}
-        formButton={"Log In"}
+        formButton={
+          ln === "en" ? "Log In" : ln === "es" ? "Acceso" : "تسجيل الدخول"
+        }
         status={useLogin.status}
       >
         <div
@@ -32,10 +36,18 @@ const UserLogin = ({ useLogin }) => {
         >
           <SocialLoginPage />
           <div style={{ display: "flex", alignItems: "center" }}>
-            Don&apos;t have an account?
+            {ln === "en" && "Don't have an account?"}
+            {ln === "es" && "¿No tienes una cuenta?"}
+            {ln === "ar" && "ليس لديك حساب؟"}
             <div style={{ width: "fit-content" }}>
               <Button
-                text={"Sign Up"}
+                text={
+                  ln === "en"
+                    ? "Sign Up"
+                    : ln === "es"
+                    ? "Inscribirse"
+                    : "اشتراك"
+                }
                 variant={"tertiary"}
                 onClick={() => {
                   useLogin.setStatus("");
@@ -45,14 +57,16 @@ const UserLogin = ({ useLogin }) => {
             </div>
           </div>
           <Link
-            href="/login/forgotPassword"
+            href={`/${ln}/login/forgotPassword`}
             style={{
               textDecoration: "underline",
               color: "var(--primary-50)",
               marginTop: "-15px",
             }}
           >
-            Forgot password
+            {ln === "en" && "Forgot password"}
+            {ln === "es" && "Has olvidado tu contraseña"}
+            {ln === "ar" && "هل نسيت كلمة السر"}
           </Link>
         </div>
       </Form>

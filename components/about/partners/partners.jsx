@@ -1,7 +1,7 @@
 import { partnersData } from "./partnersData";
 import Image from "next/image";
 
-const Partners = () => {
+const Partners = ({ ln }) => {
   return (
     <div
       style={{
@@ -26,7 +26,9 @@ const Partners = () => {
           left: "var(--padding-main)",
         }}
       >
-        Our Partners
+        {ln === "en" && "Our Partners"}
+        {ln === "es" && "Nuestros compañeros"}
+        {ln === "ar" && "شركاؤنا"}
       </div>
 
       {partnersData.map((partner, index) => {

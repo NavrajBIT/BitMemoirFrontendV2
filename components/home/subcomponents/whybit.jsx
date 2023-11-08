@@ -1,6 +1,7 @@
 import style from "../home.module.css";
+import { text } from "../translation";
 
-const Whybit = () => {
+const Whybit = ({ ln }) => {
   return (
     <div className={style.whybitContainer}>
       <div className={style.whybitfilter} />
@@ -13,7 +14,7 @@ const Whybit = () => {
             textAlign: "center",
           }}
         >
-          Why Bitmemoir
+          {text["Why Bitmemoir"][ln]}
         </div>
         <div className={style.whybitContent}>
           <div
@@ -36,24 +37,29 @@ const Whybit = () => {
           <div
             style={{
               fontSize: "1.1rem",
-              textAlign: "justify",
+              textAlign: ln === "er" ? "right" : "justify",
               maxWidth: "var(--max-width-form)",
             }}
           >
-            Revolutionizing the education landscape by the issuing legitimate
-            and validated credentials, eliminating any chance of duplicity,
-            forgery, or tampering with documents.
+            {
+              text[
+                "Revolutionizing the education landscape by the issuing legitimate and validated credentials, eliminating any chance of duplicity, forgery, or tampering with documents."
+              ][ln]
+            }
             <br />
             <br />
-            This transformative approach ensures the authentication and
-            verification of educational records, leaving no room for the
-            existence or acceptance of counterfeit or deceitful certificates.
+            {
+              text[
+                "This transformative approach ensures the authentication and verification of educational records, leaving no room for the existence or acceptance of counterfeit or deceitful certificates."
+              ][ln]
+            }
             <br />
             <br />
-            By implementing such a system, the education ecosystem undergoes a
-            profound change, offering a secure and reliable means of
-            credentialing that safeguards the integrity and credibility of
-            individuals' academic achievements.
+            {
+              text[
+                "By implementing such a system, the education ecosystem undergoes a profound change, offering a secure and reliable means of credentialing that safeguards the integrity and credibility of individuals' academic achievements."
+              ][ln]
+            }
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ import style from "../certCreator.module.css";
 import { useRouter } from "next/navigation";
 import LinkButton from "@/components/subcomponents/button/link";
 
-const TopToolBar = ({ creator, templateId }) => {
+const TopToolBar = ({ creator, templateId, dynamic, orderId }) => {
   const imageRef = useRef();
   const router = useRouter();
   return (
@@ -24,7 +24,8 @@ const TopToolBar = ({ creator, templateId }) => {
             if (creator.variables.qrcode.length === 0) {
               creator.setNoQR(true);
             } else {
-              router.back();
+              if (dynamic) router.push(`/order/${orderId}`);
+              else router.push("/certificate");
             }
           }}
         />
@@ -35,12 +36,14 @@ const TopToolBar = ({ creator, templateId }) => {
         toolDescription="Save template"
         onClick={creator.save}
       />
-      <TopTool
-        icon="saveas"
-        toolName="Save As"
-        toolDescription="Duplicate template to another file"
-        onClick={() => creator.setsaveaspopup(true)}
-      />
+      {!dynamic && (
+        <TopTool
+          icon="saveas"
+          toolName="Save As"
+          toolDescription="Duplicate template to another file"
+          onClick={() => creator.setsaveaspopup(true)}
+        />
+      )}
       Template:
       <LocalInputField
         inputData={{ type: "text", label: "" }}
@@ -76,13 +79,21 @@ const TopToolBar = ({ creator, templateId }) => {
       />
       <ScaleTool creator={creator} />
       <div style={{ width: "fit-content" }}>
-        <LinkButton
-          text="Issue>>"
+        <Button
+          text="Next >>"
           variant={"primary"}
           style={{
             fontSize: "1rem",
           }}
-          href={`/issue/${templateId}`}
+          onClick={async () => {
+            await creator.save();
+            if (creator.variables.qrcode.length === 0) {
+              creator.setNoQR(true);
+            } else {
+              if (dynamic) router.push(`/order/update/data/${orderId}`);
+              else router.push(`/issue/${templateId}`);
+            }
+          }}
         />
       </div>
       <input

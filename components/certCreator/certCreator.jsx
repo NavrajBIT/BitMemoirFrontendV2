@@ -12,8 +12,10 @@ import WentWrong from "../subcomponents/errorPages/wentWrong";
 import TutorialPopup from "./tutorialPopup";
 import NoqrPopup from "./noqrPopup";
 import SaveAsPopup from "./saveasPopup";
+import ImageSizePopup from "./imageSizePopup";
 
 const CertCreator = ({ params }) => {
+  const ln = params?.ln ? params.ln : "en";
   const creator = useCertCreator(params);
 
   if (creator.loadingStatus === "notFound") {
@@ -30,8 +32,8 @@ const CertCreator = ({ params }) => {
         display: "flex",
       }}
     >
-      <SideToolBar creator={creator} />
-      <BottomToolBar creator={creator} />
+      <SideToolBar creator={creator} dynamic={params.dynamic} ln={ln} />
+      <BottomToolBar creator={creator} dynamic={params.dynamic} ln={ln} />
 
       <div
         style={{
@@ -43,7 +45,12 @@ const CertCreator = ({ params }) => {
           gap: "var(--padding-main)",
         }}
       >
-        <TopToolBar creator={creator} templateId={params.templateId} />
+        <TopToolBar
+          creator={creator}
+          templateId={params.templateId}
+          dynamic={params.dynamic}
+          orderId={params.orderId}
+        />
         <Canvas creator={creator} />
       </div>
 
@@ -61,6 +68,7 @@ const CertCreator = ({ params }) => {
       <TutorialPopup />
       {creator.noQR && <NoqrPopup creator={creator} />}
       {creator.saveaspopup && <SaveAsPopup creator={creator} />}
+      {creator.imagequalityPopup && <ImageSizePopup creator={creator} />}
     </div>
   );
 };

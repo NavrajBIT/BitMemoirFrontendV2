@@ -1,7 +1,7 @@
 import PasswordReset from "@/components/login/forgotPassword/passwordReset";
 
-const Page = () => {
-  return <PasswordReset />;
+const Page = ({ params }) => {
+  return <PasswordReset params={params} />;
 };
 
 export default Page;

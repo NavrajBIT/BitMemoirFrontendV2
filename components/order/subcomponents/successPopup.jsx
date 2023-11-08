@@ -1,10 +1,10 @@
 import Popup from "@/components/subcomponents/popup/popup";
 import Button from "@/components/subcomponents/button/button";
-import style from "../issue.module.css";
+import style from "../order.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-const SuccessPopup = ({ issue }) => {
+const SuccessPopup = ({ close }) => {
   const router = useRouter();
   return (
     <Popup>
@@ -20,17 +20,11 @@ const SuccessPopup = ({ issue }) => {
         />
 
         <div style={{ fontSize: "1.5rem", color: "var(--primary-50)" }}>
-          Certificate Order Submitted Successfully!
+          Certificates Issued Successfully!
         </div>
-        <div>
-          <Button
-            text="Order Details"
-            variant={"tertiary"}
-            onClick={() => router.push(`/order/${issue.orderId}`)}
-          />
-        </div>
+
         <div style={{ width: "10rem" }}>
-          <Button text="OK" variant={"primary"} onClick={() => router.back()} />
+          <Button text="OK" variant={"primary"} onClick={close} />
         </div>
       </div>
     </Popup>

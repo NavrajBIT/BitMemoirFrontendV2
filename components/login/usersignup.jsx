@@ -3,7 +3,7 @@ import Form from "../subcomponents/form/form";
 import Button from "../subcomponents/button/button";
 import SocialLoginPage from "./subcomponents/socialloginButton";
 
-const UserSignUp = ({ useLogin }) => {
+const UserSignUp = ({ useLogin, ln }) => {
   return (
     <div
       style={{
@@ -16,9 +16,13 @@ const UserSignUp = ({ useLogin }) => {
       }}
     >
       <Form
-        formTitle={"Sign Up"}
+        formTitle={
+          ln === "en" ? "Sign Up" : ln === "es" ? "Inscribirse" : "اشتراك"
+        }
         formData={useLogin.signupformData}
-        formButton="Sign Up"
+        formButton={
+          ln === "en" ? "Sign Up" : ln === "es" ? "Inscribirse" : "اشتراك"
+        }
         handleSubmit={useLogin.signupSubmit}
         status={useLogin.status}
         isLoading={useLogin.isLoading}
@@ -35,10 +39,18 @@ const UserSignUp = ({ useLogin }) => {
           <SocialLoginPage />
 
           <div style={{ display: "flex", alignItems: "center" }}>
-            Already have an account?
+            {ln === "en" && "Already have an account?"}
+            {ln === "es" && "¿Ya tienes una cuenta?"}
+            {ln === "ar" && "هل لديك حساب؟"}
             <div style={{ width: "fit-content" }}>
               <Button
-                text={"Log In"}
+                text={
+                  ln === "en"
+                    ? "Log In"
+                    : ln === "es"
+                    ? "Acceso"
+                    : "تسجيل الدخول"
+                }
                 variant={"tertiary"}
                 onClick={() => {
                   useLogin.setStatus("");

@@ -6,9 +6,25 @@
   flex-direction: column;
   border: 1px solid var(--primary-80);
   border-radius: var(--border-radius);
+  position: relative;
 }
 
-.certificate:hover {
-  border: 1px solid var(--primary-100);
-  box-shadow: 0 0 10px var(--primary-50);
+.certButton {
+  display: flex;
+  gap: var(--padding-main);
+}
+
+.confirmContainer {
+  background: var(--primary-110);
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-main);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  max-width: var(--max-width-form);
+  max-height: 100vh;
+  overflow-y: hidden;
+  padding: 0px;
 }

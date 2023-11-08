@@ -1,13 +1,13 @@
 import style from "../home.module.css";
 import FreetrialButton from "./freetrialButton";
 import Image from "next/image";
-import Link from "next/link";
+import { text } from "../translation";
 
-const HeroSection = () => {
+const HeroSection = ({ ln }) => {
   return (
     <div className={style.heroContainer}>
       <section className={style.heroSection}>
-        <HeroContent />
+        <HeroContent ln={ln} />
         <DesktopIllustration />
         <MobileIllustration />
       </section>
@@ -18,7 +18,7 @@ const HeroSection = () => {
 
 export default HeroSection;
 
-const HeroContent = () => (
+const HeroContent = ({ ln }) => (
   <div
     style={{
       display: "flex",
@@ -40,10 +40,10 @@ const HeroContent = () => (
         color: "var(--primary-50)",
       }}
     >
-      Issue. Store. Verify. Retrieve.
+      {text["Issue. Store. Verify. Retrieve."][ln]}
     </div>
 
-    <FreetrialButton />
+    <FreetrialButton ln={ln} />
   </div>
 );
 

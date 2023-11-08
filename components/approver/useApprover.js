@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import API from "../subcomponents/scripts/apiCall";
+import t from "./translation";
 
-const useApprover = () => {
+const useApprover = (ln) => {
   const api = API();
   const [approversList, setApproversList] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,11 +25,12 @@ const useApprover = () => {
 
   const addApprover = async (data) => {
     setIsLoading(true);
+    console.log(ln);
     await api
       .crud("POST", "user/approver", {
-        name: data.Name,
-        designation: data.Designation,
-        email: data.Email,
+        name: data[t[ln]["Name"]],
+        designation: data[t[ln]["Designation"]],
+        email: data[t[ln]["Email"]],
       })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));

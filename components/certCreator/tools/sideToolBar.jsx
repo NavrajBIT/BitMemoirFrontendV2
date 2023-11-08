@@ -3,7 +3,7 @@ import style from "../certCreator.module.css";
 import { useState } from "react";
 import { HexColorPicker } from "react-colorful";
 
-const SideToolBar = ({ creator }) => {
+const SideToolBar = ({ creator, dynamic }) => {
   return (
     <div>
       <div className={style.sideToolBar}>
@@ -55,12 +55,14 @@ const SideToolBar = ({ creator }) => {
           toolDescription="Save Template"
           onClick={creator.save}
         />
-        <SideTool
-          icon="saveas"
-          toolName="Save As"
-          toolDescription="Duplicate template to another file"
-          onClick={() => creator.setsaveaspopup(true)}
-        />
+        {!dynamic && (
+          <SideTool
+            icon="saveas"
+            toolName="Save As"
+            toolDescription="Duplicate template to another file"
+            onClick={() => creator.setsaveaspopup(true)}
+          />
+        )}
       </div>
     </div>
   );

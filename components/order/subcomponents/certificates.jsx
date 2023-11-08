@@ -17,8 +17,11 @@ const Certificates = ({ orderer }) => {
     >
       {orderer.orderDetails.certificates.map((cert, index) => (
         <Certificate
+          canEdit={orderer.orderDetails.modelStatus === "pending"}
           cert={cert}
           index={index}
+          setCertPopup={orderer.setcertificatedetailsPopup}
+          selectCert={orderer.setSelectedCertId}
           key={"my-certificate-" + index}
         />
       ))}

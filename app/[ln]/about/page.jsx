@@ -1,7 +1,7 @@
 import About from "@/components/about/about";
 
-const Page = () => {
-  return <About />;
+const Page = ({ params }) => {
+  return <About params={params} />;
 };
 
 export default Page;

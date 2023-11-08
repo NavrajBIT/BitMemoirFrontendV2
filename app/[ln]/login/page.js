@@ -1,9 +1,9 @@
 import Login from "@/components/login/login";
 
-const Page = () => {
+const Page = ({ params }) => {
   return (
     <>
-      <Login />
+      <Login params={params} />
     </>
   );
 };

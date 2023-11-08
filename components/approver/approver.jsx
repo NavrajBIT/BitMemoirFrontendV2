@@ -5,9 +5,11 @@ import Form from "../subcomponents/form/form";
 import Button from "../subcomponents/button/button";
 import { useRouter } from "next/navigation";
 import ApproverList from "./approverList";
+import t from "./translation";
 
-const Approver = () => {
-  const script = useApprover();
+const Approver = ({ params }) => {
+  const ln = params?.ln ? params.ln : "en";
+  const script = useApprover(ln);
   const router = useRouter();
 
   if (script.isLoading)
@@ -18,9 +20,14 @@ const Approver = () => {
     );
 
   const formData = [
-    { label: "Name", type: "text", maxLength: "50", required: true },
-    { label: "Designation", type: "text", maxLength: "100", required: true },
-    { label: "Email", type: "email", required: true },
+    { label: t[ln]["Name"], type: "text", maxLength: "50", required: true },
+    {
+      label: t[ln]["Designation"],
+      type: "text",
+      maxLength: "100",
+      required: true,
+    },
+    { label: t[ln]["Email"], type: "email", required: true },
   ];
   return (
     <div style={{ minHeight: "var(--min-height)" }}>
@@ -37,7 +44,7 @@ const Approver = () => {
       >
         <div style={{ width: "fit-content" }}>
           <Button
-            text="< Back"
+            text={"< " + t[ln]["Back"]}
             variant="tertiary"
             onClick={() => router.back()}
             style={{ fontSize: "1.5rem", textDecoration: "none" }}
@@ -52,17 +59,17 @@ const Approver = () => {
           }}
         >
           <Form
-            formTitle="Approver"
+            formTitle={t[ln]["Approver"]}
             formData={formData}
             handleSubmit={script.addApprover}
-            formButton="Add +"
+            formButton={t[ln]["Add"] + " +"}
             status=""
             isLoading={script.isLoading}
           ></Form>
         </div>
       </div>
       {script.approversList !== null && script.approversList.length > 0 && (
-        <ApproverList script={script} />
+        <ApproverList script={script} ln={ln} />
       )}
     </div>
   );

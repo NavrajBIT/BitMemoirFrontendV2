@@ -8,7 +8,6 @@ import LocalLoading from "../subcomponents/loadingPage/localloading";
 import Alert from "./subcomponents/alert";
 import ConfirmPopup from "./subcomponents/confirmPopup";
 import ApproverPopup from "./subcomponents/approverPopup";
-import SuccessPopup from "./subcomponents/successPopup";
 import NotVerifiedPopup from "./subcomponents/notVerifiedPopup";
 import PlanExpired from "../subscriptions/planExpired";
 
@@ -60,7 +59,6 @@ const Issue = ({ params }) => {
       {issue.confirmPopup && <ConfirmPopup issue={issue} />}
       {issue.approverPopup && <ApproverPopup issue={issue} />}
       {issue.notVerifiedPopup && <NotVerifiedPopup issue={issue} />}
-      {issue.successPopup && <SuccessPopup issue={issue} />}
       {issue.nftQuota !== null && !isNFTQuotaSufficient && <PlanExpired />}
     </div>
   );
