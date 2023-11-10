@@ -24,7 +24,11 @@ const LoginButton = ({ onClick, ln }) => {
 
   if (isLoggedIn) {
     return (
-      <Link className={style.loginbutton} href="/dashboard" onClick={onClick}>
+      <Link
+        className={style.loginbutton}
+        href={`/${ln}/dashboard`}
+        onClick={onClick}
+      >
         <Image
           src={"/icons/dashboard.svg"}
           height={20}
@@ -39,7 +43,7 @@ const LoginButton = ({ onClick, ln }) => {
   }
 
   return (
-    <Link className={style.loginbutton} href="/login" onClick={onClick}>
+    <Link className={style.loginbutton} href={`/${ln}/login`} onClick={onClick}>
       {ln === "en" && "Log In"}
       {ln === "es" && "Acceso"}
       {ln === "ar" && "تسجيل الدخول"}

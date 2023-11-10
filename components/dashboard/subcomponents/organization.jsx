@@ -1,8 +1,9 @@
 import Button from "@/components/subcomponents/button/button";
 import style from "../dashboard.module.css";
 import { downloadFile } from "@/components/subcomponents/scripts/scripts";
+import t from "../translation";
 
-const Organization = ({ usedash }) => {
+const Organization = ({ usedash, ln }) => {
   const organizationDetails = {
     name: usedash.organizationDetails.name
       ? usedash.organizationDetails.name
@@ -48,7 +49,7 @@ const Organization = ({ usedash }) => {
           left: "var(--padding-main)",
         }}
       >
-        Organization Details
+        {t["Organization Details"][ln]}
       </div>
 
       <div style={{ fontSize: "1.5rem", padding: "var(--padding-light) 0px" }}>
@@ -63,12 +64,12 @@ const Organization = ({ usedash }) => {
             justifyContent: "center",
           }}
         >
-          <div>Description: </div>
-          <div>Address: </div>
-          <div>Country: </div>
+          <div>{t["Description"][ln]}: </div>
+          <div>{t["Address"][ln]}: </div>
+          <div>{t["Country"][ln]}: </div>
           <div>Website: </div>
-          <div>Registration Id: </div>
-          <div>Registration Proof: </div>
+          <div>{t["Registration Id"][ln]}: </div>
+          <div>{t["Registration Proof"][ln]}: </div>
         </div>
         <div
           style={{

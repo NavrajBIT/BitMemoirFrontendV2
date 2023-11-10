@@ -2,8 +2,9 @@ import Popup from "../subcomponents/popup/popup";
 import Button from "../subcomponents/button/button";
 import { useState } from "react";
 import { LocalInputField } from "../subcomponents/form/form";
+import t from "./translation";
 
-const SaveAsPopup = ({ creator }) => {
+const SaveAsPopup = ({ creator, ln }) => {
   const [templateName, setTemplateName] = useState(
     `${creator.templateName}_copy`
   );
@@ -20,7 +21,7 @@ const SaveAsPopup = ({ creator }) => {
         }}
       >
         <div style={{ fontSize: "2rem", color: "var(--primary-50)" }}>
-          Save Template As
+          {t["Save As"][ln]}
         </div>
         <div>
           Duplicate {'"'}
@@ -43,7 +44,7 @@ const SaveAsPopup = ({ creator }) => {
         >
           <div style={{ width: "fit-content" }}>
             <Button
-              text="Cancel X"
+              text={t["Cancel"][ln] + " X"}
               variant={"secondary"}
               onClick={() => {
                 creator.setsaveaspopup(false);
@@ -52,7 +53,7 @@ const SaveAsPopup = ({ creator }) => {
           </div>
           <div style={{ width: "fit-content" }}>
             <Button
-              text="Save"
+              text={t["Save"][ln]}
               variant={"primary"}
               endIcon={"saveas"}
               onClick={() => {

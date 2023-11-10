@@ -1,7 +1,7 @@
 import Trial from "@/components/trial/trial";
 
-const Page = () => {
-  return <Trial />;
+const Page = ({ params }) => {
+  return <Trial params={params} />;
 };
 
 export default Page;

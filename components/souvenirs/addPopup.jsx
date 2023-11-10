@@ -4,7 +4,7 @@ import Button from "../subcomponents/button/button";
 import { LocalInputField } from "../subcomponents/form/form";
 import { useState } from "react";
 
-const AddPopup = ({ script }) => {
+const AddPopup = ({ script, ln }) => {
   const [framename, setFramename] = useState("");
   const [selectedFrame, setSelectedFrame] = useState(null);
   const [selectedFrameURL, setSelectedFrameURL] = useState(null);
@@ -35,7 +35,7 @@ const AddPopup = ({ script }) => {
         <div style={{ fontSize: "1.5rem", color: "var(--primary-50)" }}>
           Add Frame
         </div>
-        <Draganddrop submitFile={selectFrame} file={selectedFrameURL} />
+        <Draganddrop submitFile={selectFrame} file={selectedFrameURL} ln={ln} />
         <LocalInputField
           inputData={{ label: "Frame Name", type: "text" }}
           maxLength={100}

@@ -6,7 +6,8 @@ import Wallet from "./subcomponents/wallet/wallet";
 import usekyc from "./usekyc";
 import Stepper from "../subcomponents/stepper/stepper";
 
-const Kyc = () => {
+const Kyc = ({ params }) => {
+  const ln = params?.ln ? params.ln : "en";
   const script = usekyc();
   return (
     <div

@@ -8,7 +8,9 @@ const BottomToolBar = ({ creator, dynamic, ln }) => {
   return (
     <div className={style.bottomToolBarContainer}>
       <div className={style.bottomToolBar}>
-        {creator.templateBackground && <BackgroundColor creator={creator} />}
+        {creator.templateBackground && (
+          <BackgroundColor creator={creator} ln={ln} />
+        )}
         <BottomTool
           icon="text"
           toolName={t["Add Text"][ln]}
@@ -24,34 +26,34 @@ const BottomToolBar = ({ creator, dynamic, ln }) => {
         />
         <BottomTool
           icon="variable"
-          toolName="Variable"
-          toolDescription="Add variable on the certificate template. Variable values can vary on different certificate issuances. e.g. Student Name"
+          toolName={t["Variable"][ln]}
+          toolDescription={t["VariableDesc"][ln]}
           onClick={() => creator.setIsSelectingVariable(true)}
         />
         <BottomTool
           icon="qr"
-          toolName="QR Code"
-          toolDescription="Add QR code on certificate template. QR codes help in verification of the certificate."
+          toolName={t["QR Code"][ln]}
+          toolDescription={t["QRdesc"][ln]}
           onClick={creator.addQrcode}
         />
         <BottomTool
           icon="delete"
-          toolName="Delete"
-          toolDescription="Delete selected items"
+          toolName={t["Delete"][ln]}
+          toolDescription={t["DeleteDesc"][ln]}
           onClick={creator.deletevariable}
         />
 
         <BottomTool
           icon="save"
-          toolName="Save"
-          toolDescription="Save Template"
+          toolName={t["Save"][ln]}
+          toolDescription={t["SaveDesc"][ln]}
           onClick={creator.save}
         />
         {!dynamic && (
           <BottomTool
             icon="saveas"
-            toolName="Save As"
-            toolDescription="Duplicate template to another file"
+            toolName={t["Save As"][ln]}
+            toolDescription={t["SaveAsDesc"][ln]}
             onClick={() => creator.setsaveaspopup(true)}
           />
         )}
@@ -62,7 +64,7 @@ const BottomToolBar = ({ creator, dynamic, ln }) => {
 
 export default BottomToolBar;
 
-const BackgroundColor = ({ creator }) => {
+const BackgroundColor = ({ creator, ln }) => {
   const [isColorpicker, setIsColorPicker] = useState(false);
   const [isColorPickerFocused, setIsColorPickerFocused] = useState(false);
   const changeColor = (color) => {
@@ -84,8 +86,8 @@ const BackgroundColor = ({ creator }) => {
     >
       <BottomTool
         icon="color"
-        toolName="Background Color"
-        toolDescription="Change Template Background Color"
+        toolName={t["Background Color"][ln]}
+        toolDescription={t["BGColorDesc"][ln]}
         onClick={openColorPicker}
       />
       <div

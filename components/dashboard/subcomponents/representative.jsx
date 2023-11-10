@@ -1,8 +1,9 @@
 import Button from "@/components/subcomponents/button/button";
 import style from "../dashboard.module.css";
 import { downloadFile } from "@/components/subcomponents/scripts/scripts";
+import t from "../translation";
 
-const Representative = ({ usedash }) => {
+const Representative = ({ usedash, ln }) => {
   const representativeDetails = {
     designation: usedash.issuerDetails.designation
       ? usedash.issuerDetails.designation
@@ -32,7 +33,7 @@ const Representative = ({ usedash }) => {
           left: "var(--padding-main)",
         }}
       >
-        Representative Details
+        {t["Representative Details"][ln]}
       </div>
 
       <div style={{ display: "flex", gap: "var(--padding-light)" }}>
@@ -44,8 +45,8 @@ const Representative = ({ usedash }) => {
             justifyContent: "center",
           }}
         >
-          <div>Designation: </div>
-          <div>Signed Note from Authority: </div>
+          <div>{t["Designation"][ln]}: </div>
+          <div>{t["Signed Note from Authority"][ln]}: </div>
         </div>
         <div
           style={{

@@ -3,27 +3,43 @@ import Button from "@/components/subcomponents/button/button";
 import style from "../issue.module.css";
 import { useRouter } from "next/navigation";
 
-const ApproverPopup = ({ issue }) => {
+const ApproverPopup = ({ issue, ln }) => {
   return (
     <Popup>
       <div className={style.confirmContainer}>
         <div className={style.sectionDark}>
           <div style={{ fontSize: "1.5rem", color: "var(--primary-50)" }}>
-            Approver
+            {ln === "en" && "Approver"}
+            {ln === "es" && "Aprobador"}
+            {ln === "ar" && "الموافق"}
           </div>
           <div style={{ fontSize: "1.25rem", color: "var(--primary-50)" }}>
-            Approvers will approve the certificate issuance
+            {ln === "en" && "Approvers will approve the certificate issuance"}
+            {ln === "es" &&
+              "Los aprobadores aprobarán la emisión del certificado."}
+            {ln === "ar" && "سيوافق الموافقون على إصدار الشهادة"}
           </div>
         </div>
         <div className={style.sectionLight}>
-          <div className={style.sectionHeading}>Select Approver</div>
+          <div className={style.sectionHeading}>
+            {ln === "en" && "Select Approver"}
+            {ln === "es" && "Seleccionar aprobador"}
+            {ln === "ar" && "حدد المعتمد"}
+          </div>
           <ApproverSelector issue={issue} />
         </div>
         <div style={{ color: "red" }}>
           {issue.selectedApprovers.length === 0 &&
+            ln === "en" &&
             "Please select atleast one approver."}
+          {issue.selectedApprovers.length === 0 &&
+            ln === "es" &&
+            "Por favor seleccione al menos un aprobador."}
+          {issue.selectedApprovers.length === 0 &&
+            ln === "ar" &&
+            "الرجاء تحديد معتمد واحد على الأقل."}
         </div>
-        <ButtonContainer issue={issue} />
+        <ButtonContainer issue={issue} ln={ln} />
       </div>
     </Popup>
   );
@@ -76,7 +92,7 @@ const ApproverSelector = ({ issue }) => {
         text={"Add Approver +"}
         onClick={() => {
           issue.downloadcsv();
-          router.push("/approver");
+          router.push(`/${ln}/approver`);
         }}
       />
     </div>
@@ -150,7 +166,7 @@ const UnSelectedApprovers = ({ issue, addApprover }) => (
   </div>
 );
 
-const ButtonContainer = ({ issue }) => (
+const ButtonContainer = ({ issue, ln }) => (
   <div
     style={{
       width: "100%",
@@ -162,7 +178,7 @@ const ButtonContainer = ({ issue }) => (
   >
     <div style={{ width: "fit-content", minWidth: "40%" }}>
       <Button
-        text="X Cancel"
+        text={ln === "en" ? "X Cancel" : ln === "es" ? "X Cancelar" : "X إلغاء"}
         variant="secondary"
         onClick={() => {
           issue.setApproverPopup(false);
@@ -173,7 +189,9 @@ const ButtonContainer = ({ issue }) => (
     {issue.selectedApprovers.length !== 0 && (
       <div style={{ width: "fit-content", minWidth: "40%" }}>
         <Button
-          text="Issue >"
+          text={
+            ln === "en" ? "Issue >" : ln === "es" ? "Problema >" : "المشكلة >"
+          }
           variant="primary"
           onClick={() => {
             issue.placeOrder();

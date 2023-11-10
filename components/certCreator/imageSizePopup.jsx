@@ -1,8 +1,9 @@
 import Popup from "../subcomponents/popup/popup";
 import Button from "../subcomponents/button/button";
 import Image from "next/image";
+import t from "./translation";
 
-const ImageSizePopup = ({ creator }) => {
+const ImageSizePopup = ({ creator, ln }) => {
   return (
     <Popup>
       <div
@@ -19,7 +20,7 @@ const ImageSizePopup = ({ creator }) => {
         }}
       >
         <div style={{ fontSize: "2rem", color: "var(--primary-50)" }}>
-          Low quality Image
+          {t["Low quality Image"][ln]}
         </div>
         <Image
           src={"/icons/warning.svg"}
@@ -27,16 +28,21 @@ const ImageSizePopup = ({ creator }) => {
           height={200}
           width={200}
         />
-        <div>The selected image is of low quality.</div>
-        <div>Background images should be 1080px X 810px in size.</div>
+        <div>{t["The selected image is of low quality."][ln]}</div>
         <div>
-          A low quality image can be unreadable and can render the QR codes
-          unscannable.
+          {t["Background images should be 1080px X 810px in size."][ln]}
+        </div>
+        <div>
+          {
+            t[
+              "A low quality image can be unreadable and can render the QR codes unscannable."
+            ][ln]
+          }
         </div>
 
         <div style={{ width: "fit-content" }}>
           <Button
-            text="I understand"
+            text={t["I understand"][ln]}
             variant={"primary"}
             onClick={() => {
               creator.setImageQualityPopup(false);

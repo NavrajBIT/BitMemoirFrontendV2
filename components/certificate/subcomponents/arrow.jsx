@@ -1,6 +1,6 @@
 import style from "../template.module.css";
 
-const Arrow = () => (
+const Arrow = ({ ln }) => (
   <div className={style.arrowContainer}>
     <div className={style.arrow}>
       <svg
@@ -37,8 +37,24 @@ const Arrow = () => (
         textAlign: "center",
       }}
     >
-      Select <br /> Template <br />
-      to Start
+      {ln === "en" && (
+        <>
+          Select <br /> Template <br />
+          to Start
+        </>
+      )}
+      {ln === "es" && (
+        <>
+          Seleccione la <br /> plantilla <br />
+          para comenzar
+        </>
+      )}
+      {ln === "ar" && (
+        <>
+          للبدء <br /> القالب <br />
+          حدد
+        </>
+      )}
     </div>
   </div>
 );

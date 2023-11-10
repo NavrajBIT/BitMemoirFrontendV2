@@ -1,6 +1,6 @@
 import Button from "@/components/subcomponents/button/button";
-
-const DynamicUpdate = ({ update }) => {
+import t from "../translation";
+const DynamicUpdate = ({ update, ln }) => {
   return (
     <div
       style={{
@@ -24,13 +24,13 @@ const DynamicUpdate = ({ update }) => {
           color: "var(--primary-50)",
         }}
       >
-        Update Certificates
+        {t["Update Certificates"][ln]}
       </div>
-      <div>This order contains Dynamic certificates</div>
+      <div>{t["This order contains Dynamic certificates"][ln]}</div>
       <div style={{ width: "fit-content" }}>
         <Button
           variant={"primary"}
-          text="Update"
+          text={t["Update"][ln]}
           endIcon={"update"}
           onClick={update}
         />

@@ -2,7 +2,7 @@ import { useState } from "react";
 import Draganddrop from "../subcomponents/draganddrop/draganddrop";
 import API from "../subcomponents/scripts/apiCall";
 
-const Verifyfile = ({ setcid, setIsLoading }) => {
+const Verifyfile = ({ setcid, setIsLoading, ln }) => {
   const api = API();
   const [fileURL, setFileURL] = useState(null);
 
@@ -41,6 +41,7 @@ const Verifyfile = ({ setcid, setIsLoading }) => {
           generateCID(e);
         }}
         file={fileURL}
+        ln={ln}
       />
     </div>
   );

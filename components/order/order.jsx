@@ -10,8 +10,10 @@ import CertificateEditPopup from "./subcomponents/certificateEditPopup";
 import DynamicUpdate from "./subcomponents/dynamicUpdate";
 import SuccessPopup from "./subcomponents/successPopup";
 import PlanExpired from "../subscriptions/planExpired";
+import t from "./translation";
 
 const Order = ({ params }) => {
+  const ln = params?.ln ? params.ln : "en";
   const orderer = useOrder(params);
 
   if (orderer.notFound) return <NotFound />;
@@ -35,16 +37,19 @@ const Order = ({ params }) => {
         gap: "var(--padding-main)",
       }}
     >
-      {orderer.templateDetails !== null && <OrderHeading orderer={orderer} />}
+      {orderer.templateDetails !== null && (
+        <OrderHeading orderer={orderer} ln={ln} />
+      )}
       {orderer.orderDetails &&
         orderer.orderDetails.approvals &&
         orderer.orderDetails.approvals.length > 0 && (
-          <Approval orderer={orderer} />
+          <Approval orderer={orderer} ln={ln} />
         )}
+
       {orderer.orderDetails &&
         orderer.orderDetails.type === "dynamic" &&
         orderer.orderDetails.modelStatus === "issued" && (
-          <DynamicUpdate update={orderer.updatecerts} />
+          <DynamicUpdate update={orderer.updatecerts} ln={ln} />
         )}
       {orderer.orderDetails.modelStatus === "pending" && (
         <div
@@ -58,12 +63,12 @@ const Order = ({ params }) => {
               fontSize: "1.5rem",
             }}
           >
-            Certificate Preview
+            {t["Certificate Preview"][ln]}
           </div>
-          <div>Review and Edit the Certificates before Issuing.</div>
+          <div>{t["Review and Edit the Certificates before Issuing."][ln]}</div>
         </div>
       )}
-      <Certificates orderer={orderer} />
+      <Certificates orderer={orderer} ln={ln} />
       {orderer.orderDetails.modelStatus === "pending" && (
         <div
           style={{
@@ -72,7 +77,7 @@ const Order = ({ params }) => {
           }}
         >
           <Button
-            text="Issue >>"
+            text={t["Issue >>"][ln]}
             variant={"primary"}
             onClick={orderer.issueOrder}
           />
@@ -90,7 +95,7 @@ const Order = ({ params }) => {
       {orderer.successPopup && (
         <SuccessPopup close={() => orderer.setSuccessPopup(false)} />
       )}
-      {orderer.isBuyPopup && <PlanExpired />}
+      {orderer.isBuyPopup && <PlanExpired ln={ln} />}
     </div>
   );
 };

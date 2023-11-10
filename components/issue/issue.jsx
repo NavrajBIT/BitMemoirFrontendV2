@@ -12,6 +12,7 @@ import NotVerifiedPopup from "./subcomponents/notVerifiedPopup";
 import PlanExpired from "../subscriptions/planExpired";
 
 const Issue = ({ params }) => {
+  const ln = params?.ln ? params.ln : "en";
   const issue = useIssue(params);
 
   const isNFTQuotaSufficient =
@@ -43,23 +44,25 @@ const Issue = ({ params }) => {
       }}
     >
       <Link
-        href={"/certificate"}
+        href={`/${ln}/certificate`}
         style={{ fontSize: "1.5rem", color: "var(--primary-50)" }}
       >
-        {"< Back"}
+        {ln === "en" ? "< Back" : ln === "es" ? "< Atrás" : "< خلف"}
       </Link>
 
-      <Datafield issue={issue} />
-      {issue.studentNumber > 0 && <Spreadsheet issue={issue} />}
+      <Datafield issue={issue} ln={ln} />
+      {issue.studentNumber > 0 && <Spreadsheet issue={issue} ln={ln} />}
 
       {issue.loadingStatus !== "" && (
         <LocalLoading text={issue.loadingStatus} />
       )}
       {issue.popupStatus !== "" && <Alert issue={issue} />}
-      {issue.confirmPopup && <ConfirmPopup issue={issue} />}
-      {issue.approverPopup && <ApproverPopup issue={issue} />}
-      {issue.notVerifiedPopup && <NotVerifiedPopup issue={issue} />}
-      {issue.nftQuota !== null && !isNFTQuotaSufficient && <PlanExpired />}
+      {issue.confirmPopup && <ConfirmPopup issue={issue} ln={ln} />}
+      {issue.approverPopup && <ApproverPopup issue={issue} ln={ln} />}
+      {issue.notVerifiedPopup && <NotVerifiedPopup issue={issue} ln={ln} />}
+      {issue.nftQuota !== null && !isNFTQuotaSufficient && (
+        <PlanExpired ln={ln} />
+      )}
     </div>
   );
 };

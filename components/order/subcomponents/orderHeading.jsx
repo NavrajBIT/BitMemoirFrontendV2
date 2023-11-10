@@ -1,7 +1,8 @@
 import Button from "@/components/subcomponents/button/button";
 import Image from "next/image";
+import t from "../translation";
 
-const OrderHeading = ({ orderer }) => {
+const OrderHeading = ({ orderer, ln }) => {
   return (
     <div
       style={{

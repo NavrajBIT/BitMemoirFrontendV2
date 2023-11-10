@@ -1,7 +1,7 @@
 import Subscription from "@/components/subscriptions/subscription";
 
-const Page = () => {
-	return <Subscription />;
+const Page = ({ params }) => {
+  return <Subscription params={params} />;
 };
 
 export default Page;

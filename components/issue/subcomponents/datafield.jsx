@@ -1,7 +1,7 @@
 import { LocalInputField } from "@/components/subcomponents/form/form";
 import Button from "@/components/subcomponents/button/button";
 
-const Datafield = ({ issue }) => {
+const Datafield = ({ issue, ln }) => {
   return (
     <div
       style={{
@@ -18,19 +18,33 @@ const Datafield = ({ issue }) => {
           textAlign: "center",
         }}
       >
-        Template: {issue.template.name}
+        {ln === "en" && "Template"}
+        {ln === "es" && "Plantilla"}
+        {ln === "ar" && "نموذج"}: {issue.template.name}
       </div>
 
       <div>
         <Button
-          text="Upload Data File (.csv)"
+          text={
+            ln === "en"
+              ? "Upload Data File (.csv)"
+              : ln === "es"
+              ? "Cargar archivo de datos (.csv)"
+              : "تحميل ملف البيانات (.csv)"
+          }
           variant={"primary"}
           onClick={issue.uploadcsv}
         />
       </div>
       <div>
         <Button
-          text="Download Data File Format (.csv)"
+          text={
+            ln === "en"
+              ? "Download Data File Format (.csv)"
+              : ln === "es"
+              ? "Descargar formato de archivo de datos (.csv)"
+              : "تنزيل تنسيق ملف البيانات (.csv)"
+          }
           variant={"tertiary"}
           onClick={issue.downloadcsv}
         />
@@ -53,11 +67,18 @@ const Datafield = ({ issue }) => {
             textAlign: "center",
           }}
         >
-          No. of recipients:
+          {ln === "en" && "No. of recipients"}
+          {ln === "es" && "No. de destinatarios"}
+          {ln === "ar" && "عدد المستلمين"}:
         </div>
         <LocalInputField
           inputData={{
-            label: "No. of recipients",
+            label:
+              ln === "en"
+                ? "No. of recipients"
+                : ln === "es"
+                ? "No. de destinatarios"
+                : "عدد المستلمين",
             type: "number",
             required: true,
           }}

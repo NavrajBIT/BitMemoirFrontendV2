@@ -3,7 +3,7 @@ import style from "../issue.module.css";
 import { LocalInputField } from "@/components/subcomponents/form/form";
 import Button from "@/components/subcomponents/button/button";
 
-const Spreadsheet = ({ issue }) => {
+const Spreadsheet = ({ issue, ln }) => {
   const handleCellChange = (rowIndex, columnIndex, newValue) => {
     const newData = [...issue.studentData];
     newData[rowIndex][columnIndex] = newValue;
@@ -46,7 +46,13 @@ const Spreadsheet = ({ issue }) => {
         ))}
         <div style={{ width: "fit-content" }}>
           <Button
-            text="Issue Certificates >"
+            text={
+              ln === "en"
+                ? "Issue Certificates >"
+                : ln === "es"
+                ? "Emitir Certificados >"
+                : "إصدار الشهادات >"
+            }
             variant="primary"
             onClick={issue.handleNext}
           />

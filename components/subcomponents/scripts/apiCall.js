@@ -5,10 +5,17 @@ const API_URL = process.env.NEXT_PUBLIC_API_ENDPOINT;
 const API = () => {
   const router = useRouter();
 
+  const getLanguage = () => {
+    let ln = localStorage.getItem("ln");
+    if (!ln || ln === "undefined") ln = "en";
+    return ln;
+  };
+
   async function crud(requestMethod, endpoint, data, isFormdata) {
     const token = localStorage.getItem("jwtToken");
     if (token === null || token === undefined) {
-      router.push("/login");
+      const ln = getLanguage();
+      router.push(`/${ln}/login`);
       console.log(token);
       throw "Login required";
     }
@@ -33,7 +40,8 @@ const API = () => {
       const response = await fetch(API_URL + endpoint + "/", requestOptions);
 
       if (response.status === 401) {
-        router.push("/login");
+        const ln = getLanguage();
+        router.push(`/${ln}/login`);
         throw "Login required";
       }
       if (

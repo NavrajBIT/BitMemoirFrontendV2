@@ -1,7 +1,7 @@
 import Kyc from "@/components/kyc/kyc";
 
-const Page = () => {
-  return <Kyc />;
+const Page = ({ params }) => {
+  return <Kyc params={params} />;
 };
 
 export default Page;

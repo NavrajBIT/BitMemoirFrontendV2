@@ -2,8 +2,9 @@ import style from "../dashboard.module.css";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { getTime } from "@/components/subcomponents/scripts/scripts";
+import t from "../translation";
 
-const Orders = ({ usedash }) => {
+const Orders = ({ usedash, ln }) => {
   return (
     <div
       className={style.sectionContainer}
@@ -26,12 +27,17 @@ const Orders = ({ usedash }) => {
           fontWeight: "700",
         }}
       >
-        Orders
+        {t["Orders"][ln]}
       </div>
       {usedash.orders &&
         usedash.orders.length > 0 &&
         usedash.orders.map((order, index) => (
-          <OrderCard usedash={usedash} key={"order-" + index} order={order} />
+          <OrderCard
+            usedash={usedash}
+            key={"order-" + index}
+            order={order}
+            ln={ln}
+          />
         ))}
     </div>
   );
@@ -39,7 +45,7 @@ const Orders = ({ usedash }) => {
 
 export default Orders;
 
-const OrderCard = ({ usedash, order }) => {
+const OrderCard = ({ usedash, order, ln }) => {
   const router = useRouter();
 
   let certImage;
@@ -59,7 +65,7 @@ const OrderCard = ({ usedash, order }) => {
   return (
     <div
       className={style.orderCard}
-      onClick={() => router.push(`/order/${order.id}`)}
+      onClick={() => router.push(`/${ln}/order/${order.id}`)}
     >
       <Image
         src={certImage !== null ? certImage : "/icons/imageplaceholder.svg"}

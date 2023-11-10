@@ -1,8 +1,9 @@
 import Popup from "../subcomponents/popup/popup";
 import { useState, useEffect } from "react";
 import Button from "../subcomponents/button/button";
+import t from "./translation";
 
-const TutorialPopup = () => {
+const TutorialPopup = ({ ln }) => {
   const [isTutorial, setIsTutorial] = useState(false);
 
   useEffect(() => {
@@ -27,7 +28,7 @@ const TutorialPopup = () => {
         }}
       >
         <div style={{ fontSize: "2rem", color: "var(--primary-50)" }}>
-          Tutorial
+          {t["Tutorial"][ln]}
         </div>
         <div>
           <iframe
@@ -49,7 +50,7 @@ const TutorialPopup = () => {
         >
           <div style={{ width: "fit-content" }}>
             <Button
-              text="Don't show"
+              text={t["Don't show"][ln]}
               variant={"secondary"}
               onClick={() => {
                 localStorage.setItem("certCreatorTutorial", false);
@@ -59,7 +60,7 @@ const TutorialPopup = () => {
           </div>
           <div style={{ width: "fit-content" }}>
             <Button
-              text="Watch Later"
+              text={t["Watch Later"][ln]}
               variant={"primary"}
               onClick={() => {
                 setIsTutorial(false);

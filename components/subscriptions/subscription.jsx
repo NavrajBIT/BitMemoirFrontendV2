@@ -1,6 +1,7 @@
 import SubscriptionCard from "./subscriptionCard";
 
-const Subscription = () => {
+const Subscription = ({ params }) => {
+  const ln = params?.ln ? params.ln : "en";
   return (
     <div
       style={{
@@ -38,7 +39,9 @@ const Subscription = () => {
             transform: "translateX(-50%)",
           }}
         >
-          Subscription Plans
+          {ln === "en" && "Subscription Plans"}
+          {ln === "es" && "Planes de suscripción"}
+          {ln === "ar" && "خطط الاشتراك"}
         </div>
         <div
           style={{
@@ -50,11 +53,26 @@ const Subscription = () => {
             transform: "translateX(-50%)",
           }}
         >
-          For custom plans, please contact us at support@beimagine.tech
+          {ln === "en" &&
+            "For custom plans, please contact us at support@beimagine.tech"}
+          {ln === "es" &&
+            "Para planes personalizados, contáctenos en support@beimagine.tech"}
+          {ln === "ar" &&
+            "للحصول على خطط مخصصة، يرجى الاتصال بنا على support@beimagine.tech"}
         </div>
-        <SubscriptionCard title="Silver" certificates={100} price={2} />
-        <SubscriptionCard title="Gold" certificates={500} price={1.75} />
-        <SubscriptionCard title="Platinum" certificates={1000} price={1.5} />
+        <SubscriptionCard title="Silver" certificates={100} price={2} ln={ln} />
+        <SubscriptionCard
+          title="Gold"
+          certificates={500}
+          price={1.75}
+          ln={ln}
+        />
+        <SubscriptionCard
+          title="Platinum"
+          certificates={1000}
+          price={1.5}
+          ln={ln}
+        />
       </div>
     </div>
   );

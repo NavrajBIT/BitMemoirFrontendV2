@@ -1,6 +1,7 @@
 import style from "../certificate.module.css";
+import t from "../translation";
 
-const Issuer = ({ usecert }) => {
+const Issuer = ({ usecert, ln }) => {
   return (
     <div className={style.detailContainer}>
       <div
@@ -13,7 +14,7 @@ const Issuer = ({ usecert }) => {
           fontWeight: "700",
         }}
       >
-        Issued By
+        {t["Issued By"][ln]}
       </div>
       <div
         style={{
@@ -28,7 +29,7 @@ const Issuer = ({ usecert }) => {
           color: "var(--primary-50)",
         }}
       >
-        Address:
+        {t["Address"][ln]}:
       </div>
       <div>{usecert.certDetails && usecert.certDetails.issuer.address}</div>
       <div
@@ -36,7 +37,7 @@ const Issuer = ({ usecert }) => {
           color: "var(--primary-50)",
         }}
       >
-        Country:
+        {t["Country"][ln]}:
       </div>
       <div>{usecert.certDetails && usecert.certDetails.issuer.country}</div>
       <div
@@ -52,7 +53,7 @@ const Issuer = ({ usecert }) => {
           color: "var(--primary-50)",
         }}
       >
-        Description:
+        {t["Description"][ln]}:
       </div>
       <div>{usecert.certDetails && usecert.certDetails.issuer.description}</div>
       <div

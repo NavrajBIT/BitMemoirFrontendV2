@@ -6,15 +6,16 @@ import Slider from "@/components/subcomponents/slider/slider";
 import style from "../certCreator.module.css";
 import { useRouter } from "next/navigation";
 import LinkButton from "@/components/subcomponents/button/link";
+import t from "../translation";
 
-const TopToolBar = ({ creator, templateId, dynamic, orderId }) => {
+const TopToolBar = ({ creator, templateId, dynamic, orderId, ln }) => {
   const imageRef = useRef();
   const router = useRouter();
   return (
     <div className={style.toptoolContainer}>
       <div style={{ width: "fit-content" }}>
         <Button
-          text="<<Back"
+          text={"<<" + t["Back"][ln]}
           variant={"primary"}
           style={{
             fontSize: "1rem",
@@ -24,27 +25,27 @@ const TopToolBar = ({ creator, templateId, dynamic, orderId }) => {
             if (creator.variables.qrcode.length === 0) {
               creator.setNoQR(true);
             } else {
-              if (dynamic) router.push(`/order/${orderId}`);
-              else router.push("/certificate");
+              if (dynamic) router.push(`/${ln}/order/${orderId}`);
+              else router.push(`/${ln}/certificate`);
             }
           }}
         />
       </div>
       <TopTool
         icon="save"
-        toolName="Save"
-        toolDescription="Save template"
+        toolName={t["Save"][ln]}
+        toolDescription={t["SaveDesc"][ln]}
         onClick={creator.save}
       />
       {!dynamic && (
         <TopTool
           icon="saveas"
-          toolName="Save As"
-          toolDescription="Duplicate template to another file"
+          toolName={t["Save As"][ln]}
+          toolDescription={t["SaveAsDesc"][ln]}
           onClick={() => creator.setsaveaspopup(true)}
         />
       )}
-      Template:
+      {t["Template"][ln]}:
       <LocalInputField
         inputData={{ type: "text", label: "" }}
         value={creator.templateName}
@@ -59,10 +60,12 @@ const TopToolBar = ({ creator, templateId, dynamic, orderId }) => {
           maxWidth: "200px",
         }}
       >
-        Image:
+        {t["Image"][ln]}:
         <Button
           text={
-            creator.uploadedImage ? creator.uploadedImageName : "Select Image"
+            creator.uploadedImage
+              ? creator.uploadedImageName
+              : t["Select Image"][ln]
           }
           variant="primary"
           onClick={() => imageRef.current.click()}
@@ -73,14 +76,14 @@ const TopToolBar = ({ creator, templateId, dynamic, orderId }) => {
       </div>
       <TopTool
         icon="remove"
-        toolName="Remove"
-        toolDescription="Remove base image"
+        toolName={t["Remove"][ln]}
+        toolDescription={t["RemoveDesc"][ln]}
         onClick={creator.removeImage}
       />
-      <ScaleTool creator={creator} />
+      <ScaleTool creator={creator} ln={ln} />
       <div style={{ width: "fit-content" }}>
         <Button
-          text="Next >>"
+          text={t["Next"][ln] + " >>"}
           variant={"primary"}
           style={{
             fontSize: "1rem",
@@ -108,12 +111,12 @@ const TopToolBar = ({ creator, templateId, dynamic, orderId }) => {
 
 export default TopToolBar;
 
-const ScaleTool = ({ creator }) => {
+const ScaleTool = ({ creator, ln }) => {
   return (
     <div style={{ display: "flex" }}>
       <Slider
         value={creator.scale}
-        valueDisplay={`Size: ${creator.scale}%`}
+        valueDisplay={`${t["Size"][ln]}: ${creator.scale}%`}
         handleChange={(e) => creator.setScale(e.target.value)}
       />
     </div>

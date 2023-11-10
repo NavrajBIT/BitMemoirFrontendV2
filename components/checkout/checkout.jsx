@@ -2,8 +2,10 @@
 import { LocalInputField } from "../subcomponents/form/form";
 import PayPalCheckout from "../paypal/paypal";
 import useCheckout from "./useCheckout";
+import t from "./translation";
 
-const Checkout = ({ plan }) => {
+const Checkout = ({ plan, params }) => {
+  const ln = params?.ln ? params.ln : "en";
   const script = useCheckout();
   const totalPrice =
     script.plans[plan]["certificates"] * script.plans[plan]["price"];
@@ -47,24 +49,26 @@ const Checkout = ({ plan }) => {
             transform: "translateX(-50%)",
           }}
         >
-          Checkout
+          {t["Checkout"][ln]}
         </div>
-        <div style={{ fontSize: "2rem" }}>{plan} Subscription</div>
+        <div style={{ fontSize: "2rem" }}>
+          {plan} {t["Subscription"][ln]}
+        </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "3fr 1fr 2fr" }}>
-          <div>Number of certificates</div>
+          <div>{t["Number of certificates"][ln]}</div>
           <div style={{ textAlign: "center" }}>=</div>
           <div>{script.plans[plan]["certificates"]}</div>
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "3fr 1fr 2fr" }}>
-          <div>Price per certificate</div>
+          <div>{t["Price per certificate"][ln]}</div>
           <div style={{ textAlign: "center" }}>=</div>
           <div>{script.plans[plan]["price"]} $/certificate</div>
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "3fr 1fr 2fr" }}>
-          <div>Total price</div>
+          <div>{t["Total price"][ln]}</div>
           <div style={{ textAlign: "center" }}>=</div>
           <div>{totalPrice} $</div>
         </div>
@@ -76,12 +80,12 @@ const Checkout = ({ plan }) => {
             alignItems: "center",
           }}
         >
-          <div>Coupon Code</div>
+          <div>{t["Coupon Code"][ln]}</div>
           <div style={{ textAlign: "center" }}>=</div>
           <div>
             <LocalInputField
               inputData={{
-                label: "Coupon Code",
+                label: t["Coupon Code"][ln],
                 type: "text",
               }}
               value={script.coupon}
@@ -92,7 +96,7 @@ const Checkout = ({ plan }) => {
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "3fr 1fr 2fr" }}>
-          <div>Discount</div>
+          <div>{t["Discount"][ln]}</div>
           <div style={{ textAlign: "center" }}>=</div>
           <div>{script.discount} %</div>
         </div>
@@ -112,7 +116,7 @@ const Checkout = ({ plan }) => {
             padding: "var(--padding-main) 0px",
           }}
         >
-          <div>Net Payable</div>
+          <div>{t["Net Payable"][ln]}</div>
           <div style={{ textAlign: "center" }}>=</div>
           <div>{netPayable}$</div>
         </div>

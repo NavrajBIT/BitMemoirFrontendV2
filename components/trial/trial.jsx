@@ -8,7 +8,8 @@ import LinkButton from "../subcomponents/button/link";
 import LocalLoading from "../subcomponents/loadingPage/localloading";
 import SubscriptionCard from "../subscriptions/subscriptionCard";
 
-const Trial = () => {
+const Trial = ({ params }) => {
+  const ln = params?.ln ? params.ln : "en";
   const script = usekyc();
   const api = API();
   const [trial, setTrial] = useState(null);
@@ -43,6 +44,7 @@ const Trial = () => {
     >
       {isLoading && <LocalLoading />}
       {trial !== null && !trial.is_active && <TrialForm usekyc={script} />}
+
       {trial !== null && trial.is_active && (
         <div
           style={{
@@ -56,10 +58,15 @@ const Trial = () => {
           }}
         >
           <div style={{ textAlign: "center", fontSize: "1.5rem" }}>
-            Free Trial Plan is already being used.
+            {ln === "en" && "Free Trial Plan is already being used."}
+            {ln === "es" && "El plan de prueba gratuito ya se está utilizando."}
+            {ln === "ar" && "الخطة التجريبية المجانية قيد الاستخدام بالفعل."}
           </div>
           <div style={{ textAlign: "center" }}>
-            Free Trial Balance : {trial.nft_quota}
+            {ln === "en" && "Free Trial Balance :"}
+            {ln === "es" && "Saldo de prueba gratuito:"}
+            {ln === "ar" && "رصيد النسخة التجريبية المجانية :"}
+            {trial.nft_quota}
           </div>
           <div
             style={{
@@ -70,7 +77,9 @@ const Trial = () => {
               fontWeight: "bold",
             }}
           >
-            Subscription Plans
+            {ln === "en" && "Subscription Plans"}
+            {ln === "es" && "Planes de suscripción"}
+            {ln === "ar" && "خطط الاشتراك"}
           </div>
           <div
             style={{
@@ -87,16 +96,32 @@ const Trial = () => {
               padding: "var(--padding-main)",
             }}
           >
-            <SubscriptionCard title="Silver" certificates={100} price={2} />
-            <SubscriptionCard title="Gold" certificates={500} price={1.75} />
+            <SubscriptionCard
+              title="Silver"
+              certificates={100}
+              price={2}
+              ln={ln}
+            />
+            <SubscriptionCard
+              title="Gold"
+              certificates={500}
+              price={1.75}
+              ln={ln}
+            />
             <SubscriptionCard
               title="Platinum"
               certificates={1000}
               price={1.5}
+              ln={ln}
             />
           </div>
           <div style={{ textAlign: "center" }}>
-            For further assistance, please write to support@beimagine.tech
+            {ln === "en" &&
+              "For further assistance, please write to support@beimagine.tech"}
+            {ln === "es" &&
+              "Para obtener más ayuda, escriba a support@beimagine.tech"}
+            {ln === "ar" &&
+              "لمزيد من المساعدة، يرجى الكتابة إلى support@beimagine.tech"}
           </div>
         </div>
       )}

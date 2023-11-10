@@ -1,7 +1,8 @@
 import style from "../dashboard.module.css";
 import Certificate from "@/components/order/subcomponents/card";
+import t from "../translation";
 
-const Certificates = ({ usedash }) => {
+const Certificates = ({ usedash, ln }) => {
   return (
     <div
       className={style.sectionContainer}
@@ -24,7 +25,7 @@ const Certificates = ({ usedash }) => {
           fontWeight: "700",
         }}
       >
-        Certificates
+        {t["Certificates"][ln]}
       </div>
       <div
         style={{
@@ -42,6 +43,7 @@ const Certificates = ({ usedash }) => {
               cert={cert}
               index={index}
               key={"my-certificate-" + index}
+              ln={ln}
             />
           ))}
       </div>

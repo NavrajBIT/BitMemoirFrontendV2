@@ -5,7 +5,8 @@ import { useState } from "react";
 import Verifyfile from "./verifyfile";
 import LocalLoading from "../subcomponents/loadingPage/localloading";
 
-const Verify = () => {
+const Verify = ({ params }) => {
+  const ln = params?.ln ? params.ln : "en";
   const router = useRouter();
   const [certId, setCertId] = useState(null);
   const [cid, setcid] = useState("");
@@ -81,6 +82,7 @@ const Verify = () => {
               setCertId(0);
               setcid(e);
             }}
+            ln={ln}
           />
         </DynamicForm>
         {isLoading && <LocalLoading />}

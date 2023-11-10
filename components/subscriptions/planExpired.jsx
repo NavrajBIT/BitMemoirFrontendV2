@@ -7,7 +7,7 @@ import API from "../subcomponents/scripts/apiCall";
 import { useEffect, useState } from "react";
 import FreetrialButton from "../home/subcomponents/freetrialButton";
 
-const PlanExpired = () => {
+const PlanExpired = ({ ln }) => {
   const router = useRouter();
   const api = API();
   const [trial, setTrial] = useState(false);
@@ -73,7 +73,9 @@ const PlanExpired = () => {
             fontWeight: "bold",
           }}
         >
-          Subscription Plans
+          {ln === "en" && "Subscription Plans"}
+          {ln === "es" && "Planes de suscripción"}
+          {ln === "ar" && "خطط الاشتراك"}
         </div>
         <div
           style={{
@@ -81,14 +83,20 @@ const PlanExpired = () => {
             textAlign: "center",
           }}
         >
-          You do not have enough Certificate balance to proceed.
+          {ln === "en" &&
+            "You do not have enough Certificate balance to proceed."}
+          {ln === "es" &&
+            "No tiene suficiente saldo de certificado para continuar."}
+          {ln === "ar" && "ليس لديك رصيد كافٍ من الشهادة للمتابعة."}
         </div>
         <div
           style={{
             textAlign: "center",
           }}
         >
-          Current certificate Balance = {nftQuota}
+          {ln === "en" && "Current certificate Balance ="}
+          {ln === "es" && "Saldo del certificado actual ="}
+          {ln === "ar" && "رصيد الشهادة الحالية ="} {nftQuota}
         </div>
         <div
           style={{
@@ -97,9 +105,24 @@ const PlanExpired = () => {
             flexWrap: "wrap",
           }}
         >
-          <SubscriptionCard title="Silver" certificates={100} price={2} />
-          <SubscriptionCard title="Gold" certificates={500} price={1.75} />
-          <SubscriptionCard title="Platinum" certificates={1000} price={1.5} />
+          <SubscriptionCard
+            title="Silver"
+            certificates={100}
+            price={2}
+            ln={ln}
+          />
+          <SubscriptionCard
+            title="Gold"
+            certificates={500}
+            price={1.75}
+            ln={ln}
+          />
+          <SubscriptionCard
+            title="Platinum"
+            certificates={1000}
+            price={1.5}
+            ln={ln}
+          />
         </div>
         {!trial.is_active && (
           <div
@@ -117,16 +140,34 @@ const PlanExpired = () => {
                 textAlign: "center",
               }}
             >
-              Start Free Trial
+              {ln === "en" && "Start Free Trial"}
+              {ln === "es" && "Empiza la prueba gratuita"}
+              {ln === "ar" && "ابدأ النسخة التجريبية المجانية"}
             </div>
             <div
               style={{
                 textAlign: "center",
               }}
             >
-              Get {process.env.NEXT_PUBLIC_FREE_CERTS} certificates for free.
+              {ln === "en" && (
+                <>
+                  Get {process.env.NEXT_PUBLIC_FREE_CERTS} certificates for
+                  free.
+                </>
+              )}
+              {ln === "en" && (
+                <>
+                  Obtenga {process.env.NEXT_PUBLIC_FREE_CERTS} certificados
+                  gratis.
+                </>
+              )}
+              {ln === "en" && (
+                <>
+                  احصل على {process.env.NEXT_PUBLIC_FREE_CERTS} شهادات مجاناً.
+                </>
+              )}
             </div>
-            <FreetrialButton />
+            <FreetrialButton ln={ln} />
           </div>
         )}
       </div>

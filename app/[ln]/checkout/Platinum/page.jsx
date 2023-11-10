@@ -1,7 +1,7 @@
 import Checkout from "@/components/checkout/checkout";
 
-const page = () => {
-  return <Checkout plan="Platinum" />;
+const page = ({ params }) => {
+  return <Checkout plan="Platinum" params={params} />;
 };
 
 export default page;

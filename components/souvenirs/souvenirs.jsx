@@ -11,7 +11,8 @@ import PreviewPopup from "./previewpopup";
 import StatusPopup from "./statusPopup";
 import PlanExpired from "../subscriptions/planExpired";
 
-const Souvenirs = () => {
+const Souvenirs = ({ params }) => {
+  const ln = params?.ln ? params.ln : "en";
   const script = useSouvenirs();
 
   const frames = [];
@@ -32,14 +33,22 @@ const Souvenirs = () => {
     <div className={style.formcontainer}>
       {script.isLoading && <LocalLoading />}
       <div className={style.formoverlay} />
-      <div className={style.formTitle}>Souvenir</div>
-      <Draganddrop submitFile={script.handleImageUpload} file={script.image} />
-      Please select a high quality image of 4/3 aspect ratio.
-      <Button
-        variant={"primary"}
-        text="Frame"
-        onClick={() => console.log(script.selectedFrame)}
+      <div className={style.formTitle}>
+        {ln === "en" && "Souvenir"}
+        {ln === "es" && "Recuerdo"}
+        {ln === "ar" && "تذكار"}
+      </div>
+      <Draganddrop
+        submitFile={script.handleImageUpload}
+        file={script.image}
+        ln={ln}
       />
+      {ln === "en" && "Please select a high quality image of 4/3 aspect ratio."}
+      {ln === "es" &&
+        "Seleccione una imagen de alta calidad con una relación de aspecto de 4/3."}
+      {ln === "ar" &&
+        "يرجى اختيار صورة ذات جودة عالية بنسبة عرض إلى ارتفاع 4/3."}
+
       <Select
         title="Select Frame"
         options={frames}
@@ -86,10 +95,12 @@ const Souvenirs = () => {
           />
         )}
       </div>
-      {script.framePopup && <AddPopup script={script} />}
+      {script.framePopup && <AddPopup script={script} ln={ln} />}
       {script.previewPopup && <PreviewPopup script={script} />}
       {script.status !== "" && <StatusPopup script={script} />}
-      {script.nftQuota !== null && script.nftQuota === 0 && <PlanExpired />}
+      {script.nftQuota !== null && script.nftQuota === 0 && (
+        <PlanExpired ln={ln} />
+      )}
     </div>
   );
 };

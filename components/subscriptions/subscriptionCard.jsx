@@ -2,7 +2,7 @@ import style from "./subscription.module.css";
 import Button from "../subcomponents/button/button";
 import LinkButton from "../subcomponents/button/link";
 
-const SubscriptionCard = ({ title, certificates, price }) => {
+const SubscriptionCard = ({ title, certificates, price, ln }) => {
   return (
     <div className={style.subscriptioncardcontainer}>
       <div className={style.subscriptioncardoverlay} />
@@ -34,7 +34,7 @@ const SubscriptionCard = ({ title, certificates, price }) => {
         <LinkButton
           text="Buy Now"
           variant={"primary"}
-          href={"/checkout/" + title}
+          href={`/${ln}/checkout/${title}`}
         />
       </div>
     </div>

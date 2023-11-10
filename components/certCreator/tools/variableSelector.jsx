@@ -2,8 +2,9 @@ import variableList from "../variableList";
 import Button from "@/components/subcomponents/button/button";
 import { useState } from "react";
 import { LocalInputField } from "@/components/subcomponents/form/form";
+import t from "../translation";
 
-const VariableSelector = ({ close, selectvariable }) => {
+const VariableSelector = ({ close, selectvariable, ln }) => {
   const [isCustom, setIsCustom] = useState(false);
 
   return (
@@ -28,7 +29,12 @@ const VariableSelector = ({ close, selectvariable }) => {
         />
       ) : (
         <>
-          <Button text={"Close X"} variant={"primary"} onClick={close} />
+          <Button
+            text={t["Close"][ln] + "X"}
+            variant={"primary"}
+            onClick={close}
+            style={{ background: "var(--error)" }}
+          />
           <div
             style={{
               fontSize: "2rem",
@@ -36,7 +42,7 @@ const VariableSelector = ({ close, selectvariable }) => {
               textAlign: "center",
             }}
           >
-            Select Variable:
+            {t["Select Variable"][ln]}:
           </div>
           <div
             style={{
@@ -45,7 +51,7 @@ const VariableSelector = ({ close, selectvariable }) => {
               gap: "var(--padding-light)",
             }}
           >
-            {variableList.map((variable, index) => (
+            {variableList[ln].map((variable, index) => (
               <Button
                 text={variable}
                 variant={"secondary"}

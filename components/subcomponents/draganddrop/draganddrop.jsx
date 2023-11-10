@@ -2,7 +2,7 @@ import { useRef } from "react";
 import style from "./draganddrop.module.css";
 import Image from "next/image";
 
-const Draganddrop = ({ submitFile, file }) => {
+const Draganddrop = ({ submitFile, file, ln }) => {
   const buttonRef = useRef(null);
 
   const handleFileChange = (event) => {
@@ -53,9 +53,21 @@ const Draganddrop = ({ submitFile, file }) => {
             gap: "var(--padding-main)",
           }}
         >
-          <div>Drag & Drop here...</div>
-          <div>OR</div>
-          <div>Click to Upload.</div>
+          <div>
+            {ln === "en" && "Drag & Drop here..."}
+            {ln === "es" && "Arrastra y suelta aquí..."}
+            {ln === "ar" && "السحب والإسقاط هنا..."}
+          </div>
+          <div>
+            {ln === "en" && "OR"}
+            {ln === "es" && "O"}
+            {ln === "ar" && "أو"}
+          </div>
+          <div>
+            {ln === "en" && "Click to Upload."}
+            {ln === "es" && "Haga clic para cargar."}
+            {ln === "ar" && "انقر للتحميل."}
+          </div>
         </div>
         <input
           ref={buttonRef}

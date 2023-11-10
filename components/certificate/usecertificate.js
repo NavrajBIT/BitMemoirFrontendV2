@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import API from "../subcomponents/scripts/apiCall";
 import { useRouter } from "next/navigation";
 
-const usecertificate = () => {
+const usecertificate = (ln) => {
   const [isLoading, setIsLoading] = useState(false);
   const [templates, setTemplates] = useState([]);
   const [selectedTemplate, setSelectedtemplate] = useState(null);
@@ -41,14 +41,14 @@ const usecertificate = () => {
       .crud("POST", "certificate/template")
       .then((res) => {
         if (res.status >= 200 && res.status <= 299)
-          router.push(`/certCreator/${res.id}`);
+          router.push(`/${ln}/certCreator/${res.id}`);
       })
       .catch((err) => console.log(err));
     setIsLoading(false);
   };
 
   const editTemplate = () => {
-    router.push(`/certCreator/${selectedTemplate.id}`);
+    router.push(`/${ln}/certCreator/${selectedTemplate.id}`);
   };
   const deleteTemplate = async () => {
     setIsDeletePopup(false);
@@ -59,7 +59,7 @@ const usecertificate = () => {
   };
 
   const issueCert = () => {
-    router.push(`/issue/${selectedTemplate.id}`);
+    router.push(`/${ln}/issue/${selectedTemplate.id}`);
   };
 
   return {

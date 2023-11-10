@@ -1,7 +1,7 @@
 import Verify from "@/components/verify/verify";
 
-const Page = () => {
-  return <Verify />;
+const Page = ({ params }) => {
+  return <Verify params={params} />;
 };
 
 export default Page;

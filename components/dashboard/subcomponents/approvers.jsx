@@ -2,8 +2,9 @@ import Button from "@/components/subcomponents/button/button";
 import style from "../dashboard.module.css";
 import { useRouter } from "next/navigation";
 import { ApproverCard } from "@/components/approver/approverList";
+import t from "../translation";
 
-const Approvers = ({ usedash }) => {
+const Approvers = ({ usedash, ln }) => {
   const router = useRouter();
   return (
     <div
@@ -24,9 +25,9 @@ const Approvers = ({ usedash }) => {
           left: "var(--padding-main)",
         }}
       >
-        Approvers
+        {t["Approvers"][ln]}
       </div>
-      Approvers can approve the issuance of Essential (degree) certificates.
+      {t["Approvers1"][ln]}
       <div
         style={{
           width: "100%",
@@ -44,6 +45,7 @@ const Approvers = ({ usedash }) => {
               key={"approver-" + index}
               approver={approver}
               script={usedash}
+              ln={ln}
             />
           ))}
       </div>

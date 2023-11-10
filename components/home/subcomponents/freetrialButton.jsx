@@ -13,7 +13,7 @@ const FreetrialButton = ({ ln }) => {
         endIcon={"arrow-right"}
         onClick={() => {
           localStorage.setItem("nextRoute", "/trial");
-          router.push("/trial");
+          router.push(`/${ln}/trial`);
         }}
       />
     </div>

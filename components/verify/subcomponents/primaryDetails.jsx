@@ -4,7 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { getTime } from "@/components/subcomponents/scripts/scripts";
 
-const PrimaryDetails = ({ usecert }) => {
+const PrimaryDetails = ({ usecert, ln }) => {
+  const translation = {
+    verified: { en: "Verified", es: "Verificado", ar: "تم التحقق" },
+    unverified: {
+      en: "Unverified",
+      es: "Inconfirmado",
+      ar: "لم يتم التحقق منها",
+    },
+  };
+
   const verificationstatus = usecert.certDetails.is_verified
     ? "verified"
     : "unverified";
@@ -35,7 +44,7 @@ const PrimaryDetails = ({ usecert }) => {
           fontWeight: "700",
         }}
       >
-        {verificationstatus === "verified" ? "Verified" : "Unverified"}
+        {translation[verificationstatus][ln]}
       </div>
       <div
         style={{

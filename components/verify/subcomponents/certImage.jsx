@@ -1,8 +1,9 @@
 import style from "../certificate.module.css";
 import Image from "next/image";
 import LinkButton from "@/components/subcomponents/button/link";
+import t from "../translation";
 
-const CertImage = ({ usecert }) => {
+const CertImage = ({ usecert, ln }) => {
   const imagesrc = usecert.certDetails
     ? usecert.certDetails.image
       ? usecert.certDetails.image
@@ -28,7 +29,7 @@ const CertImage = ({ usecert }) => {
           fontWeight: "700",
         }}
       >
-        Certificate
+        {t["Certificate"][ln]}
       </div>
       <div
         style={{

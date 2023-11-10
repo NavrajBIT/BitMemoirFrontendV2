@@ -10,7 +10,8 @@ import Certificates from "./subcomponents/certificates";
 import Loading from "../subcomponents/loadingPage/loading";
 import Subscriptions from "./subcomponents/subscriptions";
 
-const Dashboard = () => {
+const Dashboard = ({ params }) => {
+  const ln = params?.ln ? params.ln : "en";
   const usedash = usedashboard();
 
   if (usedash.isLoading) return <Loading />;
@@ -28,19 +29,23 @@ const Dashboard = () => {
       {usedash.accountDetails &&
         usedash.emailDetails &&
         usedash.kycDetails &&
-        usedash.issuerDetails && <Heading usedash={usedash} />}
-      <Subscriptions usedash={usedash} />
-      <Tabs usedash={usedash} />
+        usedash.issuerDetails && <Heading usedash={usedash} ln={ln} />}
+      <Subscriptions usedash={usedash} ln={ln} />
+      <Tabs usedash={usedash} ln={ln} />
       {usedash.selectedTab === "Profile" && (
         <>
-          {usedash.organizationDetails && <Organization usedash={usedash} />}
-          {usedash.issuerDetails && <Representative usedash={usedash} />}
-          <Approvers usedash={usedash} />
+          {usedash.organizationDetails && (
+            <Organization usedash={usedash} ln={ln} />
+          )}
+          {usedash.issuerDetails && (
+            <Representative usedash={usedash} ln={ln} />
+          )}
+          <Approvers usedash={usedash} ln={ln} />
         </>
       )}
-      {usedash.selectedTab === "Orders" && <Orders usedash={usedash} />}
+      {usedash.selectedTab === "Orders" && <Orders usedash={usedash} ln={ln} />}
       {usedash.selectedTab === "Certificates" && (
-        <Certificates usedash={usedash} />
+        <Certificates usedash={usedash} ln={ln} />
       )}
     </div>
   );

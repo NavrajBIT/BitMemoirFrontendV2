@@ -8,6 +8,7 @@ import useCIDcertificate from "./usecidCertificate";
 import Image from "next/image";
 
 const CIDCertificate = async ({ params }) => {
+  const ln = params?.ln ? params.ln : "en";
   const usecert = await useCIDcertificate(params);
 
   if (!usecert.certDetails)
@@ -38,7 +39,9 @@ const CIDCertificate = async ({ params }) => {
             fontWeight: "700",
           }}
         >
-          Unverified
+          {ln === "en" && "Unverified"}
+          {ln === "es" && "Inconfirmado"}
+          {ln === "ar" && "لم يتم التحقق منها"}
         </div>
       </div>
     );
@@ -54,14 +57,14 @@ const CIDCertificate = async ({ params }) => {
         wordWrap: "break-word",
       }}
     >
-      <PrimaryDetails usecert={usecert} />
+      <PrimaryDetails usecert={usecert} ln={ln} />
 
       <div className={style.details}>
-        <Issuer usecert={usecert} />
-        <Receiver usecert={usecert} />
+        <Issuer usecert={usecert} ln={ln} />
+        <Receiver usecert={usecert} ln={ln} />
       </div>
-      <CertImage usecert={usecert} />
-      <Advertisment />
+      <CertImage usecert={usecert} ln={ln} />
+      <Advertisment ln={ln} />
     </div>
   );
 };

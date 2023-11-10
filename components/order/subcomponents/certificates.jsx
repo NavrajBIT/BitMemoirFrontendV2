@@ -1,6 +1,7 @@
 import Certificate from "./card";
+import t from "../translation";
 
-const Certificates = ({ orderer }) => {
+const Certificates = ({ orderer, ln }) => {
   return (
     <div
       style={{
@@ -23,6 +24,7 @@ const Certificates = ({ orderer }) => {
           setCertPopup={orderer.setcertificatedetailsPopup}
           selectCert={orderer.setSelectedCertId}
           key={"my-certificate-" + index}
+          ln={ln}
         />
       ))}
       <div
@@ -35,7 +37,7 @@ const Certificates = ({ orderer }) => {
           color: "var(--primary-50)",
         }}
       >
-        Certificates
+        {t["Certificates"][ln]}
       </div>
     </div>
   );

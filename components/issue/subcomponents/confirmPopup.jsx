@@ -3,13 +3,15 @@ import Button from "@/components/subcomponents/button/button";
 import style from "../issue.module.css";
 import Image from "next/image";
 
-const ConfirmPopup = ({ issue }) => {
+const ConfirmPopup = ({ issue, ln }) => {
   return (
     <Popup>
       <div className={style.confirmContainer}>
         <div className={style.sectionDark}>
           <div style={{ fontSize: "1.5rem", color: "var(--primary-50)" }}>
-            Certificate Details
+            {ln === "en" && "Certificate Details"}
+            {ln === "es" && "Detalles del certificado"}
+            {ln === "ar" && "تفاصيل الشهادة"}
           </div>
           <div style={{ fontSize: "1.25rem", color: "var(--primary-50)" }}>
             {issue.template.name}
@@ -33,12 +35,14 @@ const ConfirmPopup = ({ issue }) => {
           />
         </div>
         <div style={{ fontSize: "1rem", color: "var(--text-primary)" }}>
-          Total number of certificates: {issue.studentNumber}
+          {ln === "en" && "Total number of certificates:"}
+          {ln === "es" && "Número total de certificados:"}
+          {ln === "ar" && "إجمالي عدد الشهادات:"} {issue.studentNumber}
         </div>
 
-        <TypeSelector issue={issue} />
-        <DeploymentSelector issue={issue} />
-        <ButtonContainer issue={issue} />
+        <TypeSelector issue={issue} ln={ln} />
+        <DeploymentSelector issue={issue} ln={ln} />
+        <ButtonContainer issue={issue} ln={ln} />
       </div>
     </Popup>
   );
@@ -46,9 +50,13 @@ const ConfirmPopup = ({ issue }) => {
 
 export default ConfirmPopup;
 
-const TypeSelector = ({ issue }) => (
+const TypeSelector = ({ issue, ln }) => (
   <div className={style.sectionLight}>
-    <div className={style.sectionHeading}>Certificate type</div>
+    <div className={style.sectionHeading}>
+      {ln === "en" && "Certificate type"}
+      {ln === "es" && "Tipo de certificado"}
+      {ln === "ar" && "نوع الشهادة"}
+    </div>
     <div className={style.selector}>
       <input
         type="checkbox"
@@ -60,7 +68,9 @@ const TypeSelector = ({ issue }) => (
           })
         }
       />
-      Essential (Degree Certificates)
+      {ln === "en" && "Essential (Degree Certificates)"}
+      {ln === "es" && "Esencial (Certificados de Grado)"}
+      {ln === "ar" && "أساسي (شهادات الدرجة)"}
     </div>
     <div className={style.selector}>
       <input
@@ -73,14 +83,20 @@ const TypeSelector = ({ issue }) => (
           })
         }
       />
-      Non Essential (Diploma Certificates)
+      {ln === "en" && "Non Essential (Diploma Certificates)"}
+      {ln === "es" && "No Esencial (Certificados de Diploma)"}
+      {ln === "ar" && "غير أساسية (شهادات الدبلوم)"}
     </div>
   </div>
 );
 
-const DeploymentSelector = ({ issue }) => (
+const DeploymentSelector = ({ issue, ln }) => (
   <div className={style.sectionLight}>
-    <div className={style.sectionHeading}>Deployment type</div>
+    <div className={style.sectionHeading}>
+      {ln === "en" && "Deployment type"}
+      {ln === "es" && "Tipo de implementación"}
+      {ln === "ar" && "نوع النشر"}
+    </div>
     <div className={style.selector}>
       <input
         type="checkbox"
@@ -92,7 +108,9 @@ const DeploymentSelector = ({ issue }) => (
           })
         }
       />
-      Static
+      {ln === "en" && "Static"}
+      {ln === "es" && "Estático"}
+      {ln === "ar" && "ثابتة"}
     </div>
     <div className={style.selector}>
       <input
@@ -105,11 +123,13 @@ const DeploymentSelector = ({ issue }) => (
           })
         }
       />
-      Dynamic
+      {ln === "en" && "Dynamic"}
+      {ln === "es" && "Dinámico"}
+      {ln === "ar" && "متحرك"}
     </div>
   </div>
 );
-const ButtonContainer = ({ issue }) => (
+const ButtonContainer = ({ issue, ln }) => (
   <div
     style={{
       width: "100%",
@@ -122,7 +142,7 @@ const ButtonContainer = ({ issue }) => (
   >
     <div style={{ width: "fit-content", minWidth: "40%" }}>
       <Button
-        text="X Cancel"
+        text={ln === "en" ? "Cancel" : ln === "es" ? "Cancelar" : "يلغي"}
         variant="secondary"
         onClick={() => {
           issue.setApproverPopup(false);
@@ -132,7 +152,9 @@ const ButtonContainer = ({ issue }) => (
     </div>
     <div style={{ width: "fit-content", minWidth: "40%" }}>
       <Button
-        text="Issue >"
+        text={
+          ln === "en" ? "Issue >" : ln === "es" ? "Problema >" : "المشكلة >"
+        }
         variant="primary"
         onClick={() => {
           if (issue.certType === "essential") {

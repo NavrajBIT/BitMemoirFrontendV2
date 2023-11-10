@@ -1,8 +1,9 @@
 import Popup from "../subcomponents/popup/popup";
 import Button from "../subcomponents/button/button";
 import { useRouter } from "next/navigation";
+import t from "./translation";
 
-const NoqrPopup = ({ creator }) => {
+const NoqrPopup = ({ creator, ln }) => {
   const router = useRouter();
   return (
     <Popup>
@@ -17,12 +18,9 @@ const NoqrPopup = ({ creator }) => {
         }}
       >
         <div style={{ fontSize: "2rem", color: "var(--primary-50)" }}>
-          No QR code
+          {t["No QR code"][ln]}
         </div>
-        <div>
-          The certificate does not have a qr code. A QR code makes the
-          certificate verifiable.
-        </div>
+        <div>{t["QrpopDesc"][ln]}</div>
 
         <div
           style={{
@@ -33,7 +31,7 @@ const NoqrPopup = ({ creator }) => {
         >
           <div style={{ width: "fit-content" }}>
             <Button
-              text="< Continue"
+              text={t["Continue"][ln]}
               variant={"secondary"}
               onClick={() => {
                 creator.setNoQR(false);
@@ -43,7 +41,7 @@ const NoqrPopup = ({ creator }) => {
           </div>
           <div style={{ width: "fit-content" }}>
             <Button
-              text="Add Qr"
+              text={t["addQR"][ln]}
               variant={"primary"}
               onClick={() => {
                 creator.setNoQR(false);

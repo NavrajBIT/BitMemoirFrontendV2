@@ -1,6 +1,7 @@
 import style from "../certificate.module.css";
+import t from "../translation";
 
-const Receiver = ({ usecert }) => {
+const Receiver = ({ usecert, ln }) => {
   return (
     <div className={style.detailContainer}>
       <div
@@ -13,7 +14,7 @@ const Receiver = ({ usecert }) => {
           fontWeight: "700",
         }}
       >
-        Received By
+        {t["Received By"][ln]}
       </div>
       {usecert.certDetails &&
         usecert.certDetails.variablevalues.length > 0 &&
@@ -44,7 +45,7 @@ const Receiver = ({ usecert }) => {
           wordBreak: "break-all",
         }}
       >
-        Wallet:
+        Account Id:
       </div>
       <div>{usecert.certDetails && usecert.certDetails.wallet}</div>
     </div>

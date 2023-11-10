@@ -1,6 +1,7 @@
 import style from "../dashboard.module.css";
+import t from "../translation";
 
-const Tabs = ({ usedash }) => {
+const Tabs = ({ usedash, ln }) => {
   return (
     <div
       style={{
@@ -14,16 +15,16 @@ const Tabs = ({ usedash }) => {
         gap: "var(--padding-light)",
       }}
     >
-      <TabButton title="Profile" usedash={usedash} />
-      <TabButton title="Orders" usedash={usedash} />
-      <TabButton title="Certificates" usedash={usedash} />
+      <TabButton title="Profile" usedash={usedash} ln={ln} />
+      <TabButton title="Orders" usedash={usedash} ln={ln} />
+      <TabButton title="Certificates" usedash={usedash} ln={ln} />
     </div>
   );
 };
 
 export default Tabs;
 
-const TabButton = ({ title, usedash }) => {
+const TabButton = ({ title, usedash, ln }) => {
   return (
     <div
       className={style.tabButton}
@@ -34,7 +35,7 @@ const TabButton = ({ title, usedash }) => {
       }}
       onClick={() => usedash.setSelectedTab(title)}
     >
-      {title}
+      {t[title][ln]}
     </div>
   );
 };

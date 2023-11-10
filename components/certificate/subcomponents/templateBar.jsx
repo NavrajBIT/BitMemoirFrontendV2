@@ -1,14 +1,15 @@
 import Image from "next/image";
 import style from "../template.module.css";
 import { useState } from "react";
+import t from "../translation";
 
-const TemplateBar = ({ cert }) => {
+const TemplateBar = ({ cert, ln }) => {
   return (
     <div className={style.templateBar}>
       <div className={style.recentlyUsedContainer}>
-        <div className={style.heading}>Templates</div>
+        <div className={style.heading}>{t["Templates"][ln]}</div>
         <div className={style.templateContainer}>
-          <CreateNewTemplate cert={cert} />
+          <CreateNewTemplate cert={cert} ln={ln} />
           {cert.templates &&
             Array.isArray(cert.templates) &&
             cert.templates.length > 0 &&
@@ -42,7 +43,7 @@ const TemplateBar = ({ cert }) => {
 
 export default TemplateBar;
 
-const CreateNewTemplate = ({ cert }) => {
+const CreateNewTemplate = ({ cert, ln }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -79,7 +80,9 @@ const CreateNewTemplate = ({ cert }) => {
           cursor: "context-menu",
         }}
       >
-        Create New template
+        {ln === "en" && "Create New template"}
+        {ln === "es" && "Crear nueva plantilla"}
+        {ln === "ar" && "إنشاء قالب جديد"}
       </div>
     </div>
   );

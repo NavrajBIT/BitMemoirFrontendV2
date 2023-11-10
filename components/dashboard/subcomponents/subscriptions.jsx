@@ -1,8 +1,9 @@
 import LinkButton from "@/components/subcomponents/button/link";
 import style from "../dashboard.module.css";
 import FreetrialButton from "@/components/home/subcomponents/freetrialButton";
+import t from "../translation";
 
-const Subscriptions = ({ usedash }) => {
+const Subscriptions = ({ usedash, ln }) => {
   return (
     <div
       className={style.sectionContainer}
@@ -22,9 +23,9 @@ const Subscriptions = ({ usedash }) => {
           left: "var(--padding-main)",
         }}
       >
-        Subscriptions
+        {t["Subscriptions"][ln]}
       </div>
-      Certificate balance : {usedash.nftQuota}
+      {t["Certificate balance"][ln]} : {usedash.nftQuota}
       {usedash.subscriptions &&
         usedash.subscriptions?.map((plan, index) => {
           if (parseInt(plan.nft_quota) > 0)
@@ -34,7 +35,9 @@ const Subscriptions = ({ usedash }) => {
                   <div style={{ fontSize: "1.5rem" }}>
                     {plan.plan} Subscription
                   </div>
-                  <div>Available certificates : {plan.nft_quota}</div>
+                  <div>
+                    {t["Available certificates"][ln]} : {plan.nft_quota}
+                  </div>
                 </div>
               </div>
             );
@@ -44,18 +47,20 @@ const Subscriptions = ({ usedash }) => {
         parseInt(usedash.trial.nft_quota) > 0 && (
           <div>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <div style={{ fontSize: "1.5rem" }}>Free Trial</div>
-              <div>Available certificates : {usedash.trial.nft_quota}</div>
+              <div style={{ fontSize: "1.5rem" }}>{t["Free Trial"][ln]}</div>
+              <div>
+                {t["Available certificates"][ln]} : {usedash.trial.nft_quota}
+              </div>
             </div>
           </div>
         )}
       {usedash.trial && !usedash.trial.is_active ? (
-        <FreetrialButton />
+        <FreetrialButton ln={ln} />
       ) : (
         <div style={{ width: "fit-content" }}>
           <LinkButton
-            text={"Buy Subscription"}
-            href={"/subscription"}
+            text={t["Buy Subscription"][ln]}
+            href={`/${ln}/subscription`}
             variant={"primary"}
           />
         </div>

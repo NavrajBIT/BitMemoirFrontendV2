@@ -50,6 +50,7 @@ const CertCreator = ({ params }) => {
           templateId={params.templateId}
           dynamic={params.dynamic}
           orderId={params.orderId}
+          ln={ln}
         />
         <Canvas creator={creator} />
       </div>
@@ -59,16 +60,19 @@ const CertCreator = ({ params }) => {
           <VariableSelector
             close={() => creator.setIsSelectingVariable(false)}
             selectvariable={creator.addVariable}
+            ln={ln}
           />
         </Popup>
       )}
       {creator.loadingStatus !== "" && (
         <LocalLoading text={creator.loadingStatus} />
       )}
-      <TutorialPopup />
-      {creator.noQR && <NoqrPopup creator={creator} />}
-      {creator.saveaspopup && <SaveAsPopup creator={creator} />}
-      {creator.imagequalityPopup && <ImageSizePopup creator={creator} />}
+      <TutorialPopup ln={ln} />
+      {creator.noQR && <NoqrPopup creator={creator} ln={ln} />}
+      {creator.saveaspopup && <SaveAsPopup creator={creator} ln={ln} />}
+      {creator.imagequalityPopup && (
+        <ImageSizePopup creator={creator} ln={ln} />
+      )}
     </div>
   );
 };

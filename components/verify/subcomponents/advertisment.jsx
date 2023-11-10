@@ -1,7 +1,8 @@
 import style from "../certificate.module.css";
 import LinkButton from "@/components/subcomponents/button/link";
+import t from "../translation";
 
-const Advertisment = () => {
+const Advertisment = ({ ln }) => {
   return (
     <div
       className={style.container}
@@ -20,7 +21,7 @@ const Advertisment = () => {
           textAlign: "center",
         }}
       >
-        Issue your own verified certificate as NFT
+        {t["ad1"][ln]}
       </div>
       <div
         style={{
@@ -29,11 +30,14 @@ const Advertisment = () => {
           textAlign: "center",
         }}
       >
-        You can issue certifications as NFTs and send them to virtual wallets,
-        verifying their validity using blockchain technology
+        {t["ad2"][ln]}
       </div>
       <div style={{ width: "fit-content" }}>
-        <LinkButton variant="primary" text="Try For Free" href="/trial" />
+        <LinkButton
+          variant="primary"
+          text={t["ad3"][ln]}
+          href={`/${ln}/trial`}
+        />
       </div>
     </div>
   );

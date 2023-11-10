@@ -3,8 +3,9 @@ import Button from "@/components/subcomponents/button/button";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
+import t from "../translation";
 
-const Heading = ({ usedash }) => {
+const Heading = ({ usedash, ln }) => {
   const [isMenu, setIsMenu] = useState(false);
   const userDetails = {
     name: `${
@@ -23,7 +24,7 @@ const Heading = ({ usedash }) => {
           {userDetails.name}
           {usedash.kycDetails.status !== "Approved" && (
             <span style={{ fontSize: "0.75rem", color: "red" }}>
-              KYC pending*
+              {t["KYC pending"][ln]}*
             </span>
           )}
         </div>
@@ -60,7 +61,7 @@ const Heading = ({ usedash }) => {
             "X"
           )}
         </div>
-        {isMenu && <Menu />}
+        {isMenu && <Menu ln={ln} />}
       </div>
     </div>
   );
@@ -68,7 +69,7 @@ const Heading = ({ usedash }) => {
 
 export default Heading;
 
-const Menu = () => {
+const Menu = ({ ln }) => {
   const router = useRouter();
 
   return (
@@ -78,7 +79,7 @@ const Menu = () => {
         variant={"secondary"}
         onClick={() => {
           localStorage.setItem("jwtToken", null);
-          router.push("/home");
+          router.push(`/${ln}/home`);
         }}
       />
 
@@ -86,21 +87,21 @@ const Menu = () => {
         text="Edit Profile"
         variant={"secondary"}
         onClick={() => {
-          router.push("/kyc");
+          router.push(`/${ln}/kyc`);
         }}
       />
       <Button
         text="KYC Status"
         variant={"secondary"}
         onClick={() => {
-          router.push("/kyc/status");
+          router.push(`/${ln}/kyc/status`);
         }}
       />
       <Button
         text="Change Password"
         variant={"secondary"}
         onClick={() => {
-          router.push("/login/changePassword");
+          router.push(`/${ln}/login/changePassword`);
         }}
       />
     </div>

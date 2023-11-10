@@ -2,41 +2,44 @@ import SideTool from "./sideTool";
 import style from "../certCreator.module.css";
 import { useState } from "react";
 import { HexColorPicker } from "react-colorful";
+import t from "../translation";
 
-const SideToolBar = ({ creator, dynamic }) => {
+const SideToolBar = ({ creator, dynamic, ln }) => {
   return (
     <div>
       <div className={style.sideToolBar}>
-        {creator.templateBackground && <BackgroundColor creator={creator} />}
+        {creator.templateBackground && (
+          <BackgroundColor creator={creator} ln={ln} />
+        )}
         <SideTool
           icon="text"
-          toolName="Add Text"
-          toolDescription="Add permanent text on the certificate template"
+          toolName={t["Add Text"][ln]}
+          toolDescription={t["Addtextdescription"][ln]}
           onClick={creator.addText}
         />
 
         <SideTool
           icon="add_image"
-          toolName="Add Logo"
-          toolDescription="Add logo on the certificate template"
+          toolName={t["Add Logo"][ln]}
+          toolDescription={t["Addtextdescription"][ln]}
           onClick={creator.addLogo}
         />
         <SideTool
           icon="variable"
-          toolName="Variable"
-          toolDescription="Add variable on the certificate template. Variable values can vary on different certificate issuances. e.g. Student Name"
+          toolName={t["Variable"][ln]}
+          toolDescription={t["VariableDesc"][ln]}
           onClick={() => creator.setIsSelectingVariable(true)}
         />
         <SideTool
           icon="qr"
-          toolName="QR Code"
-          toolDescription="Add QR code on certificate template. QR codes help in verification of the certificate."
+          toolName={t["QR Code"][ln]}
+          toolDescription={t["QRdesc"][ln]}
           onClick={creator.addQrcode}
         />
         <SideTool
           icon="delete"
-          toolName="Delete"
-          toolDescription="Delete selected items"
+          toolName={t["Delete"][ln]}
+          toolDescription={t["DeleteDesc"][ln]}
           onClick={creator.deletevariable}
         />
         {/* <SideTool
@@ -51,15 +54,15 @@ const SideToolBar = ({ creator, dynamic }) => {
         /> */}
         <SideTool
           icon="save"
-          toolName="Save"
-          toolDescription="Save Template"
+          toolName={t["Save"][ln]}
+          toolDescription={t["SaveDesc"][ln]}
           onClick={creator.save}
         />
         {!dynamic && (
           <SideTool
             icon="saveas"
-            toolName="Save As"
-            toolDescription="Duplicate template to another file"
+            toolName={t["Save As"][ln]}
+            toolDescription={t["SaveAsDesc"][ln]}
             onClick={() => creator.setsaveaspopup(true)}
           />
         )}
@@ -70,7 +73,7 @@ const SideToolBar = ({ creator, dynamic }) => {
 
 export default SideToolBar;
 
-const BackgroundColor = ({ creator }) => {
+const BackgroundColor = ({ creator, ln }) => {
   const [isColorpicker, setIsColorPicker] = useState(false);
   const [isColorPickerFocused, setIsColorPickerFocused] = useState(false);
   const changeColor = (color) => {
@@ -92,8 +95,8 @@ const BackgroundColor = ({ creator }) => {
     >
       <SideTool
         icon="color"
-        toolName="Background Color"
-        toolDescription="Change Template Background Color"
+        toolName={t["Background Color"][ln]}
+        toolDescription={t["BGColorDesc"][ln]}
         onClick={openColorPicker}
       />
       <div

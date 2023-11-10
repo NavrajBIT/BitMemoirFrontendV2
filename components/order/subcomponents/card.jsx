@@ -1,13 +1,18 @@
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import style from "../order.module.css";
 import { useEffect, useState } from "react";
 import API from "@/components/subcomponents/scripts/apiCall";
 import Button from "@/components/subcomponents/button/button";
 import LinkButton from "@/components/subcomponents/button/link";
 
-const Certificate = ({ cert, index, canEdit, setCertPopup, selectCert }) => {
-  const router = useRouter();
+const Certificate = ({
+  cert,
+  index,
+  canEdit,
+  setCertPopup,
+  selectCert,
+  ln,
+}) => {
   const api = API();
   const [certImage, setcertImage] = useState(null);
   const [isMinted, setIsMinted] = useState(null);
@@ -129,7 +134,7 @@ const Certificate = ({ cert, index, canEdit, setCertPopup, selectCert }) => {
             text=""
             variant={"primary"}
             endIcon={"view"}
-            href={`/certificate/${cert.id}`}
+            href={`/${ln}/certificate/${cert.id}`}
           />
         )}
         {certImage !== null && (

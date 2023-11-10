@@ -1,8 +1,9 @@
 import API from "@/components/subcomponents/scripts/apiCall";
 import { useState, useEffect } from "react";
 import Button from "@/components/subcomponents/button/button";
+import t from "../translation";
 
-const Approval = ({ orderer }) => {
+const Approval = ({ orderer, ln }) => {
   return (
     <div
       style={{
@@ -27,7 +28,7 @@ const Approval = ({ orderer }) => {
           color: "var(--primary-50)",
         }}
       >
-        Approvals
+        {t["Approvals"][ln]}
       </div>
       {orderer.orderDetails.approvals.map((approval, index) => (
         <ApprovalCard

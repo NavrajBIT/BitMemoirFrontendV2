@@ -3,7 +3,7 @@ import style from "../template.module.css";
 import Button from "@/components/subcomponents/button/button";
 import { useState } from "react";
 
-const FullViewTemplate = ({ cert }) => {
+const FullViewTemplate = ({ cert, ln }) => {
   const template = cert.selectedTemplate;
   const [isClicked, setIsClicked] = useState(false);
 
@@ -34,7 +34,7 @@ const FullViewTemplate = ({ cert }) => {
           />
           {!isClicked && <ButtonContainer cert={cert} />}
 
-          {!isClicked && <ToolBar cert={cert} />}
+          {!isClicked && <ToolBar cert={cert} ln={ln} />}
         </div>
       </div>
     </div>
@@ -64,11 +64,15 @@ const ButtonContainer = ({ cert }) => (
   </div>
 );
 
-const ToolBar = ({ cert }) => (
+const ToolBar = ({ cert, ln }) => (
   <div className={style.toolbar}>
     <div className={style.templateHeading}>{cert.selectedTemplate.name}</div>
     <div style={{ width: "fit-content" }}>
-      <Button text={"Issue >>"} variant={"primary"} onClick={cert.issueCert} />
+      <Button
+        text={ln === "en" ? "Issue" : ln === "es" ? "Asunto" : "مشكلة" + ">>"}
+        variant={"primary"}
+        onClick={cert.issueCert}
+      />
     </div>
   </div>
 );
