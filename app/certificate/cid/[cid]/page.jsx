@@ -1,6 +1,7 @@
 import CIDCertificate from "@/components/verify/cidCertificate";
 import Navbar from "@/components/subcomponents/navbar/navbar";
 import Footer from "@/components/subcomponents/footer/footer";
+import AutoNestedRouter from "@/components/subcomponents/autoRouter/autoNestedRouter";
 
 const Page = ({ params }) => {
   return (
@@ -8,6 +9,7 @@ const Page = ({ params }) => {
       <Navbar />
       <CIDCertificate params={params} />
       <Footer />
+      <AutoNestedRouter />
     </>
   );
 };

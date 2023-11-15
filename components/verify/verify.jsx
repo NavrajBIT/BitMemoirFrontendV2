@@ -53,10 +53,18 @@ const Verify = ({ params }) => {
         }}
       >
         <DynamicForm
-          formTitle={"Verify Certificate"}
+          formTitle={
+            ln === "en"
+              ? "Verify Certificate"
+              : ln === "es"
+              ? "Verificar certificado"
+              : "التحقق من الشهادة"
+          }
           formData={verifyDataForm}
           handleSubmit={handleSubmit}
-          formButton={"Verify"}
+          formButton={
+            ln === "en" ? "Verify" : ln === "es" ? "Verificar" : "يؤكد"
+          }
           status={status}
           bgImage={false}
         >
@@ -67,14 +75,18 @@ const Verify = ({ params }) => {
               color: "var(--primary-50)",
             }}
           >
-            OR
+            {ln === "en" && "OR"}
+            {ln === "es" && "O"}
+            {ln === "ar" && "أو"}
           </div>
           <div
             style={{
               textAlign: "center",
             }}
           >
-            Upload file to verify
+            {ln === "en" && "Upload file to verify"}
+            {ln === "es" && "Subir archivo al verificador"}
+            {ln === "ar" && "قم بتحميل الملف للتحقق"}
           </div>
           <Verifyfile
             setIsLoading={setIsLoading}
