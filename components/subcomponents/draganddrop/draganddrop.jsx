@@ -55,7 +55,7 @@ const Draganddrop = ({ submitFile, file, ln }) => {
         >
           <div>
             {ln === "en" && "Drag & Drop here..."}
-            {ln === "es" && "Arrastra y suelta aquí..."}
+            {ln === "es" && "Arrastra el archivo aqui..."}
             {ln === "ar" && "السحب والإسقاط هنا..."}
           </div>
           <div>
@@ -65,7 +65,7 @@ const Draganddrop = ({ submitFile, file, ln }) => {
           </div>
           <div>
             {ln === "en" && "Click to Upload."}
-            {ln === "es" && "Haga clic para cargar."}
+            {ln === "es" && "Click aquí para cargar"}
             {ln === "ar" && "انقر للتحميل."}
           </div>
         </div>

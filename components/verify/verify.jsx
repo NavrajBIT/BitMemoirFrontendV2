@@ -15,7 +15,7 @@ const Verify = ({ params }) => {
   const verifyDataForm = [
     {
       type: "number",
-      label: "Certificate Id",
+      label: ln === "es" ? "Id del certificado" : "Certificate Id",
       required: false,
       value: certId,
       setValue: (e) => {
@@ -85,7 +85,7 @@ const Verify = ({ params }) => {
             }}
           >
             {ln === "en" && "Upload file to verify"}
-            {ln === "es" && "Subir archivo al verificador"}
+            {ln === "es" && "Cargar archivo para verificar"}
             {ln === "ar" && "قم بتحميل الملف للتحقق"}
           </div>
           <Verifyfile

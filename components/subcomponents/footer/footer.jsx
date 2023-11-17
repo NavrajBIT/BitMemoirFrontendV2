@@ -13,7 +13,7 @@ const Footer = ({ params }) => {
       <div className={style.footercontainer}>
         <div className={style.footerheading}>
           {ln === "en" && "Reach out to us at"}
-          {ln === "es" && "Llegar a nosotros en"}
+          {ln === "es" && "Contactanos"}
           {ln === "ar" && "تواصل معنا على"}
         </div>
         <div className={style.footercontent}>

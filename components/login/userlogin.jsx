@@ -45,7 +45,7 @@ const UserLogin = ({ useLogin, ln }) => {
                   ln === "en"
                     ? "Sign Up"
                     : ln === "es"
-                    ? "Inscribirse"
+                    ? "Regístrate"
                     : "اشتراك"
                 }
                 variant={"tertiary"}

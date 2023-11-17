@@ -1,7 +1,7 @@
 export const text = {
   "Issue. Store. Verify. Retrieve.": {
     en: "Issue. Store. Verify. Retrieve.",
-    es: "Asunto. Almacenar. Verificar. Recuperar.",
+    es: "Emitir. Almacenar. Verificar. Compartir.",
     ar: "مشكلة. محل. يؤكد. يسترد.",
   },
   "Free Trial": {
@@ -11,7 +11,7 @@ export const text = {
   },
   "Why Bitmemoir": {
     en: "Why Bitmemoir",
-    es: "Por qué Endmemoir",
+    es: "Por qué BitMemoir",
     ar: "لماذا بيتميموير",
   },
   "Revolutionizing the education landscape by the issuing legitimate and validated credentials, eliminating any chance of duplicity, forgery, or tampering with documents.":

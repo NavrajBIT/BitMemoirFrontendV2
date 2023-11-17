@@ -27,7 +27,7 @@ const Partners = ({ ln }) => {
         }}
       >
         {ln === "en" && "Our Partners"}
-        {ln === "es" && "Nuestros compañeros"}
+        {ln === "es" && "Nuestros socios"}
         {ln === "ar" && "شركاؤنا"}
       </div>
 

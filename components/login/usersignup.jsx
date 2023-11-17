@@ -17,11 +17,11 @@ const UserSignUp = ({ useLogin, ln }) => {
     >
       <Form
         formTitle={
-          ln === "en" ? "Sign Up" : ln === "es" ? "Inscribirse" : "اشتراك"
+          ln === "en" ? "Sign Up" : ln === "es" ? "Regístrate" : "اشتراك"
         }
         formData={useLogin.signupformData}
         formButton={
-          ln === "en" ? "Sign Up" : ln === "es" ? "Inscribirse" : "اشتراك"
+          ln === "en" ? "Sign Up" : ln === "es" ? "Regístrate" : "اشتراك"
         }
         handleSubmit={useLogin.signupSubmit}
         status={useLogin.status}

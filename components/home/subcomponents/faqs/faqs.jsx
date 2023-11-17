@@ -9,7 +9,7 @@ const FAQ = ({ ln }) => {
       },
       answer: {
         en: "BitMemoir is a unique blockchain-based platform focusing primarily on negating the possibility of creating fake credentials or fudging the documents. The aim is to develop and nurture an ecosystem of verified documents and journey mapping an individual’s life.",
-        es: "BitMemoir es una plataforma única basada en blockchain que se centra principalmente en negar la posibilidad de crear credenciales falsas o manipular documentos. El objetivo es desarrollar y nutrir un ecosistema de documentos verificados y mapas de viaje de la vida de un individuo.",
+        es: "BitMemoir es una plataforma única basada en blockchain que tiene como objetivo emitir credenciales verificables y auténticas o manipular documentos. El objetivo es desarrollar y nutrir un ecosistema de documentos verificados y mapas de viaje de la vida de un individuo.",
         ar: "BitMemoir عبارة عن منصة فريدة من نوعها تعتمد على blockchain وتركز بشكل أساسي على إلغاء إمكانية إنشاء بيانات اعتماد مزيفة أو تزوير المستندات. الهدف هو تطوير ورعاية نظام بيئي من الوثائق التي تم التحقق منها ورحلة رسم خرائط حياة الفرد.",
       },
     },

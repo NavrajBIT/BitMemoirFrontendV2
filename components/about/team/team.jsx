@@ -42,7 +42,7 @@ const Team = ({ ln }) => {
           <TeamCard
             key={index + teamMember}
             name={teamMember.name}
-            designation={teamMember.designation}
+            designation={teamMember.designation[ln]}
             img={teamMember.img}
           />
         );

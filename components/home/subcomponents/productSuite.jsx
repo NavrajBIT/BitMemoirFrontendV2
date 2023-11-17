@@ -34,7 +34,7 @@ const products = [
   {
     title: {
       en: "Non Custodial wallet",
-      es: "Cartera sin custodia",
+      es: "wallet sin custodia",
       ar: "المحفظة غير الاحتجازية",
     },
     description: {

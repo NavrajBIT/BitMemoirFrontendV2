@@ -12,7 +12,7 @@ const Navbar = ({ params }) => {
       route: `/${ln}/certificate`,
     },
     {
-      name: { en: "Souvenirs", es: "Recuerdos", ar: "هدايا تذكارية" },
+      name: { en: "Souvenirs", es: "Souvenirs", ar: "هدايا تذكارية" },
       route: `/${ln}/souvenir `,
     },
     {
