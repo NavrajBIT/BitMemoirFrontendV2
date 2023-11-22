@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import API from "@/components/subcomponents/scripts/apiCall";
 
-const useWallet = (usekyc) => {
+const useWallet = (usekyc, ln) => {
   const router = useRouter();
   const api = API();
   const [isPopup, setIsPopup] = useState(false);
@@ -32,12 +32,12 @@ const useWallet = (usekyc) => {
     await usekyc
       .handleWalletSubmit(walletAddress)
       .then((res) => {
-        router.push("/kyc/status");
+        router.push(`/${ln}/kyc/status`);
       })
       .catch((err) => {
         console.log(err);
       });
-    router.push("/kyc/status");
+    router.push(`/${ln}/kyc/status`);
     setIsLoading(false);
   };
 

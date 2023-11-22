@@ -13,6 +13,7 @@ const getBlogDetail = async (blogId) => {
 };
 
 const BlogNum = async ({ params }) => {
+  const ln = params?.ln ? params.ln : "en"
   const blog = await getBlogDetail(params.blogId);
 
   if (!blog) return <NotFound />;
@@ -32,7 +33,7 @@ const BlogNum = async ({ params }) => {
     >
       <title>{blog.title}</title>
       <div style={{ width: "fit-content" }}>
-        <LinkButton text="< back" href={"/blog"} variant={"secondary"} />
+        <LinkButton text="< back" href={`/${ln}/blog`} variant={"secondary"} />
       </div>
       <main className={style.title}>{blog.title}</main>
       <div className={style.blogImageContainer}>

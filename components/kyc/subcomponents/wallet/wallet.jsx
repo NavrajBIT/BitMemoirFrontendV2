@@ -5,8 +5,8 @@ import useWallet from "./useWallet";
 import LocalLoading from "@/components/subcomponents/loadingPage/localloading";
 import LinkButton from "@/components/subcomponents/button/link";
 
-const Wallet = ({ usekyc }) => {
-  const script = useWallet(usekyc);
+const Wallet = ({ usekyc, ln }) => {
+  const script = useWallet(usekyc, ln);
   if (script.isLoading) return <LocalLoading text="Checking Wallet..." />;
   return (
     <div
@@ -73,7 +73,7 @@ const Wallet = ({ usekyc }) => {
               If you want to change your wallet address, please write to
               support@beimagine.tech.
             </div>
-            <LinkButton text="Next >" variant="primary" href="/kyc/status" />
+            <LinkButton text="Next >" variant="primary" href={`/${ln}/kyc/status`} />
           </div>
         ) : (
           <div

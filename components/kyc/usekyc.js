@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import API from "../subcomponents/scripts/apiCall";
 import { useRouter } from "next/navigation";
 
-const usekyc = () => {
+const usekyc = (ln) => {
   const api = API();
   const router = useRouter();
   const [kycStep, setKycStep] = useState(1);
@@ -262,7 +262,7 @@ const usekyc = () => {
       .then((res) => {
         console.log(res);
         if (res.status >= 200 && res.status <= 299) {
-          router.push("/kyc/status");
+          router.push(`/${ln}/kyc/status`);
         }
       })
       .catch((err) => console.log(err));

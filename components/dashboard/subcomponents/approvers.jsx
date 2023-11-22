@@ -53,7 +53,7 @@ const Approvers = ({ usedash, ln }) => {
         <Button
           text={"Add Approvers +"}
           variant={"secondary"}
-          onClick={() => router.push("/approver")}
+          onClick={() => router.push(`/${ln}/approver`)}
         />
       </div>
     </div>

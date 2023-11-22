@@ -4,7 +4,8 @@ import API from "@/components/subcomponents/scripts/apiCall";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const ChangePassword = () => {
+const ChangePassword = ({params}) => {
+  const ln = params?.ln ? params.ln : "en"
   const api = API();
   const router = useRouter();
   const [oldPassword, setOldPassword] = useState("");
@@ -57,7 +58,7 @@ const ChangePassword = () => {
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
-          router.push("/dashboard");
+          router.push(`/${ln}/dashboard`);
           alert("Password Changed Successfully.");
         }
         if (res["old_password"][[0]] === "Incorrect old password.") {

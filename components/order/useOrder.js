@@ -4,6 +4,7 @@ import { getTime } from "../subcomponents/scripts/scripts";
 import { useRouter } from "next/navigation";
 
 const useOrder = (params) => {
+  const ln = params?.ln ? params.ln : "en";
   const api = API();
   const router = useRouter();
   const [orderDetails, setOrderDetails] = useState(null);
@@ -83,7 +84,7 @@ const useOrder = (params) => {
     if (orderDetails.certificates.length >= nftQuota) {
       setisBuyPopup(true);
     } else {
-      router.push(`/order/update/template/${params.orderId}`);
+      router.push(`${ln}/order/update/template/${params.orderId}`);
     }
     setIsLoading(false);
   };

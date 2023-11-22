@@ -11,6 +11,7 @@ import LocalLoading from "@/components/subcomponents/loadingPage/localloading";
 
 const DataUpdate = ({ params }) => {
   const api = API();
+  const ln = params?.ln ? params.ln : "en";
   const router = useRouter();
   const [orderData, setOrderData] = useState(null);
   const [certData, setCertData] = useState(null);
@@ -63,7 +64,7 @@ const DataUpdate = ({ params }) => {
             onClick={async () => {
               setIsLoading(true);
               await savedata();
-              router.push(`/order/${params.orderId}`);
+              router.push(`${ln}/order/${params.orderId}`);
               setIsLoading(false);
             }}
             text="Next >>"

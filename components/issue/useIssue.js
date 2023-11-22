@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 const useIssue = (params) => {
   const api = API();
+  const ln = params?.ln ? params.ln : "en";
   const approver = useApprover();
   const router = useRouter();
   const [loadingStatus, setLoadingStatus] = useState("");
@@ -293,7 +294,7 @@ const useIssue = (params) => {
       .then((res) => {
         console.log(res);
         if (res.status >= 200 && res.status <= 299) {
-          router.push(`/order/${res.id}`);
+          router.push(`/${ln}/order/${res.id}`);
         }
       })
       .catch((err) => console.log(err));

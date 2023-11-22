@@ -8,7 +8,7 @@ import Stepper from "../subcomponents/stepper/stepper";
 
 const Kyc = ({ params }) => {
   const ln = params?.ln ? params.ln : "en";
-  const script = usekyc();
+  const script = usekyc(ln);
   return (
     <div
       style={{
@@ -33,7 +33,7 @@ const Kyc = ({ params }) => {
       {script.kycStep === 1 && <Account usekyc={script} />}
       {script.kycStep === 2 && <Organization usekyc={script} />}
       {script.kycStep === 3 && <Representative usekyc={script} />}
-      {script.kycStep === 4 && <Wallet usekyc={script} />}
+      {script.kycStep === 4 && <Wallet usekyc={script} ln={ ln} />}
     </div>
   );
 };

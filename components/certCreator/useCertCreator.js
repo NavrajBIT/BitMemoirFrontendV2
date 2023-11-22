@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 
 const useCertCreator = (params) => {
   const router = useRouter();
+  const ln = params?.ln ? params.ln : "en";
   const [loadingStatus, setLoadingStatus] = useState("loading");
   const [isSelectingvariable, setIsSelectingVariable] = useState(false);
   const [uploadedImageURL, setUploadedImageURL] = useState(null);
@@ -111,7 +112,7 @@ const useCertCreator = (params) => {
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
-          router.push(`/certCreator/${res.id}`);
+          router.push(`/${ln}/certCreator/${res.id}`);
         }
       })
       .catch((err) => console.log(err));

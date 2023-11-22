@@ -93,8 +93,8 @@ const TopToolBar = ({ creator, templateId, dynamic, orderId, ln }) => {
             if (creator.variables.qrcode.length === 0) {
               creator.setNoQR(true);
             } else {
-              if (dynamic) router.push(`/order/update/data/${orderId}`);
-              else router.push(`/issue/${templateId}`);
+              if (dynamic) router.push(`/${ln}/order/update/data/${orderId}`);
+              else router.push(`/${ln}/issue/${templateId}`);
             }
           }}
         />

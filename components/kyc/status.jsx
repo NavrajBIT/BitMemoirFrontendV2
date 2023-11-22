@@ -6,8 +6,9 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import API from "../subcomponents/scripts/apiCall";
 
-const Status = () => {
-  const script = usekyc();
+const Status = ({ params }) => {
+  const ln = params?.ln ? params.ln : "en"
+  const script = usekyc(ln);
   return (
     <div
       style={{
@@ -20,7 +21,7 @@ const Status = () => {
         alignItems: "center",
       }}
     >
-      <StatusDetails usekyc={script} />
+      <StatusDetails usekyc={script} ln={ln } />
       <KYCDetails />
     </div>
   );
@@ -28,7 +29,7 @@ const Status = () => {
 
 export default Status;
 
-const StatusDetails = ({ usekyc }) => {
+const StatusDetails = ({ usekyc, ln }) => {
   const router = useRouter();
   const [accountStatus, setAccountStatus] = useState(false);
   const [organizationStatus, setOrganizationStatus] = useState(false);
@@ -217,7 +218,7 @@ const StatusDetails = ({ usekyc }) => {
           text="Edit Profile"
           variant={"secondary"}
           endIcon={"edit"}
-          onClick={() => router.push("/kyc")}
+          onClick={() => router.push(`/${ln}/kyc`)}
         />
       </div>
     </div>
