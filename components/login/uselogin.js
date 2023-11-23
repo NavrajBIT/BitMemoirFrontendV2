@@ -144,7 +144,7 @@ const uselogin = (ln) => {
   //Handle Social Login Oauth  Response from Our backend
 
   const handleGoogleLogin = (response, page) => {
-    const ln1 = "en";
+    let ln1 = "en";
     try {
       let storedLanguage = localStorage.getItem("ln");
       if (storedLanguage !== null && storedLanguage !== "null") {
