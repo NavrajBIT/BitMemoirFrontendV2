@@ -54,7 +54,7 @@ const DataUpdate = ({ params }) => {
       <div className={style.navContainer}>
         <div className={style.buttonContainer}>
           <LinkButton
-            href={`/order/update/template/${params.orderId}`}
+            href={`/${ln}/order/update/template/${params.orderId}`}
             text="<< Back"
             variant={"primary"}
           />

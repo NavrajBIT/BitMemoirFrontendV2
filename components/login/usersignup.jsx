@@ -36,7 +36,7 @@ const UserSignUp = ({ useLogin, ln }) => {
             gap: "var(--padding-main)",
           }}
         >
-          <SocialLoginPage />
+          <SocialLoginPage ln={ ln} />
 
           <div style={{ display: "flex", alignItems: "center" }}>
             {ln === "en" && "Already have an account?"}

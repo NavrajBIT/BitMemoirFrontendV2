@@ -34,7 +34,7 @@ const UserLogin = ({ useLogin, ln }) => {
             gap: "var(--padding-main)",
           }}
         >
-          <SocialLoginPage />
+          <SocialLoginPage ln={ ln} />
           <div style={{ display: "flex", alignItems: "center" }}>
             {ln === "en" && "Don't have an account?"}
             {ln === "es" && "¿No tienes una cuenta?"}

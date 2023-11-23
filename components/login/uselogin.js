@@ -117,8 +117,11 @@ const uselogin = (ln) => {
 
   const handleGoogleLoginButton = async () => {
     try {
+      localStorage.setItem("ln", ln);
+    } catch {}
+    try {
       const clientId = process.env.NEXT_PUBLIC_GOOGLE_KEY;
-      const redirectUri = `${process.env.NEXT_PUBLIC_LOCATION}${ln}login/auth/google`;
+      const redirectUri = `${process.env.NEXT_PUBLIC_LOCATION}en/login/auth/google`;
       const url = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=openid%20email%20profile`;
 
       router.push(url);
@@ -141,6 +144,13 @@ const uselogin = (ln) => {
   //Handle Social Login Oauth  Response from Our backend
 
   const handleGoogleLogin = (response, page) => {
+    const ln1 = "en";
+    try {
+      let storedLanguage = localStorage.getItem("ln");
+      if (storedLanguage !== null && storedLanguage !== "null") {
+        ln1 = storedLanguage;
+      }
+    } catch {}
     setIsLoading(true);
     console.log(response);
     api
@@ -150,12 +160,12 @@ const uselogin = (ln) => {
           setStatus(res.error);
         } else {
           if (res.isAccountExits) {
-            router.push(`/${ln}/dashboard`);
+            router.push(`/${ln1}/dashboard`);
           } else {
             try {
-              router.push(`/${ln}/kyc`);
+              router.push(`/${ln1}/kyc`);
             } catch {
-              router.push(`/${ln}/kyc`);
+              router.push(`/${ln1}/kyc`);
             }
           }
         }

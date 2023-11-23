@@ -7,8 +7,8 @@ import { GoogleLoginButton } from "react-social-login-buttons";
 //Custom Login Scripts
 import uselogin from "../uselogin";
 
-const SocialLoginPage = () => {
-  const script = uselogin();
+const SocialLoginPage = ({ln}) => {
+  const script = uselogin(ln);
 
   const buttonStyle = {
     width: "100%",
