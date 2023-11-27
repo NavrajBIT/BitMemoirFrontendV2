@@ -155,13 +155,13 @@ const PlanExpired = ({ ln }) => {
                   free.
                 </>
               )}
-              {ln === "en" && (
+              {ln === "es" && (
                 <>
                   Obtenga {process.env.NEXT_PUBLIC_FREE_CERTS} certificados
                   gratis.
                 </>
               )}
-              {ln === "en" && (
+              {ln === "ar" && (
                 <>
                   احصل على {process.env.NEXT_PUBLIC_FREE_CERTS} شهادات مجاناً.
                 </>

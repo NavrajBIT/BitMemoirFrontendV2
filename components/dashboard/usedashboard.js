@@ -7,6 +7,7 @@ const usedashboard = () => {
   const [selectedTab, setSelectedTab] = useState("Profile");
   const [accountDetails, setAccountDetails] = useState(null);
   const [kycDetails, setKycDetails] = useState(null);
+  const [contractDetails, setContractDetails] = useState(null);
   const [emailDetails, setEmailDetails] = useState(null);
   const [organizationDetails, setOrganizationDetails] = useState(null);
   const [issuerDetails, setIssuerDetails] = useState(null);
@@ -32,6 +33,7 @@ const usedashboard = () => {
     await poppulateCertificates();
     await poppulateKYCDetails();
     await poppulateSubscriptions();
+    await poppulateContractDetails();
     setIsLoading(false);
   };
 
@@ -53,6 +55,17 @@ const usedashboard = () => {
         console.log(res[0]);
         if (res.status === 200) {
           setKycDetails(res[0]);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+  const poppulateContractDetails = async () => {
+    await api
+      .crud("GET", "user/contract")
+      .then((res) => {
+        console.log(res[0]);
+        if (res.status === 200) {
+          setContractDetails(res[0]);
         }
       })
       .catch((err) => console.log(err));
@@ -152,10 +165,25 @@ const usedashboard = () => {
     poppulateApprovers();
   };
 
+  const changeVerifyURL = async (newURL) => {
+    setIsLoading(true);
+    await api
+      .crud("PATCH", `user/contract/${contractDetails.id}`, {
+        verification_url: newURL,
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) setContractDetails(res);
+      })
+      .catch((err) => console.log(err));
+    setIsLoading(false);
+  };
+
   return {
     isLoading,
     accountDetails,
     kycDetails,
+    contractDetails,
     emailDetails,
     organizationDetails,
     issuerDetails,
@@ -168,6 +196,7 @@ const usedashboard = () => {
     subscriptions,
     trial,
     nftQuota,
+    changeVerifyURL,
   };
 };
 

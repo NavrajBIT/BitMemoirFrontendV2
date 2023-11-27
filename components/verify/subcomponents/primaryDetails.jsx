@@ -3,6 +3,7 @@ import style from "../certificate.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { getTime } from "@/components/subcomponents/scripts/scripts";
+import update from "./verificationKpiUpdate";
 
 const PrimaryDetails = ({ usecert, ln }) => {
   const translation = {
@@ -17,6 +18,8 @@ const PrimaryDetails = ({ usecert, ln }) => {
   const verificationstatus = usecert.certDetails.is_verified
     ? "verified"
     : "unverified";
+
+  update(usecert.certDetails.id);
 
   return (
     <div

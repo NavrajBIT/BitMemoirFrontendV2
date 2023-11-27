@@ -4,9 +4,11 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
 import t from "../translation";
+import Contract from "./contract";
 
 const Heading = ({ usedash, ln }) => {
   const [isMenu, setIsMenu] = useState(false);
+
   const userDetails = {
     name: `${
       usedash.accountDetails.first_name
@@ -17,6 +19,7 @@ const Heading = ({ usedash, ln }) => {
     phone: usedash.accountDetails.phone && usedash.accountDetails.phone,
     wallet: usedash.accountDetails.wallet && usedash.accountDetails.wallet,
   };
+
   return (
     <div className={style.sectionContainer}>
       <div style={{ display: "flex", flexDirection: "column" }}>
@@ -28,10 +31,12 @@ const Heading = ({ usedash, ln }) => {
             </span>
           )}
         </div>
+
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div>Email: {userDetails.email}</div>
           <div>Phone: {userDetails.phone}</div>
           <div>Wallet: {userDetails.wallet}</div>
+          <Contract usedash={usedash} ln={ln} />
         </div>
       </div>
       <div
