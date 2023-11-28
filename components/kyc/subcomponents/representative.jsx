@@ -45,9 +45,8 @@ const Representative = ({ usekyc }) => {
         text="Download sample note"
         variant={"tertiary"}
         onClick={() => {
-          downloadFile(
-            "C:/Users/Navra/Downloads/sampleNote.docx",
-            reg_filename(usekyc.organizationDetails.reg_proof)
+          window.open(
+            "https://drive.google.com/drive/folders/1hr9JtyGKuY5X9Mt2DcTKDH1fwNo1BODF?usp=sharing"
           );
         }}
       />
