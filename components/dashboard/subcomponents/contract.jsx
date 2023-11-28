@@ -2,31 +2,29 @@ import { useState } from "react";
 import Popup from "@/components/subcomponents/popup/popup";
 import Button from "@/components/subcomponents/button/button";
 import { LocalInputField } from "@/components/subcomponents/form/form";
+import { isValidNearAddress } from "@/components/subcomponents/scripts/scripts";
 
 const Contract = ({ usedash, ln }) => {
-  const url = usedash?.contractDetails?.verification_url
-    ? usedash?.contractDetails?.verification_url
-    : `${process.env.NEXT_PUBLIC_LOCATION}${ln}/certificate/`;
-
-  const [isEdittingURL, setIsEdittingURL] = useState(false);
-
+  const [isEditting, setIsEditting] = useState(false);
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
-      Verify URL:
-      {url}
+      Smart Contract :{" "}
+      {usedash?.contractDetails?.contract_address
+        ? usedash?.contractDetails?.contract_address
+        : "Default"}
       <div style={{ width: "fit-content" }}>
         <Button
           text={""}
           endIcon={"edit"}
           variant={"tertiary"}
-          onClick={() => setIsEdittingURL(true)}
+          onClick={() => setIsEditting(true)}
         />
       </div>
-      {isEdittingURL && (
-        <EditUrlPopup
+      {isEditting && (
+        <EditContractPopup
           usedash={usedash}
           ln={ln}
-          setIsEdittingURL={setIsEdittingURL}
+          setIsEditting={setIsEditting}
         />
       )}
     </div>
@@ -35,12 +33,22 @@ const Contract = ({ usedash, ln }) => {
 
 export default Contract;
 
-const EditUrlPopup = ({ usedash, ln, setIsEdittingURL }) => {
-  const url = usedash?.contractDetails?.verification_url
-    ? usedash?.contractDetails?.verification_url
-    : `${process.env.NEXT_PUBLIC_LOCATION}${ln}/certificate/`;
-  const [newURL, setNewURL] = useState(url);
+const EditContractPopup = ({ usedash, ln, setIsEditting }) => {
+  const url = usedash?.contractDetails?.contract_address
+    ? usedash?.contractDetails?.contract_address
+    : "";
+  const [newAddress, setNewAddress] = useState(url);
+  const [privateKey, setPrivateKey] = useState("");
   const [hasChanged, setHasChanged] = useState(false);
+  const [status, setStatus] = useState("");
+
+  const handleSubmit = () => {
+    setStatus("");
+    if (isValidNearAddress(newAddress)) {
+      usedash.changeContractDetails(newAddress, privateKey);
+      setIsEditting(false);
+    } else setStatus("Please enter a valid address on NEAR protocol.");
+  };
 
   return (
     <Popup>
@@ -64,34 +72,68 @@ const EditUrlPopup = ({ usedash, ln, setIsEdittingURL }) => {
             fontWeight: "bold",
           }}
         >
-          Verification URL
+          Smart Contract
+          <div
+            style={{
+              fontSize: "1rem",
+              textAlign: "center",
+              color: "var(--primary-50)",
+            }}
+          >
+            {"("}NEAR Protocol{")"}
+          </div>
         </div>
         <div>
-          Verification url is included in the certificate QR codes. Change this
-          value if you want to redirect the QR codes to a custom location.
+          Bitmemoir will use this smart contract to mint the Certificates.
         </div>
-        <div>Enter Verification URL:</div>
-        <div style={{ width: "100%" }}>
+        <div style={{ color: "var(--error)" }}>
+          Warning: You will be in-charge of the smart contract.
+        </div>
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            gap: "var(--padding-light)",
+          }}
+        >
+          <div>Enter Contract Address:</div>
           <LocalInputField
             inputData={{
-              label: "URL",
+              label: "Contract Address",
               type: "text",
             }}
-            value={newURL}
+            value={newAddress}
             handleChange={(e) => {
-              setNewURL(e.target.value);
+              setNewAddress(e.target.value);
               setHasChanged(true);
             }}
             maxLength={100}
           />
         </div>
-        <div>
-          Certificate QR code will open: {newURL}
-          <span style={{ color: "var(--primary-60)", fontStyle: "italic" }}>
-            CertId
-          </span>
-          /
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            gap: "var(--padding-light)",
+          }}
+        >
+          <div>Enter Private Key:</div>
+          <LocalInputField
+            inputData={{
+              label: "Private Key",
+              type: "text",
+            }}
+            value={privateKey}
+            handleChange={(e) => {
+              setPrivateKey(e.target.value);
+              setHasChanged(true);
+            }}
+            maxLength={100}
+          />
         </div>
+        <div style={{ color: "var(--error)" }}>{status}</div>
         <div
           style={{
             display: "flex",
@@ -104,16 +146,27 @@ const EditUrlPopup = ({ usedash, ln, setIsEdittingURL }) => {
               text={"Save"}
               endIcon={"save"}
               variant={"primary"}
-              onClick={() => {
-                usedash.changeVerifyURL(newURL);
-                setIsEdittingURL(false);
-              }}
+              onClick={handleSubmit}
             />
           )}
           <Button
             text={"Cancel X"}
             variant={"secondary"}
-            onClick={() => setIsEdittingURL(false)}
+            onClick={() => setIsEditting(false)}
+          />
+        </div>
+        <div
+          style={{
+            width: "fit-content",
+          }}
+        >
+          <Button
+            variant="tertiary"
+            text="Restore Default"
+            onClick={() => {
+              usedash.changeContractDetails(null, null);
+              setIsEditting(false);
+            }}
           />
         </div>
       </div>

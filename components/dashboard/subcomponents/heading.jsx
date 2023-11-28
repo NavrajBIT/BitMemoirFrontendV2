@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
 import t from "../translation";
+import VerifyURL from "./verifyurl";
 import Contract from "./contract";
 
 const Heading = ({ usedash, ln }) => {
@@ -36,6 +37,7 @@ const Heading = ({ usedash, ln }) => {
           <div>Email: {userDetails.email}</div>
           <div>Phone: {userDetails.phone}</div>
           <div>Wallet: {userDetails.wallet}</div>
+          <VerifyURL usedash={usedash} ln={ln} />
           <Contract usedash={usedash} ln={ln} />
         </div>
       </div>

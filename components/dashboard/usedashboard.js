@@ -179,6 +179,21 @@ const usedashboard = () => {
     setIsLoading(false);
   };
 
+  const changeContractDetails = async (address, privateKey) => {
+    setIsLoading(true);
+    await api
+      .crud("PATCH", `user/contract/${contractDetails.id}`, {
+        contract_address: address,
+        private_key: privateKey,
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) setContractDetails(res);
+      })
+      .catch((err) => console.log(err));
+    setIsLoading(false);
+  };
+
   return {
     isLoading,
     accountDetails,
@@ -197,6 +212,7 @@ const usedashboard = () => {
     trial,
     nftQuota,
     changeVerifyURL,
+    changeContractDetails,
   };
 };
 
