@@ -38,7 +38,9 @@ const usecertificate = (ln) => {
   const createNewTemplate = async () => {
     setIsLoading(true);
     await api
-      .crud("POST", "certificate/template")
+      .crud("POST", "certificate/template", {
+        name: ln === "es" ? "Mi Plantilla" : "My Template",
+      })
       .then((res) => {
         if (res.status >= 200 && res.status <= 299)
           router.push(`/${ln}/certCreator/${res.id}`);

@@ -21,7 +21,7 @@ const SideToolBar = ({ creator, dynamic, ln }) => {
         <SideTool
           icon="add_image"
           toolName={t["Add Logo"][ln]}
-          toolDescription={t["Addtextdescription"][ln]}
+          toolDescription={t["AddImageDesc"][ln]}
           onClick={creator.addLogo}
         />
         <SideTool

@@ -63,7 +63,7 @@ const VariableSelector = ({ close, selectvariable, ln }) => {
               />
             ))}
             <Button
-              text={"Custom Variable"}
+              text={t["Custom Variable"][ln]}
               variant={"primary"}
               onClick={() => {
                 setIsCustom(true);

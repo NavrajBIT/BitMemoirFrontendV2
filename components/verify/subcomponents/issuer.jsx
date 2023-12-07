@@ -61,7 +61,7 @@ const Issuer = ({ usecert, ln }) => {
           color: "var(--primary-50)",
         }}
       >
-        Account Id:
+        {t["Account Id"][ln]}:
       </div>
       <div>{usecert.certDetails && usecert.certDetails.issuer.wallet}</div>
     </div>

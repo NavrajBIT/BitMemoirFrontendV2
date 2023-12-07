@@ -1,4 +1,3 @@
-import { useState } from "react";
 import style from "../issue.module.css";
 import { LocalInputField } from "@/components/subcomponents/form/form";
 import Button from "@/components/subcomponents/button/button";
@@ -22,7 +21,7 @@ const Spreadsheet = ({ issue, ln }) => {
               </div>
             ))}
             <div className={style.cell}>Email</div>
-            <div className={style.cell}>Wallet</div>
+            <div className={style.cell}>NEAR Wallet</div>
           </div>
         </div>
 

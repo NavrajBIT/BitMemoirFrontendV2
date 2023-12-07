@@ -21,7 +21,7 @@ const Footer = ({ params }) => {
           <Email email={"marketing@beimagine.tech"} />
           <div className={style.socialheading}>
             {ln === "en" && "Check out our social:"}
-            {ln === "es" && "Echa un vistazo a nuestro social:"}
+            {ln === "es" && "Echa un vistazo a nuestras redes sociales:"}
             {ln === "ar" && "تحقق من الاجتماعية لدينا:"}
           </div>
           <div className={style.sociallinkcontainer}>

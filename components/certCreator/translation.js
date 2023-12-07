@@ -5,10 +5,10 @@ const t = {
     es: "Agregar texto permanente en la plantilla del certificado",
     ar: "إضافة نص دائم إلى قالب الشهادة",
   },
-  "Add Logo": { en: "Add Logo", es: "Añadir texto", ar: "إضافة نص" },
+  "Add Logo": { en: "Add Logo", es: "Añadir imagen", ar: "إضافة نص" },
   AddImageDesc: {
     en: "Add Logo to the template",
-    es: "Agregar logotipo a la plantilla",
+    es: "Añadir imagen permanente en la plantilla del certificado",
     ar: "إضافة شعار إلى القالب",
   },
   Variable: { en: "Variable", es: "Variable", ar: "عامل" },
@@ -29,7 +29,7 @@ const t = {
     es: "Eliminar elementos seleccionados",
     ar: "حذف العناصر المحددة",
   },
-  Save: { en: "Save", es: "Ahorrar", ar: "يحفظ" },
+  Save: { en: "Save", es: "Guardar", ar: "يحفظ" },
   SaveDesc: {
     en: "Save Template",
     es: "Guardar plantilla",
@@ -89,13 +89,18 @@ const t = {
   },
   Close: {
     en: "Close",
-    es: "Cerca",
+    es: "Cerrar",
     ar: "يغلق",
   },
   "Select Variable": {
     en: "Select Variable",
     es: "Seleccionar variable",
     ar: "حدد متغير",
+  },
+  "Custom Variable": {
+    en: "Custom Variable",
+    es: "Personalizar variable",
+    ar: "Custom Variable",
   },
   Tutorial: {
     en: "Tutorial",

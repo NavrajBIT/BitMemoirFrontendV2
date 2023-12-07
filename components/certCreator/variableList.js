@@ -21,10 +21,9 @@ const variableList = {
     "Nombre del Instructor",
     "Nombre del tema",
     "Calificación de la materia",
-    "Nombre del padre",
-    "No Señor.",
+    "No de estudiante/legajo",
     "Notas totales",
-    "Marcas obtenidas",
+    "Calificación obtenida",
     "Aprobado por",
   ],
   ar: [

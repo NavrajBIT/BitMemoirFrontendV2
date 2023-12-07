@@ -50,7 +50,7 @@ const CertImage = ({ usecert, ln }) => {
         <LinkButton
           href={imagesrc}
           target="_blank"
-          text="Download"
+          text={t["Download"][ln]}
           variant={"primary"}
           endIcon={"download"}
         />

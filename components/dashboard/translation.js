@@ -9,7 +9,7 @@ const t = {
   Subscriptions: { en: "Subscriptions", es: "Suscripciones", ar: "الاشتراكات" },
   "Certificate balance": {
     en: "Certificate balance",
-    es: "Saldo del certificado",
+    es: "Certificados disponibles",
     ar: "رصيد الشهادة",
   },
   "Free Trial": {

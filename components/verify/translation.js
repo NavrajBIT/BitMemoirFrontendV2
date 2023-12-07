@@ -1,8 +1,10 @@
 const t = {
   "Issued By": { en: "Issued By", es: "Expedido por", ar: "أصدرت من قبل" },
+  "Account Id": { en: "Account Id", es: "Número de cuenta", ar: "Account Id" },
   Address: { en: "Address", es: "DIRECCIÓN", ar: "عنوان" },
   Country: { en: "Country", es: "País", ar: "دولة" },
   Description: { en: "Description", es: "Descripción", ar: "وصف" },
+  Download: { en: "Download", es: "Descargar", ar: "Download" },
   "Received By": { en: "Received By", es: "Recibido por", ar: "استلمت من قبل" },
   Certificate: { en: "Certificate", es: "Certificado", ar: "شهادة" },
   ad1: {

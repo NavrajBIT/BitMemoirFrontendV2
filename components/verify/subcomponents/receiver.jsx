@@ -45,7 +45,7 @@ const Receiver = ({ usecert, ln }) => {
           wordBreak: "break-all",
         }}
       >
-        Account Id:
+        {t["Account Id"][ln]}:
       </div>
       <div>{usecert.certDetails && usecert.certDetails.wallet}</div>
     </div>

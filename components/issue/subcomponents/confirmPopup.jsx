@@ -69,7 +69,7 @@ const TypeSelector = ({ issue, ln }) => (
         }
       />
       {ln === "en" && "Essential (Degree Certificates)"}
-      {ln === "es" && "Esencial (Certificados de Grado)"}
+      {ln === "es" && "Second key (Certificados de Grado)"}
       {ln === "ar" && "أساسي (شهادات الدرجة)"}
     </div>
     <div className={style.selector}>
@@ -84,7 +84,7 @@ const TypeSelector = ({ issue, ln }) => (
         }
       />
       {ln === "en" && "Non Essential (Diploma Certificates)"}
-      {ln === "es" && "No Esencial (Certificados de Diploma)"}
+      {ln === "es" && "First key (Certificados de Diploma)"}
       {ln === "ar" && "غير أساسية (شهادات الدبلوم)"}
     </div>
   </div>

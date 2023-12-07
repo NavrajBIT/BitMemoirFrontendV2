@@ -17,14 +17,17 @@ const Souvenirs = ({ params }) => {
 
   const frames = [];
 
-  frames.push({ name: "None", value: "none" });
+  frames.push({ name: ln === "es" ? "Ninguno" : "None", value: "none" });
   if (script.frames) {
     script.frames.map((frm) => {
       frames.push({ name: frm.frame_name, value: frm.id });
     });
   }
 
-  frames.push({ name: "Add Frame", value: "add" });
+  frames.push({
+    name: ln === "es" ? "Añadir marco" : "Add Frame",
+    value: "add",
+  });
 
   const canIssue =
     script.image && script.certId && (script.accountId || script.email);
@@ -50,7 +53,7 @@ const Souvenirs = ({ params }) => {
         "يرجى اختيار صورة ذات جودة عالية بنسبة عرض إلى ارتفاع 4/3."}
 
       <Select
-        title="Select Frame"
+        title={ln === "es" ? "Seleccionar marco" : "Select Frame"}
         options={frames}
         submit={(e) => {
           if (e === "add") {
@@ -68,7 +71,10 @@ const Souvenirs = ({ params }) => {
         }}
       />
       <LocalInputField
-        inputData={{ label: "Account ID", type: "text" }}
+        inputData={{
+          label: ln === "es" ? "Número de Cuenta" : "Account ID",
+          type: "text",
+        }}
         maxLength={100}
         value={script.accountId}
         handleChange={(e) => script.setAccountId(e.target.value)}
