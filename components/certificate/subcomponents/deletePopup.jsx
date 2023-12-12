@@ -1,7 +1,7 @@
 import Button from "@/components/subcomponents/button/button";
 import Popup from "@/components/subcomponents/popup/popup";
 
-const DeletePopup = ({ cert }) => (
+const DeletePopup = ({ cert, ln }) => (
   <Popup>
     {cert.selectedTemplate && (
       <div
@@ -16,7 +16,10 @@ const DeletePopup = ({ cert }) => (
         }}
       >
         <div style={{ fontSize: "1.5rem", textAlign: "center" }}>
-          Are you sure you want to delete {cert.selectedTemplate.name} ?
+          {ln === "es"
+            ? "¿Estás seguro de que quieres eliminar?"
+            : "Are you sure you want to delete"}{" "}
+          {cert.selectedTemplate.name} ?
         </div>
         <div
           style={{
@@ -29,7 +32,7 @@ const DeletePopup = ({ cert }) => (
           <div style={{ width: "fit-content" }}>
             <Button
               variant="primary"
-              text="X Cancel"
+              text={ln === "es" ? "Cerrar" : "X Cancel"}
               onClick={() => cert.setIsDeletePopup(false)}
             />
           </div>
@@ -37,7 +40,7 @@ const DeletePopup = ({ cert }) => (
             <Button
               variant="secondary"
               endIcon={"delete"}
-              text="Delete"
+              text={ln === "es" ? "Borrar" : "Delete"}
               onClick={cert.deleteTemplate}
             />
           </div>

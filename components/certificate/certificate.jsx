@@ -20,7 +20,7 @@ const Certificate = ({ params }) => {
       ) : (
         <FullViewTemplate cert={cert} ln={ln} />
       )}
-      {cert.isDeletePopup && <DeletePopup cert={cert} />}
+      {cert.isDeletePopup && <DeletePopup cert={cert} ln={ln} />}
       {cert.isLoading && <LocalLoading />}
       <TutorialPopup ln={ln} />
     </div>

@@ -2,7 +2,7 @@ import Link from "next/link";
 import style from "./blog.module.css";
 import Image from "next/image";
 
-const BlogFullCard = ({ blog }) => {
+const BlogFullCard = ({ blog, ln }) => {
   return (
     <div
       style={{
@@ -53,7 +53,7 @@ const BlogFullCard = ({ blog }) => {
       </div>
 
       <Link
-        href={`/blog/${blog.id}`}
+        href={`/${ln}/blog/${blog.id}`}
         style={{
           color: "var(--primary-50)",
         }}

@@ -1,7 +1,7 @@
 import Blog from "@/components/blogs/blog";
 
-const Page = () => {
-  return <Blog />;
+const Page = ({ params }) => {
+  return <Blog params={params} />;
 };
 
 export default Page;

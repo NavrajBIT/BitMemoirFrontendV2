@@ -2,17 +2,18 @@ import DynamicForm from "@/components/subcomponents/form/dynamicForm";
 import Form from "@/components/subcomponents/form/form";
 import Button from "@/components/subcomponents/button/button";
 import LocalLoading from "@/components/subcomponents/loadingPage/localloading";
+import { buttonTranslation } from "../translation";
 
-const Account = ({ usekyc }) => {
+const Account = ({ usekyc, ln }) => {
   if (usekyc.accountDetails === null || usekyc.emailDetails === null) {
     return <LocalLoading text="Loading account details..." />;
   }
 
-  if (usekyc.isOTP) return <OTPForm usekyc={usekyc} />;
+  if (usekyc.isOTP) return <OTPForm usekyc={usekyc} ln={ln} />;
 
   const formData = [
     {
-      label: "First name",
+      label: ln === "es" ? "Nombre" : "First name",
       type: "text",
       required: true,
       maxLength: "50",
@@ -21,7 +22,7 @@ const Account = ({ usekyc }) => {
         usekyc.handleChange("account", "first_name", e.target.value),
     },
     {
-      label: "Last name",
+      label: ln === "es" ? "Apellido" : "Last name",
       type: "text",
       required: true,
       maxLength: "50",
@@ -30,14 +31,14 @@ const Account = ({ usekyc }) => {
         usekyc.handleChange("account", "last_name", e.target.value),
     },
     {
-      label: "Email",
+      label: "E-mail",
       type: "email",
       required: true,
       value: usekyc.emailDetails.email,
       setValue: (e) => usekyc.handleChange("email", "email", e.target.value),
     },
     {
-      label: "Phone",
+      label: ln === "es" ? "Número de teléfono" : "Phone",
       type: "tel",
       required: false,
       value: usekyc.accountDetails.phone,
@@ -47,15 +48,15 @@ const Account = ({ usekyc }) => {
 
   const getButtonTitle = () => {
     if (usekyc.emailChanged) {
-      if (usekyc.accountChanged) return "Save";
-      else return "Save Email";
-    } else if (usekyc.accountChanged) return "Save";
-    else return "Next >";
+      if (usekyc.accountChanged) return buttonTranslation["Save"][ln];
+      else return buttonTranslation["Save Email"][ln];
+    } else if (usekyc.accountChanged) return buttonTranslation["Save"][ln];
+    else return buttonTranslation["Next >"][ln];
   };
 
   return (
     <DynamicForm
-      formTitle="Account Details"
+      formTitle={ln === "es" ? "Detalles de la cuenta" : "Account Details"}
       formButton={getButtonTitle()}
       isLoading={usekyc.isLoading}
       status={usekyc.formStatus}
@@ -65,7 +66,7 @@ const Account = ({ usekyc }) => {
       <br />
       {usekyc.accountChanged || usekyc.emailChanged ? (
         <Button
-          text="Skip for now >>"
+          text={buttonTranslation["Skip for now >>"][ln]}
           variant={"tertiary"}
           onClick={() => {
             usekyc.changeStep(usekyc.kycStep + 1);
@@ -80,7 +81,7 @@ const Account = ({ usekyc }) => {
 
 export default Account;
 
-const OTPForm = ({ usekyc }) => {
+const OTPForm = ({ usekyc, ln }) => {
   const formData = [
     {
       label: "OTP",
@@ -90,16 +91,17 @@ const OTPForm = ({ usekyc }) => {
   ];
   return (
     <Form
-      formTitle="Verify Email"
-      formButton="Verify"
+      formTitle={ln === "es" ? "Verificar E-mail" : "Verify Email"}
+      formButton={ln === "es" ? "Verificar" : "Verify"}
       isLoading={usekyc.isLoading}
       status={usekyc.formStatus}
       handleSubmit={usekyc.verifyEmail}
       formData={formData}
     >
       <div>
-        OTP sent to {usekyc.emailDetails.email}. Please check your mail,
-        including the spam folder.
+        {ln === "es"
+          ? `OTP enviada a ${usekyc.emailDetails.email} Revise su correo, incluida la carpeta de spam`
+          : `OTP sent to ${usekyc.emailDetails.email}. Please check your mail, including the spam folder.`}
       </div>
     </Form>
   );

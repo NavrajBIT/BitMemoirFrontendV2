@@ -152,9 +152,7 @@ const ButtonContainer = ({ issue, ln }) => (
     </div>
     <div style={{ width: "fit-content", minWidth: "40%" }}>
       <Button
-        text={
-          ln === "en" ? "Issue >" : ln === "es" ? "Problema >" : "المشكلة >"
-        }
+        text={ln === "en" ? "Issue >" : ln === "es" ? "Emitir >" : "المشكلة >"}
         variant="primary"
         onClick={() => {
           if (issue.certType === "essential") {

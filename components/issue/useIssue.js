@@ -65,7 +65,12 @@ const useIssue = (params) => {
 
   const downloadcsv = () => {
     if (!studentNumber || studentNumber <= 0) {
-      setPopupStatus("Please enter number of recipients!");
+      setPopupStatus(() => {
+        if (ln === "es") return "Por favor ingrese el número de destinatarios!";
+        else {
+          return "Please enter number of recipients!";
+        }
+      });
       return;
     }
     const headers = [
@@ -128,16 +133,24 @@ const useIssue = (params) => {
         if (data.length > 0) {
           data.map((row) => {
             if (row.length !== template.variables.length + 2) {
-              setPopupStatus(
-                "Invalid Data. Please check the data and try again. Make sure there are no commas (,) in the data. Download the Data File Format for reference."
-              );
+              setPopupStatus(() => {
+                if (ln === "es") {
+                  return "Datos inválidos. Por favor verifique los datos y vuelva a intentarlo. Asegúrese de que no haya comas (,) en los datos. Descargue el formato de archivo de datos como referencia.";
+                } else {
+                  return "Invalid Data. Please check the data and try again. Make sure there are no commas (,) in the data. Download the Data File Format for reference.";
+                }
+              });
               isValid = false;
             }
           });
         } else {
-          setPopupStatus(
-            "Invalid Data. Please check the data and try again. Make sure there are no commas (,) in the data. Download the Data File Format for reference."
-          );
+          setPopupStatus(() => {
+            if (ln === "es") {
+              return "Datos inválidos. Por favor verifique los datos y vuelva a intentarlo. Asegúrese de que no haya comas (,) en los datos. Descargue el formato de archivo de datos como referencia.";
+            } else {
+              return "Invalid Data. Please check the data and try again. Make sure there are no commas (,) in the data. Download the Data File Format for reference.";
+            }
+          });
           isValid = false;
         }
         return isValid;
@@ -158,7 +171,13 @@ const useIssue = (params) => {
       const file = event.target.files[0];
       if (file) {
         if (!file.name.endsWith(".csv")) {
-          setPopupStatus("Please upload a valid .csv file.");
+          setPopupStatus(() => {
+            if (ln === "es") {
+              return "Cargue un archivo .csv válido.";
+            } else {
+              return "Please upload a valid .csv file.";
+            }
+          });
           uploader.remove();
           return;
         }
@@ -186,20 +205,32 @@ const useIssue = (params) => {
         } else if (columnIndex === row.length - 2 && cell !== "") {
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           if (!emailRegex.test(cell)) {
-            setPopupStatus(
-              `Invalid email address for recipient ${
-                rowIndex + 1
-              }. Please provide a valid email address.`
-            );
+            setPopupStatus(() => {
+              if (ln === "es") {
+                return `Dirección de e-mail no válida para el destinatario${
+                  rowIndex + 1
+                }. Proporcione una dirección de e-mail válida.`;
+              } else {
+                return `Invalid email address for recipient ${
+                  rowIndex + 1
+                }. Please provide a valid email address.`;
+              }
+            });
             is_valid = false;
           }
         } else if (columnIndex === row.length - 1 && cell !== "") {
           if (!isValidNearAddress(cell)) {
-            setPopupStatus(
-              `Invalid wallet address for recipient ${
-                rowIndex + 1
-              }. Please provide a valid wallet address.`
-            );
+            setPopupStatus(() => {
+              if (ln === "es") {
+                return `Dirección de billetera no válida para el destinatario${
+                  rowIndex + 1
+                }. Proporcione una dirección de billetera válida.`;
+              } else {
+                return `Invalid wallet address for recipient ${
+                  rowIndex + 1
+                }. Please provide a valid wallet address.`;
+              }
+            });
             is_valid = false;
           }
         } else {
@@ -207,11 +238,17 @@ const useIssue = (params) => {
             studentData[rowIndex][row.length - 2] === "" &&
             studentData[rowIndex][row.length - 1] === ""
           ) {
-            setPopupStatus(
-              `Both email and wallet for student ${
-                rowIndex + 1
-              } is empty. Please provide either email or wallet address or both for the student.`
-            );
+            setPopupStatus(() => {
+              if (ln === "es") {
+                return `Tanto el correo electrónico como la billetera del destinatario${
+                  rowIndex + 1
+                } están vacíos. Proporcione el correo electrónico o la dirección de billetera o ambas para el destinatario.`;
+              } else {
+                return `Both email and wallet for recipient ${
+                  rowIndex + 1
+                } is empty. Please provide either email or wallet address or both for the recipient.`;
+              }
+            });
             is_valid = false;
           }
         }

@@ -1,6 +1,6 @@
 import Button from "@/components/subcomponents/button/button";
 
-const BrowserWallet = ({ useWallet }) => {
+const BrowserWallet = ({ useWallet, ln }) => {
   return (
     <div
       style={{
@@ -24,12 +24,24 @@ const BrowserWallet = ({ useWallet }) => {
           fontWeight: "bold",
         }}
       >
-        Browser Wallet
+        {ln === "es" ? "Billetera desde tu navegado" : "Browser Wallet"}
       </div>
-      <div>Connect with Bit-Wallet browser extension.</div>
+      <div>
+        {ln === "es"
+          ? "Conecta tu extensión de Bit-Wallet en tu navegador"
+          : "Connect with Bit-Wallet browser extension."}
+      </div>
       <div style={{ width: "fit-content" }}>
         <Button
-          text={useWallet.isWallet ? "Connect Wallet" : "Get Wallet"}
+          text={
+            useWallet.isWallet
+              ? ln === "es"
+                ? "Conectar billetera"
+                : "Connect Wallet"
+              : ln === "es"
+              ? "Obtén tu billetera"
+              : "Get Wallet"
+          }
           variant={"primary"}
           onClick={useWallet.handleBrowserConnect}
         />

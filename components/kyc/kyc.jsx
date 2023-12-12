@@ -30,10 +30,10 @@ const Kyc = ({ params }) => {
       />
       <div style={{ height: "2rem" }} />
 
-      {script.kycStep === 1 && <Account usekyc={script} />}
-      {script.kycStep === 2 && <Organization usekyc={script} />}
-      {script.kycStep === 3 && <Representative usekyc={script} />}
-      {script.kycStep === 4 && <Wallet usekyc={script} ln={ ln} />}
+      {script.kycStep === 1 && <Account usekyc={script} ln={ln} />}
+      {script.kycStep === 2 && <Organization usekyc={script} ln={ln} />}
+      {script.kycStep === 3 && <Representative usekyc={script} ln={ln} />}
+      {script.kycStep === 4 && <Wallet usekyc={script} ln={ln} />}
     </div>
   );
 };

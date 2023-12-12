@@ -29,9 +29,13 @@ const Wallet = ({ usekyc, ln }) => {
         }}
       >
         <div style={{ textAlign: "center" }}>
-          A wallet is your identity on the blockchain.
+          {ln === "es"
+            ? "La billetera es tu identidad en la blockchain"
+            : "A wallet is your identity on the blockchain."}
           <br />
-          The certificates will be released from your Account ID.
+          {ln === "es"
+            ? "Los certificados serán generados desde el ID de tu cuenta"
+            : "The certificates will be released from your Account ID."}
         </div>
         <div
           style={{
@@ -44,7 +48,7 @@ const Wallet = ({ usekyc, ln }) => {
             fontWeight: "bold",
           }}
         >
-          Wallet
+          {ln === "es" ? "Billetera" : "Wallet"}
         </div>
         {usekyc.accountDetails?.wallet &&
         usekyc.accountDetails?.wallet !== "" ? (
@@ -60,20 +64,26 @@ const Wallet = ({ usekyc, ln }) => {
             }}
           >
             <div style={{ color: "var(--success)", textAlign: "center" }}>
-              Wallet Connected
+              {ln === "es" ? "Billetera Conectada" : "Wallet Connected"}
             </div>
             <div
               style={{
                 overflowWrap: "break-word",
               }}
             >
-              Account ID: {usekyc.accountDetails.wallet}
+              {ln === "es" ? "Número de cuenta" : "Account ID"}:{" "}
+              {usekyc.accountDetails.wallet}
             </div>
             <div>
-              If you want to change your wallet address, please write to
-              support@beimagine.tech.
+              {ln === "es"
+                ? "Si desea cambiar la dirección de su billetera, escriba a support@beimagine.tech."
+                : "If you want to change your wallet address, please write to support@beimagine.tech."}
             </div>
-            <LinkButton text="Next >" variant="primary" href={`/${ln}/kyc/status`} />
+            <LinkButton
+              text="Next >"
+              variant="primary"
+              href={`/${ln}/kyc/status`}
+            />
           </div>
         ) : (
           <div
@@ -83,8 +93,8 @@ const Wallet = ({ usekyc, ln }) => {
               flexWrap: "wrap",
             }}
           >
-            <BrowserWallet useWallet={script} />
-            <MobileWallet useWallet={script} />
+            <BrowserWallet useWallet={script} ln={ln} />
+            <MobileWallet useWallet={script} ln={ln} />
           </div>
         )}
       </div>

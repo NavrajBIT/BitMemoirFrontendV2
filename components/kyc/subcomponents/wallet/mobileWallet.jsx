@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import QRCode from "react-qr-code";
 import LocalLoading from "@/components/subcomponents/loadingPage/localloading";
 
-const MobileWallet = ({ useWallet }) => {
+const MobileWallet = ({ useWallet, ln }) => {
   const [walletAddress, setWalletAddress] = useState("");
   const [socketURL, setSocketURL] = useState("");
   const [isConnected, setIsConnected] = useState(false);
@@ -81,9 +81,13 @@ const MobileWallet = ({ useWallet }) => {
           fontWeight: "bold",
         }}
       >
-        Mobile Wallet
+        {ln === "es" ? "Billetera desde tu móvil" : "Mobile Wallet"}
       </div>
-      <div>Connect with Bit-Wallet mobile app.</div>
+      <div>
+        {ln === "es"
+          ? "Conecta tu billetera con la app móvil de BitWallet"
+          : "Connect with Bit-Wallet mobile app."}
+      </div>
       <div
         style={{
           display: "flex",
@@ -92,13 +96,16 @@ const MobileWallet = ({ useWallet }) => {
         }}
       >
         <LocalInputField
-          inputData={{ label: "Account ID", required: true }}
+          inputData={{
+            label: ln === "es" ? "ID de cuenta" : "Account ID",
+            required: true,
+          }}
           value={walletAddress}
           handleChange={(e) => setWalletAddress(e.target.value)}
         />
         <div style={{ width: "fit-content" }}>
           <Button
-            text={"Request"}
+            text={ln === "es" ? "Solicitar" : "Request"}
             variant={"primary"}
             isLoading={useWallet.isRequesting}
             onClick={() =>
@@ -107,8 +114,12 @@ const MobileWallet = ({ useWallet }) => {
           />
         </div>
       </div>
-      <div>OR</div>
-      <div>Scan the QR-code using bit-wallet app.</div>
+      <div>{ln === "es" ? "O" : "OR"}</div>
+      <div>
+        {ln === "es"
+          ? "Escanéa el código QR usando la app de BitWallet"
+          : "Scan the QR-code using bit-wallet app."}
+      </div>
       {isConnected && (
         <QRCode
           size={256}

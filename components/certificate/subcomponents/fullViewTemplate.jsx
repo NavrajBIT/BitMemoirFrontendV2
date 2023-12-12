@@ -69,7 +69,7 @@ const ToolBar = ({ cert, ln }) => (
     <div className={style.templateHeading}>{cert.selectedTemplate.name}</div>
     <div style={{ width: "fit-content" }}>
       <Button
-        text={ln === "en" ? "Issue" : ln === "es" ? "Asunto" : "مشكلة" + ">>"}
+        text={ln === "en" ? "Issue" : ln === "es" ? "Emitir" : "مشكلة" + ">>"}
         variant={"primary"}
         onClick={cert.issueCert}
       />

@@ -2,15 +2,17 @@ import DynamicForm from "@/components/subcomponents/form/dynamicForm";
 import Button from "@/components/subcomponents/button/button";
 import LocalLoading from "@/components/subcomponents/loadingPage/localloading";
 import { downloadFile } from "@/components/subcomponents/scripts/scripts";
+import { buttonTranslation } from "../translation";
 
-const Organization = ({ usekyc }) => {
+const Organization = ({ usekyc, ln }) => {
   if (usekyc.organizationDetails === null) {
     return <LocalLoading text="Loading organization details..." />;
   }
 
   const formData = [
     {
-      label: "Name of the organization",
+      label:
+        ln === "es" ? "Nombre de la organización" : "Name of the organization",
       type: "text",
       required: true,
       maxLength: "100",
@@ -19,7 +21,7 @@ const Organization = ({ usekyc }) => {
         usekyc.handleChange("organization", "name", e.target.value),
     },
     {
-      label: "Address",
+      label: ln === "es" ? "Dirección" : "Address",
       type: "text",
       required: false,
       maxLength: "500",
@@ -28,7 +30,7 @@ const Organization = ({ usekyc }) => {
         usekyc.handleChange("organization", "address", e.target.value),
     },
     {
-      label: "Country",
+      label: ln === "es" ? "País" : "Country",
       type: "text",
       required: true,
       maxLength: "100",
@@ -37,7 +39,7 @@ const Organization = ({ usekyc }) => {
         usekyc.handleChange("organization", "country", e.target.value),
     },
     {
-      label: "Website",
+      label: ln === "es" ? "Sitio web" : "Website",
       type: "text",
       required: false,
       maxLength: "100",
@@ -46,7 +48,7 @@ const Organization = ({ usekyc }) => {
         usekyc.handleChange("organization", "website", e.target.value),
     },
     {
-      label: "Description",
+      label: ln === "es" ? "Descripción de la organización" : "Description",
       type: "text",
       required: false,
       maxLength: "500",
@@ -55,7 +57,7 @@ const Organization = ({ usekyc }) => {
         usekyc.handleChange("organization", "description", e.target.value),
     },
     {
-      label: "Registration Id",
+      label: ln === "es" ? "ID de registro" : "Registration Id",
       type: "text",
       required: false,
       maxLength: "50",
@@ -67,7 +69,8 @@ const Organization = ({ usekyc }) => {
       type: "file",
       required: true,
       file: usekyc.issuerDetails.signed_note,
-      text: "Upload Registration Proof",
+      text:
+        ln === "es" ? "Cargar prueba de registro" : "Upload Registration Proof",
       onChange: (file) =>
         usekyc.uploadRegProof("organization", "reg_proof", file),
     },
@@ -80,8 +83,14 @@ const Organization = ({ usekyc }) => {
 
   return (
     <DynamicForm
-      formTitle="Organization Details"
-      formButton={usekyc.organizationChanged ? "Save" : "Next >"}
+      formTitle={
+        ln === "es" ? "Detalles de la organización" : "Organization Details"
+      }
+      formButton={
+        usekyc.organizationChanged
+          ? buttonTranslation["Save"][ln]
+          : buttonTranslation["Next >"][ln]
+      }
       isLoading={usekyc.isLoading}
       status={usekyc.formStatus}
       handleSubmit={usekyc.handleOrganizationSubmit}
@@ -89,7 +98,7 @@ const Organization = ({ usekyc }) => {
     >
       {usekyc.organizationChanged && (
         <Button
-          text="Skip for now >>"
+          text={buttonTranslation["Skip for now >>"][ln]}
           variant={"tertiary"}
           onClick={() => {
             usekyc.changeStep(usekyc.kycStep + 1);

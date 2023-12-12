@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from "./blog.module.css";
 import Image from "next/image";
 
-const BlogCard = ({ blog }) => {
+const BlogCard = ({ blog, ln }) => {
   return (
     <div
       style={{
@@ -27,7 +27,10 @@ const BlogCard = ({ blog }) => {
         {blog.title}
       </div>
 
-      <Link href={`/blog/${blog.id}`} style={{ color: "var(--primary-50)" }}>
+      <Link
+        href={`/${ln}/blog/${blog.id}`}
+        style={{ color: "var(--primary-50)" }}
+      >
         read more...
       </Link>
     </div>

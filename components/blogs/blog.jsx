@@ -2,7 +2,8 @@ import BlogCard from "./blogCard";
 import BlogFullCard from "./blogFullCard";
 import useblog from "./useblog";
 
-const Blog = async () => {
+const Blog = async ({ params }) => {
+  const ln = params?.ln ? params.ln : "en";
   const { blogs } = await useblog();
 
   let smallBlogs = [];
@@ -32,10 +33,10 @@ const Blog = async () => {
       }}
     >
       {smallBlogs.map((blog, index) => {
-        return <BlogCard key={"small-blog-" + index} blog={blog} />;
+        return <BlogCard key={"small-blog-" + index} blog={blog} ln={ln} />;
       })}
       {largeBlogs.map((blog, index) => {
-        return <BlogFullCard key={"large-blog-" + index} blog={blog} />;
+        return <BlogFullCard key={"large-blog-" + index} blog={blog} ln={ln} />;
       })}
     </div>
   );

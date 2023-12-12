@@ -2,15 +2,19 @@ import DynamicForm from "@/components/subcomponents/form/dynamicForm";
 import Button from "@/components/subcomponents/button/button";
 import LocalLoading from "@/components/subcomponents/loadingPage/localloading";
 import { downloadFile } from "@/components/subcomponents/scripts/scripts";
+import { buttonTranslation } from "../translation";
 
-const Representative = ({ usekyc }) => {
+const Representative = ({ usekyc, ln }) => {
   if (usekyc.issuerDetails === null) {
-    return <LocalLoading text="Loading organization details..." />;
+    return <LocalLoading text="Loading representative details..." />;
   }
 
   const formData = [
     {
-      label: "Designation of the Representative",
+      label:
+        ln === "es"
+          ? "Designación del representante"
+          : "Designation of the Representative",
       type: "text",
       required: true,
       maxLength: "50",
@@ -22,7 +26,7 @@ const Representative = ({ usekyc }) => {
       type: "file",
       required: true,
       file: usekyc.issuerDetails.signed_note,
-      text: "Upload Signed Note",
+      text: ln === "es" ? "Cargar nota firmada" : "Upload Signed Note",
       onChange: (file) => usekyc.uploadRegProof("issuer", "signed_note", file),
     },
   ];
@@ -34,15 +38,23 @@ const Representative = ({ usekyc }) => {
 
   return (
     <DynamicForm
-      formTitle="Representative Details"
-      formButton={usekyc.issuerChanged ? "Save" : "Next >"}
+      formTitle={
+        ln === "es" ? "Detalles del representante" : "Representative Details"
+      }
+      formButton={
+        usekyc.issuerChanged
+          ? buttonTranslation["Save"][ln]
+          : buttonTranslation["Next >"][ln]
+      }
       isLoading={usekyc.isLoading}
       status={usekyc.formStatus}
       handleSubmit={usekyc.handleIssuerSubmit}
       formData={formData}
     >
       <Button
-        text="Download sample note"
+        text={
+          ln === "es" ? "Descargar plantilla de nota" : "Download sample note"
+        }
         variant={"tertiary"}
         onClick={() => {
           window.open(
@@ -52,7 +64,7 @@ const Representative = ({ usekyc }) => {
       />
       <br />
       <Button
-        text="Skip for now >>"
+        text={buttonTranslation["Skip for now >>"][ln]}
         variant={"tertiary"}
         onClick={() => {
           usekyc.changeStep(usekyc.kycStep + 1);
