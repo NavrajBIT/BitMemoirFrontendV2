@@ -9,6 +9,15 @@ export const teamData = [
     img: "/about/team/nikhil.png",
   },
   {
+    name: "Alejandro Giuffrida",
+    designation: {
+      en: "Latam Team Head",
+      es: "Jefe de equipo de latam",
+      ar: "Latam Team Head",
+    },
+    img: "/about/team/ale.jpg",
+  },
+  {
     name: "Kavya GN",
     designation: {
       en: "Human Resource",
@@ -35,15 +44,7 @@ export const teamData = [
     },
     img: "/about/team/ankita.png",
   },
-  {
-    name: "Mayank Gupta",
-    designation: {
-      en: "Social Media Manager",
-      es: "Gerente de Redes Sociales",
-      ar: "Social Media Manager",
-    },
-    img: "/about/team/mayank.png",
-  },
+
   {
     name: "R.K Kedia",
     designation: {
@@ -88,5 +89,23 @@ export const teamData = [
       ar: "Blockchain Developer",
     },
     img: "/about/team/vivek.png",
+  },
+  {
+    name: "Rishab Dhar",
+    designation: {
+      en: "Flutter Developer",
+      es: "Desarrollador Flutter",
+      ar: "Flutter Developer",
+    },
+    img: "/about/team/rishab.jpg",
+  },
+  {
+    name: "Tanuj Srivastava",
+    designation: {
+      en: "Blockchain Developer",
+      es: "Desarrollador Blockchain",
+      ar: "Blockchain Developer",
+    },
+    img: "/about/team/tanuj.jpg",
   },
 ];

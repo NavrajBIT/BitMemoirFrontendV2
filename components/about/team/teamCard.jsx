@@ -13,7 +13,13 @@ const TeamCard = (props) => {
         borderRadius: "var(--border-radius)",
       }}
     >
-      <Image src={props.img} alt={props.name} width={200} height={200} />
+      <Image
+        src={props.img}
+        alt={props.name}
+        width={200}
+        height={200}
+        style={{ objectFit: "fill" }}
+      />
 
       <div
         style={{
