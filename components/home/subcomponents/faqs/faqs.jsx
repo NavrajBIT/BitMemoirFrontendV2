@@ -161,7 +161,7 @@ const BitBenefits = ({ ln }) => {
             "B. Easy verification: Certificates can be easily verified by scanning the QR code or accessing the blockchain record."}
           {ln === "es" &&
             "B. Verificación sencilla: los certificados se pueden verificar fácilmente escaneando el código QR o accediendo al registro de blockchain."}
-          {ln === "en" &&
+          {ln === "ar" &&
             "ب. التحقق السهل: يمكن التحقق من الشهادات بسهولة عن طريق مسح رمز الاستجابة السريعة أو الوصول إلى سجل blockchain."}
         </p>
         <p>
@@ -175,9 +175,9 @@ const BitBenefits = ({ ln }) => {
         <p>
           {ln === "en" &&
             "D. Efficient issuance: BitMemoir streamlines the certificate issuance process, saving time and resources for the users."}
-          {ln === "en" &&
+          {ln === "es" &&
             "D. Emisión eficiente: BitMemoir agiliza el proceso de emisión de certificados, ahorrando tiempo y recursos a los usuarios."}
-          {ln === "en" &&
+          {ln === "ar" &&
             "د. الإصدار الفعال: يعمل BitMemoir على تبسيط عملية إصدار الشهادة، مما يوفر الوقت والموارد للمستخدمين."}
         </p>
         <p>

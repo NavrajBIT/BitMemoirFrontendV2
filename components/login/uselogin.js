@@ -99,7 +99,7 @@ const uselogin = (ln) => {
         } else {
           try {
             let nextRoute = localStorage.getItem("nextRoute");
-            router.push(nextRoute);
+            router.push(`/${ln}/${nextRoute}`);
           } catch {
             router.push(`/${ln}/kyc`);
           }
